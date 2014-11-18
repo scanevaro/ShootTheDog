@@ -256,8 +256,6 @@ public class Assets {
         skin.dispose();
         //atlas
         items.dispose();
-        //font
-        font.dispose();
         //music
         duckHunt.dispose();
         startRound.dispose();

@@ -25,7 +25,7 @@ public class MainMenuScreen implements Screen {
     //screen
     private OrthographicCamera guiCam;
     private Stage stage;
-    private SpriteBatch batcher;
+    private SpriteBatch batch;
     //widgets
     private Image titleImage;
     private ImageButton muteButton;
@@ -38,8 +38,8 @@ public class MainMenuScreen implements Screen {
 
         guiCam = new OrthographicCamera(480, 320);
         guiCam.position.set(480 / 2, 320 / 2, 0);
-        batcher = new SpriteBatch();
-        stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batcher);
+        batch = new SpriteBatch();
+        stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
 
         setWidgets();
         configureWidgets();
@@ -55,7 +55,7 @@ public class MainMenuScreen implements Screen {
     private void setWidgets() {
         titleImage = new Image(Assets.title);
 
-        ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(Assets.getSkin().get(Button.ButtonStyle.class));
+        ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         muteButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
         muteButtonStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         muteButton = new ImageButton(muteButtonStyle);
@@ -70,7 +70,7 @@ public class MainMenuScreen implements Screen {
         play2DucksStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonDown));
         play2DucksButton = new ImageButton(play2DucksStyle);
 
-        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(Assets.getSkin().get(Button.ButtonStyle.class));
+        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonUp));
         aboutStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonDown));
         aboutButton = new ImageButton(aboutStyle);
@@ -84,7 +84,13 @@ public class MainMenuScreen implements Screen {
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (muteButton.isChecked()) muteButton.setChecked(false);
+                if (muteButton.isChecked()) {
+                    Settings.soundEnabled = false;
+                    muteButton.setChecked(true);
+                } else {
+                    Settings.soundEnabled = true;
+                    muteButton.setChecked(false);
+                }
             }
         });
         play1DuckButton.addListener(new ClickListener() {
@@ -120,7 +126,7 @@ public class MainMenuScreen implements Screen {
         play2DucksButton.setPosition(Game.VIRTUAL_WIDTH / 2 - play2DucksButton.getWidth() / 2, 68);
         stage.addActor(play2DucksButton);
 
-        aboutButton.setSize(50, 32);
+        aboutButton.setSize(128, 64);
         aboutButton.setPosition(Game.VIRTUAL_WIDTH / 2 - aboutButton.getWidth() / 2, 32);
         stage.addActor(aboutButton);
 
@@ -135,15 +141,16 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         guiCam.update();
-        batcher.setProjectionMatrix(guiCam.combined);
+        batch.setProjectionMatrix(guiCam.combined);
 
         stage.act();
         stage.draw();
 
         //highscore
         Assets.font.setScale(0.5f, 0.5f);
-        Assets.font.draw(batcher, "High Score Game A: " + String.valueOf(Settings.highscoreA), Game.VIRTUAL_WIDTH / 2, 40);
-        Assets.font.draw(batcher, "High Score Game B: " + String.valueOf(Settings.highscoreB), Game.VIRTUAL_WIDTH / 2, 20);
+        batch.begin();
+        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2, 10);
+        batch.end();
     }
 
     @Override
