@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -29,6 +28,7 @@ public class MainMenuScreen implements Screen {
     //widgets
     private Image titleImage;
     private ImageButton muteButton;
+    private ImageButton closeButton;
     private ImageButton play1DuckButton;
     private ImageButton play2DucksButton;
     private ImageButton aboutButton;
@@ -57,22 +57,28 @@ public class MainMenuScreen implements Screen {
 
         ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         muteButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        muteButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         muteButtonStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         muteButton = new ImageButton(muteButtonStyle);
 
-        ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(Assets.getSkin().get(Button.ButtonStyle.class));
+        ImageButton.ImageButtonStyle closeButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
+        closeButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeButtonUp));
+        closeButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeButtonDown));
+        closeButton = new ImageButton(closeButtonStyle);
+
+        ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play1DuckStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonUp));
-        play1DuckStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonDown));
+        play1DuckStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonDown));
         play1DuckButton = new ImageButton(play1DuckStyle);
 
-        ImageButton.ImageButtonStyle play2DucksStyle = new ImageButton.ImageButtonStyle(Assets.getSkin().get(Button.ButtonStyle.class));
+        ImageButton.ImageButtonStyle play2DucksStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play2DucksStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonUp));
-        play2DucksStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonDown));
+        play2DucksStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonDown));
         play2DucksButton = new ImageButton(play2DucksStyle);
 
         ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonUp));
-        aboutStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonDown));
+        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonDown));
         aboutButton = new ImageButton(aboutStyle);
     }
 
@@ -118,19 +124,23 @@ public class MainMenuScreen implements Screen {
         muteButton.setPosition(0, 0);
         stage.addActor(muteButton);
 
-        play1DuckButton.setSize(64, 32);
+        closeButton.setSize(64, 64);
+        closeButton.setPosition(Game.VIRTUAL_WIDTH - closeButton.getWidth(), 0);
+        stage.addActor(closeButton);
+
+        play1DuckButton.setSize(160, 18);
         play1DuckButton.setPosition(Game.VIRTUAL_WIDTH / 2 - play1DuckButton.getWidth() / 2, 100);
         stage.addActor(play1DuckButton);
 
-        play2DucksButton.setSize(64, 32);
+        play2DucksButton.setSize(160, 18);
         play2DucksButton.setPosition(Game.VIRTUAL_WIDTH / 2 - play2DucksButton.getWidth() / 2, 68);
         stage.addActor(play2DucksButton);
 
-        aboutButton.setSize(128, 64);
+        aboutButton.setSize(128, 20);
         aboutButton.setPosition(Game.VIRTUAL_WIDTH / 2 - aboutButton.getWidth() / 2, 32);
         stage.addActor(aboutButton);
 
-        titleImage.setSize(128, 64);
+        titleImage.setSize(256, 128);
         titleImage.setPosition(Game.VIRTUAL_WIDTH / 2 - titleImage.getWidth() / 2, 150);
         stage.addActor(titleImage);
     }
@@ -149,7 +159,7 @@ public class MainMenuScreen implements Screen {
         //highscore
         Assets.font.setScale(0.5f, 0.5f);
         batch.begin();
-        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2, 10);
+        Assets.font.draw(batch, "Version 0 1", Game.VIRTUAL_WIDTH / 2 - 50, 10);
         batch.end();
     }
 

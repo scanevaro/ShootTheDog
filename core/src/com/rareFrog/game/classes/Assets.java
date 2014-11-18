@@ -54,6 +54,8 @@ public class Assets {
     public static Texture play2ButtonDown;
     public static Texture aboutButtonUp;
     public static Texture aboutButtonDown;
+    public static Texture closeButtonDown;
+    public static Texture closeButtonUp;
 
     public static Animation duckFlyRightBlue;
     public static Animation duckFlyRightBlack;
@@ -211,6 +213,8 @@ public class Assets {
         play2ButtonDown = new Texture(Gdx.files.internal("data/images/play2ButtonDown.png"));
         aboutButtonUp = new Texture(Gdx.files.internal("data/images/aboutButtonUp.png"));
         aboutButtonDown = new Texture(Gdx.files.internal("data/images/aboutButtonDown.png"));
+        closeButtonUp = new Texture(Gdx.files.internal("data/images/closeButtonUp.png"));
+        closeButtonDown = new Texture(Gdx.files.internal("data/images/closeButtonDown.png"));
     }
 
     private static void loadSounds() {
@@ -281,6 +285,8 @@ public class Assets {
         play2ButtonDown.dispose();
         aboutButtonUp.dispose();
         aboutButtonDown.dispose();
+        closeButtonUp.dispose();
+        closeButtonDown.dispose();
     }
 
     public static Skin getSkin() {
