@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.classes.Assets;
 import com.rareFrog.game.classes.Settings;
@@ -27,6 +29,7 @@ public class GameScreen implements Screen {
     private int state;
     private float stateTime;
     private OrthographicCamera guiCam;
+    private Stage stage;
     private Vector3 touchPoint;
     private SpriteBatch batcher;
     private World world;
@@ -44,10 +47,11 @@ public class GameScreen implements Screen {
         this.gameMode = gameMode;
 
         round = 1;
-        guiCam = new OrthographicCamera(480, 320);
-        guiCam.position.set(480 / 2, 320 / 2, 0);
-        touchPoint = new Vector3();
+        guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+        guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         batcher = new SpriteBatch();
+        stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batcher);
+        touchPoint = new Vector3();
         worldListener = new World.WorldListener() {
 
             @Override
@@ -57,7 +61,7 @@ public class GameScreen implements Screen {
 
             @Override
             public void shoot() {
-                Assets.shoot.play();
+                if (Settings.soundEnabled) Assets.shoot.play();
             }
 
             @Override
@@ -68,7 +72,8 @@ public class GameScreen implements Screen {
         };
         world = new World(worldListener, gameMode);
         renderer = new WorldRenderer(batcher, world);
-        Assets.startRound.play();
+
+        if (Settings.soundEnabled) Assets.startRound.play();
 
         state = GAME_READY;
         stateTime = 0;
@@ -114,7 +119,9 @@ public class GameScreen implements Screen {
                     if (shots > 0) {
                         guiCam.unproject(touchPoint.set(Gdx.input.getX(),
                                 Gdx.input.getY(), 0));
-                        Assets.shoot.play();
+
+                        if (Settings.soundEnabled) Assets.shoot.play();
+
                         shots--;
                     }
                 }

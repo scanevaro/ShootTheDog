@@ -47,7 +47,7 @@ public class MainMenuScreen implements Screen {
         setLayout();
 
         if (Settings.soundEnabled)
-            Assets.duckHunt.play();
+            Assets.menuIntro.play();
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -103,12 +103,14 @@ public class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game, World.GAME_MODE_1));
+                if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
         });
         play2DucksButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game, World.GAME_MODE_2));
+                if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
         });
         aboutButton.addListener(new ClickListener() {

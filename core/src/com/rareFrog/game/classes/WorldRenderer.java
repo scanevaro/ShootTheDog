@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
 import com.rareFrog.game.entities.Duck;
 
-public class WorldRenderer {
+public class WorldRenderer extends Actor {
 
     private World world;
     private OrthographicCamera gameCam;

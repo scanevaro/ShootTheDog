@@ -74,7 +74,7 @@ public class Assets {
 
     public static BitmapFont font;
 
-    public static Music duckHunt;
+    public static Music menuIntro;
     public static Music startRound;
     public static Music endRound;
     public static Music gameOver1;
@@ -220,10 +220,10 @@ public class Assets {
     }
 
     private static void loadSounds() {
-        duckHunt = Gdx.audio.newMusic(Gdx.files
+        menuIntro = Gdx.audio.newMusic(Gdx.files
                 .internal("data/sounds/DuckHunt.mp3"));
-        duckHunt.setLooping(false);
-        duckHunt.setVolume(0.5f);
+        menuIntro.setLooping(false);
+        menuIntro.setVolume(0.5f);
         startRound = Gdx.audio.newMusic(Gdx.files
                 .internal("data/sounds/start_round.mp3"));
         endRound = Gdx.audio.newMusic((Gdx.files
@@ -263,7 +263,7 @@ public class Assets {
         //atlas
         items.dispose();
         //music
-        duckHunt.dispose();
+        menuIntro.dispose();
         startRound.dispose();
         endRound.dispose();
         gameOver1.dispose();

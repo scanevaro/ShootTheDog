@@ -3,6 +3,8 @@ package com.rareFrog.game.classes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
 import com.rareFrog.game.entities.Duck;
 import com.rareFrog.game.screens.GameScreen;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("all")
-public class World {
+public class World extends Actor {
 
     public interface WorldListener {
         public void reload();
@@ -22,8 +24,6 @@ public class World {
         public void ducks();
     }
 
-    public static final float WORLD_WIDTH = 15;
-    public static final float WORLD_HEIGHT = 10;
     public static final int WORLD_STATE_RUNNING = 0;
     public static final int WORLD_STATE_ROUND_START = 1;
     public static final int WORLD_STATE_ROUND_PAUSE = 2;
@@ -60,8 +60,8 @@ public class World {
         rand = new Random();
         this.touchPoint = new Vector3();
 
-        dog = new Dog(0, 1.9f, this);
         this.score = 0;
+        dog = new Dog(0, 60, this);
 
         Duck.duck_velocity_x = 3;
         Duck.duck_velocity_y = 6;
@@ -138,7 +138,7 @@ public class World {
             if (ducksHit != 0)
                 dog.position.x = ducks.get(duckCount).position.x;
             else
-                dog.position.x = World.WORLD_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
+                dog.position.x = Game.VIRTUAL_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
         }
 
         if (stateTime > 1.6f) {
@@ -159,7 +159,7 @@ public class World {
             newRound();
             state = WORLD_STATE_ROUND_START;
             dog.state = Dog.DOG_STATE_WALKING_NEW_ROUND;
-            dog.position.set(World.WORLD_WIDTH / 2 - World.WORLD_WIDTH / 4,
+            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4,
                     1.9f);
         }
     }
@@ -169,7 +169,7 @@ public class World {
             newRound();
             state = WORLD_STATE_ROUND_START;
             dog.state = Dog.DOG_STATE_WALKING_NEW_ROUND;
-            dog.position.set(World.WORLD_WIDTH / 2 - World.WORLD_WIDTH / 4,
+            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4,
                     1.9f);
         } else if (stateTime > 5) {
             if (perfect) {
@@ -190,7 +190,7 @@ public class World {
                         if (ducks.get(x).state == Duck.DUCK_STATE_DEAD) {
                             ducks.remove(duckCountRoundEnd);
                             ducks.add(duck);
-                            Assets.movingDucksArray.play();
+                            if (Settings.soundEnabled) Assets.movingDucksArray.play();
                             stateTime = 0;
                             return;
                         }
@@ -211,10 +211,10 @@ public class World {
 
             if (ducksDead == 10) {
                 state = WORLD_STATE_PERFECT_ROUND;
-                Assets.endRound.play();
+                if (Settings.soundEnabled) Assets.endRound.play();
             } else if (ducksDead >= 6) {
                 state = WORLD_STATE_ROUND_END;
-                Assets.endRound.play();
+                if (Settings.soundEnabled) Assets.endRound.play();
             } else {
                 state = WORLD_STATE_GAME_OVER_1;
             }
@@ -225,7 +225,7 @@ public class World {
     private void stateGameOver1() {
         if (stateTime > 3) {
             state = WORLD_STATE_GAME_OVER_2;
-            dog.position.x = World.WORLD_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
+            dog.position.x = Game.VIRTUAL_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
             dog.position.y = 1.7f;
             dog.state = Dog.DOG_STATE_LAUGHING_GAME_OVER;
         }
