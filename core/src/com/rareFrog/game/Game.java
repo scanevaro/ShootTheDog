@@ -6,7 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.rareFrog.game.classes.Assets;
 import com.rareFrog.game.classes.Settings;
-import com.rareFrog.game.screens.MainMenuScreen;
+import com.rareFrog.game.screens.SplashScreen;
 
 public class Game implements ApplicationListener {
     public static final float VIRTUAL_WIDTH = 480;
@@ -19,7 +19,7 @@ public class Game implements ApplicationListener {
     public void create() {
         Settings.load();
         Assets.load();
-        setScreen(new MainMenuScreen(this));
+        setScreen(new SplashScreen(this));
         fps = new FPSLogger();
     }
 

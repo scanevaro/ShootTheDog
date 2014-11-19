@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class Assets {
     public static Skin skin;
 
+    public static TextureAtlas atlas;
     public static TextureAtlas items;
 
     public static TextureRegion backgroundRegion;
@@ -122,6 +123,7 @@ public class Assets {
     }
 
     private static void loadAtlas() {
+        atlas = new TextureAtlas(Gdx.files.internal("data/splash/pack"));
         items = new TextureAtlas(Gdx.files.internal("data/items.pack"),
                 Gdx.files.internal("data"));
     }
