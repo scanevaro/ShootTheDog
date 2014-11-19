@@ -96,7 +96,7 @@ public class Duck extends DynamicGameObject {
     private void stateFlying(float deltaTime) {
         texture = DucksTextures.getFlyingTexture(stateTime, type, velocity);
 
-        if (position.y < 74)
+        if (position.y < 75)
             velocity.y = Math.abs(velocity.y);
         position.add(velocity.x * deltaTime * 2, velocity.y * deltaTime * 2);
         bounds.x = position.x - bounds.width / 2;
@@ -134,27 +134,27 @@ public class Duck extends DynamicGameObject {
 
         if (position.x < DUCK_WIDTH / 2) {
             position.x = DUCK_WIDTH / 2;
-            velocity.x = duck_velocity_x;
-            velocity.y = duck_velocity_y + rand.nextFloat();
+            velocity.x = duck_velocity_y;
+            velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
         if (position.x > Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
             position.x = Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2;
-            velocity.x = -duck_velocity_x;
-            velocity.y = duck_velocity_y + rand.nextFloat();
+            velocity.x = -duck_velocity_y;
+            velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
         if (position.y < DUCK_WIDTH / 2) {
             position.y = DUCK_HEIGHT / 2;
-            velocity.x = duck_velocity_x;
-            velocity.y = duck_velocity_y + rand.nextFloat();
+            velocity.x = duck_velocity_y;
+            velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
         if (position.y > Game.VIRTUAL_HEIGHT - DUCK_HEIGHT / 2) {
             position.y = Game.VIRTUAL_HEIGHT - DUCK_HEIGHT / 2;
-            velocity.x = -duck_velocity_x;
+            velocity.x = -duck_velocity_y;
             float topBot = rand.nextFloat() > 0.5f ? 1 : -1;
-            velocity.y = duck_velocity_y + rand.nextFloat() * topBot;
+            velocity.y = duck_velocity_y * rand.nextFloat() * topBot;
         }
 
         if (stateTime > 0.125f) {

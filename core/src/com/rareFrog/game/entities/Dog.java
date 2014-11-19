@@ -90,7 +90,7 @@ public class Dog extends GameObject {
     }
 
     private void stateWalkingNewRound(float deltaTime) {
-        if (position.x >= Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 5.5f) {
+        if (position.x >= Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4) {
             state = DOG_STATE_FOUND;
             stateTime = 0;
             frames = -1;
@@ -125,22 +125,15 @@ public class Dog extends GameObject {
         }
 
         if (dogPositiony + 55 > position.y)
-            position.add(deltaTime * 10, deltaTime * 80);
+            position.add(deltaTime * 20, deltaTime * 120);
         else state = DOG_STATE_FALLING;
-//        {
-//            dogPositiony = 0;
-//            position.add(deltaTime * 10, deltaTime * gravityY);
-//            gravityY += -5;
-//            if (position.y < 85) {
-//                state = DOG_STATE_HIDDEN;
-//            }
-//        }
+
         texture = Assets.dogJumping.getKeyFrame(stateTime);
     }
 
     private void stateFalling(float delta) {
         dogPositiony = 0;
-        position.add(delta * 10, delta * gravityY);
+        position.add(delta * 20, delta * gravityY);
         gravityY += -5;
         if (position.y < 85) state = DOG_STATE_HIDDEN;
 
@@ -149,10 +142,10 @@ public class Dog extends GameObject {
 
     private void stateFoundDuck(float deltaTime, int ducksHit) {
         if (stateTime < 0.21)
-            position.add(0, deltaTime * 6);
+            position.add(0, deltaTime * 90);
         else if (stateTime < 0.5f) {
         } else
-            position.add(0, -deltaTime * 6);
+            position.add(0, -deltaTime * 90);
 
         if (stateTime > 1) {
             state = DOG_STATE_HIDDEN;
@@ -164,19 +157,16 @@ public class Dog extends GameObject {
                 world.duckCount++;
         }
 
-        if (ducksHit == 1)
-            texture = Assets.dogDuckFound;
-        else
-            texture = Assets.dogDucksFound;
-
+        if (ducksHit == 1) texture = Assets.dogDuckFound;
+        else texture = Assets.dogDucksFound;
     }
 
     private void stateLaughing(float deltaTime) {
         if (stateTime < 0.5)
-            position.add(0, deltaTime * 3);
+            position.add(0, deltaTime * 45);
         else if (stateTime < 1.3f) {
         } else
-            position.add(0, -deltaTime * 6);
+            position.add(0, -deltaTime * 90);
 
         if (stateTime > 3) {
             state = DOG_STATE_HIDDEN;
@@ -191,8 +181,8 @@ public class Dog extends GameObject {
     }
 
     private void stateLaughingGameOver(float deltaTime) {
-        if (position.y <= 3.25f)
-            position.add(0, deltaTime * 1);
+        if (position.y <= 80)
+            position.add(0, deltaTime * 10);
 
         texture = Assets.dogLaughing.getKeyFrame(stateTime, true);
     }
@@ -202,7 +192,7 @@ public class Dog extends GameObject {
 
         if (world.state == World.WORLD_STATE_ROUND_PAUSE) {
             stateTime = 0;
-            position.y = 1.7f;
+            position.y = 60;
             if (ducksHit == 0) {
                 state = DOG_STATE_LAUGHING;
                 if (Settings.soundEnabled) Assets.dogLaughingSnd.play();
