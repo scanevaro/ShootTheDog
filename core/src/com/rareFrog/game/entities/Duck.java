@@ -22,12 +22,12 @@ public class Duck extends DynamicGameObject {
     public static final int DUCK_STATE_DEAD = 4;
     public static final int DUCK_STATE_FLY_AWAY = 6;
     public static final int DUCK_STATE_GONE = 7;
-    public static final float DUCK_GRAVITY = -0.5f;
+    public static final float DUCK_GRAVITY = -9.5f;
     public static final float DUCK_WIDTH = 38;
     public static final float DUCK_HEIGHT = 38;
     public static final int SCORE = 500;
-    public static float duck_velocity_y = 6;
-    public static float duck_velocity_x = 3;
+    public static float duck_velocity_y = 90;
+    public static float duck_velocity_x = 45;
 
     public int type;
     public TextureRegion texture;
@@ -96,9 +96,9 @@ public class Duck extends DynamicGameObject {
     private void stateFlying(float deltaTime) {
         texture = DucksTextures.getFlyingTexture(stateTime, type, velocity);
 
-        if (position.y < 2.9f)
+        if (position.y < 74)
             velocity.y = Math.abs(velocity.y);
-        position.add(velocity.x * deltaTime, velocity.y * deltaTime);
+        position.add(velocity.x * deltaTime * 2, velocity.y * deltaTime * 2);
         bounds.x = position.x - bounds.width / 2;
         bounds.y = position.y - bounds.height / 2;
 
@@ -134,27 +134,27 @@ public class Duck extends DynamicGameObject {
 
         if (position.x < DUCK_WIDTH / 2) {
             position.x = DUCK_WIDTH / 2;
-            velocity.x = duck_velocity_y;
-            velocity.y = rand.nextFloat();
+            velocity.x = duck_velocity_x;
+            velocity.y = duck_velocity_y + rand.nextFloat();
         }
 
         if (position.x > Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
             position.x = Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2;
-            velocity.x = -duck_velocity_y;
-            velocity.y = rand.nextFloat();
+            velocity.x = -duck_velocity_x;
+            velocity.y = duck_velocity_y + rand.nextFloat();
         }
 
         if (position.y < DUCK_WIDTH / 2) {
             position.y = DUCK_HEIGHT / 2;
-            velocity.x = duck_velocity_y;
-            velocity.y = rand.nextFloat();
+            velocity.x = duck_velocity_x;
+            velocity.y = duck_velocity_y + rand.nextFloat();
         }
 
         if (position.y > Game.VIRTUAL_HEIGHT - DUCK_HEIGHT / 2) {
             position.y = Game.VIRTUAL_HEIGHT - DUCK_HEIGHT / 2;
-            velocity.x = -duck_velocity_y;
+            velocity.x = -duck_velocity_x;
             float topBot = rand.nextFloat() > 0.5f ? 1 : -1;
-            velocity.y = rand.nextFloat() * topBot;
+            velocity.y = duck_velocity_y + rand.nextFloat() * topBot;
         }
 
         if (stateTime > 0.125f) {
@@ -237,18 +237,16 @@ public class Duck extends DynamicGameObject {
     private void stateFlyAway(float deltaTime) {
         texture = DucksTextures.getUpTexture(type, stateTime);
 
-        position.add(0, deltaTime * 5);
+        position.add(0, deltaTime * 135);
 
-        if (stateTime > 0.125f) {
+        if (stateTime > 0.125f)
             if ((stateTime - lastTimeSaved) >= 0.125f) {
                 if (Settings.soundEnabled) Assets.miss.play();
                 lastTimeSaved = stateTime;
             }
-        }
 
-        if (position.y > Game.VIRTUAL_HEIGHT + DUCK_HEIGHT) {
+        if (position.y > Game.VIRTUAL_HEIGHT + DUCK_HEIGHT)
             state = DUCK_STATE_GONE;
-        }
 
         uiTexture = Assets.uiWhiteDuck;
     }

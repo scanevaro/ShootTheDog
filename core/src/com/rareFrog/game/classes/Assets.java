@@ -47,6 +47,7 @@ public class Assets {
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
 
+//    public static Texture menuBackground;
     public static Texture soundIconUp;
     public static Texture soundIconDown;
     public static Texture play1ButtonUp;
@@ -207,6 +208,7 @@ public class Assets {
         dogDuckFound = items.findRegion("dog1Duck");
         dogDucksFound = items.findRegion("dog2Ducks");
 
+//        menuBackground = new Texture(Gdx.files.internal("data/images/menuBackground.png"));
         soundIconUp = new Texture(Gdx.files.internal("data/images/soundIconUp.png"));
         soundIconDown = new Texture(Gdx.files.internal("data/images/soundIconDown.png"));
         play1ButtonUp = new Texture(Gdx.files.internal("data/images/play1ButtonUp.png"));

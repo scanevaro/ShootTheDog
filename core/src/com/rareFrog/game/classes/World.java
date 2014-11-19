@@ -63,8 +63,6 @@ public class World extends Actor {
         this.score = 0;
         dog = new Dog(0, 60, this);
 
-        Duck.duck_velocity_x = 3;
-        Duck.duck_velocity_y = 6;
         generateRound();
     }
 
@@ -72,8 +70,8 @@ public class World extends Actor {
         ducks.clear();
 
         for (int i = 0; i < 10; i++) {
-            float random = rand.nextFloat() > 0.5f ? 6.5f : 8.5f;
-            Duck duck = new Duck(random, 2f);
+            float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
+            Duck duck = new Duck(random, 75f);
             ducks.add(duck);
         }
 
@@ -341,8 +339,8 @@ public class World extends Actor {
     }
 
     private void newRound() {
-        Duck.duck_velocity_x += 0.5f;
-        Duck.duck_velocity_y += 0.5f;
+        Duck.duck_velocity_x += 12;
+        Duck.duck_velocity_y += 6;
 
         generateRound();
         GameScreen.round++;

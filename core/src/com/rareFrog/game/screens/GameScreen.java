@@ -53,10 +53,8 @@ public class GameScreen implements Screen {
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batcher);
         touchPoint = new Vector3();
         worldListener = new World.WorldListener() {
-
             @Override
             public void reload() {
-
             }
 
             @Override
@@ -66,9 +64,7 @@ public class GameScreen implements Screen {
 
             @Override
             public void ducks() {
-
             }
-
         };
         world = new World(worldListener, gameMode);
         renderer = new WorldRenderer(batcher, world);
@@ -80,6 +76,8 @@ public class GameScreen implements Screen {
         shots = 3;
         lastScore = 0;
         scoreString = "000000";
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     public void update(float deltaTime) {
@@ -142,11 +140,7 @@ public class GameScreen implements Screen {
                 Assets.gameOver1.play();
                 break;
         }
-        // ApplicationType appType = Gdx.app.getType();
 
-		/*
-         * Input code
-		 */
         updateScore();
     }
 

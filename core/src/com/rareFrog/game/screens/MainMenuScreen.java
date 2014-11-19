@@ -26,6 +26,7 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     //widgets
+    private Image menuBackground;
     private Image titleImage;
     private ImageButton muteButton;
     private ImageButton closeButton;
@@ -53,6 +54,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void setWidgets() {
+        menuBackground = new Image(Assets.backgroundRegion/*Assets.menuBackground*/);
         titleImage = new Image(Assets.title);
 
         ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
@@ -119,9 +121,19 @@ public class MainMenuScreen implements Screen {
 //                game.setScreen(new AboutScreen(game));
             }
         });
+        closeButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
     }
 
     private void setLayout() {
+        menuBackground.setSize(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+        menuBackground.setPosition(0, 0);
+        stage.addActor(menuBackground);
+
         muteButton.setSize(64, 64);
         muteButton.setPosition(0, 0);
         stage.addActor(muteButton);
@@ -149,7 +161,8 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+//        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(1, 0.823529f, 0.3764705f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         guiCam.update();
