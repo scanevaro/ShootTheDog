@@ -91,33 +91,33 @@ public class SplashScreen implements Screen {
         veil.setColor(1, 1, 1, 0);
 
         Timeline.createSequence()
-                .push(Tween.set(tween, SpriteAccessor.POS_XY).targetRelative(-1, 0))
-                .push(Tween.set(engine, SpriteAccessor.POS_XY).targetRelative(1, 0))
-                .push(Tween.set(universal, SpriteAccessor.POS_XY).targetRelative(0, 0.5f))
-                .push(Tween.set(logo, SpriteAccessor.SCALE_XY).target(7, 7))
-                .push(Tween.set(logo, SpriteAccessor.OPACITY).target(0))
+//                .push(Tween.set(tween, SpriteAccessor.POS_XY).targetRelative(-1, 0))
+//                .push(Tween.set(engine, SpriteAccessor.POS_XY).targetRelative(1, 0))
+//                .push(Tween.set(universal, SpriteAccessor.POS_XY).targetRelative(0, 0.5f))
+//                .push(Tween.set(logo, SpriteAccessor.SCALE_XY).target(7, 7))
+//                .push(Tween.set(logo, SpriteAccessor.OPACITY).target(0))
                 .push(Tween.set(strip, SpriteAccessor.SCALE_XY).target(1, 0))
                 .push(Tween.set(powered, SpriteAccessor.OPACITY).target(0))
                 .push(Tween.set(gdx, SpriteAccessor.OPACITY).target(0))
-
+//
                 .pushPause(0.5f)
                 .push(Tween.to(strip, SpriteAccessor.SCALE_XY, 0.8f).target(1, 0.6f).ease(Back.OUT))
-                .push(Tween.to(tween, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Quart.OUT))
-                .push(Tween.to(engine, SpriteAccessor.POS_XY, 0.5f).targetRelative(-1, 0).ease(Quart.OUT))
-                .push(Tween.to(universal, SpriteAccessor.POS_XY, 0.6f).targetRelative(0, -0.5f).ease(Quint.OUT))
-                .pushPause(-0.3f)
-                .beginParallel()
-                .push(Tween.set(logo, SpriteAccessor.OPACITY).target(1))
-                .push(Tween.to(logo, SpriteAccessor.SCALE_XY, 0.5f).target(1, 1).ease(Back.OUT))
-                .end()
-                .push(Tween.to(strip, SpriteAccessor.SCALE_XY, 0.5f).target(1, 1).ease(Back.IN))
-                .pushPause(0.3f)
-                .beginParallel()
-                .push(Tween.to(tween, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
-                .push(Tween.to(engine, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
-                .push(Tween.to(universal, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
-                .push(Tween.to(logo, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
-                .end()
+//                .push(Tween.to(tween, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Quart.OUT))
+//                .push(Tween.to(engine, SpriteAccessor.POS_XY, 0.5f).targetRelative(-1, 0).ease(Quart.OUT))
+//                .push(Tween.to(universal, SpriteAccessor.POS_XY, 0.6f).targetRelative(0, -0.5f).ease(Quint.OUT))
+//                .pushPause(-0.3f)
+//                .beginParallel()
+//                .push(Tween.set(logo, SpriteAccessor.OPACITY).target(1))
+//                .push(Tween.to(logo, SpriteAccessor.SCALE_XY, 0.5f).target(1, 1).ease(Back.OUT))
+//                .end()
+//                .push(Tween.to(strip, SpriteAccessor.SCALE_XY, 0.5f).target(1, 1).ease(Back.IN))
+//                .pushPause(0.3f)
+//                .beginParallel()
+//                .push(Tween.to(tween, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
+//                .push(Tween.to(engine, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
+//                .push(Tween.to(universal, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
+//                .push(Tween.to(logo, SpriteAccessor.POS_XY, 0.5f).targetRelative(1, 0).ease(Back.IN))
+//                .end()
 
                 .pushPause(-0.3f)
                 .push(Tween.to(powered, SpriteAccessor.OPACITY, 0.3f).target(1))
@@ -183,10 +183,10 @@ public class SplashScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         strip.draw(batch);
-        universal.draw(batch);
-        tween.draw(batch);
-        engine.draw(batch);
-        logo.draw(batch);
+//        universal.draw(batch);
+//        tween.draw(batch);
+//        engine.draw(batch);
+//        logo.draw(batch);
         powered.draw(batch);
         gdx.draw(batch);
         if (veil.getColor().a > 0.1f) veil.draw(batch);
