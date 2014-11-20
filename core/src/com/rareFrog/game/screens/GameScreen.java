@@ -68,6 +68,7 @@ public class GameScreen implements Screen {
         };
         world = new World(worldListener, gameMode);
         renderer = new WorldRenderer(batcher, world);
+        world.setWorldRenderer(renderer);
         stage.addActor(renderer);
 
         if (Settings.soundEnabled) Assets.startRound.play();

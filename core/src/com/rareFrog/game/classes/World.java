@@ -36,6 +36,7 @@ public class World {
 
     public final List<Duck> ducks;
     public final WorldListener listener;
+    private WorldRenderer worldRenderer;
     public final Dog dog;
     public final Random rand;
 
@@ -260,12 +261,13 @@ public class World {
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
 
-            if (Gdx.input.justTouched()
-                    && duck.bounds.contains(touchPoint.x, touchPoint.y)
-                    && duck.state == Duck.DUCK_STATE_FLYING) {
-                duck.hit();
-
-                score += Duck.SCORE;
+            if (Gdx.input.justTouched()) {
+                worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                if (duck.bounds.contains(touchPoint.x, touchPoint.y)
+                        && duck.state == Duck.DUCK_STATE_FLYING) {
+                    duck.hit();
+                    score += Duck.SCORE;
+                }
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0
                     && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
@@ -338,5 +340,9 @@ public class World {
 
         generateRound();
         GameScreen.round++;
+    }
+
+    public void setWorldRenderer(WorldRenderer worldRenderer) {
+        this.worldRenderer = worldRenderer;
     }
 }

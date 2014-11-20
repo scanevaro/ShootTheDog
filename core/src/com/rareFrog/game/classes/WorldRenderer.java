@@ -38,13 +38,14 @@ public class WorldRenderer extends Actor {
 
         batch.setColor(color);
 
-//        batch.draw(animation.getKeyFrame(stateTime), 0, 0, Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
-
         clearScreen();
 
         gameCam.update();
-        gameCam.unproject(world.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
-                0));
+
+//        if (Gdx.input.justTouched())
+//            gameCam.unproject(world.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
+//                    0));
+
         batch.setProjectionMatrix(gameCam.combined);
         batch.enableBlending();
 
