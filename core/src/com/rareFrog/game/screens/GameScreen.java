@@ -68,6 +68,7 @@ public class GameScreen implements Screen {
         };
         world = new World(worldListener, gameMode);
         renderer = new WorldRenderer(batcher, world);
+        stage.addActor(renderer);
 
         if (Settings.soundEnabled) Assets.startRound.play();
 
@@ -86,7 +87,7 @@ public class GameScreen implements Screen {
 
         switch (state) {
             case GAME_READY:
-                updateReady(deltaTime);
+                updateReady();
                 break;
             // case ROUND_START
             // case COUNT_DUCKS
@@ -103,9 +104,10 @@ public class GameScreen implements Screen {
         }
 
         world.update(deltaTime);
+        stage.act();
     }
 
-    private void updateReady(float deltaTime) {
+    private void updateReady() {
         if (world.dog.state == Dog.DOG_STATE_HIDDEN)
             state = GAME_RUNNING;
     }
@@ -176,15 +178,16 @@ public class GameScreen implements Screen {
         if (Gdx.input.justTouched()) game.setScreen(new MainMenuScreen(game));
     }
 
-    public void draw(float deltaTime) {
-        renderer.render();
+    public void draw() {
+//        renderer.render();
+        stage.draw();
 
         guiCam.update();
         batcher.setProjectionMatrix(guiCam.combined);
         batcher.enableBlending();
         batcher.begin();
 
-        drawUI(deltaTime);
+        drawUI();
 
         switch (state) {
             case GAME_READY:
@@ -205,7 +208,7 @@ public class GameScreen implements Screen {
         batcher.end();
     }
 
-    private void drawUI(float deltaTime) {
+    private void drawUI() {
         TextureRegion texture = null;
         switch (shots) {
             case 3:
@@ -362,13 +365,14 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        draw(delta);
+        draw();
 
         stateTime += delta;
     }
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

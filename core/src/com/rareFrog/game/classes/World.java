@@ -1,9 +1,7 @@
 package com.rareFrog.game.classes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
 import com.rareFrog.game.entities.Duck;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("all")
-public class World extends Actor {
+public class World {
 
     public interface WorldListener {
         public void reload();
@@ -261,10 +259,6 @@ public class World extends Actor {
     private void checkDuckCollision() {
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
-
-            if (Gdx.input.justTouched()) {
-                new Vector2(touchPoint.x, touchPoint.y);
-            }
 
             if (Gdx.input.justTouched()
                     && duck.bounds.contains(touchPoint.x, touchPoint.y)

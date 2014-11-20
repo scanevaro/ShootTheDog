@@ -142,10 +142,10 @@ public class Dog extends GameObject {
 
     private void stateFoundDuck(float deltaTime, int ducksHit) {
         if (stateTime < 0.21)
-            position.add(0, deltaTime * 90);
+            position.add(0, deltaTime * 150);
         else if (stateTime < 0.5f) {
         } else
-            position.add(0, -deltaTime * 90);
+            position.add(0, -deltaTime * 150);
 
         if (stateTime > 1) {
             state = DOG_STATE_HIDDEN;
@@ -163,7 +163,7 @@ public class Dog extends GameObject {
 
     private void stateLaughing(float deltaTime) {
         if (stateTime < 0.5)
-            position.add(0, deltaTime * 45);
+            position.add(0, deltaTime * 65);
         else if (stateTime < 1.3f) {
         } else
             position.add(0, -deltaTime * 90);

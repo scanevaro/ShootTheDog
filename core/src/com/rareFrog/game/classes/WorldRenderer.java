@@ -1,8 +1,10 @@
 package com.rareFrog.game.classes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,7 +16,7 @@ import com.rareFrog.game.entities.Duck;
 public class WorldRenderer extends Actor {
 
     private World world;
-    private OrthographicCamera gameCam;
+    public OrthographicCamera gameCam;
     private SpriteBatch batch;
     private TextureRegion background;
     private ShapeRenderer shapeRenderer;
@@ -29,7 +31,15 @@ public class WorldRenderer extends Actor {
         shapeRenderer = new ShapeRenderer();
     }
 
-    public void render() {
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        Color color = new Color(getColor().r, getColor().g,
+                getColor().b, getColor().a * parentAlpha);
+
+        batch.setColor(color);
+
+//        batch.draw(animation.getKeyFrame(stateTime), 0, 0, Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+
         clearScreen();
 
         gameCam.update();
@@ -50,6 +60,27 @@ public class WorldRenderer extends Actor {
         }
     }
 
+//    public void render() {
+//        clearScreen();
+//
+//        gameCam.update();
+//        gameCam.unproject(world.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
+//                0));
+//        batch.setProjectionMatrix(gameCam.combined);
+//        batch.enableBlending();
+//
+//        if (world.dog.state == Dog.DOG_STATE_WALKING
+//                || world.dog.state == Dog.DOG_STATE_FOUND
+//                || world.dog.state == Dog.DOG_STATE_JUMPING
+//                || world.dog.state == Dog.DOG_STATE_WALKING_NEW_ROUND) {
+//            renderBackground();
+//            renderObjects();
+//        } else {
+//            renderObjects();
+//            renderBackground();
+//        }
+//    }
+
     // also draws the background color
     private void clearScreen() {
         if (world.gameMode == World.GAME_MODE_1) {
@@ -69,18 +100,14 @@ public class WorldRenderer extends Actor {
     }
 
     private void renderBackground() {
-        batch.begin();
         batch.draw(Assets.backgroundRegion, gameCam.position.x - Game.VIRTUAL_WIDTH / 2,
                 gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
                 Game.VIRTUAL_HEIGHT);
-        batch.end();
     }
 
     private void renderObjects() {
-        batch.begin();
         renderDog();
         renderDucks();
-        batch.end();
     }
 
     private void renderDog() {
