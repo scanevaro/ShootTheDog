@@ -289,12 +289,8 @@ public class GameScreen implements Screen {
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.5f, 0.5f);
-        Assets.font.draw(batcher, "Round",
-                480 / 2 - Assets.presentRound.getRegionWidth() / 2 - 10,
-                Gdx.graphics.getHeight() / 2 + 64);
-        Assets.font.draw(batcher, String.valueOf(round),
-                480 / 2 - Assets.font.getSpaceWidth() + 4,
-                Gdx.graphics.getHeight() / 2 + 45);
+        Assets.font.draw(batcher, "Round", Game.VIRTUAL_WIDTH / 2 - Assets.presentRound.getRegionWidth() / 2 - 10, Game.VIRTUAL_HEIGHT / 2 + 64);
+        Assets.font.draw(batcher, String.valueOf(round), Game.VIRTUAL_WIDTH / 2 - Assets.font.getSpaceWidth() + 4, Game.VIRTUAL_HEIGHT / 2 + 45);
     }
 
     private void presentRunning() {
@@ -308,9 +304,7 @@ public class GameScreen implements Screen {
 
             Assets.font.setColor(Color.WHITE);
             Assets.font.setScale(0.45f, 0.5f);
-            Assets.font.draw(batcher, "FLY AWAY", 480 / 2
-                            - Assets.presentFlyAway.getRegionWidth() / 2 - 15,
-                    Gdx.graphics.getHeight() / 2 + 45);
+            Assets.font.draw(batcher, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
         }
 
         if (world.state == World.WORLD_STATE_PERFECT_ROUND) {
@@ -318,18 +312,13 @@ public class GameScreen implements Screen {
                 presentRoundEnd();
 
             if (stateTime > 5) {
-                batcher.draw(Assets.presentFlyAway,
-                        480 / 2 - Assets.presentFlyAway.getRegionWidth(),
-                        320 / 2 + 30, Assets.presentFlyAway.getRegionWidth()
-                                + Assets.presentFlyAway.getRegionWidth(),
-                        Assets.presentFlyAway.getRegionHeight()
-                                + Assets.presentFlyAway.getRegionHeight());
+                batcher.draw(Assets.presentFlyAway, Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth(),
+                        Game.VIRTUAL_HEIGHT / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
+                        Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
                 Assets.font.setColor(Color.WHITE);
                 Assets.font.setScale(0.45f, 0.5f);
-                Assets.font.draw(batcher, "Perfect", 480 / 2
-                                - Assets.presentFlyAway.getRegionWidth() / 2 - 15,
-                        Gdx.graphics.getHeight() / 2 + 45);
+                Assets.font.draw(batcher, "Perfect", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
             }
         }
 
@@ -347,20 +336,13 @@ public class GameScreen implements Screen {
     }
 
     private void presentGameOver() {
-        batcher.draw(
-                Assets.presentFlyAway,
-                480 / 2 - Assets.presentFlyAway.getRegionWidth() - 5,
-                320 / 2 + 30,
-                Assets.presentFlyAway.getRegionWidth()
-                        + Assets.presentFlyAway.getRegionWidth() + 12,
-                Assets.presentFlyAway.getRegionHeight()
-                        + Assets.presentFlyAway.getRegionHeight());
+        batcher.draw(Assets.presentFlyAway, 480 / 2 - Assets.presentFlyAway.getRegionWidth() - 5, 320 / 2 + 30,
+                Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth() + 12,
+                Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.45f, 0.5f);
-        Assets.font.draw(batcher, "GAME OVER",
-                480 / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 20,
-                Gdx.graphics.getHeight() / 2 + 45);
+        Assets.font.draw(batcher, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
     }
 
     @Override
@@ -395,5 +377,4 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
     }
-
 }

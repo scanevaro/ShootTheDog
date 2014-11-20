@@ -156,8 +156,7 @@ public class World {
             newRound();
             state = WORLD_STATE_ROUND_START;
             dog.state = Dog.DOG_STATE_WALKING_NEW_ROUND;
-            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4,
-                    1.9f);
+            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4, 60);
         }
     }
 
@@ -166,11 +165,10 @@ public class World {
             newRound();
             state = WORLD_STATE_ROUND_START;
             dog.state = Dog.DOG_STATE_WALKING_NEW_ROUND;
-            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4,
-                    1.9f);
+            dog.position.set(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4, 60);
         } else if (stateTime > 5) {
             if (perfect) {
-                Assets.perfect.play();
+                if (Settings.soundEnabled) Assets.perfect.play();
                 score += PERFECT;
                 perfect = false;
             }
@@ -199,10 +197,9 @@ public class World {
 
         if (duckCountRoundEnd >= ducks.size()) {
             int ducksDead = 0;
-            for (int i = 0; i < ducks.size(); i++) {
+            for (int i = 0; i < ducks.size(); i++)
                 if (ducks.get(i).state == Duck.DUCK_STATE_DEAD)
                     ducksDead++;
-            }
 
             stateTime = 0;
 
@@ -212,10 +209,7 @@ public class World {
             } else if (ducksDead >= 6) {
                 state = WORLD_STATE_ROUND_END;
                 if (Settings.soundEnabled) Assets.endRound.play();
-            } else {
-                state = WORLD_STATE_GAME_OVER_1;
-            }
-
+            } else state = WORLD_STATE_GAME_OVER_1;
         }
     }
 
@@ -258,20 +252,16 @@ public class World {
     }
 
     private void checkDuckCollision() {
+        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
 
-            if (Gdx.input.justTouched()) {
-                worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-                if (duck.bounds.contains(touchPoint.x, touchPoint.y)
-                        && duck.state == Duck.DUCK_STATE_FLYING) {
-                    duck.hit();
-                    score += Duck.SCORE;
-                }
-            } else if (Gdx.input.justTouched() && GameScreen.shots == 0
-                    && duck.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
+                duck.hit();
+                score += Duck.SCORE;
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
-            }
         } else {
             Duck duck = ducks.get(duckCount);
             if (Gdx.input.justTouched()
