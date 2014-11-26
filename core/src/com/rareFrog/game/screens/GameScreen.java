@@ -140,7 +140,7 @@ public class GameScreen implements Screen {
             case World.WORLD_STATE_GAME_OVER_1:
                 stateTime = 0;
                 state = GAME_OVER_1;
-                Assets.gameOver1.play();
+                if (Settings.soundEnabled) Assets.gameOver1.play();
                 break;
         }
 

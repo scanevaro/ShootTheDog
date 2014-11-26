@@ -37,8 +37,8 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(Game game) {
         this.game = game;
 
-        guiCam = new OrthographicCamera(480, 320);
-        guiCam.position.set(480 / 2, 320 / 2, 0);
+        guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+        guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
 
@@ -51,6 +51,8 @@ public class MainMenuScreen implements Screen {
             Assets.menuIntro.play();
 
         Gdx.input.setInputProcessor(stage);
+
+//        game.actionResolver.loginGPGS();
     }
 
     private void setWidgets() {
