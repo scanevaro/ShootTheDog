@@ -148,7 +148,6 @@ public class World {
             stateTime = 0;
             duckCount = 0;
         }
-
     }
 
     private void stateRoundEnd() {
