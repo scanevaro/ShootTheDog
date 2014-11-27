@@ -52,7 +52,7 @@ public class MainMenuScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-//        game.actionResolver.loginGPGS();
+        game.actionResolver.loginGPGS();
     }
 
     private void setWidgets() {

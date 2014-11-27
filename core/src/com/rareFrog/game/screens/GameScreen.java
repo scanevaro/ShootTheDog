@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
             public void ducks() {
             }
         };
-        world = new World(worldListener, gameMode);
+        world = new World(worldListener, game, gameMode);
         renderer = new WorldRenderer(batcher, world);
         world.setWorldRenderer(renderer);
         stage.addActor(renderer);

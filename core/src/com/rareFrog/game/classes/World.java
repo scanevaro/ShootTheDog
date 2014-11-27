@@ -34,6 +34,8 @@ public class World {
     public static final int GAME_MODE_2 = 1;
     private final int PERFECT = 10000;
 
+    private Game game;
+
     public final List<Duck> ducks;
     public final WorldListener listener;
     private WorldRenderer worldRenderer;
@@ -52,7 +54,8 @@ public class World {
 
     Vector3 touchPoint;
 
-    public World(WorldListener listener, int gameMode) {
+    public World(WorldListener listener, Game game, int gameMode) {
+        this.game = game;
         this.ducks = new ArrayList<Duck>(10);
         this.listener = listener;
         this.gameMode = gameMode;
@@ -259,6 +262,11 @@ public class World {
             if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
                 score += Duck.SCORE;
+
+                //Achievement First Blood
+                if (game.actionResolver.getSignedInGPGS())
+                    game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQAw");
+
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
         } else {

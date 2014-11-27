@@ -23,6 +23,7 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
             gameHelper.enableDebugLog(true);
         }
         gameHelper.setup(this);
+        gameHelper.setMaxAutoSignInAttempts(0);
     }
 
     @Override
