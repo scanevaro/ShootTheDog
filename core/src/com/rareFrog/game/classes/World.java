@@ -144,6 +144,7 @@ public class World {
         if (stateTime > 1.6f) {
             updateDog(deltaTime, ducksHit);
             checkDogState();
+            checkDogCollision();
         }
 
         if (duckCount > 9) {
@@ -239,6 +240,16 @@ public class World {
         }
     }
 
+    private void checkDogCollision() {
+        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
+        if (Gdx.input.justTouched())
+            if (GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
+                dog.state = Dog.DOG_STATE_SHOT;
+                dog.stateTime = 0;
+            }
+    }
+
     private void updateDucks(float deltaTime) {
         if (gameMode == GAME_MODE_1)
             ducks.get(duckCount).update(deltaTime);
@@ -266,6 +277,9 @@ public class World {
                 //Achievement First Blood
                 if (game.actionResolver.getSignedInGPGS())
                     game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQAw");
+
+                if (GameScreen.shots == 1)
+                    game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQBA");
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;

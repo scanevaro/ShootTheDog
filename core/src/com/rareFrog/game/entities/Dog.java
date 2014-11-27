@@ -18,6 +18,7 @@ public class Dog extends GameObject {
     public static final int DOG_STATE_WALKING_NEW_ROUND = 6;
     public static final int DOG_STATE_LAUGHING_GAME_OVER = 7;
     public static final int DOG_STATE_FALLING = 8;
+    public static final int DOG_STATE_SHOT = 9;
     public static final float DOG_WIDTH = 64;
     public static final float DOG_HEIGHT = 64;
 
@@ -65,6 +66,9 @@ public class Dog extends GameObject {
                 break;
             case DOG_STATE_LAUGHING:
                 stateLaughing(deltaTime);
+                break;
+            case DOG_STATE_SHOT:
+                stateShot();
                 break;
             case DOG_STATE_LAUGHING_GAME_OVER:
                 stateLaughingGameOver(deltaTime);
@@ -177,7 +181,18 @@ public class Dog extends GameObject {
                 world.duckCount++;
         }
 
+        bounds.set(position.x - DOG_WIDTH / 2, position.y - DOG_HEIGHT / 2, DOG_WIDTH, DOG_HEIGHT);
+
         texture = Assets.dogLaughing.getKeyFrame(stateTime, true);
+    }
+
+    private void stateShot() {
+        if (stateTime > 3) {
+            state = DOG_STATE_HIDDEN;
+            world.state = World.WORLD_STATE_RUNNING;
+        }
+
+        texture = Assets.dogShot.getKeyFrame(stateTime, true);
     }
 
     private void stateLaughingGameOver(float deltaTime) {

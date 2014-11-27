@@ -47,7 +47,7 @@ public class Assets {
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
 
-//    public static Texture menuBackground;
+    //    public static Texture menuBackground;
     public static Texture soundIconUp;
     public static Texture soundIconDown;
     public static Texture play1ButtonUp;
@@ -72,6 +72,7 @@ public class Assets {
     public static Animation dogJumping;
     public static Animation dogLaughing;
     public static Animation uiDucks;
+    public static Animation dogShot;
 
     public static BitmapFont font;
 
@@ -181,6 +182,9 @@ public class Assets {
         uiDucks = new Animation(0.2f,
                 (items.findRegion("uiWhiteDuck")),
                 (items.findRegion("uiRedDuck")));
+        dogShot = new Animation(0.2f,
+                new TextureRegion(new Texture(Gdx.files.internal("data/dogShot0.png"))),
+                new TextureRegion(new Texture(Gdx.files.internal("data/dogShot1.png"))));
 
         duckFallingBlue = items.findRegion("duckFallingBlue");
         duckFallingBlack = items.findRegion("duckFallingBlack");
