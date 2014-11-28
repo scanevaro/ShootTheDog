@@ -248,6 +248,7 @@ public class World {
             dog.state = Dog.DOG_STATE_SHOT;
             dog.stateTime = 0;
             if (Settings.soundEnabled) Assets.shoot.play();
+            Assets.dogLaughingSnd.stop();
         } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
 //            if (Settings.soundEnabled) Assets.noBullets.play();
         } else if (Gdx.input.justTouched() &&
