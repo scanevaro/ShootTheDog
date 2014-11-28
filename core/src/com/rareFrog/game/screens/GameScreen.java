@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rareFrog.game.Game;
@@ -30,7 +29,6 @@ public class GameScreen implements Screen {
     private float stateTime;
     private OrthographicCamera guiCam;
     private Stage stage;
-    private Vector3 touchPoint;
     private SpriteBatch batcher;
     private World world;
     private World.WorldListener worldListener;
@@ -51,7 +49,6 @@ public class GameScreen implements Screen {
         guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         batcher = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batcher);
-        touchPoint = new Vector3();
         worldListener = new World.WorldListener() {
             @Override
             public void reload() {
@@ -118,9 +115,6 @@ public class GameScreen implements Screen {
             case World.WORLD_STATE_RUNNING:
                 if (Gdx.input.justTouched()) {
                     if (shots > 0) {
-                        guiCam.unproject(touchPoint.set(Gdx.input.getX(),
-                                Gdx.input.getY(), 0));
-
                         if (Settings.soundEnabled) Assets.shoot.play();
 
                         shots--;
@@ -129,7 +123,6 @@ public class GameScreen implements Screen {
                 break;
             case World.WORLD_STATE_ROUND_PAUSE:
                 stateTime = 0;
-                shots = 3;
                 break;
             case World.WORLD_STATE_COUNTING_DUCKS:
                 stateTime = 0;
@@ -165,7 +158,7 @@ public class GameScreen implements Screen {
     private void updateGameOver1() {
         if (stateTime > 3) {
             state = GAME_OVER_2;
-            Assets.gameOver2.play();
+            if (Settings.soundEnabled) Assets.gameOver2.play();
 
             if (gameMode == World.GAME_MODE_1)
                 Settings.addScoreA(lastScore);

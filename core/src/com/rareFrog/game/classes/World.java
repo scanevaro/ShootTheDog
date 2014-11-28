@@ -237,17 +237,24 @@ public class World {
         if (dog.state == Dog.DOG_STATE_HIDDEN) {
             state = WORLD_STATE_RUNNING;
             checkDucksRoundPause = true;
+            GameScreen.shots = 3;
         }
     }
 
     private void checkDogCollision() {
         worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-        if (Gdx.input.justTouched())
-            if (GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
-                dog.state = Dog.DOG_STATE_SHOT;
-                dog.stateTime = 0;
-            }
+        if (Gdx.input.justTouched() && GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
+            dog.state = Dog.DOG_STATE_SHOT;
+            dog.stateTime = 0;
+            if (Settings.soundEnabled) Assets.shoot.play();
+        } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
+//            if (Settings.soundEnabled) Assets.noBullets.play();
+        } else if (Gdx.input.justTouched() &&
+                GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
+            GameScreen.shots--;
+            if (Settings.soundEnabled) Assets.shoot.play();
+        }
     }
 
     private void updateDucks(float deltaTime) {
@@ -270,9 +277,21 @@ public class World {
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
 
-            if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() &&
+                    duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
-                score += Duck.SCORE;
+
+                switch (GameScreen.shots) {
+                    case 2:
+                        score += Duck.SCORE2;
+                        break;
+                    case 1:
+                        score += Duck.SCORE1;
+                        break;
+                    case 0:
+                        score += Duck.SCORE0;
+                        break;
+                }
 
                 //Achievement First Blood
                 if (game.actionResolver.getSignedInGPGS())
@@ -281,7 +300,8 @@ public class World {
                 if (GameScreen.shots == 1)
                     game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQBA");
 
-            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
+            } else if (Gdx.input.justTouched() &&
+                    GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
         } else {
             Duck duck = ducks.get(duckCount);
@@ -290,21 +310,42 @@ public class World {
                     && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
 
-                score += Duck.SCORE;
-            } else if (Gdx.input.justTouched() && GameScreen.shots == 0
-                    && duck.state == Duck.DUCK_STATE_FLYING) {
+                switch (GameScreen.shots) {
+                    case 2:
+                        score += Duck.SCORE2;
+                        break;
+                    case 1:
+                        score += Duck.SCORE1;
+                        break;
+                    case 0:
+                        score += Duck.SCORE0;
+                        break;
+                }
+
+            } else if (Gdx.input.justTouched() &&
+                    GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
-            }
+
 
             Duck duck2 = ducks.get(duckCount + 1);
-            if (Gdx.input.justTouched()
-                    && duck2.bounds.contains(touchPoint.x, touchPoint.y)
-                    && duck2.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() &&
+                    duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.hit();
 
-                score += Duck.SCORE;
-            } else if (Gdx.input.justTouched() && GameScreen.shots == 0
-                    && duck2.state == Duck.DUCK_STATE_FLYING) {
+                switch (GameScreen.shots) {
+                    case 2:
+                        score += Duck.SCORE2;
+                        break;
+                    case 1:
+                        score += Duck.SCORE1;
+                        break;
+                    case 0:
+                        score += Duck.SCORE0;
+                        break;
+                }
+
+            } else if (Gdx.input.justTouched() &&
+                    GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.state = Duck.DUCK_STATE_FLY_AWAY;
             }
         }

@@ -47,8 +47,7 @@ public class MainMenuScreen implements Screen {
         addListeners();
         setLayout();
 
-        if (Settings.soundEnabled)
-            Assets.menuIntro.play();
+        if (Settings.soundEnabled) Assets.menuIntro.play();
 
         Gdx.input.setInputProcessor(stage);
 

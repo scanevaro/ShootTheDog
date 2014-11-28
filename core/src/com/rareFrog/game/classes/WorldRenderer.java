@@ -42,10 +42,6 @@ public class WorldRenderer extends Actor {
 
         gameCam.update();
 
-//        if (Gdx.input.justTouched())
-//            gameCam.unproject(world.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
-//                    0));
-
         batch.setProjectionMatrix(gameCam.combined);
         batch.enableBlending();
 
@@ -60,27 +56,6 @@ public class WorldRenderer extends Actor {
             renderBackground();
         }
     }
-
-//    public void render() {
-//        clearScreen();
-//
-//        gameCam.update();
-//        gameCam.unproject(world.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
-//                0));
-//        batch.setProjectionMatrix(gameCam.combined);
-//        batch.enableBlending();
-//
-//        if (world.dog.state == Dog.DOG_STATE_WALKING
-//                || world.dog.state == Dog.DOG_STATE_FOUND
-//                || world.dog.state == Dog.DOG_STATE_JUMPING
-//                || world.dog.state == Dog.DOG_STATE_WALKING_NEW_ROUND) {
-//            renderBackground();
-//            renderObjects();
-//        } else {
-//            renderObjects();
-//            renderBackground();
-//        }
-//    }
 
     // also draws the background color
     private void clearScreen() {
@@ -113,8 +88,7 @@ public class WorldRenderer extends Actor {
 
     private void renderDog() {
         if (world.dog.texture != null)
-            batch.draw(world.dog.texture, world.dog.position.x,
-                    world.dog.position.y, Dog.DOG_WIDTH, Dog.DOG_HEIGHT);
+            batch.draw(world.dog.texture, world.dog.position.x, world.dog.position.y, Dog.DOG_WIDTH, Dog.DOG_HEIGHT);
     }
 
     private void renderDucks() {
