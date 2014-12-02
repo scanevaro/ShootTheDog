@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
@@ -18,8 +17,7 @@ public class WorldRenderer extends Actor {
     private World world;
     public OrthographicCamera gameCam;
     private SpriteBatch batch;
-    private TextureRegion background;
-    private ShapeRenderer shapeRenderer;
+    //    private ShapeRenderer shapeRenderer;
     private int sideX;
 
     public WorldRenderer(SpriteBatch batch, World world) {
@@ -28,7 +26,7 @@ public class WorldRenderer extends Actor {
         this.gameCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         this.batch = batch;
 
-        shapeRenderer = new ShapeRenderer();
+//        shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -44,6 +42,8 @@ public class WorldRenderer extends Actor {
 
         batch.setProjectionMatrix(gameCam.combined);
         batch.enableBlending();
+
+        renderBackgroundBack();
 
         if (world.dog.state == Dog.DOG_STATE_WALKING
                 || world.dog.state == Dog.DOG_STATE_FOUND
@@ -73,6 +73,12 @@ public class WorldRenderer extends Actor {
         }
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    private void renderBackgroundBack() {
+        batch.draw(Assets.backgroundBackRegion, gameCam.position.x - Game.VIRTUAL_WIDTH / 2,
+                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
+                Game.VIRTUAL_HEIGHT);
     }
 
     private void renderBackground() {

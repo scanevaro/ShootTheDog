@@ -26,6 +26,7 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     //widgets
+    private Image menuBackgroundBack;
     private Image menuBackground;
     private Image titleImage;
     private ImageButton muteButton;
@@ -55,7 +56,8 @@ public class MainMenuScreen implements Screen {
     }
 
     private void setWidgets() {
-        menuBackground = new Image(Assets.backgroundRegion/*Assets.menuBackground*/);
+        menuBackgroundBack = new Image(Assets.backgroundBackRegion);
+        menuBackground = new Image(Assets.backgroundRegion);
         titleImage = new Image(Assets.title);
 
         ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
@@ -131,6 +133,10 @@ public class MainMenuScreen implements Screen {
     }
 
     private void setLayout() {
+        menuBackgroundBack.setSize(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+        menuBackgroundBack.setPosition(0, 0);
+        stage.addActor(menuBackgroundBack);
+
         menuBackground.setSize(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         menuBackground.setPosition(0, 0);
         stage.addActor(menuBackground);

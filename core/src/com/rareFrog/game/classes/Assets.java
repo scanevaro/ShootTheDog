@@ -19,6 +19,7 @@ public class Assets {
     public static TextureAtlas items;
 
     public static TextureRegion backgroundRegion;
+    public static TextureRegion backgroundBackRegion;
     public static TextureRegion pause;
     public static TextureRegion ready;
     public static TextureRegion duckHit;
@@ -131,7 +132,8 @@ public class Assets {
     }
 
     private static void loadTextures() {
-        backgroundRegion = items.findRegion("background");
+        backgroundRegion = items.findRegion("grass1280");
+        backgroundBackRegion = items.findRegion("wallpaper1280");
         dogWalking = new Animation(0.15f,
                 (items.findRegion("dogWalking1")),
                 (items.findRegion("dogWalking2")),
