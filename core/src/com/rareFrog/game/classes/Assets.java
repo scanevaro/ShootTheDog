@@ -93,6 +93,7 @@ public class Assets {
     public static Sound cuak;
     public static Sound movingDucksArray;
     public static Sound perfect;
+    public static Sound outOfBullets;
 
     public static void load() {
         loadSkin();
@@ -242,22 +243,16 @@ public class Assets {
                 .internal("data/sounds/gameOver2.mp3"));
 
         shoot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/blast.mp3"));
-        dogBark = Gdx.audio
-                .newSound(Gdx.files.internal("data/sounds/bark.mp3"));
+        dogBark = Gdx.audio.newSound(Gdx.files.internal("data/sounds/bark.mp3"));
         miss = Gdx.audio.newSound(Gdx.files.internal("data/sounds/miss.mp3"));
-        dogLaughingSnd = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/laugh.mp3"));
-        dogDuckFoundSnd = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/end_duck_round.mp3"));
-        hitGround = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/drop.mp3"));
-        duckFallingSnd = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/duck_falling.mp3"));
+        dogLaughingSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/laugh.mp3"));
+        dogDuckFoundSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/end_duck_round.mp3"));
+        hitGround = Gdx.audio.newSound(Gdx.files.internal("data/sounds/drop.mp3"));
+        duckFallingSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/duck_falling.mp3"));
         cuak = Gdx.audio.newSound(Gdx.files.internal("data/sounds/cuak.mp3"));
-        movingDucksArray = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/movingDucksArray.mp3"));
-        perfect = Gdx.audio.newSound(Gdx.files
-                .internal("data/sounds/perfect.mp3"));
+        movingDucksArray = Gdx.audio.newSound(Gdx.files.internal("data/sounds/movingDucksArray.mp3"));
+        perfect = Gdx.audio.newSound(Gdx.files.internal("data/sounds/perfect.mp3"));
+        outOfBullets = Gdx.audio.newSound(Gdx.files.internal("data/sounds/outOfBullets.mp3"));
     }
 
     public static void playSound(Sound sound) {
@@ -286,6 +281,7 @@ public class Assets {
         cuak.dispose();
         movingDucksArray.dispose();
         perfect.dispose();
+        outOfBullets.dispose();
         //textures
         soundIconUp.dispose();
         soundIconDown.dispose();

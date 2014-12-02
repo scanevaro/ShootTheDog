@@ -250,7 +250,7 @@ public class World {
             if (Settings.soundEnabled) Assets.shoot.play();
             Assets.dogLaughingSnd.stop();
         } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
-//            if (Settings.soundEnabled) Assets.noBullets.play();
+            if (Settings.soundEnabled) Assets.outOfBullets.play();
         } else if (Gdx.input.justTouched() &&
                 GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
             GameScreen.shots--;
