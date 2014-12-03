@@ -180,15 +180,14 @@ public class World {
 
     private void stateCountingDucks(float deltaTime) {
         if (stateTime > 0.325f) {
-            for (duckCountRoundEnd = duckCountRoundEnd; duckCountRoundEnd < ducks
-                    .size(); duckCountRoundEnd++) {
+            for (duckCountRoundEnd = duckCountRoundEnd; duckCountRoundEnd < ducks.size(); duckCountRoundEnd++) {
                 if (ducks.get(duckCountRoundEnd).state == Duck.DUCK_STATE_GONE) {
                     Duck duck = ducks.get(duckCountRoundEnd);
                     for (int x = duckCountRoundEnd; x < ducks.size(); x++) {
                         if (ducks.get(x).state == Duck.DUCK_STATE_DEAD) {
                             ducks.remove(duckCountRoundEnd);
                             ducks.add(duck);
-                            if (Settings.soundEnabled) Assets.movingDucksArray.play();
+                            if (Settings.soundEnabled) Assets.movingDucksArray[x].play();
                             stateTime = 0;
                             return;
                         }

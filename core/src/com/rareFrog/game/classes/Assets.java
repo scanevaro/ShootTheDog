@@ -91,7 +91,7 @@ public class Assets {
     public static Sound hitGround;
     public static Sound duckFallingSnd;
     public static Sound cuak;
-    public static Sound movingDucksArray;
+    public static Sound[] movingDucksArray;
     public static Sound perfect;
     public static Sound outOfBullets;
 
@@ -250,9 +250,21 @@ public class Assets {
         hitGround = Gdx.audio.newSound(Gdx.files.internal("data/sounds/drop.mp3"));
         duckFallingSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/duck_falling.mp3"));
         cuak = Gdx.audio.newSound(Gdx.files.internal("data/sounds/cuak.mp3"));
-        movingDucksArray = Gdx.audio.newSound(Gdx.files.internal("data/sounds/movingDucksArray.mp3"));
         perfect = Gdx.audio.newSound(Gdx.files.internal("data/sounds/perfect.mp3"));
         outOfBullets = Gdx.audio.newSound(Gdx.files.internal("data/sounds/outOfBullets.mp3"));
+
+        movingDucksArray = new Sound[10];
+        movingDucksArray[0] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck0.mp3"));
+        movingDucksArray[1] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck1.mp3"));
+        movingDucksArray[2] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck2.mp3"));
+        movingDucksArray[3] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck3.mp3"));
+        movingDucksArray[4] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck4.mp3"));
+        movingDucksArray[5] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck5.mp3"));
+        movingDucksArray[6] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck6.mp3"));
+        movingDucksArray[7] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck7.mp3"));
+        movingDucksArray[8] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck8.mp3"));
+        movingDucksArray[9] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck9.mp3"));
+
     }
 
     public static void playSound(Sound sound) {
@@ -279,9 +291,9 @@ public class Assets {
         hitGround.dispose();
         duckFallingSnd.dispose();
         cuak.dispose();
-        movingDucksArray.dispose();
         perfect.dispose();
         outOfBullets.dispose();
+        for (int i = 0; i < movingDucksArray.length; i++) movingDucksArray[i].dispose();
         //textures
         soundIconUp.dispose();
         soundIconDown.dispose();
