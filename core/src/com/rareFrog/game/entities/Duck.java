@@ -103,8 +103,8 @@ public class Duck extends DynamicGameObject {
         if (position.y < 75)
             velocity.y = Math.abs(velocity.y);
         position.add(velocity.x * deltaTime * 2, velocity.y * deltaTime * 2);
-        bounds.x = position.x - bounds.width / 2;
-        bounds.y = position.y - bounds.height / 2;
+        bounds.x = position.x;
+        bounds.y = position.y;
 
         if (rand.nextFloat() > 0.998f)
             velocity.x = -velocity.x;
@@ -215,8 +215,8 @@ public class Duck extends DynamicGameObject {
 
         velocity.add(0, DUCK_GRAVITY);
         position.add(velocity.x * deltaTime, velocity.y * deltaTime);
-        bounds.x = position.x - DUCK_WIDTH / 2;
-        bounds.y = position.y - DUCK_HEIGHT / 2;
+        bounds.x = position.x;
+        bounds.y = position.y;
 
         if (position.y < 70f) {
             state = DUCK_STATE_DEAD;
@@ -242,6 +242,8 @@ public class Duck extends DynamicGameObject {
         texture = DucksTextures.getUpTexture(type, stateTime);
 
         position.add(0, deltaTime * 135);
+        bounds.x = position.x;
+        bounds.y = position.y;
 
         if (stateTime > 0.125f)
             if ((stateTime - lastTimeSaved) >= 0.125f) {

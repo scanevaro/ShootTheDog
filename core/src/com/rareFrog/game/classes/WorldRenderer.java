@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
@@ -17,8 +18,7 @@ public class WorldRenderer extends Actor {
     private World world;
     public OrthographicCamera gameCam;
     private SpriteBatch batch;
-    //    private ShapeRenderer shapeRenderer;
-    private int sideX;
+    private ShapeRenderer shapeRenderer;
 
     public WorldRenderer(SpriteBatch batch, World world) {
         this.world = world;
@@ -26,7 +26,7 @@ public class WorldRenderer extends Actor {
         this.gameCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         this.batch = batch;
 
-//        shapeRenderer = new ShapeRenderer();
+        shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -104,23 +104,17 @@ public class WorldRenderer extends Actor {
 
             TextureRegion texture = duck.texture;
 
-            sideX = duck.velocity.x < 0 ? -1 : 1;
             if (texture != null)
-                if (sideX < 0)
-                    batch.draw(texture, duck.position.x + Duck.DUCK_WIDTH / 2,
-                            duck.position.y - Duck.DUCK_HEIGHT / 2, sideX
-                                    * Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
+                if (duck.velocity.x >= 0)
+                    batch.draw(texture, duck.bounds.x, duck.bounds.y, Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
                 else
-                    batch.draw(texture, duck.position.x - Duck.DUCK_WIDTH / 2,
-                            duck.position.y - Duck.DUCK_HEIGHT / 2, sideX
-                                    * Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
+                    batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
 
             {// Debug Duck
 //                shapeRenderer.setProjectionMatrix(gameCam.combined);
 //                shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 //                shapeRenderer.setColor(Color.RED);
-//                shapeRenderer.rect(duck.bounds.x, duck.bounds.y,
-//                        duck.bounds.width, duck.bounds.height);
+//                shapeRenderer.rect(duck.bounds.x, duck.bounds.y, duck.bounds.width, duck.bounds.height);
 //                shapeRenderer.end();
             }
         }
