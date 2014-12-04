@@ -34,6 +34,7 @@ public class MainMenuScreen implements Screen {
     private ImageButton play1DuckButton;
     private ImageButton play2DucksButton;
     private ImageButton aboutButton;
+    private ImageButton libgdxButton;
 
     public MainMenuScreen(Game game) {
         this.game = game;
@@ -85,6 +86,10 @@ public class MainMenuScreen implements Screen {
         aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonUp));
         aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonDown));
         aboutButton = new ImageButton(aboutStyle);
+
+        ImageButton.ImageButtonStyle libgdxStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
+        libgdxStyle.imageUp = new TextureRegionDrawable(Assets.atlas.findRegion("gdx"));
+        libgdxButton = new ImageButton(libgdxStyle);
     }
 
     private void configureWidgets() {
@@ -124,6 +129,12 @@ public class MainMenuScreen implements Screen {
 //                game.setScreen(new AboutScreen(game));
             }
         });
+        libgdxButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.net.openURI("libgdx.badlogicgames.com");
+            }
+        });
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -160,6 +171,10 @@ public class MainMenuScreen implements Screen {
         aboutButton.setSize(128, 20);
         aboutButton.setPosition(Game.VIRTUAL_WIDTH / 2 - aboutButton.getWidth() / 2, 32);
         stage.addActor(aboutButton);
+
+        libgdxButton.setSize(64, 64);
+        libgdxButton.setPosition(Game.VIRTUAL_WIDTH - libgdxButton.getWidth(), Game.VIRTUAL_HEIGHT - libgdxButton.getHeight());
+        stage.addActor(libgdxButton);
 
         titleImage.setSize(256, 128);
         titleImage.setPosition(Game.VIRTUAL_WIDTH / 2 - titleImage.getWidth() / 2, 150);

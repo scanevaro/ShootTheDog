@@ -48,6 +48,7 @@ public class World {
     public int duckCount;
     public int duckCountRoundEnd;
     public int ducksHit;
+    public int ducksDead;
     public float stateTime;
     public boolean checkDucksRoundPause;
     public boolean perfect;
@@ -79,6 +80,7 @@ public class World {
 
         duckCount = 0;
         duckCountRoundEnd = 0;
+        ducksDead = 0;
         stateTime = 0;
         perfect = true;
         this.state = WORLD_STATE_ROUND_START;
@@ -180,28 +182,45 @@ public class World {
 
     private void stateCountingDucks(float deltaTime) {
         if (stateTime > 0.325f) {
+//            for (duckCountRoundEnd = duckCountRoundEnd; duckCountRoundEnd < ducks.size(); duckCountRoundEnd++) {
+//                if (ducks.get(duckCountRoundEnd).state == Duck.DUCK_STATE_GONE) {
+//                    Duck duck = ducks.get(duckCountRoundEnd);
+//                    for (int x = duckCountRoundEnd; x < ducks.size(); x++) {
+//                        if (ducks.get(x).state == Duck.DUCK_STATE_DEAD) {
+//                            ducks.remove(duckCountRoundEnd);
+//                            ducks.add(duck);
+//                            if (Settings.soundEnabled) Assets.movingDucksArray[x].play();
+//                            stateTime = 0;
+//                            return;
+//                        }
+//                    }
+//                    duckCountRoundEnd = ducks.size();
+//                }
+//            }
+
+            /** changed original counting ducks to count the ones that got Hit, so it plays the continuos SFX */
             for (duckCountRoundEnd = duckCountRoundEnd; duckCountRoundEnd < ducks.size(); duckCountRoundEnd++) {
-                if (ducks.get(duckCountRoundEnd).state == Duck.DUCK_STATE_GONE) {
-                    Duck duck = ducks.get(duckCountRoundEnd);
-                    for (int x = duckCountRoundEnd; x < ducks.size(); x++) {
-                        if (ducks.get(x).state == Duck.DUCK_STATE_DEAD) {
-                            ducks.remove(duckCountRoundEnd);
-                            ducks.add(duck);
-                            if (Settings.soundEnabled) Assets.movingDucksArray[x].play();
-                            stateTime = 0;
-                            return;
-                        }
-                    }
-                    duckCountRoundEnd = ducks.size();
+                Duck duck = ducks.get(duckCountRoundEnd);
+
+                if (duck.state == Duck.DUCK_STATE_DEAD) {
+                    if (Settings.soundEnabled) Assets.movingDucksArray[ducksDead].play();
+
+                    ducks.remove(duckCountRoundEnd);
+                    ducks.add(0, duck);
+
+                    ducksDead++;
+                    duckCountRoundEnd++;
+                    stateTime = 0;
+                    return;
                 }
             }
         }
 
         if (duckCountRoundEnd >= ducks.size()) {
-            int ducksDead = 0;
-            for (int i = 0; i < ducks.size(); i++)
-                if (ducks.get(i).state == Duck.DUCK_STATE_DEAD)
-                    ducksDead++;
+//            int ducksDead = 0;
+//            for (int i = 0; i < ducks.size(); i++)
+//                if (ducks.get(i).state == Duck.DUCK_STATE_DEAD)
+//                    ducksDead++;
 
             stateTime = 0;
 
@@ -294,12 +313,12 @@ public class World {
                 }
 
                 //Achievement First Blood
-                if (game.actionResolver.getSignedInGPGS())
+                if (game.actionResolver.getSignedInGPGS()) {
                     game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQAw");
 
-                if (GameScreen.shots == 1)
-                    game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQBA");
-
+                    if (GameScreen.shots == 1)
+                        game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQBA");
+                }
             } else if (Gdx.input.justTouched() &&
                     GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
