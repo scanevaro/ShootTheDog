@@ -82,6 +82,7 @@ public class Assets {
     public static Music endRound;
     public static Music gameOver1;
     public static Music gameOver2;
+    public static Music background;
 
     public static Sound shoot;
     public static Sound dogBark;
@@ -229,18 +230,14 @@ public class Assets {
     }
 
     private static void loadSounds() {
-        menuIntro = Gdx.audio.newMusic(Gdx.files
-                .internal("data/sounds/DuckHunt.mp3"));
+        menuIntro = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/DuckHunt.mp3"));
         menuIntro.setLooping(false);
         menuIntro.setVolume(0.5f);
-        startRound = Gdx.audio.newMusic(Gdx.files
-                .internal("data/sounds/start_round.mp3"));
-        endRound = Gdx.audio.newMusic((Gdx.files
-                .internal("data/sounds/end_round.mp3")));
-        gameOver1 = Gdx.audio.newMusic(Gdx.files
-                .internal("data/sounds/gameOver1.mp3"));
-        gameOver2 = Gdx.audio.newMusic(Gdx.files
-                .internal("data/sounds/gameOver2.mp3"));
+        startRound = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/start_round.mp3"));
+        endRound = Gdx.audio.newMusic((Gdx.files.internal("data/sounds/end_round.mp3")));
+        gameOver1 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver1.mp3"));
+        gameOver2 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver2.mp3"));
+        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.wav"));
 
         shoot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/blast.mp3"));
         dogBark = Gdx.audio.newSound(Gdx.files.internal("data/sounds/bark.mp3"));

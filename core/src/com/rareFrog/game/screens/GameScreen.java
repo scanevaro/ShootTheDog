@@ -68,7 +68,11 @@ public class GameScreen implements Screen {
         world.setWorldRenderer(renderer);
         stage.addActor(renderer);
 
-        if (Settings.soundEnabled) Assets.startRound.play();
+//        if (Settings.soundEnabled) Assets.startRound.play();
+        if (Settings.soundEnabled) {
+            Assets.background.play();
+            Assets.background.setLooping(true);
+        }
 
         state = GAME_READY;
         stateTime = 0;
@@ -158,6 +162,8 @@ public class GameScreen implements Screen {
     private void updateGameOver1() {
         if (stateTime > 3) {
             state = GAME_OVER_2;
+
+            if (Assets.background.isPlaying()) Assets.background.stop();
             if (Settings.soundEnabled) Assets.gameOver2.play();
 
             if (gameMode == World.GAME_MODE_1)
