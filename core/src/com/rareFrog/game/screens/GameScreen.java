@@ -66,12 +66,14 @@ public class GameScreen implements Screen {
         world = new World(worldListener, game, gameMode);
         renderer = new WorldRenderer(batcher, world);
         world.setWorldRenderer(renderer);
+        world.setStage(stage);
         stage.addActor(renderer);
 
 //        if (Settings.soundEnabled) Assets.startRound.play();
         if (Settings.soundEnabled) {
-            Assets.background.play();
-            Assets.background.setLooping(true);
+            Assets.startRound.play();
+//            Assets.background.play();
+//            Assets.background.setLooping(true);
         }
 
         state = GAME_READY;
@@ -110,8 +112,21 @@ public class GameScreen implements Screen {
     }
 
     private void updateReady() {
-        if (world.dog.state == Dog.DOG_STATE_HIDDEN)
+//        if (Settings.soundEnabled) {
+//            if (!Assets.startRound.isPlaying() && !Assets.background.isPlaying()) {
+//                Assets.background.play();
+//                Assets.background.setLooping(true);
+//            }
+//        }
+
+        if (world.dog.state == Dog.DOG_STATE_HIDDEN) {
             state = GAME_RUNNING;
+
+            if (Settings.soundEnabled) {
+                Assets.background.play();
+                Assets.background.setLooping(true);
+            }
+        }
     }
 
     private void updateRunning(float deltaTime) {
@@ -355,6 +370,30 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+
+//        Vector2 crop = new Vector2(0f, 0f);
+//
+//        float aspectRatio = (float) width / (float) height;
+//        float scale = 1;
+//
+//        if (aspectRatio > Game.VIRTUAL_ASPECT) {
+//            scale = (float) height / Game.VIRTUAL_HEIGHT;
+//            crop.x = (width - Game.VIRTUAL_WIDTH * scale) / 2f;
+//        } else if (aspectRatio < Game.VIRTUAL_ASPECT) {
+//            scale = (float) width / Game.VIRTUAL_WIDTH;
+//            crop.y = (height - Game.VIRTUAL_HEIGHT * scale) / 2f;
+//        } else {
+//            scale = (float) width / Game.VIRTUAL_WIDTH;
+//        }
+//
+//        float w = Game.VIRTUAL_WIDTH * scale;
+//        float h = Game.VIRTUAL_HEIGHT * scale;
+//
+////        viewport.set(crop.x, crop.y, w, h);
+//        Gdx.gl.glViewport((int) crop.x, (int) crop.y, (int) w, (int) h);
+//
+//        renderer.gameCam.viewportWidth = w;
+//        renderer.gameCam.viewportHeight = h;
     }
 
     @Override

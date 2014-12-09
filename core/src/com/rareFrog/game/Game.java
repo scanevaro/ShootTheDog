@@ -3,7 +3,6 @@ package com.rareFrog.game;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.rareFrog.game.classes.Assets;
 import com.rareFrog.game.classes.Settings;
 import com.rareFrog.game.interfaces.ActionResolver;
@@ -12,10 +11,11 @@ import com.rareFrog.game.screens.SplashScreen;
 public class Game implements ApplicationListener {
     public static final float VIRTUAL_WIDTH = 480;
     public static final float VIRTUAL_HEIGHT = 320;
+    public static final float VIRTUAL_ASPECT = VIRTUAL_WIDTH / VIRTUAL_HEIGHT;
 
     public ActionResolver actionResolver;
     private Screen screen;
-    FPSLogger fps;
+//    FPSLogger fps;
 
     public Game(ActionResolver actionResolver) {
         this.actionResolver = actionResolver;
@@ -26,13 +26,13 @@ public class Game implements ApplicationListener {
         Settings.load();
         Assets.load();
         setScreen(new SplashScreen(this));
-        fps = new FPSLogger();
+//        fps = new FPSLogger();
     }
 
     @Override
     public void render() {
         screen.render(Gdx.graphics.getDeltaTime());
-        fps.log();
+//        fps.log();
     }
 
     public void setScreen(Screen screen) {

@@ -237,7 +237,7 @@ public class Assets {
         endRound = Gdx.audio.newMusic((Gdx.files.internal("data/sounds/end_round.mp3")));
         gameOver1 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver1.mp3"));
         gameOver2 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver2.mp3"));
-        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.wav"));
+        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.mp3"));
 
         shoot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/blast.mp3"));
         dogBark = Gdx.audio.newSound(Gdx.files.internal("data/sounds/bark.mp3"));

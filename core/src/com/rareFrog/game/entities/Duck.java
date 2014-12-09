@@ -1,5 +1,6 @@
 package com.rareFrog.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.classes.Assets;
@@ -99,6 +100,12 @@ public class Duck extends DynamicGameObject {
 
     private void stateFlying(float deltaTime) {
         texture = DucksTextures.getFlyingTexture(stateTime, type, velocity);
+
+        if (Gdx.input.justTouched()) {
+            System.out.println("pos x = " + position.x + ", pos y = " + position.y);
+            System.out.println("bound x = " + bounds.x + ", bound y = " + bounds.y);
+            System.out.println("bound width = " + bounds.width + ", bound height = " + bounds.height);
+        }
 
         if (position.y < 75)
             velocity.y = Math.abs(velocity.y);

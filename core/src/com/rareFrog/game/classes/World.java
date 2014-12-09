@@ -1,7 +1,8 @@
 package com.rareFrog.game.classes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
 import com.rareFrog.game.entities.Duck;
@@ -41,6 +42,7 @@ public class World {
     private WorldRenderer worldRenderer;
     public final Dog dog;
     public final Random rand;
+    public Stage stage;
 
     public int score;
     public int state;
@@ -53,7 +55,7 @@ public class World {
     public boolean checkDucksRoundPause;
     public boolean perfect;
 
-    Vector3 touchPoint;
+    Vector2 touchPoint;
 
     public World(WorldListener listener, Game game, int gameMode) {
         this.game = game;
@@ -61,7 +63,7 @@ public class World {
         this.listener = listener;
         this.gameMode = gameMode;
         rand = new Random();
-        this.touchPoint = new Vector3();
+        this.touchPoint = new Vector2();
 
         this.score = 0;
         dog = new Dog(0, 60, this);
@@ -260,7 +262,7 @@ public class World {
     }
 
     private void checkDogCollision() {
-        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+//        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
         if (Gdx.input.justTouched() && GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
             dog.state = Dog.DOG_STATE_SHOT;
@@ -291,10 +293,14 @@ public class World {
     }
 
     private void checkDuckCollision() {
-        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+//        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+//        stage.screenToStageCoordinates(touchPoint);
 
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
+
+            if (Gdx.input.justTouched())
+                System.out.println("touch x = " + touchPoint.x + ", touch y = " + touchPoint.y);
 
             if (Gdx.input.justTouched() &&
                     duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
@@ -415,5 +421,9 @@ public class World {
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
