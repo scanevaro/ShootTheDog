@@ -101,12 +101,6 @@ public class Duck extends DynamicGameObject {
     private void stateFlying(float deltaTime) {
         texture = DucksTextures.getFlyingTexture(stateTime, type, velocity);
 
-        if (Gdx.input.justTouched()) {
-            System.out.println("pos x = " + position.x + ", pos y = " + position.y);
-            System.out.println("bound x = " + bounds.x + ", bound y = " + bounds.y);
-            System.out.println("bound width = " + bounds.width + ", bound height = " + bounds.height);
-        }
-
         if (position.y < 75)
             velocity.y = Math.abs(velocity.y);
         position.add(velocity.x * deltaTime * 2, velocity.y * deltaTime * 2);
@@ -266,5 +260,9 @@ public class Duck extends DynamicGameObject {
 
     private void stateGone() {
         uiTexture = Assets.uiWhiteDuck;
+    }
+
+    public String toString() {
+        return "[" + bounds.x + ", " + bounds.y + "]";
     }
 }

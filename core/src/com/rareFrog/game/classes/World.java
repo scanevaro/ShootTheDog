@@ -89,6 +89,10 @@ public class World {
     }
 
     public void update(float deltaTime) {
+        float touchX = ((Gdx.input.getX() - ((Gdx.graphics.getWidth() - stage.getViewport().getScreenWidth()) / 2)) * (stage.getViewport().getWorldWidth() / stage.getViewport().getScreenWidth()));
+        float touchY = (((Gdx.graphics.getHeight()-Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
+        touchPoint.x = touchX;
+        touchPoint.y = touchY;
         switch (state) {
             case WORLD_STATE_ROUND_START:
                 stateRoundStart(deltaTime);
@@ -262,6 +266,7 @@ public class World {
     }
 
     private void checkDogCollision() {
+
 //        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
         if (Gdx.input.justTouched() && GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
@@ -298,9 +303,6 @@ public class World {
 
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
-
-            if (Gdx.input.justTouched())
-                System.out.println("touch x = " + touchPoint.x + ", touch y = " + touchPoint.y);
 
             if (Gdx.input.justTouched() &&
                     duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
