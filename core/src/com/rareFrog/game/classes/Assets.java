@@ -13,6 +13,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Assets {
+    public static int UISHOTSWIDTH = 29;
+    public static int UISHOTSHEIGHT = 21;
+    public static int UISCOREWIDTH = 53;
+    public static int UISCOREHEIGHT = 21;
+
     public static Skin skin;
 
     public static TextureAtlas atlas;

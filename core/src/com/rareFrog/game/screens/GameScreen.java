@@ -244,29 +244,24 @@ public class GameScreen implements Screen {
                 texture,
                 40,
                 20,
-                Assets.ui3Shots.getRegionWidth()
-                        + Assets.ui3Shots.getRegionWidth() / 2,
-                Assets.ui3Shots.getRegionHeight()
-                        + Assets.ui3Shots.getRegionHeight() / 2);
+                Assets.UISHOTSWIDTH + Assets.UISHOTSWIDTH / 2,
+                Assets.UISHOTSHEIGHT + Assets.UISHOTSHEIGHT / 2);
         batcher.draw(
                 Assets.uiDucksRound,
                 480 / 2 - Assets.uiDucksRound.getRegionWidth() / 2 - 30,
                 20,
-                Assets.uiDucksRound.getRegionWidth() * 2
-                        - Assets.uiDucksRound.getRegionWidth() / 2,
-                Assets.uiDucksRound.getRegionHeight()
-                        + Assets.uiDucksRound.getRegionHeight() / 2);
+                Assets.uiDucksRound.getRegionWidth() * 2 - Assets.uiDucksRound.getRegionWidth() / 2,
+                Assets.uiDucksRound.getRegionHeight() + Assets.uiDucksRound.getRegionHeight() / 2);
 
         x = 0;
         for (int i = 0; i < world.ducks.size(); i++) {
             TextureRegion uiDuck = world.ducks.get(i).uiTexture;
             if (uiDuck != null) {
-                batcher.draw(uiDuck,
+                batcher.draw(
+                        uiDuck,
                         480 / 2 - Assets.uiWhiteDuck.getRegionWidth() - 29 + x,
-                        21, Assets.uiWhiteDuck.getRegionWidth() * 2
-                                - Assets.uiWhiteDuck.getRegionWidth() / 2,
-                        Assets.uiWhiteDuck.getRegionHeight()
-                                + Assets.uiWhiteDuck.getRegionHeight() / 2);
+                        21, Assets.uiWhiteDuck.getRegionWidth() * 2 - Assets.uiWhiteDuck.getRegionWidth() / 2,
+                        Assets.uiWhiteDuck.getRegionHeight() + Assets.uiWhiteDuck.getRegionHeight() / 2);
             }
 
             x += 12;
@@ -276,10 +271,8 @@ public class GameScreen implements Screen {
                 Assets.uiScore,
                 480 - 100,
                 20,
-                Assets.uiScore.getRegionWidth()
-                        + Assets.uiScore.getRegionWidth() / 2,
-                Assets.uiScore.getRegionHeight()
-                        + Assets.uiScore.getRegionHeight() / 2);
+                Assets.UISCOREWIDTH + Assets.UISCOREWIDTH / 2,
+                Assets.UISCOREHEIGHT + Assets.UISCOREHEIGHT / 2);
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.59f, 0.59f);
@@ -296,10 +289,8 @@ public class GameScreen implements Screen {
                 Assets.presentRound,
                 480 / 2 - Assets.presentRound.getRegionWidth(),
                 320 / 2 + 30,
-                Assets.presentRound.getRegionWidth()
-                        + Assets.presentRound.getRegionWidth(),
-                Assets.presentRound.getRegionHeight()
-                        + Assets.presentRound.getRegionHeight());
+                Assets.presentRound.getRegionWidth() + Assets.presentRound.getRegionWidth(),
+                Assets.presentRound.getRegionHeight() + Assets.presentRound.getRegionHeight());
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.5f, 0.5f);
@@ -311,10 +302,8 @@ public class GameScreen implements Screen {
         if (world.ducks.get(world.duckCount).state == Duck.DUCK_STATE_FLY_AWAY) {
             batcher.draw(Assets.presentFlyAway,
                     480 / 2 - Assets.presentFlyAway.getRegionWidth(),
-                    320 / 2 + 30, Assets.presentFlyAway.getRegionWidth()
-                            + Assets.presentFlyAway.getRegionWidth(),
-                    Assets.presentFlyAway.getRegionHeight()
-                            + Assets.presentFlyAway.getRegionHeight());
+                    320 / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
+                    Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
             Assets.font.setColor(Color.WHITE);
             Assets.font.setScale(0.45f, 0.5f);
@@ -326,7 +315,9 @@ public class GameScreen implements Screen {
                 presentRoundEnd();
 
             if (stateTime > 5) {
-                batcher.draw(Assets.presentFlyAway, Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth(),
+                batcher.draw(
+                        Assets.presentFlyAway,
+                        Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth(),
                         Game.VIRTUAL_HEIGHT / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
                         Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
@@ -370,30 +361,6 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-
-//        Vector2 crop = new Vector2(0f, 0f);
-//
-//        float aspectRatio = (float) width / (float) height;
-//        float scale = 1;
-//
-//        if (aspectRatio > Game.VIRTUAL_ASPECT) {
-//            scale = (float) height / Game.VIRTUAL_HEIGHT;
-//            crop.x = (width - Game.VIRTUAL_WIDTH * scale) / 2f;
-//        } else if (aspectRatio < Game.VIRTUAL_ASPECT) {
-//            scale = (float) width / Game.VIRTUAL_WIDTH;
-//            crop.y = (height - Game.VIRTUAL_HEIGHT * scale) / 2f;
-//        } else {
-//            scale = (float) width / Game.VIRTUAL_WIDTH;
-//        }
-//
-//        float w = Game.VIRTUAL_WIDTH * scale;
-//        float h = Game.VIRTUAL_HEIGHT * scale;
-//
-////        viewport.set(crop.x, crop.y, w, h);
-//        Gdx.gl.glViewport((int) crop.x, (int) crop.y, (int) w, (int) h);
-//
-//        renderer.gameCam.viewportWidth = w;
-//        renderer.gameCam.viewportHeight = h;
     }
 
     @Override
