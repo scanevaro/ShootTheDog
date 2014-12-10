@@ -52,6 +52,7 @@ public class Assets {
     public static TextureRegion duckHitBlue;
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
+    public static TextureRegion pauseButton;
 
     //    public static Texture menuBackground;
     public static Texture soundIconUp;
@@ -100,6 +101,8 @@ public class Assets {
     public static Sound[] movingDucksArray;
     public static Sound perfect;
     public static Sound outOfBullets;
+    public static Sound pauseClicked;
+    public static Sound pauseClosed;
 
     public static void load() {
         loadSkin();
@@ -108,28 +111,25 @@ public class Assets {
 
         loadTextures();
 
-        loadFont();
-
         loadSounds();
     }
 
     private static void loadSkin() {
         skin = new Skin();
-        FileHandle fileHandle = Gdx.files.internal("data/uiskin.json");
-        FileHandle atlasFile = fileHandle.sibling("uiskin.atlas");
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/comic.ttf"));
+        font = generator.generateFont(40);
+
+        skin.add("default-font", font, BitmapFont.class);
+
+        generator.dispose();
+
+        FileHandle fileHandle = Gdx.files.internal("data/items.json");
+        FileHandle atlasFile = fileHandle.sibling("items.pack");
         if (atlasFile.exists()) {
             skin.addRegions(new TextureAtlas(atlasFile));
         }
         skin.load(fileHandle);
-    }
-
-    private static void loadFont() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/wonder.ttf"));
-        font = generator.generateFont(20);
-
-        skin.add("gameFont", font, BitmapFont.class);
-
-        generator.dispose();
     }
 
     private static void loadAtlas() {
@@ -201,6 +201,7 @@ public class Assets {
         duckHitBlue = items.findRegion("duckHitBlue");
         duckHitBlack = items.findRegion("duckHitBlack");
         duckHitRed = items.findRegion("duckHitRed");
+        pauseButton = items.findRegion("pauseButton");
 
         ui0Shots = items.findRegion("ui0Shots1");
         duckHit = items.findRegion("duckHit");
@@ -254,6 +255,8 @@ public class Assets {
         cuak = Gdx.audio.newSound(Gdx.files.internal("data/sounds/cuak.mp3"));
         perfect = Gdx.audio.newSound(Gdx.files.internal("data/sounds/perfect.mp3"));
         outOfBullets = Gdx.audio.newSound(Gdx.files.internal("data/sounds/outOfBullets.mp3"));
+        pauseClicked = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pauseClick.mp3"));
+        pauseClosed = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pauseClose.mp3"));
 
         movingDucksArray = new Sound[10];
         movingDucksArray[0] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck0.mp3"));
@@ -307,9 +310,5 @@ public class Assets {
         aboutButtonDown.dispose();
         closeButtonUp.dispose();
         closeButtonDown.dispose();
-    }
-
-    public static Skin getSkin() {
-        return skin;
     }
 }

@@ -6,7 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.classes.Assets;
@@ -28,8 +34,8 @@ public class GameScreen implements Screen {
     private int state;
     private float stateTime;
     private OrthographicCamera guiCam;
-    private Stage stage;
     private SpriteBatch batcher;
+    private Stage stage;
     private World world;
     private World.WorldListener worldListener;
     private WorldRenderer renderer;
@@ -39,6 +45,13 @@ public class GameScreen implements Screen {
     private int lastScore;
     private String scoreString;
     private int gameMode;
+    private boolean dialogOpen;
+
+    /**
+     * Widgets
+     */
+    private ImageButton pauseButton;
+    private Window pauseWindow;
 
     public GameScreen(Game game, int gameMode) {
         this.game = game;
@@ -69,6 +82,10 @@ public class GameScreen implements Screen {
         world.setStage(stage);
         stage.addActor(renderer);
 
+        setWidgets();
+        addListeners();
+
+
 //        if (Settings.soundEnabled) Assets.startRound.play();
         if (Settings.soundEnabled) {
             Assets.startRound.play();
@@ -82,7 +99,71 @@ public class GameScreen implements Screen {
         lastScore = 0;
         scoreString = "000000";
 
+        dialogOpen = false;
+
         Gdx.input.setInputProcessor(stage);
+    }
+
+    private void setWidgets() {
+        ImageButton.ImageButtonStyle pauseStyle = new ImageButton.ImageButtonStyle();
+        pauseStyle.imageUp = new TextureRegionDrawable(Assets.pauseButton);
+        pauseButton = new ImageButton(pauseStyle);
+        pauseButton.setSize(21, 21);
+        pauseButton.setPosition(Game.VIRTUAL_WIDTH - pauseButton.getWidth() - 5, Game.VIRTUAL_HEIGHT - pauseButton.getHeight() - 5);
+        stage.addActor(pauseButton);
+
+        pauseWindow = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+        pauseWindow.setWidth(256);
+        pauseWindow.setPosition(Game.VIRTUAL_WIDTH / 2 - pauseWindow.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - pauseWindow.getHeight() / 2);
+
+        final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
+        closeDialogButton.setSize(52, 15);
+        closeDialogButton.setPosition(pauseWindow.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
+        closeDialogButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dialogOpen = false;
+                if (Settings.soundEnabled) Assets.pauseClosed.play();
+                pauseWindow.remove();
+            }
+        });
+        pauseWindow.addActor(closeDialogButton);
+
+        ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
+        muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        final ImageButton muteButton = new ImageButton(muteStyle);
+        muteButton.setSize(64, 64);
+        muteButton.setPosition(20, pauseWindow.getHeight() / 2 - muteButton.getHeight() / 2);
+        muteButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (muteButton.isChecked()) {
+                    Settings.soundEnabled = false;
+                    muteButton.setChecked(true);
+                } else {
+                    Settings.soundEnabled = true;
+                    muteButton.setChecked(false);
+                }
+
+                if (!Settings.soundEnabled) Assets.background.pause();
+                else if (world.state != World.WORLD_STATE_ROUND_START) Assets.background.play();
+
+                if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
+            }
+        });
+        pauseWindow.addActor(muteButton);
+    }
+
+    private void addListeners() {
+        pauseButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dialogOpen = true;
+                if (Settings.soundEnabled) Assets.pauseClicked.play();
+                stage.addActor(pauseWindow);
+            }
+        });
     }
 
     public void update(float deltaTime) {
@@ -107,8 +188,10 @@ public class GameScreen implements Screen {
                 break;
         }
 
-        world.update(deltaTime);
-        stage.act();
+        if (!dialogOpen) {
+            world.update(deltaTime);
+            stage.act();
+        }
     }
 
     private void updateReady() {
@@ -132,10 +215,9 @@ public class GameScreen implements Screen {
     private void updateRunning(float deltaTime) {
         switch (world.state) {
             case World.WORLD_STATE_RUNNING:
-                if (Gdx.input.justTouched()) {
+                if (!dialogOpen && Gdx.input.justTouched()) {
                     if (shots > 0) {
                         if (Settings.soundEnabled) Assets.shoot.play();
-
                         shots--;
                     }
                 }
@@ -194,7 +276,6 @@ public class GameScreen implements Screen {
     }
 
     public void draw() {
-//        renderer.render();
         stage.draw();
 
         guiCam.update();
@@ -355,7 +436,7 @@ public class GameScreen implements Screen {
         update(delta);
         draw();
 
-        stateTime += delta;
+        if (!dialogOpen) stateTime += delta;
     }
 
     @Override

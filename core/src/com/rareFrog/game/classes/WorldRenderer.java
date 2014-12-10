@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
@@ -18,15 +17,12 @@ public class WorldRenderer extends Actor {
     private World world;
     public OrthographicCamera gameCam;
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
 
     public WorldRenderer(SpriteBatch batch, World world) {
         this.world = world;
         this.gameCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         this.gameCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         this.batch = batch;
-
-        shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -109,14 +105,6 @@ public class WorldRenderer extends Actor {
                     batch.draw(texture, duck.bounds.x, duck.bounds.y, Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
                 else
                     batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
-
-            {// Debug Duck
-//                shapeRenderer.setProjectionMatrix(gameCam.combined);
-//                shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//                shapeRenderer.setColor(Color.RED);
-//                shapeRenderer.rect(duck.bounds.x, duck.bounds.y, duck.bounds.width, duck.bounds.height);
-//                shapeRenderer.end();
-            }
         }
     }
 }

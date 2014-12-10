@@ -3,6 +3,7 @@ package com.rareFrog.game.classes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.entities.Dog;
 import com.rareFrog.game.entities.Duck;
@@ -90,7 +91,7 @@ public class World {
 
     public void update(float deltaTime) {
         float touchX = ((Gdx.input.getX() - ((Gdx.graphics.getWidth() - stage.getViewport().getScreenWidth()) / 2)) * (stage.getViewport().getWorldWidth() / stage.getViewport().getScreenWidth()));
-        float touchY = (((Gdx.graphics.getHeight()-Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
+        float touchY = (((Gdx.graphics.getHeight() - Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
         touchPoint.x = touchX;
         touchPoint.y = touchY;
         switch (state) {
@@ -427,5 +428,18 @@ public class World {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    /**
+     * Can be used if World extends actor
+     * so can add the listener and catch the click
+     * instead of using Gdx.input.justTouched(),
+     * and it also catches the real position
+     */
+    private class WorldClickListener extends ClickListener {
+        @Override
+        public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
+
+        }
     }
 }
