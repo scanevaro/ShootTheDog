@@ -150,6 +150,8 @@ public class World {
                 dog.position.x = Game.VIRTUAL_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
         }
 
+        if (stateTime <= 1.6f && Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
+
         if (stateTime > 1.6f) {
             updateDog(deltaTime, ducksHit);
             checkDogState();
@@ -267,9 +269,6 @@ public class World {
     }
 
     private void checkDogCollision() {
-
-//        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
         if (Gdx.input.justTouched() && GameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
             dog.state = Dog.DOG_STATE_SHOT;
             dog.stateTime = 0;
@@ -277,8 +276,7 @@ public class World {
             Assets.dogLaughingSnd.stop();
         } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
             if (Settings.soundEnabled) Assets.outOfBullets.play();
-        } else if (Gdx.input.justTouched() &&
-                GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
+        } else if (Gdx.input.justTouched() && GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
             GameScreen.shots--;
             if (Settings.soundEnabled) Assets.shoot.play();
         }
@@ -299,9 +297,6 @@ public class World {
     }
 
     private void checkDuckCollision() {
-//        worldRenderer.gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-//        stage.screenToStageCoordinates(touchPoint);
-
         if (gameMode == GAME_MODE_1) {
             Duck duck = ducks.get(duckCount);
 
@@ -331,6 +326,7 @@ public class World {
             } else if (Gdx.input.justTouched() &&
                     GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
+            else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
         } else {
             Duck duck = ducks.get(duckCount);
             if (Gdx.input.justTouched()
@@ -353,6 +349,7 @@ public class World {
             } else if (Gdx.input.justTouched() &&
                     GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
+            else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
 
 
             Duck duck2 = ducks.get(duckCount + 1);
