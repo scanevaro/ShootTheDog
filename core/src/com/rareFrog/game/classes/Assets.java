@@ -25,8 +25,6 @@ public class Assets {
 
     public static TextureRegion backgroundRegion;
     public static TextureRegion backgroundBackRegion;
-    public static TextureRegion pause;
-    public static TextureRegion ready;
     public static TextureRegion duckHit;
     public static TextureRegion title;
     public static TextureRegion gameMode1;
@@ -42,6 +40,7 @@ public class Assets {
     public static TextureRegion ui1Shots;
     public static TextureRegion uiWhiteDuck;
     public static TextureRegion uiRedDuck;
+    public static TextureRegion uiYellowDuck;
     public static TextureRegion dogDuckFound;
     public static TextureRegion dogDucksFound;
     public static TextureRegion presentFlyAway;
@@ -219,6 +218,7 @@ public class Assets {
         ui1Shots = items.findRegion("ui1Shots");
         uiWhiteDuck = items.findRegion("uiWhiteDuck");
         uiRedDuck = items.findRegion("uiRedDuck");
+        uiYellowDuck = items.findRegion("uiYellowDuck");
         dogDuckFound = items.findRegion("dog1Duck");
         dogDucksFound = items.findRegion("dog2Ducks");
 

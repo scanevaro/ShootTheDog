@@ -453,6 +453,13 @@ uiWhiteDuck
   orig: 7, 21
   offset: 0, 0
   index: -1
+uiYellowDuck
+  rotate: false
+  xy: 1791, 1029
+  size: 7, 21
+  orig: 7, 21
+  offset: 0, 0
+  index: -1
 menuCursor
   rotate: false
   xy: 1812, 1053

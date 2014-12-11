@@ -1,6 +1,5 @@
 package com.rareFrog.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rareFrog.game.Game;
 import com.rareFrog.game.classes.Assets;

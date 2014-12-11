@@ -190,6 +190,8 @@ public class World {
     }
 
     private void stateCountingDucks(float deltaTime) {
+        updateDucksCounting(deltaTime);
+
         if (stateTime > 0.325f) {
 //            for (duckCountRoundEnd = duckCountRoundEnd; duckCountRoundEnd < ducks.size(); duckCountRoundEnd++) {
 //                if (ducks.get(duckCountRoundEnd).state == Duck.DUCK_STATE_GONE) {
@@ -212,6 +214,8 @@ public class World {
                 Duck duck = ducks.get(duckCountRoundEnd);
 
                 if (duck.state == Duck.DUCK_STATE_DEAD) {
+                    duck.uiTexture = Assets.uiYellowDuck;
+
                     if (Settings.soundEnabled) Assets.movingDucksArray[ducksDead].play();
 
                     ducks.remove(duckCountRoundEnd);
@@ -227,9 +231,7 @@ public class World {
 
         if (duckCountRoundEnd >= ducks.size()) {
 //            int ducksDead = 0;
-//            for (int i = 0; i < ducks.size(); i++)
-//                if (ducks.get(i).state == Duck.DUCK_STATE_DEAD)
-//                    ducksDead++;
+
 
             stateTime = 0;
 
@@ -239,8 +241,16 @@ public class World {
             } else if (ducksDead >= 6) {
                 state = WORLD_STATE_ROUND_END;
                 if (Settings.soundEnabled) Assets.endRound.play();
-            } else state = WORLD_STATE_GAME_OVER_1;
+            } else {
+                if (Assets.background.isPlaying()) Assets.background.stop();
+                state = WORLD_STATE_GAME_OVER_1;
+            }
         }
+    }
+
+    private void updateDucksCounting(float deltaTime) {
+        for (int i = 0; i < ducks.size(); i++)
+            ducks.get(i).update(deltaTime);
     }
 
     private void stateGameOver1() {
