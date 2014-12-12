@@ -159,6 +159,7 @@ public class GameScreen implements Screen {
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (world.state == World.WORLD_STATE_ROUND_START) return;
                 dialogOpen = true;
                 if (Settings.soundEnabled) Assets.pauseClicked.play();
                 stage.addActor(pauseWindow);

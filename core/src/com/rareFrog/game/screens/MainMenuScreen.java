@@ -56,6 +56,7 @@ public class MainMenuScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        game.requestHandler.showAds(true);
         game.actionResolver.loginGPGS();
     }
 
@@ -130,6 +131,7 @@ public class MainMenuScreen implements Screen {
         play1DuckButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.requestHandler.showAds(false);
                 game.setScreen(new GameScreen(game, World.GAME_MODE_1));
                 if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
@@ -137,6 +139,7 @@ public class MainMenuScreen implements Screen {
         play2DucksButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.requestHandler.showAds(false);
                 game.setScreen(new GameScreen(game, World.GAME_MODE_2));
                 if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.rareFrog.game.classes.Assets;
 import com.rareFrog.game.classes.Settings;
 import com.rareFrog.game.interfaces.ActionResolver;
+import com.rareFrog.game.interfaces.IActivityRequestHandler;
 import com.rareFrog.game.screens.SplashScreen;
 
 public class Game implements ApplicationListener {
@@ -14,11 +15,13 @@ public class Game implements ApplicationListener {
     public static final float VIRTUAL_ASPECT = VIRTUAL_WIDTH / VIRTUAL_HEIGHT;
 
     public ActionResolver actionResolver;
+    public IActivityRequestHandler requestHandler;
     private Screen screen;
 //    FPSLogger fps;
 
-    public Game(ActionResolver actionResolver) {
+    public Game(ActionResolver actionResolver, IActivityRequestHandler handler) {
         this.actionResolver = actionResolver;
+        this.requestHandler = handler;
     }
 
     @Override
