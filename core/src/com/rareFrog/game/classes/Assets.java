@@ -52,18 +52,22 @@ public class Assets {
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
     public static TextureRegion pauseButton;
-
-    //    public static Texture menuBackground;
-    public static Texture soundIconUp;
-    public static Texture soundIconDown;
-    public static Texture play1ButtonUp;
-    public static Texture play1ButtonDown;
-    public static Texture play2ButtonUp;
-    public static Texture play2ButtonDown;
-    public static Texture aboutButtonUp;
-    public static Texture aboutButtonDown;
-    public static Texture closeButtonDown;
-    public static Texture closeButtonUp;
+    public static TextureRegion soundIconUp;
+    public static TextureRegion soundIconDown;
+    public static TextureRegion play1ButtonUp;
+    public static TextureRegion play1ButtonDown;
+    public static TextureRegion play2ButtonUp;
+    public static TextureRegion play2ButtonDown;
+    public static TextureRegion aboutButtonUp;
+    public static TextureRegion aboutButtonDown;
+    public static TextureRegion closeButtonDown;
+    public static TextureRegion closeButtonUp;
+    public static TextureRegion leaderboardsButtonUp;
+    public static TextureRegion leaderboardsButtonDown;
+    public static TextureRegion achievementsButtonUp;
+    public static TextureRegion achievementsButtonDown;
+    public static TextureRegion loginButtonUp;
+    public static TextureRegion loginButtonDown;
 
     public static Animation duckFlyRightBlue;
     public static Animation duckFlyRightBlack;
@@ -221,18 +225,22 @@ public class Assets {
         uiYellowDuck = items.findRegion("uiYellowDuck");
         dogDuckFound = items.findRegion("dog1Duck");
         dogDucksFound = items.findRegion("dog2Ducks");
-
-//        menuBackground = new Texture(Gdx.files.internal("data/images/menuBackground.png"));
-        soundIconUp = new Texture(Gdx.files.internal("data/images/soundIconUp.png"));
-        soundIconDown = new Texture(Gdx.files.internal("data/images/soundIconDown.png"));
-        play1ButtonUp = new Texture(Gdx.files.internal("data/images/play1ButtonUp.png"));
-        play1ButtonDown = new Texture(Gdx.files.internal("data/images/play1ButtonDown.png"));
-        play2ButtonUp = new Texture(Gdx.files.internal("data/images/play2ButtonUp.png"));
-        play2ButtonDown = new Texture(Gdx.files.internal("data/images/play2ButtonDown.png"));
-        aboutButtonUp = new Texture(Gdx.files.internal("data/images/aboutButtonUp.png"));
-        aboutButtonDown = new Texture(Gdx.files.internal("data/images/aboutButtonDown.png"));
-        closeButtonUp = new Texture(Gdx.files.internal("data/images/closeButtonUp.png"));
-        closeButtonDown = new Texture(Gdx.files.internal("data/images/closeButtonDown.png"));
+        soundIconUp = items.findRegion("soundIconUp");
+        soundIconDown = items.findRegion("soundIconDown");
+        play1ButtonUp = items.findRegion("play1ButtonUp");
+        play1ButtonDown = items.findRegion("play1ButtonDown");
+        play2ButtonUp = items.findRegion("play2ButtonUp");
+        play2ButtonDown = items.findRegion("play2ButtonDown");
+        aboutButtonUp = items.findRegion("aboutButtonUp");
+        aboutButtonDown = items.findRegion("aboutButtonDown");
+        closeButtonUp = items.findRegion("closeButtonUp");
+        closeButtonDown = items.findRegion("closeButtonDown");
+        leaderboardsButtonUp = items.findRegion("leaderboards0");
+        leaderboardsButtonDown = items.findRegion("leaderboards0");
+        achievementsButtonUp = items.findRegion("achievements0");
+        achievementsButtonDown = items.findRegion("achievements1");
+        loginButtonUp = items.findRegion("login0");
+        loginButtonDown = items.findRegion("login0");
     }
 
     private static void loadSounds() {
@@ -299,16 +307,5 @@ public class Assets {
         perfect.dispose();
         outOfBullets.dispose();
         for (int i = 0; i < movingDucksArray.length; i++) movingDucksArray[i].dispose();
-        //textures
-        soundIconUp.dispose();
-        soundIconDown.dispose();
-        play1ButtonUp.dispose();
-        play1ButtonDown.dispose();
-        play2ButtonUp.dispose();
-        play2ButtonDown.dispose();
-        aboutButtonUp.dispose();
-        aboutButtonDown.dispose();
-        closeButtonUp.dispose();
-        closeButtonDown.dispose();
     }
 }

@@ -1,8 +1,7 @@
 package com.rareFrog.game.classes;
 
 import com.badlogic.gdx.Gdx;
-
-import java.io.*;
+import com.badlogic.gdx.files.FileHandle;
 
 public class Settings {
     public static boolean soundEnabled = true;
@@ -11,41 +10,27 @@ public class Settings {
     public final static String file = ".duckhunt";
 
     public static void load() {
-        BufferedReader in = null;
         try {
-            in = new BufferedReader(new InputStreamReader(Gdx.files.external(
-                    file).read()));
+            FileHandle filehandle = Gdx.files.external(file);
 
-            soundEnabled = Boolean.parseBoolean(in.readLine());
-            highscoreA = Integer.parseInt(in.readLine());
-            highscoreB = Integer.parseInt(in.readLine());
+            String[] strings = filehandle.readString().split("\n");
+
+            soundEnabled = Boolean.parseBoolean(strings[0]);
+            highscoreA = Integer.parseInt(strings[1]);
+            highscoreB = Integer.parseInt(strings[2]);
         } catch (Throwable e) {
             // :( It's ok we have defaults
-        } finally {
-            try {
-                if (in != null)
-                    in.close();
-            } catch (IOException e) {
-            }
         }
     }
 
     public static void save() {
-        BufferedWriter out = null;
         try {
-            out = new BufferedWriter(new OutputStreamWriter(Gdx.files.external(
-                    file).write(false)));
+            FileHandle filehandle = Gdx.files.external(file);
 
-            out.write(Boolean.toString(soundEnabled));
-            out.write(Integer.toString(highscoreA));
-            out.write(Integer.toString(highscoreB));
+            filehandle.writeString(Boolean.toString(soundEnabled) + "\n", false);
+            filehandle.writeString(Integer.toString(highscoreA) + "\n", true);
+            filehandle.writeString(Integer.toString(highscoreB), true);
         } catch (Throwable e) {
-        } finally {
-            try {
-                if (out != null)
-                    out.close();
-            } catch (IOException e) {
-            }
         }
     }
 

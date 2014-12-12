@@ -35,6 +35,9 @@ public class MainMenuScreen implements Screen {
     private ImageButton play2DucksButton;
     private ImageButton aboutButton;
     private ImageButton libgdxButton;
+    private ImageButton achievementsButton;
+    private ImageButton leaderboardsButton;
+    private ImageButton loginButton;
 
     public MainMenuScreen(Game game) {
         this.game = game;
@@ -90,6 +93,21 @@ public class MainMenuScreen implements Screen {
         ImageButton.ImageButtonStyle libgdxStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         libgdxStyle.imageUp = new TextureRegionDrawable(Assets.atlas.findRegion("gdx"));
         libgdxButton = new ImageButton(libgdxStyle);
+
+        ImageButton.ImageButtonStyle leaderboardsStyle = new ImageButton.ImageButtonStyle();
+        leaderboardsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsButtonUp));
+        leaderboardsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsButtonDown));
+        leaderboardsButton = new ImageButton(leaderboardsStyle);
+
+        ImageButton.ImageButtonStyle achievementsStyle = new ImageButton.ImageButtonStyle();
+        achievementsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonUp));
+        achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonDown));
+        achievementsButton = new ImageButton(achievementsStyle);
+
+        ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
+        loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
+        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
+        loginButton = new ImageButton(loginStyle);
     }
 
     private void configureWidgets() {
@@ -142,6 +160,24 @@ public class MainMenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
+        leaderboardsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+            }
+        });
+        achievementsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+            }
+        });
+        loginButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+            }
+        });
     }
 
     private void setLayout() {
@@ -180,11 +216,22 @@ public class MainMenuScreen implements Screen {
         titleImage.setSize(256, 128);
         titleImage.setPosition(Game.VIRTUAL_WIDTH / 2 - titleImage.getWidth() / 2, 150);
         stage.addActor(titleImage);
+
+        leaderboardsButton.setSize(64, 64);
+        leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), 0);
+        stage.addActor(leaderboardsButton);
+
+        loginButton.setSize(64, 64);
+        loginButton.setPosition(0, 0);
+        stage.addActor(loginButton);
+
+        achievementsButton.setSize(64, 64);
+        achievementsButton.setPosition(0, 0);
+        stage.addActor(achievementsButton);
     }
 
     @Override
     public void render(float delta) {
-//        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClearColor(1, 0.823529f, 0.3764705f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -194,10 +241,9 @@ public class MainMenuScreen implements Screen {
         stage.act();
         stage.draw();
 
-        //highscore
         Assets.font.setScale(0.5f, 0.5f);
         batch.begin();
-        Assets.font.draw(batch, "Version 0 1", Game.VIRTUAL_WIDTH / 2 - 50, 10);
+        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2 - 50, 10);
         batch.end();
     }
 
