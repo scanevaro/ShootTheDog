@@ -1,0 +1,8 @@
+achievementShootTheDog,"CgkI6qzFw40CEAIQAg"
+achievementFirstBlood,"CgkI6qzFw40CEAIQAw"
+achievementLastBullet,"CgkI6qzFw40CEAIQBA"
+achievementInnerRage,"CgkI6qzFw40CEAIQBQ"
+achievementLetItGo,"CgkI6qzFw40CEAIQBg"
+leaderboardHighscores,"CgkI6qzFw40CEAIQBw"
+
+SHOOTTHEDOG – 72350783082
