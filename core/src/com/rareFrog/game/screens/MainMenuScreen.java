@@ -163,19 +163,19 @@ public class MainMenuScreen implements Screen {
         leaderboardsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                game.actionResolver.getLeaderboardGPGS();
             }
         });
         achievementsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                game.actionResolver.getAchievementsGPGS();
             }
         });
         loginButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                game.actionResolver.loginGPGS();
             }
         });
     }
@@ -218,15 +218,15 @@ public class MainMenuScreen implements Screen {
         stage.addActor(titleImage);
 
         leaderboardsButton.setSize(64, 64);
-        leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), 0);
+        leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), closeButton.getWidth() + 5);
         stage.addActor(leaderboardsButton);
 
         loginButton.setSize(64, 64);
-        loginButton.setPosition(0, 0);
+        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5);
         stage.addActor(loginButton);
 
         achievementsButton.setSize(64, 64);
-        achievementsButton.setPosition(0, 0);
+        achievementsButton.setPosition(Game.VIRTUAL_WIDTH - achievementsButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5 + loginButton.getWidth() + 5);
         stage.addActor(achievementsButton);
     }
 
@@ -243,7 +243,7 @@ public class MainMenuScreen implements Screen {
 
         Assets.font.setScale(0.5f, 0.5f);
         batch.begin();
-        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2 - 50, 10);
+        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2 - 50, 20);
         batch.end();
     }
 
