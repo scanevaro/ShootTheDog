@@ -236,6 +236,7 @@ public class GameScreen implements Screen {
                 stateTime = 0;
                 state = GAME_OVER_1;
                 if (Settings.soundEnabled) Assets.gameOver1.play();
+                game.requestHandler.showAds(true);
                 break;
         }
 
@@ -273,7 +274,10 @@ public class GameScreen implements Screen {
     }
 
     private void updateGameOver2() {
-        if (Gdx.input.justTouched()) game.setScreen(new MainMenuScreen(game));
+        if (Gdx.input.justTouched()) {
+            game.setScreen(new MainMenuScreen(game));
+            game.requestHandler.showInterstitial(true);
+        }
     }
 
     public void draw() {

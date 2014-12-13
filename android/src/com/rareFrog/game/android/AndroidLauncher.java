@@ -13,6 +13,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
 import com.rareFrog.game.Game;
@@ -22,6 +23,7 @@ import com.rareFrog.game.interfaces.IActivityRequestHandler;
 public class AndroidLauncher extends AndroidApplication implements GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
     GameHelper gameHelper;
     protected AdView adView;
+    private InterstitialAd interstitial;
 
     private final int SHOW_ADS = 1;
     private final int HIDE_ADS = 0;
@@ -51,8 +53,7 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
         adView = new AdView(this);
         adView.setAdUnitId("ca-app-pub-6543072510381828/6747477399");
         adView.setAdSize(AdSize.BANNER);
-        adView.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build());
+        adView.loadAd(new AdRequest.Builder()/*addTestDevice(AdRequest.DEVICE_ID_EMULATOR).*/.build());
 
         layout.addView(gameView);
 
@@ -63,6 +64,16 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
         layout.addView(adView, adParams);
 
         setContentView(layout);
+
+        // Create the interstitial.
+        interstitial = new InterstitialAd(this);
+        interstitial.setAdUnitId("ca-app-pub-6543072510381828/7209978992");
+
+        // Create ad request.
+        AdRequest adRequest = new AdRequest.Builder()/*.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)*/.build();
+
+        // Begin loading your interstitial.
+        interstitial.loadAd(adRequest);
     }
 
     @Override
@@ -152,8 +163,28 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
         }
     };
 
+    protected Handler intHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SHOW_ADS: {
+                    if (interstitial.isLoaded())
+                        interstitial.show();
+                    break;
+                }
+            }
+        }
+    };
+
     @Override
     public void showAds(boolean show) {
         handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
+    }
+
+    @Override
+    public void showInterstitial(boolean show) {
+//        if (show && interstitial.isLoaded())
+//            interstitial.show();
+        intHandler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }
 }

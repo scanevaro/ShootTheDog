@@ -5,4 +5,6 @@ package com.rareFrog.game.interfaces;
  */
 public interface IActivityRequestHandler {
     public void showAds(boolean show);
+
+    public void showInterstitial(boolean show);
 }

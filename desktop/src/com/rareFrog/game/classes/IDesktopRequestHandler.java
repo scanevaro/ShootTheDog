@@ -10,4 +10,9 @@ public class IDesktopRequestHandler implements IActivityRequestHandler {
     public void showAds(boolean show) {
         System.out.println("Show Ads called");
     }
+
+    @Override
+    public void showInterstitial(boolean show) {
+        System.out.println("Show Interstitial called");
+    }
 }
