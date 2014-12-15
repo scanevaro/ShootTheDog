@@ -52,6 +52,7 @@ public class World {
     public int duckCountRoundEnd;
     public int ducksHit;
     public int ducksDead;
+    public int dogShot;
     public float stateTime;
     public boolean checkDucksRoundPause;
     public boolean perfect;
@@ -87,6 +88,8 @@ public class World {
         stateTime = 0;
         perfect = true;
         this.state = WORLD_STATE_ROUND_START;
+
+        dogShot = 0;
     }
 
     public void update(float deltaTime) {
@@ -244,13 +247,26 @@ public class World {
             if (ducksDead == 10) {
                 state = WORLD_STATE_PERFECT_ROUND;
                 if (Settings.soundEnabled) Assets.endRound.play();
+
+                //ducksgiving
+                if (ducksDead == 10 && dogShot != 10)
+                    game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAQ");
+                    //every last one
+                else if (ducksDead == 10 && dogShot == 10)
+                    game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQBA");
+
             } else if (ducksDead >= 6) {
                 state = WORLD_STATE_ROUND_END;
                 if (Settings.soundEnabled) Assets.endRound.play();
             } else {
                 if (Assets.background.isPlaying()) Assets.background.stop();
                 state = WORLD_STATE_GAME_OVER_1;
+
+                //inner rage
+                if (ducksDead == 0 && dogShot == 10) game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAg");
             }
+
+            if (dogShot == 0) game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQBQ");
         }
     }
 
@@ -291,10 +307,10 @@ public class World {
             if (Settings.soundEnabled) Assets.shoot.play();
             Assets.dogLaughingSnd.stop();
             Assets.duckFoundSnd.stop();
-            if (Settings.soundEnabled) {
-//                Assets.dogShotSound.play();
-                Assets.dogShotMusic.play();
-            }
+            if (Settings.soundEnabled) Assets.dogShotMusic.play();
+
+            dogShot++;
+
         } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
             if (Settings.soundEnabled) Assets.outOfBullets.play();
         } else if (Gdx.input.justTouched() && GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
@@ -336,24 +352,20 @@ public class World {
                         score += Duck.SCORE0;
                         break;
                 }
-
-                //Achievement First Blood
-                if (game.actionResolver.getSignedInGPGS()) {
-                    game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQAw");
-
-                    if (GameScreen.shots == 1)
-                        game.actionResolver.unlockAchievementGPGS("CgkI6qzFw40CEAIQBA");
-                }
             } else if (Gdx.input.justTouched() &&
                     GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
             else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
         } else {
             Duck duck = ducks.get(duckCount);
+            int shot = 0;
             if (Gdx.input.justTouched()
                     && duck.bounds.contains(touchPoint.x, touchPoint.y)
                     && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
+
+                //two ducks one stone
+                shot++;
 
                 switch (GameScreen.shots) {
                     case 2:
@@ -377,6 +389,11 @@ public class World {
             if (Gdx.input.justTouched() &&
                     duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.hit();
+
+                //two ducks one stone
+                shot++;
+
+                if (shot == 2) game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAw");
 
                 switch (GameScreen.shots) {
                     case 2:
