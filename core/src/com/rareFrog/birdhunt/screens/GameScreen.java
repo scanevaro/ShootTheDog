@@ -332,25 +332,27 @@ public class GameScreen implements Screen {
                 20,
                 Assets.UISHOTSWIDTH + Assets.UISHOTSWIDTH / 2,
                 Assets.UISHOTSHEIGHT + Assets.UISHOTSHEIGHT / 2);
-        batcher.draw(
-                Assets.uiDucksRound,
-                480 / 2 - Assets.uiDucksRound.getRegionWidth() / 2 - 30,
-                20,
-                Assets.uiDucksRound.getRegionWidth() * 2 - Assets.uiDucksRound.getRegionWidth() / 2,
-                Assets.uiDucksRound.getRegionHeight() + Assets.uiDucksRound.getRegionHeight() / 2);
 
-        x = 0;
+//        batcher.draw(
+//                Assets.uiDucksRound,
+//                480 / 2 - Assets.uiDucksRound.getRegionWidth() / 2 - 30,
+//                20,
+//                Assets.uiDucksRound.getRegionWidth() * 2 - Assets.uiDucksRound.getRegionWidth() / 2,
+//                Assets.uiDucksRound.getRegionHeight() + Assets.uiDucksRound.getRegionHeight() / 2);
+
+        x = -88;
         for (int i = 0; i < world.ducks.size(); i++) {
             TextureRegion uiDuck = world.ducks.get(i).uiTexture;
             if (uiDuck != null) {
                 batcher.draw(
                         uiDuck,
-                        480 / 2 - Assets.uiWhiteDuck.getRegionWidth() - 29 + x,
-                        21, Assets.uiWhiteDuck.getRegionWidth() * 2 - Assets.uiWhiteDuck.getRegionWidth() / 2,
-                        Assets.uiWhiteDuck.getRegionHeight() + Assets.uiWhiteDuck.getRegionHeight() / 2);
+                        Game.VIRTUAL_WIDTH / 2 - 22 + x,
+                        21,
+                        22,
+                        22);
             }
 
-            x += 12;
+            x += 22;
         }
 
         batcher.draw(
