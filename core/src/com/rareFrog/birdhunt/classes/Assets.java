@@ -257,7 +257,7 @@ public class Assets {
         gameOver1.setVolume(0.5f);
         gameOver2 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver2.mp3"));
         gameOver2.setVolume(0.5f);
-        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.mp3"));
+        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.wav"));
         background.setVolume(0.5f);
         dogShotMusic = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/shotTheDog.mp3"));
         dogShotMusic.setVolume(0.5f);

@@ -146,7 +146,7 @@ public class World {
     }
 
     private void stateRoundPause(float deltaTime) {
-        if (Assets.background.getVolume() > 0.15f) Assets.background.setVolume(Assets.background.getVolume() - 0.005f);
+//        if (Assets.background.getVolume() > 0.15f) Assets.background.setVolume(Assets.background.getVolume() - 0.005f);
 
         if (checkDucksRoundPause) {
             checkDucksRoundPause();
@@ -307,9 +307,10 @@ public class World {
             if (Settings.soundEnabled) Assets.shoot.play();
             Assets.dogLaughingSnd.stop();
             Assets.duckFoundSnd.stop();
-            if (Settings.soundEnabled) Assets.dogShotMusic.play();
+            if (Settings.soundEnabled) Assets.dogShotSound.play();
 
             dogShot++;
+            GameScreen.shots--;
 
         } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
             if (Settings.soundEnabled) Assets.outOfBullets.play();

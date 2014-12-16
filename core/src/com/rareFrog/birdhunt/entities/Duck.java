@@ -220,7 +220,7 @@ public class Duck extends DynamicGameObject {
         bounds.x = position.x;
         bounds.y = position.y;
 
-        if (position.y < 70f) {
+        if (position.y < 50f) {
             state = DUCK_STATE_DEAD;
             Assets.duckFallingSnd.stop(soundID);
             if (Settings.soundEnabled) Assets.hitGround.play();
