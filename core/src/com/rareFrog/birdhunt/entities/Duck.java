@@ -44,6 +44,7 @@ public class Duck extends DynamicGameObject {
     private Random rand;
     private int frames;
     private long soundID;
+    private float fallingVolume;
 
     public Duck(float x, float y) {
         super(x, y, DUCK_WIDTH, DUCK_HEIGHT);
@@ -203,11 +204,9 @@ public class Duck extends DynamicGameObject {
         if (Settings.soundEnabled) Assets.duckShot.play();
     }
 
-    public void dead() {
-        /***/
-    }
-
     private void stateFalling(float deltaTime) {
+        Assets.duckFoundSnd.setVolume(soundID, fallingVolume -= 0.05f);
+
         frames++;
         if (frames > 4) {
             texture = DucksTextures.getFallingTexture(type, true);
@@ -235,8 +234,10 @@ public class Duck extends DynamicGameObject {
             state = DUCK_STATE_FALLING;
             velocity.set(0, DUCK_GRAVITY);
 
-            if (Settings.soundEnabled)
+            if (Settings.soundEnabled) {
                 soundID = Assets.duckFallingSnd.play();
+                Assets.duckFoundSnd.setVolume(soundID, fallingVolume = 1);
+            }
         }
     }
 
