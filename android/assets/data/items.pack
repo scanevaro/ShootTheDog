@@ -1,7 +1,7 @@
 
 items.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 grass1280
   rotate: false
@@ -574,7 +574,7 @@ presentRound
 
 items2.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 pauseDialog
   rotate: false

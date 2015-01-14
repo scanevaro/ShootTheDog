@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -34,7 +36,7 @@ public class GameScreen implements Screen {
     private int state;
     private float stateTime;
     private OrthographicCamera guiCam;
-    private SpriteBatch batcher;
+    private SpriteBatch batch;
     private Stage stage;
     private World world;
     private World.WorldListener worldListener;
@@ -52,16 +54,22 @@ public class GameScreen implements Screen {
      */
     private ImageButton pauseButton;
     private Window pauseWindow;
+    private Label acceX, acceY, acceZ, rotation, orientation;
+    private float accelX, accelY;
+
+    private ShapeRenderer shapeRenderer;
 
     public GameScreen(Game game, int gameMode) {
         this.game = game;
         this.gameMode = gameMode;
 
+        shapeRenderer = new ShapeRenderer();
+
         round = 1;
         guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
-        batcher = new SpriteBatch();
-        stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batcher);
+        batch = new SpriteBatch();
+        stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
         worldListener = new World.WorldListener() {
             @Override
             public void reload() {
@@ -77,7 +85,7 @@ public class GameScreen implements Screen {
             }
         };
         world = new World(worldListener, game, gameMode);
-        renderer = new WorldRenderer(batcher, world);
+        renderer = new WorldRenderer(batch, world);
         world.setWorldRenderer(renderer);
         world.setStage(stage);
         stage.addActor(renderer);
@@ -153,6 +161,22 @@ public class GameScreen implements Screen {
             }
         });
         pauseWindow.addActor(muteButton);
+
+        acceX = new Label("", Assets.skin);
+        acceX.setPosition(0, 32 + 5);
+        stage.addActor(acceX);
+        acceY = new Label("", Assets.skin);
+        acceY.setPosition(0, 5);
+        stage.addActor(acceY);
+        acceZ = new Label("", Assets.skin);
+        acceZ.setPosition(0, 64 + 5);
+        stage.addActor(acceZ);
+        orientation = new Label("", Assets.skin);
+        orientation.setPosition(0, 96 + 5);
+        stage.addActor(orientation);
+        rotation = new Label("", Assets.skin);
+        rotation.setPosition(0, 128 + 5);
+        stage.addActor(rotation);
     }
 
     private void addListeners() {
@@ -284,9 +308,9 @@ public class GameScreen implements Screen {
         stage.draw();
 
         guiCam.update();
-        batcher.setProjectionMatrix(guiCam.combined);
-        batcher.enableBlending();
-        batcher.begin();
+        batch.setProjectionMatrix(guiCam.combined);
+        batch.enableBlending();
+        batch.begin();
 
         drawUI();
 
@@ -306,7 +330,40 @@ public class GameScreen implements Screen {
                 break;
         }
 
-        batcher.end();
+        batch.end();
+
+        {/**Dot draw with accelerometer*/
+            shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(Color.RED);
+
+            /**
+             * Accelerometer has 3 axis, x y and z. They all return a maxium value of Integer 10.
+             * if device is looking up (screen up), z returns a value of 10, if its looking down, it returns -10
+             * if device is on portrait mode and standing, y returns 10, if its upsidedown, -10
+             * if device is landscape mode and turned left (like standing) it returns -10, and turned right 10.
+             *
+             * This means: device landscape mode: if (+x +y +z) turning right and forward (forward i mean turning screen far from you)
+             *                                    if (+x -y +z) turning left and forward
+             *                                    if (-x +y +z) turning right and backwards
+             *                                    if (-x -y +z) turning left and backwards
+             */
+
+            accelY = Gdx.input.getAccelerometerX() * 20 + Game.VIRTUAL_HEIGHT / 2;
+            accelX = Gdx.input.getAccelerometerY() * 20 + Game.VIRTUAL_WIDTH / 2;
+
+            shapeRenderer.circle(accelX, accelY, 16);
+
+            shapeRenderer.end();
+        }/***/
+
+        acceX.setText("x: " + String.valueOf(Gdx.input.getAccelerometerX()));
+        acceY.setText("y: " + String.valueOf(Gdx.input.getAccelerometerY()));
+        acceZ.setText("z: " + String.valueOf(Gdx.input.getAccelerometerZ()));
+        orientation.setText("Orientation: " + String.valueOf(Gdx.input.getNativeOrientation()));
+        rotation.setText("Rotation: " + String.valueOf(Gdx.input.getRotation()));
     }
 
     private void drawUI() {
@@ -326,14 +383,14 @@ public class GameScreen implements Screen {
                 break;
         }
 
-        batcher.draw(
+        batch.draw(
                 texture,
                 40,
                 20,
                 Assets.UISHOTSWIDTH + Assets.UISHOTSWIDTH / 2,
                 Assets.UISHOTSHEIGHT + Assets.UISHOTSHEIGHT / 2);
 
-//        batcher.draw(
+//        batch.draw(
 //                Assets.uiDucksRound,
 //                480 / 2 - Assets.uiDucksRound.getRegionWidth() / 2 - 30,
 //                20,
@@ -344,7 +401,7 @@ public class GameScreen implements Screen {
         for (int i = 0; i < world.ducks.size(); i++) {
             TextureRegion uiDuck = world.ducks.get(i).uiTexture;
             if (uiDuck != null) {
-                batcher.draw(
+                batch.draw(
                         uiDuck,
                         Game.VIRTUAL_WIDTH / 2 - 22 + x,
                         21,
@@ -355,7 +412,7 @@ public class GameScreen implements Screen {
             x += 22;
         }
 
-        batcher.draw(
+        batch.draw(
                 Assets.uiScore,
                 480 - 100,
                 20,
@@ -364,16 +421,16 @@ public class GameScreen implements Screen {
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.59f, 0.59f);
-        Assets.font.draw(batcher, scoreString, 480 - 95, 48);
+        Assets.font.draw(batch, scoreString, 480 - 95, 48);
 
-        batcher.draw(Assets.presentFlyAway, 41, 54, 41, 15);
+        batch.draw(Assets.presentFlyAway, 41, 54, 41, 15);
 
         Assets.font.setColor(0.4f, 0.8f, 0.2f, 1);
-        Assets.font.draw(batcher, "R " + String.valueOf(round), 48, 66);
+        Assets.font.draw(batch, "R " + String.valueOf(round), 48, 66);
     }
 
     private void presentReady() {
-        batcher.draw(
+        batch.draw(
                 Assets.presentRound,
                 480 / 2 - Assets.presentRound.getRegionWidth(),
                 320 / 2 + 30,
@@ -382,20 +439,20 @@ public class GameScreen implements Screen {
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.5f, 0.5f);
-        Assets.font.draw(batcher, "Round", Game.VIRTUAL_WIDTH / 2 - Assets.presentRound.getRegionWidth() / 2 - 10, Game.VIRTUAL_HEIGHT / 2 + 64);
-        Assets.font.draw(batcher, String.valueOf(round), Game.VIRTUAL_WIDTH / 2 - Assets.font.getSpaceWidth() + 4, Game.VIRTUAL_HEIGHT / 2 + 45);
+        Assets.font.draw(batch, "Round", Game.VIRTUAL_WIDTH / 2 - Assets.presentRound.getRegionWidth() / 2 - 10, Game.VIRTUAL_HEIGHT / 2 + 64);
+        Assets.font.draw(batch, String.valueOf(round), Game.VIRTUAL_WIDTH / 2 - Assets.font.getSpaceWidth() + 4, Game.VIRTUAL_HEIGHT / 2 + 45);
     }
 
     private void presentRunning() {
         if (world.ducks.get(world.duckCount).state == Duck.DUCK_STATE_FLY_AWAY) {
-            batcher.draw(Assets.presentFlyAway,
+            batch.draw(Assets.presentFlyAway,
                     480 / 2 - Assets.presentFlyAway.getRegionWidth(),
                     320 / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
                     Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
             Assets.font.setColor(Color.WHITE);
             Assets.font.setScale(0.45f, 0.5f);
-            Assets.font.draw(batcher, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
+            Assets.font.draw(batch, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
         }
 
         if (world.state == World.WORLD_STATE_PERFECT_ROUND) {
@@ -403,7 +460,7 @@ public class GameScreen implements Screen {
                 presentRoundEnd();
 
             if (stateTime > 5) {
-                batcher.draw(
+                batch.draw(
                         Assets.presentFlyAway,
                         Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth(),
                         Game.VIRTUAL_HEIGHT / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
@@ -411,7 +468,7 @@ public class GameScreen implements Screen {
 
                 Assets.font.setColor(Color.WHITE);
                 Assets.font.setScale(0.45f, 0.5f);
-                Assets.font.draw(batcher, "Perfect", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
+                Assets.font.draw(batch, "Perfect", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
             }
         }
 
@@ -429,13 +486,13 @@ public class GameScreen implements Screen {
     }
 
     private void presentGameOver() {
-        batcher.draw(Assets.presentFlyAway, 480 / 2 - Assets.presentFlyAway.getRegionWidth() - 5, 320 / 2 + 30,
+        batch.draw(Assets.presentFlyAway, 480 / 2 - Assets.presentFlyAway.getRegionWidth() - 5, 320 / 2 + 30,
                 Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth() + 12,
                 Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
 
         Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.45f, 0.5f);
-        Assets.font.draw(batcher, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
+        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
     }
 
     @Override

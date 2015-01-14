@@ -3,7 +3,6 @@ package com.rareFrog.birdhunt.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,11 +17,11 @@ import com.rareFrog.birdhunt.classes.Assets;
 import com.rareFrog.birdhunt.classes.Settings;
 import com.rareFrog.birdhunt.classes.World;
 
+
 public class MainMenuScreen implements Screen {
     //main
     Game game;
     //screen
-    private OrthographicCamera guiCam;
     private Stage stage;
     private SpriteBatch batch;
     //widgets
@@ -37,13 +36,11 @@ public class MainMenuScreen implements Screen {
     private ImageButton libgdxButton;
     private ImageButton achievementsButton;
     private ImageButton leaderboardsButton;
-//    private ImageButton loginButton;
+    private ImageButton loginButton;
 
     public MainMenuScreen(Game game) {
         this.game = game;
 
-        guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
-        guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
 
@@ -57,7 +54,6 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         game.requestHandler.showAds(true);
-        game.actionResolver.loginGPGS();
     }
 
     private void setWidgets() {
@@ -105,10 +101,10 @@ public class MainMenuScreen implements Screen {
         achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonDown));
         achievementsButton = new ImageButton(achievementsStyle);
 
-//        ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
-//        loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
-//        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
-//        loginButton = new ImageButton(loginStyle);
+        ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
+        loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
+        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
+        loginButton = new ImageButton(loginStyle);
     }
 
     private void configureWidgets() {
@@ -175,12 +171,12 @@ public class MainMenuScreen implements Screen {
                 game.actionResolver.getAchievementsGPGS();
             }
         });
-//        loginButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                game.actionResolver.loginGPGS();
-//            }
-//        });
+        loginButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.actionResolver.loginGPGS();
+            }
+        });
     }
 
     private void setLayout() {
@@ -224,9 +220,9 @@ public class MainMenuScreen implements Screen {
         leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), closeButton.getWidth() + 5);
         stage.addActor(leaderboardsButton);
 
-//        loginButton.setSize(64, 64);
-//        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5);
-//        stage.addActor(loginButton);
+        loginButton.setSize(64, 64);
+        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5 + loginButton.getHeight());
+        stage.addActor(loginButton);
 
         achievementsButton.setSize(64, 64);
         achievementsButton.setPosition(Game.VIRTUAL_WIDTH - achievementsButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5/* + loginButton.getWidth() + 5*/);
@@ -237,9 +233,6 @@ public class MainMenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0.823529f, 0.3764705f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        guiCam.update();
-        batch.setProjectionMatrix(guiCam.combined);
 
         stage.act();
         stage.draw();

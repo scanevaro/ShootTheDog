@@ -10,5 +10,8 @@ com.badlogic.gdx.graphics.Color: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	pauseDialog: { titleFont: default-font, background: pauseDialog, titleFontColor: white }
+},
+  com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+  default: { font: default-font, fontColor: white }
 }
 }
