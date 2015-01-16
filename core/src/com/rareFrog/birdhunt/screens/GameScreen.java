@@ -351,7 +351,7 @@ public class GameScreen implements Screen {
              *                                    if (-x -y +z) turning left and backwards
              */
 
-            accelY = Gdx.input.getAccelerometerX() * 40 + Game.VIRTUAL_HEIGHT / 2;
+            accelY = -Gdx.input.getAccelerometerX() * 40 + Game.VIRTUAL_HEIGHT / 2;
             accelX = Gdx.input.getAccelerometerY() * 40 + Game.VIRTUAL_WIDTH / 2;
 
             shapeRenderer.circle(accelX, accelY, 16);
