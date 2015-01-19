@@ -1,4 +1,4 @@
-package com.rareFrog.birdhunt.classes;
+package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

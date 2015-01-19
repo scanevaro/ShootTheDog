@@ -1,4 +1,4 @@
-package com.rareFrog.birdhunt.classes;
+package com.rareFrog.birdhunt;
 
 import aurelienribon.tweenengine.TweenAccessor;
 import com.badlogic.gdx.graphics.Color;

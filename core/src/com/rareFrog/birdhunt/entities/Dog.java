@@ -2,10 +2,10 @@ package com.rareFrog.birdhunt.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.GameObject;
-import com.rareFrog.birdhunt.classes.Settings;
-import com.rareFrog.birdhunt.classes.World;
+import com.rareFrog.birdhunt.Assets;
+import com.rareFrog.birdhunt.GameObject;
+import com.rareFrog.birdhunt.Settings;
+import com.rareFrog.birdhunt.World;
 
 public class Dog extends GameObject {
 

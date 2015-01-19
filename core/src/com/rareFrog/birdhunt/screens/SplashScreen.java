@@ -1,25 +1,26 @@
 package com.rareFrog.birdhunt.screens;
 
 import aurelienribon.tweenengine.*;
-import aurelienribon.tweenengine.equations.*;
+import aurelienribon.tweenengine.equations.Back;
+import aurelienribon.tweenengine.equations.Cubic;
+import aurelienribon.tweenengine.equations.Quad;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.rareFrog.birdhunt.Assets;
 import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.SpriteAccessor;
+import com.rareFrog.birdhunt.SpriteAccessor;
 
 /**
  * Created by scanevaro on 18/11/2014.
  */
-public class SplashScreen implements Screen {
+public class SplashScreen extends AbstractScreen {
     private static final int PX_PER_METER = 400;
 
     private final OrthographicCamera camera = new OrthographicCamera();

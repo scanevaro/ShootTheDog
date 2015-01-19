@@ -1,7 +1,6 @@
 package com.rareFrog.birdhunt.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,15 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.Settings;
-import com.rareFrog.birdhunt.classes.World;
-import com.rareFrog.birdhunt.classes.WorldRenderer;
+import com.rareFrog.birdhunt.*;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 
-public class GameScreen implements Screen {
+public class GameScreen extends AbstractScreen {
 
     private final int GAME_READY = 0;
     private final int GAME_RUNNING = 1;
@@ -48,13 +43,14 @@ public class GameScreen implements Screen {
     private String scoreString;
     private int gameMode;
     private boolean dialogOpen;
+    public int score, multiplier;
 
     /**
      * Widgets
      */
     private ImageButton pauseButton;
     private Window pauseWindow;
-    private Label acceX, acceY, acceZ, rotation, orientation;
+    private Label acceX, acceY, acceZ, rotation, orientation, multiplierLabel;
     private float accelX, accelY;
 
     private ShapeRenderer shapeRenderer;
@@ -84,7 +80,7 @@ public class GameScreen implements Screen {
             public void ducks() {
             }
         };
-        world = new World(worldListener, game, gameMode);
+        world = new World(worldListener, game, this, gameMode);
         renderer = new WorldRenderer(batch, world);
         world.setWorldRenderer(renderer);
         world.setStage(stage);
@@ -177,6 +173,12 @@ public class GameScreen implements Screen {
         rotation = new Label("", Assets.skin);
         rotation.setPosition(0, 128 + 5);
         stage.addActor(rotation);
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.fontBig, Color.CYAN);
+        multiplierLabel = new Label("", labelStyle);
+        multiplierLabel.setSize(32, 32);
+        multiplierLabel.setPosition(5, Gdx.graphics.getHeight() - multiplierLabel.getHeight());
+        stage.addActor(multiplierLabel);
     }
 
     private void addListeners() {
@@ -268,8 +270,8 @@ public class GameScreen implements Screen {
     }
 
     private void updateScore() {
-        if (world.score != lastScore) {
-            lastScore = world.score;
+        if (score != lastScore) {
+            lastScore = score;
 
             if (String.valueOf(lastScore).length() == 3)
                 scoreString = "000" + String.valueOf(lastScore);
@@ -364,6 +366,8 @@ public class GameScreen implements Screen {
         acceZ.setText("z: " + String.valueOf(Gdx.input.getAccelerometerZ()));
         orientation.setText("Orientation: " + String.valueOf(Gdx.input.getNativeOrientation()));
         rotation.setText("Rotation: " + String.valueOf(Gdx.input.getRotation()));
+
+        multiplierLabel.setText(String.valueOf(multiplier) + "x");
     }
 
     private void drawUI() {
