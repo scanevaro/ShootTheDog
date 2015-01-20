@@ -14,17 +14,25 @@ public class Controls {
     private float azimuthCalibration;
     private float azimuthPreviousAverage;
     int azimuthCounter = 0;
+    int updateCounter = 0;
 
     public Controls() {
-        double coefficients[] = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
+        double coefficients[] = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
         azimuthPrevious = new float[100];
 
         fir = new FIR(coefficients);
     }
 
     public void update() {
-        rawAzimuth = Gdx.input.getAzimuth();
-        azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+        updateCounter++;
+        if (updateCounter > 3) {
+            updateCounter -= 3;
+            rawAzimuth = Gdx.input.getAzimuth();
+            azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+            if (calibrated == false) {
+                calibrate();
+            }
+        }
     }
 
     public float getCalibratedValue() {
@@ -46,7 +54,6 @@ public class Controls {
     public void calibrate() {
         calibrated = false;
         azimuthPrevious[azimuthCounter] = azimuthValue;
-        System.out.println("cal: " + calibrated + " count: " + azimuthCounter);
         if (azimuthCounter == 99) {
             azimuthCounter = 0;
             float tempAverage = 0;
@@ -55,7 +62,7 @@ public class Controls {
             }
             tempAverage /= 100;
             System.out.println("temp:" + tempAverage);
-            if (Math.abs(azimuthPreviousAverage - tempAverage) < 10) {
+            if (Math.abs(azimuthPreviousAverage - tempAverage) < 20) {
                 azimuthCalibration = (azimuthPreviousAverage + tempAverage) / 2;
                 calibrated = true;
             }

@@ -14,9 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.*;
 import com.rareFrog.birdhunt.*;
+import com.rareFrog.birdhunt.classes.Controls;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.input.GameInputProcessor;
@@ -44,16 +43,14 @@ public class GameScreen extends AbstractScreen {
     private String scoreString;
     private int gameMode;
     public int score, multiplier;
-
+    private Controls controls;
     /**
      * Widgets
      */
     private ImageButton pauseButton;
-    private Window pauseWindow;
-    private Label azimuth;
-    private ShapeRenderer shapeRenderer;
-    private Controls controls;
+    private Label compass, multiplierLabel;
 
+    private ShapeRenderer shapeRenderer;
 
     public GameScreen(Game game, int gameMode) {
         controls = new Controls();
@@ -118,21 +115,10 @@ public class GameScreen extends AbstractScreen {
         pauseButton.setPosition(Game.VIRTUAL_WIDTH - pauseButton.getWidth() - 5, Game.VIRTUAL_HEIGHT - pauseButton.getHeight() - 5);
         stage.addActor(pauseButton);
 
-        acceX = new Label("", Assets.skin);
-        acceX.setPosition(0, 32 + 5);
-        stage.addActor(acceX);
-        acceY = new Label("", Assets.skin);
-        acceY.setPosition(0, 5);
-        stage.addActor(acceY);
-        acceZ = new Label("", Assets.skin);
-        acceZ.setPosition(0, 64 + 5);
-        stage.addActor(acceZ);
-        orientation = new Label("", Assets.skin);
-        orientation.setPosition(0, 96 + 5);
-        stage.addActor(orientation);
-        rotation = new Label("", Assets.skin);
-        rotation.setPosition(0, 128 + 5);
-        stage.addActor(rotation);
+        compass = new Label("", Assets.skin);
+        compass.setPosition(0, 64 + 5);
+        stage.addActor(compass);
+
 
         Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.fontBig, Color.CYAN);
         multiplierLabel = new Label("", labelStyle);
@@ -290,47 +276,14 @@ public class GameScreen extends AbstractScreen {
         }
 
         batch.end();
-
-        {/**Dot draw with accelerometer*/
-            shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
-
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.setColor(Color.RED);
-
-            /**
-             * Accelerometer has 3 axis, x y and z. They all return a maxium value of Integer 10.
-             * if device is looking up (screen up), z returns a value of 10, if its looking down, it returns -10
-             * if device is on portrait mode and standing, y returns 10, if its upsidedown, -10
-             * if device is landscape mode and turned left (like standing) it returns -10, and turned right 10.
-             *
-             * This means: device landscape mode: if (+x +y +z) turning right and forward (forward i mean turning screen far from you)
-             *                                    if (+x -y +z) turning left and forward
-             *                                    if (-x +y +z) turning right and backwards
-             *                                    if (-x -y +z) turning left and backwards
-             */
-
-            //shapeRenderer.circle(accelX, accelY, 16);
-
-            shapeRenderer.end();
-        }/***/
-
-        acceX.setText("x: " + String.valueOf(Gdx.input.getAccelerometerX()));
-        acceY.setText("y: " + String.valueOf(Gdx.input.getAccelerometerY()));
-        acceZ.setText("z: " + String.valueOf(Gdx.input.getAccelerometerZ()));
-        orientation.setText("Orientation: " + String.valueOf(Gdx.input.getNativeOrientation()));
-        rotation.setText("Rotation: " + String.valueOf(Gdx.input.getRotation()));
-
-        multiplierLabel.setText(String.valueOf(multiplier) + "x");
+        //P for processed, R for raw and C for calibrated
         controls.update();
         if (Gdx.input.isTouched()) {
             controls.calibrate();
         }
-        if (!controls.isCalibrated()) {
-            controls.calibrate();
-        }
-        controls.update();
-        azimuth.setText("A: " + (int)controls.getRawValue() + " C " + (int)controls.getCalibratedValue() + " V " + (int)controls.getAzimuthValue() + " C " + (int) controls.getAzimuthCalibration());
+        compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
+        renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
+        multiplierLabel.setText(String.valueOf(multiplier) + "x");
     }
 
     private void drawUI() {
