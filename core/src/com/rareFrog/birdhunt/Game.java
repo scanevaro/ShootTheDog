@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.rareFrog.birdhunt.interfaces.ActionResolver;
 import com.rareFrog.birdhunt.interfaces.IActivityRequestHandler;
+import com.rareFrog.birdhunt.interfaces.InputInterface;
 import com.rareFrog.birdhunt.screens.AbstractScreen;
 import com.rareFrog.birdhunt.screens.SplashScreen;
 
@@ -15,13 +16,16 @@ public class Game implements ApplicationListener {
     public ActionResolver actionResolver;
     public IActivityRequestHandler requestHandler;
     public AbstractScreen screen;
+    public InputInterface inputInterface;
     //    FPSLogger fps;
     public Dialogs dialogs;
     public boolean dialogOpen;
 
-    public Game(ActionResolver actionResolver, IActivityRequestHandler handler) {
+
+    public Game(ActionResolver actionResolver, IActivityRequestHandler handler, InputInterface inputInterface) {
         this.actionResolver = actionResolver;
         this.requestHandler = handler;
+        this.inputInterface = inputInterface;
     }
 
     @Override

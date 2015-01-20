@@ -1,6 +1,11 @@
 package com.rareFrog.birdhunt.android;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,18 +24,26 @@ import com.google.example.games.basegameutils.GameHelper;
 import com.rareFrog.birdhunt.Game;
 import com.rareFrog.birdhunt.interfaces.ActionResolver;
 import com.rareFrog.birdhunt.interfaces.IActivityRequestHandler;
+import com.rareFrog.birdhunt.interfaces.InputInterface;
 
-public class AndroidLauncher extends AndroidApplication implements GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
+public class AndroidLauncher extends AndroidApplication implements SensorEventListener, InputInterface, GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
     GameHelper gameHelper;
     protected AdView adView;
     private InterstitialAd interstitial;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
 
     private final int SHOW_ADS = 1;
     private final int HIDE_ADS = 0;
+    private float rotationValue[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rotationValue = new float[3];
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_FASTEST);
 
         RelativeLayout layout = new RelativeLayout(this);
 
@@ -40,7 +53,7 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        View gameView = initializeForView(new Game(this, this), config);
+        View gameView = initializeForView(new Game(this, this, this), config);
 
         if (gameHelper == null) {
             gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
@@ -190,5 +203,26 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
 //        if (show && interstitial.isLoaded())
 //            interstitial.show();
         intHandler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
+    }
+
+    @Override
+    public float[] getRotation() {
+        return rotationValue;
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE) {
+            return;
+        }
+        rotationValue = event.values;
+        for(int i = 0; i<rotationValue.length; i++){
+            rotationValue[i] = (float) Math.toDegrees(rotationValue[i]);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

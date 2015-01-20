@@ -116,7 +116,7 @@ public class GameScreen extends AbstractScreen {
         stage.addActor(pauseButton);
 
         compass = new Label("", Assets.skin);
-        compass.setPosition(0, 64 + 5);
+        compass.setPosition(0, 128 + 5);
         stage.addActor(compass);
 
 
@@ -277,7 +277,7 @@ public class GameScreen extends AbstractScreen {
 
         batch.end();
         //P for processed, R for raw and C for calibrated
-        controls.update();
+        controls.update(this.game.inputInterface.getRotation()[0]);
         if (Gdx.input.isTouched()) {
             controls.calibrate();
         }

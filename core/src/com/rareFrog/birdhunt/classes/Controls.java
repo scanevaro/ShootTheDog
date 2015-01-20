@@ -17,21 +17,20 @@ public class Controls {
     int updateCounter = 0;
 
     public Controls() {
-        double coefficients[] = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
+        double coefficients[] = new double[100];
+        for (int i = 0; i < 100; i++) {
+            coefficients[i] = 0.01f;
+        }
         azimuthPrevious = new float[100];
 
         fir = new FIR(coefficients);
     }
 
-    public void update() {
-        updateCounter++;
-        if (updateCounter > 3) {
-            updateCounter -= 3;
-            rawAzimuth = Gdx.input.getAzimuth();
-            azimuthValue = (float) fir.getOutputSample(rawAzimuth);
-            if (calibrated == false) {
-                calibrate();
-            }
+    public void update(float value) {
+        rawAzimuth = value;//Gdx.input.getAzimuth();
+        azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+        if (calibrated == false) {
+            calibrate();
         }
     }
 
@@ -74,7 +73,7 @@ public class Controls {
 
     public void blockingCalibrate() {
         while (!calibrated) {
-            update();
+            //update();
             calibrate();
         }
     }
