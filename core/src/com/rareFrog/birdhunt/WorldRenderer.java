@@ -16,12 +16,17 @@ public class WorldRenderer extends Actor {
     private World world;
     public OrthographicCamera gameCam;
     private SpriteBatch batch;
+    private float horizontalPosition = 0;
 
     public WorldRenderer(SpriteBatch batch, World world) {
         this.world = world;
         this.gameCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         this.gameCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         this.batch = batch;
+    }
+
+    public void setHorizontalPosition(float x){
+        this.horizontalPosition = x;
     }
 
     @Override
@@ -71,14 +76,14 @@ public class WorldRenderer extends Actor {
     }
 
     private void renderBackgroundBack() {
-        batch.draw(Assets.backgroundBackRegion, gameCam.position.x - Game.VIRTUAL_WIDTH / 2,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
+        batch.draw(Assets.backgroundBackRegion, gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
+                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Assets.backgroundBackRegion.getRegionWidth(),
                 Game.VIRTUAL_HEIGHT);
     }
 
     private void renderBackground() {
-        batch.draw(Assets.backgroundRegion, gameCam.position.x - Game.VIRTUAL_WIDTH / 2,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
+        batch.draw(Assets.backgroundRegion, gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
+                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Assets.backgroundRegion.getRegionWidth(),
                 Game.VIRTUAL_HEIGHT);
     }
 
@@ -89,7 +94,7 @@ public class WorldRenderer extends Actor {
 
     private void renderDog() {
         if (world.dog.texture != null)
-            batch.draw(world.dog.texture, world.dog.position.x, world.dog.position.y, Dog.DOG_WIDTH, Dog.DOG_HEIGHT);
+            batch.draw(world.dog.texture, world.dog.position.x-horizontalPosition, world.dog.position.y, Dog.DOG_WIDTH, Dog.DOG_HEIGHT);
     }
 
     private void renderDucks() {
@@ -101,9 +106,9 @@ public class WorldRenderer extends Actor {
 
             if (texture != null)
                 if (duck.velocity.x >= 0)
-                    batch.draw(texture, duck.bounds.x, duck.bounds.y, Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
+                    batch.draw(texture, duck.bounds.x-horizontalPosition, duck.bounds.y, Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
                 else
-                    batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
+                    batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH-horizontalPosition, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
         }
     }
 }

@@ -281,8 +281,9 @@ public class GameScreen extends AbstractScreen {
         if (Gdx.input.isTouched()) {
             controls.calibrate();
         }
+        renderer.setHorizontalPosition(controls.getCalibratedValue());
         compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
-        renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
+        // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
         multiplierLabel.setText(String.valueOf(multiplier) + "x");
     }
 

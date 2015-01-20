@@ -7,17 +7,30 @@ import com.rareFrog.birdhunt.classes.IDesktopRequestHandler;
 import com.rareFrog.birdhunt.desktop.classes.ActionResolverDesktop;
 import com.rareFrog.birdhunt.interfaces.InputInterface;
 
-public class DesktopLauncher {
+public class DesktopLauncher implements InputInterface {
+    private float rotation = 0;
+    private boolean increment = false;
+
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = (int) Game.VIRTUAL_WIDTH;
         config.height = (int) Game.VIRTUAL_HEIGHT;
-        new LwjglApplication(new Game(new ActionResolverDesktop(), new IDesktopRequestHandler(), new InputInterface() {
-            @Override
-            public float[] getRotation() {
-                float test[] = {0,0,0};
-                return test;
-            }
-        }), config);
+        new LwjglApplication(new Game(new ActionResolverDesktop(), new IDesktopRequestHandler(), new DesktopLauncher()), config);
+    }
+
+    @Override
+    public float[] getRotation() {
+        if (increment)
+            rotation += 0.5f;
+        else
+            rotation -= 0.5f;
+        if (rotation < -90) {
+            increment = true;
+        }
+        if (rotation > 90) {
+            increment = false;
+        }
+        System.out.println(rotation);
+        return new float[]{rotation, rotation, rotation};
     }
 }
