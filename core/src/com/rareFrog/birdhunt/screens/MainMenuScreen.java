@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,7 +25,6 @@ public class MainMenuScreen extends AbstractScreen {
     //main
     Game game;
     //screen
-    private Stage stage;
     private SpriteBatch batch;
     private GameInputProcessor gameInputProcessor;
     //widgets
@@ -33,6 +34,7 @@ public class MainMenuScreen extends AbstractScreen {
     //    private ImageButton muteButton;
 //    private ImageButton closeButton;
     private ImageButton play1DuckButton, play2DucksButton, configButton;
+    private Window configDialog;
 //    private ImageButton aboutButton;
 //    private ImageButton libgdxButton;
 //    private ImageButton achievementsButton;
@@ -49,6 +51,7 @@ public class MainMenuScreen extends AbstractScreen {
         configureWidgets();
         addListeners();
         setLayout();
+        prepareConfigDialog();
 
         if (Settings.soundEnabled) Assets.menuIntro.play();
 
@@ -194,7 +197,7 @@ public class MainMenuScreen extends AbstractScreen {
         configButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                stage.addActor(configDialog);
             }
         });
     }
@@ -249,6 +252,72 @@ public class MainMenuScreen extends AbstractScreen {
         configButton.setSize(32, 32);
         configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth(), 2);
         stage.addActor(configButton);
+    }
+
+    private void prepareConfigDialog() {
+        configDialog = new Window("Config", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+        configDialog.setWidth(256);
+        configDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - configDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - configDialog.getHeight() / 2);
+
+        //TODO Change it to CLOSE ICON
+        final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
+        closeDialogButton.setSize(52, 15);
+        closeDialogButton.setPosition(configDialog.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
+        closeDialogButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.dialogOpen = false;
+                if (Settings.soundEnabled) Assets.pauseClosed.play();
+                configDialog.remove();
+            }
+        });
+        configDialog.addActor(closeDialogButton);
+
+        ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
+        muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        final ImageButton muteButton = new ImageButton(muteStyle);
+        muteButton.setSize(64, 64);
+        muteButton.setPosition(20, configDialog.getHeight() / 2 - muteButton.getHeight() / 2);
+        muteButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (muteButton.isChecked()) {
+                    Settings.soundEnabled = false;
+                    muteButton.setChecked(true);
+                } else {
+                    Settings.soundEnabled = true;
+                    muteButton.setChecked(false);
+                }
+            }
+        });
+        configDialog.addActor(muteButton);
+
+        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle();
+        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        final ImageButton aboutButton = new ImageButton(aboutStyle);
+        aboutButton.setSize(64, 64);
+        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 - aboutButton.getHeight() / 2);
+        aboutButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+            }
+        });
+        configDialog.addActor(aboutButton);
+
+        ImageButton.ImageButtonStyle quitStyle = new ImageButton.ImageButtonStyle();
+        quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        final ImageButton quitButton = new ImageButton(quitStyle);
+        quitButton.setSize(64, 64);
+        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 - quitButton.getHeight() / 2);
+        quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+            }
+        });
+        configDialog.addActor(quitButton);
     }
 
     private void setInputProcessor() {

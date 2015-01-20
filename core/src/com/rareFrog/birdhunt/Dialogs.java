@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -17,7 +16,7 @@ import com.rareFrog.birdhunt.screens.SplashScreen;
  * Created by scanevaro on 14/01/2015.
  */
 public class Dialogs {
-    public Window window;
+    public Window menuDialog, gameDialog, splashDialog;
     private Game game;
 
     public Dialogs(Game game) {
@@ -31,7 +30,7 @@ public class Dialogs {
             if (Settings.soundEnabled) Assets.pauseClicked.play();
         } else {
             game.dialogOpen = false;
-            remove();
+            remove(screen);
             if (Settings.soundEnabled) Assets.pauseClosed.play();
         }
     }
@@ -39,100 +38,88 @@ public class Dialogs {
     private void build(final AbstractScreen screen) {
 
         if (screen instanceof SplashScreen) {
-            window = new Dialog("Quit Game?", Assets.skin);
+            splashDialog = new Dialog("Quit Game?", Assets.skin);
 
-            screen.stage.addActor(window);
+            screen.stage.addActor(splashDialog);
 
             return;
         }
 
         if (screen instanceof MainMenuScreen) {
-            if (window != null) {
-                window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
-                screen.stage.addActor(window);
+            if (menuDialog != null) {
+                menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
+                screen.stage.addActor(menuDialog);
                 return;
             }
 
-            window = new Window("Config", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
-            window.setWidth(256);
-            window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
+            menuDialog = new Window("Quit", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+            menuDialog.setWidth(256);
+            menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
 
-            //TODO Change it to CLOSE ICON
-            final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
-            closeDialogButton.setSize(52, 15);
-            closeDialogButton.setPosition(window.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
-            closeDialogButton.addListener(new ClickListener() {
+            ImageButton.ImageButtonStyle quitStyle = new ImageButton.ImageButtonStyle();
+            quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            quitStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton quitButton = new ImageButton(quitStyle);
+            quitButton.setSize(64, 64);
+            quitButton.setPosition(menuDialog.getWidth() / 4 - quitButton.getWidth() / 2, 0);
+            quitButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    game.dialogOpen = false;
-                    if (Settings.soundEnabled) Assets.pauseClosed.play();
-                    window.remove();
                 }
             });
-            window.addActor(closeDialogButton);
+            menuDialog.addActor(quitButton);
 
-            ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
-            muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-            muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
-            final ImageButton muteButton = new ImageButton(muteStyle);
-            muteButton.setSize(64, 64);
-            muteButton.setPosition(20, window.getHeight() / 2 - muteButton.getHeight() / 2);
-            muteButton.addListener(new ClickListener() {
+            ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
+            closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            closeStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton closeButton = new ImageButton(closeStyle);
+            closeButton.setSize(64, 64);
+            closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 0);
+            closeButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (muteButton.isChecked()) {
-                        Settings.soundEnabled = false;
-                        muteButton.setChecked(true);
-                    } else {
-                        Settings.soundEnabled = true;
-                        muteButton.setChecked(false);
-                    }
-
-                    if (!Settings.soundEnabled) Assets.background.pause();
-                    else if (((GameScreen) screen).world.state != World.WORLD_STATE_ROUND_START)
-                        Assets.background.play();
-
-                    if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
                 }
             });
-            window.addActor(muteButton);
+            menuDialog.addActor(closeButton);
 
-            screen.stage.addActor(window);
+            screen.stage.addActor(menuDialog);
 
             return;
         }
 
         if (screen instanceof GameScreen) {
-            if (window != null) {
-                window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
-                screen.stage.addActor(window);
+            if (gameDialog != null) {
+                gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
+                screen.stage.addActor(gameDialog);
                 return;
             }
 
-            window = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
-            window.setWidth(256);
-            window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
+            gameDialog = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+            gameDialog.setWidth(256);
+            gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
 
-            //TODO Change it to CLOSE ICON
-            final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
-            closeDialogButton.setSize(52, 15);
-            closeDialogButton.setPosition(window.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
-            closeDialogButton.addListener(new ClickListener() {
+            ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
+            closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton closeButton = new ImageButton(closeStyle);
+            closeButton.setSize(48, 48);
+            closeButton.setPosition(gameDialog.getWidth() / 4 - closeButton.getWidth() / 2, 20);
+            closeButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     game.dialogOpen = false;
                     if (Settings.soundEnabled) Assets.pauseClosed.play();
-                    window.remove();
+                    gameDialog.remove();
                 }
             });
-            window.addActor(closeDialogButton);
+            gameDialog.addActor(closeButton);
 
             ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
             muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
             muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
             final ImageButton muteButton = new ImageButton(muteStyle);
             muteButton.setSize(64, 64);
-            muteButton.setPosition(20, window.getHeight() / 2 - muteButton.getHeight() / 2);
+            muteButton.setPosition(5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 10);
             muteButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -151,16 +138,65 @@ public class Dialogs {
                     if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
                 }
             });
-            window.addActor(muteButton);
+            gameDialog.addActor(muteButton);
 
-            screen.stage.addActor(window);
+            ImageButton.ImageButtonStyle compassStyle = new ImageButton.ImageButtonStyle();
+            compassStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            compassStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton compassButton = new ImageButton(compassStyle);
+            compassButton.setSize(64, 64);
+            compassButton.setPosition(gameDialog.getWidth() / 4, gameDialog.getHeight() / 2 - compassButton.getHeight() / 2 + 10);
+            compassButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                }
+            });
+            gameDialog.addActor(compassButton);
+
+            ImageButton.ImageButtonStyle touchStyle = new ImageButton.ImageButtonStyle();
+            touchStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            touchStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton touchButton = new ImageButton(touchStyle);
+            touchButton.setSize(64, 64);
+            touchButton.setPosition(gameDialog.getWidth() / 4 * 3 - touchButton.getWidth(), gameDialog.getHeight() / 2 - touchButton.getHeight() / 2 + 10);
+            touchButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                }
+            });
+            gameDialog.addActor(touchButton);
+
+            ImageButton.ImageButtonStyle backStyle = new ImageButton.ImageButtonStyle();
+            backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            backStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton backButton = new ImageButton(backStyle);
+            backButton.setSize(64, 64);
+            backButton.setPosition(gameDialog.getWidth() - backButton.getWidth(), gameDialog.getHeight() / 2 - backButton.getHeight() / 2 + 10);
+            backButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.setScreen(new MainMenuScreen(game));
+                }
+            });
+            gameDialog.addActor(backButton);
+
+            screen.stage.addActor(gameDialog);
 
             return;
         }
     }
 
-    private void remove() {
-        if (window != null)
-            window.remove();
+    private void remove(AbstractScreen screen) {
+        if (screen instanceof SplashScreen)
+            if (splashDialog != null)
+                splashDialog.remove();
+
+        if (screen instanceof MainMenuScreen)
+            if (menuDialog != null)
+                menuDialog.remove();
+
+        if (screen instanceof GameScreen)
+            if (gameDialog != null)
+                gameDialog.remove();
     }
 }
