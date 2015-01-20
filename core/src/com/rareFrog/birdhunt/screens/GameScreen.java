@@ -17,10 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.Settings;
-import com.rareFrog.birdhunt.classes.World;
-import com.rareFrog.birdhunt.classes.WorldRenderer;
+import com.rareFrog.birdhunt.classes.*;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 
@@ -54,12 +51,13 @@ public class GameScreen implements Screen {
      */
     private ImageButton pauseButton;
     private Window pauseWindow;
-    private Label acceX, acceY, acceZ, rotation, orientation;
-    private float accelX, accelY;
-
+    private Label azimuth;
     private ShapeRenderer shapeRenderer;
+    private Controls controls;
+
 
     public GameScreen(Game game, int gameMode) {
+        controls = new Controls();
         this.game = game;
         this.gameMode = gameMode;
 
@@ -162,21 +160,9 @@ public class GameScreen implements Screen {
         });
         pauseWindow.addActor(muteButton);
 
-        acceX = new Label("", Assets.skin);
-        acceX.setPosition(0, 32 + 5);
-        stage.addActor(acceX);
-        acceY = new Label("", Assets.skin);
-        acceY.setPosition(0, 5);
-        stage.addActor(acceY);
-        acceZ = new Label("", Assets.skin);
-        acceZ.setPosition(0, 64 + 5);
-        stage.addActor(acceZ);
-        orientation = new Label("", Assets.skin);
-        orientation.setPosition(0, 96 + 5);
-        stage.addActor(orientation);
-        rotation = new Label("", Assets.skin);
-        rotation.setPosition(0, 128 + 5);
-        stage.addActor(rotation);
+        azimuth = new Label("", Assets.skin);
+        azimuth.setPosition(0, 120 + 5);
+        stage.addActor(azimuth);
     }
 
     private void addListeners() {
@@ -351,19 +337,19 @@ public class GameScreen implements Screen {
              *                                    if (-x -y +z) turning left and backwards
              */
 
-            accelY = -Gdx.input.getAccelerometerX() * 40 + Game.VIRTUAL_HEIGHT / 2;
-            accelX = Gdx.input.getAccelerometerY() * 40 + Game.VIRTUAL_WIDTH / 2;
-
-            shapeRenderer.circle(accelX, accelY, 16);
+            //shapeRenderer.circle(accelX, accelY, 16);
 
             shapeRenderer.end();
         }/***/
-
-        acceX.setText("x: " + String.valueOf(Gdx.input.getAccelerometerX()));
-        acceY.setText("y: " + String.valueOf(Gdx.input.getAccelerometerY()));
-        acceZ.setText("z: " + String.valueOf(Gdx.input.getAccelerometerZ()));
-        orientation.setText("Orientation: " + String.valueOf(Gdx.input.getNativeOrientation()));
-        rotation.setText("Rotation: " + String.valueOf(Gdx.input.getRotation()));
+        controls.update();
+        if (Gdx.input.isTouched()) {
+            controls.calibrate();
+        }
+        if (!controls.isCalibrated()) {
+            controls.calibrate();
+        }
+        controls.update();
+        azimuth.setText("A: " + (int)controls.getRawValue() + " C " + (int)controls.getCalibratedValue() + " V " + (int)controls.getAzimuthValue() + " C " + (int) controls.getAzimuthCalibration());
     }
 
     private void drawUI() {
