@@ -47,9 +47,55 @@ public class Dialogs {
         }
 
         if (screen instanceof MainMenuScreen) {
-            window = new Window("Config", Assets.skin);
+            if (window != null) {
+                window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
+                screen.stage.addActor(window);
+                return;
+            }
 
-            //TODO
+            window = new Window("Config", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+            window.setWidth(256);
+            window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
+
+            //TODO Change it to CLOSE ICON
+            final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
+            closeDialogButton.setSize(52, 15);
+            closeDialogButton.setPosition(window.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
+            closeDialogButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.dialogOpen = false;
+                    if (Settings.soundEnabled) Assets.pauseClosed.play();
+                    window.remove();
+                }
+            });
+            window.addActor(closeDialogButton);
+
+            ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
+            muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton muteButton = new ImageButton(muteStyle);
+            muteButton.setSize(64, 64);
+            muteButton.setPosition(20, window.getHeight() / 2 - muteButton.getHeight() / 2);
+            muteButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (muteButton.isChecked()) {
+                        Settings.soundEnabled = false;
+                        muteButton.setChecked(true);
+                    } else {
+                        Settings.soundEnabled = true;
+                        muteButton.setChecked(false);
+                    }
+
+                    if (!Settings.soundEnabled) Assets.background.pause();
+                    else if (((GameScreen) screen).world.state != World.WORLD_STATE_ROUND_START)
+                        Assets.background.play();
+
+                    if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
+                }
+            });
+            window.addActor(muteButton);
 
             screen.stage.addActor(window);
 
@@ -67,6 +113,7 @@ public class Dialogs {
             window.setWidth(256);
             window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
 
+            //TODO Change it to CLOSE ICON
             final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
             closeDialogButton.setSize(52, 15);
             closeDialogButton.setPosition(window.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);

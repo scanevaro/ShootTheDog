@@ -23,6 +23,8 @@ import com.rareFrog.birdhunt.SpriteAccessor;
 public class SplashScreen extends AbstractScreen {
     private static final int PX_PER_METER = 400;
 
+    private Game game;
+
     private final OrthographicCamera camera = new OrthographicCamera();
     private final SpriteBatch batch = new SpriteBatch();
     private final TweenManager tweenManager = new TweenManager();
@@ -38,6 +40,8 @@ public class SplashScreen extends AbstractScreen {
     private final TextureRegion gdxTex;
 
     public SplashScreen(final Game game) {
+        this.game = game;
+
         this.callback = new TweenCallback() {
             @Override
             public void onEvent(int type, BaseTween<?> source) {
@@ -171,7 +175,7 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        tweenManager.update(delta);
+        if (!game.dialogOpen) tweenManager.update(delta);
 
         if (gdx.getRotation() > 360 * 15 - 20) gdx.setRegion(gdxTex);
 
@@ -184,10 +188,6 @@ public class SplashScreen extends AbstractScreen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         strip.draw(batch);
-//        universal.draw(batch);
-//        tween.draw(batch);
-//        engine.draw(batch);
-//        logo.draw(batch);
         powered.draw(batch);
         gdx.draw(batch);
         if (veil.getColor().a > 0.1f) veil.draw(batch);
