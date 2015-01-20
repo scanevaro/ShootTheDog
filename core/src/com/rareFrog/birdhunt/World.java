@@ -1,10 +1,9 @@
-package com.rareFrog.birdhunt.classes;
+package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.rareFrog.birdhunt.Game;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.screens.GameScreen;
@@ -37,6 +36,7 @@ public class World {
     private final int PERFECT = 10000;
 
     private Game game;
+    private GameScreen gameScreen;
 
     public final List<Duck> ducks;
     public final WorldListener listener;
@@ -45,7 +45,6 @@ public class World {
     public final Random rand;
     public Stage stage;
 
-    public int score;
     public int state;
     public int gameMode;
     public int duckCount;
@@ -59,15 +58,17 @@ public class World {
 
     Vector2 touchPoint;
 
-    public World(WorldListener listener, Game game, int gameMode) {
+    public World(WorldListener listener, Game game, GameScreen gameScreen, int gameMode) {
         this.game = game;
+        this.gameScreen = gameScreen;
         this.ducks = new ArrayList<Duck>(10);
         this.listener = listener;
         this.gameMode = gameMode;
         rand = new Random();
         this.touchPoint = new Vector2();
 
-        this.score = 0;
+        gameScreen.score = 0;
+        gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
 
         generateRound();
@@ -190,7 +191,7 @@ public class World {
         } else if (stateTime > 5) {
             if (perfect) {
                 if (Settings.soundEnabled) Assets.perfect.play();
-                score += PERFECT;
+                gameScreen.score += PERFECT;
                 perfect = false;
             }
         }
@@ -344,19 +345,22 @@ public class World {
 
                 switch (GameScreen.shots) {
                     case 2:
-                        score += Duck.SCORE2;
+                        gameScreen.multiplier++;
+                        gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
                         break;
                     case 1:
-                        score += Duck.SCORE1;
+                        gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
                         break;
                     case 0:
-                        score += Duck.SCORE0;
+                        if (gameScreen.multiplier != 1)
+                            gameScreen.multiplier--;
+                        gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                         break;
                 }
-            } else if (Gdx.input.justTouched() &&
-                    GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
-            else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
+                gameScreen.multiplier = 1;
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
         } else {
             Duck duck = ducks.get(duckCount);
             int shot = 0;
@@ -370,21 +374,24 @@ public class World {
 
                 switch (GameScreen.shots) {
                     case 2:
-                        score += Duck.SCORE2;
+                        gameScreen.multiplier++;
+                        gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
                         break;
                     case 1:
-                        score += Duck.SCORE1;
+                        gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
                         break;
                     case 0:
-                        score += Duck.SCORE0;
+                        if (gameScreen.multiplier != 1)
+                            gameScreen.multiplier--;
+                        gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                         break;
                 }
 
-            } else if (Gdx.input.justTouched() &&
-                    GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING)
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
-            else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
-
+                gameScreen.multiplier = 1;
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0)
+                Assets.outOfBullets.play();
 
             Duck duck2 = ducks.get(duckCount + 1);
             if (Gdx.input.justTouched() &&
@@ -398,19 +405,22 @@ public class World {
 
                 switch (GameScreen.shots) {
                     case 2:
-                        score += Duck.SCORE2;
+                        gameScreen.multiplier++;
+                        gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
                         break;
                     case 1:
-                        score += Duck.SCORE1;
+                        gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
                         break;
                     case 0:
-                        score += Duck.SCORE0;
+                        if (gameScreen.multiplier != 1)
+                            gameScreen.multiplier--;
+                        gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                         break;
                 }
 
-            } else if (Gdx.input.justTouched() &&
-                    GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.state = Duck.DUCK_STATE_FLY_AWAY;
+                gameScreen.multiplier = 1;
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.rareFrog.birdhunt.classes;
+package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -20,8 +20,7 @@ public class Assets {
 
     public static Skin skin;
 
-    public static TextureAtlas atlas;
-    public static TextureAtlas items;
+    public static TextureAtlas atlas, items;
 
     public static TextureRegion backgroundRegion;
     public static TextureRegion backgroundBackRegion;
@@ -68,6 +67,7 @@ public class Assets {
     public static TextureRegion achievementsButtonDown;
     public static TextureRegion loginButtonUp;
     public static TextureRegion loginButtonDown;
+    public static TextureRegion configButtonUp, configButtonDown;
 
     public static Animation duckFlyRightBlue;
     public static Animation duckFlyRightBlack;
@@ -84,7 +84,7 @@ public class Assets {
     public static Animation uiDucks;
     public static Animation dogShot;
 
-    public static BitmapFont font;
+    public static BitmapFont font, fontBig;
 
     public static Music menuIntro;
     public static Music startRound;
@@ -125,8 +125,10 @@ public class Assets {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/comic.ttf"));
         font = generator.generateFont(40);
+        fontBig = generator.generateFont(65);
 
         skin.add("default-font", font, BitmapFont.class);
+        skin.add("big-font", fontBig, BitmapFont.class);
 
         generator.dispose();
 
@@ -244,6 +246,8 @@ public class Assets {
         achievementsButtonDown = items.findRegion("achievements1");
         loginButtonUp = items.findRegion("login0");
         loginButtonDown = items.findRegion("login0");
+        configButtonUp = new TextureRegion(new Texture(Gdx.files.internal("data/images/config.png")));
+        configButtonDown = new TextureRegion(new Texture(Gdx.files.internal("data/images/config.png")));
     }
 
     private static void loadSounds() {

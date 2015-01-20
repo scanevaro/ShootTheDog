@@ -2,11 +2,9 @@ package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.Settings;
 import com.rareFrog.birdhunt.interfaces.ActionResolver;
 import com.rareFrog.birdhunt.interfaces.IActivityRequestHandler;
+import com.rareFrog.birdhunt.screens.AbstractScreen;
 import com.rareFrog.birdhunt.screens.SplashScreen;
 
 public class Game implements ApplicationListener {
@@ -16,8 +14,10 @@ public class Game implements ApplicationListener {
 
     public ActionResolver actionResolver;
     public IActivityRequestHandler requestHandler;
-    private Screen screen;
-//    FPSLogger fps;
+    public AbstractScreen screen;
+    //    FPSLogger fps;
+    public Dialogs dialogs;
+    public boolean dialogOpen;
 
     public Game(ActionResolver actionResolver, IActivityRequestHandler handler) {
         this.actionResolver = actionResolver;
@@ -26,6 +26,10 @@ public class Game implements ApplicationListener {
 
     @Override
     public void create() {
+        dialogs = new Dialogs(this);
+
+        Gdx.input.setCatchBackKey(true);
+
         Settings.load();
         Assets.load();
         setScreen(new SplashScreen(this));
@@ -38,7 +42,7 @@ public class Game implements ApplicationListener {
 //        fps.log();
     }
 
-    public void setScreen(Screen screen) {
+    public void setScreen(AbstractScreen screen) {
         if (this.screen != null) this.screen.hide();
         this.screen = screen;
         if (this.screen != null) {

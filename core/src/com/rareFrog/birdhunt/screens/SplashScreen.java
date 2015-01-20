@@ -1,26 +1,29 @@
 package com.rareFrog.birdhunt.screens;
 
 import aurelienribon.tweenengine.*;
-import aurelienribon.tweenengine.equations.*;
+import aurelienribon.tweenengine.equations.Back;
+import aurelienribon.tweenengine.equations.Cubic;
+import aurelienribon.tweenengine.equations.Quad;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.rareFrog.birdhunt.Assets;
 import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.SpriteAccessor;
+import com.rareFrog.birdhunt.SpriteAccessor;
 
 /**
  * Created by scanevaro on 18/11/2014.
  */
-public class SplashScreen implements Screen {
+public class SplashScreen extends AbstractScreen {
     private static final int PX_PER_METER = 400;
+
+    private Game game;
 
     private final OrthographicCamera camera = new OrthographicCamera();
     private final SpriteBatch batch = new SpriteBatch();
@@ -37,6 +40,8 @@ public class SplashScreen implements Screen {
     private final TextureRegion gdxTex;
 
     public SplashScreen(final Game game) {
+        this.game = game;
+
         this.callback = new TweenCallback() {
             @Override
             public void onEvent(int type, BaseTween<?> source) {
@@ -170,7 +175,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        tweenManager.update(delta);
+        if (!game.dialogOpen) tweenManager.update(delta);
 
         if (gdx.getRotation() > 360 * 15 - 20) gdx.setRegion(gdxTex);
 
@@ -183,10 +188,6 @@ public class SplashScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         strip.draw(batch);
-//        universal.draw(batch);
-//        tween.draw(batch);
-//        engine.draw(batch);
-//        logo.draw(batch);
         powered.draw(batch);
         gdx.draw(batch);
         if (veil.getColor().a > 0.1f) veil.draw(batch);

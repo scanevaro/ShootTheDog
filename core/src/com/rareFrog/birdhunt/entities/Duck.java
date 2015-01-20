@@ -2,10 +2,10 @@ package com.rareFrog.birdhunt.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.classes.Assets;
-import com.rareFrog.birdhunt.classes.DucksTextures;
-import com.rareFrog.birdhunt.classes.DynamicGameObject;
-import com.rareFrog.birdhunt.classes.Settings;
+import com.rareFrog.birdhunt.Assets;
+import com.rareFrog.birdhunt.DucksTextures;
+import com.rareFrog.birdhunt.DynamicGameObject;
+import com.rareFrog.birdhunt.Settings;
 
 import java.util.Random;
 
