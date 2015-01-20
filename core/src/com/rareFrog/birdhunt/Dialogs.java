@@ -1,11 +1,13 @@
 package com.rareFrog.birdhunt;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.rareFrog.birdhunt.screens.AbstractScreen;
 import com.rareFrog.birdhunt.screens.GameScreen;
 import com.rareFrog.birdhunt.screens.MainMenuScreen;
@@ -26,13 +28,15 @@ public class Dialogs {
         if (!game.dialogOpen) {
             game.dialogOpen = true;
             build(screen);
+            if (Settings.soundEnabled) Assets.pauseClicked.play();
         } else {
             game.dialogOpen = false;
             remove();
+            if (Settings.soundEnabled) Assets.pauseClosed.play();
         }
     }
 
-    private void build(AbstractScreen screen) {
+    private void build(final AbstractScreen screen) {
 
         if (screen instanceof SplashScreen) {
             window = new Dialog("Quit Game?", Assets.skin);
@@ -54,45 +58,54 @@ public class Dialogs {
 
         if (screen instanceof GameScreen) {
             if (window != null) {
-                window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2);
+                window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
                 screen.stage.addActor(window);
                 return;
             }
 
-            window = new Window("Pause", Assets.skin);
+            window = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
+            window.setWidth(256);
+            window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - window.getHeight() / 2);
 
-            TextButton noButton = new TextButton("Resume", Assets.skin);
-            noButton.addListener(new ClickListener() {
+            final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
+            closeDialogButton.setSize(52, 15);
+            closeDialogButton.setPosition(window.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
+            closeDialogButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     game.dialogOpen = false;
+                    if (Settings.soundEnabled) Assets.pauseClosed.play();
                     window.remove();
                 }
             });
-            noButton.setPosition(noButton.getWidth() / 4, noButton.getHeight() / 2);
+            window.addActor(closeDialogButton);
 
-            //add to dialog
-            window.addActor(noButton);
-
-            TextButton backButton = new TextButton("Main Menu", Assets.skin);
-            backButton.addListener(new ClickListener() {
+            ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
+            muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+            muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+            final ImageButton muteButton = new ImageButton(muteStyle);
+            muteButton.setSize(64, 64);
+            muteButton.setPosition(20, window.getHeight() / 2 - muteButton.getHeight() / 2);
+            muteButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    /**
-                     * Go Back and show Interstitial Ad
-                     * game.setScreen(new MainMenuScreen());
-                     */
-                    Gdx.app.exit();
+                    if (muteButton.isChecked()) {
+                        Settings.soundEnabled = false;
+                        muteButton.setChecked(true);
+                    } else {
+                        Settings.soundEnabled = true;
+                        muteButton.setChecked(false);
+                    }
+
+                    if (!Settings.soundEnabled) Assets.background.pause();
+                    else if (((GameScreen) screen).world.state != World.WORLD_STATE_ROUND_START)
+                        Assets.background.play();
+
+                    if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
                 }
             });
-            backButton.setPosition(noButton.getWidth() / 4 + 20 + noButton.getWidth(), backButton.getHeight() / 2);
-            //add to dialog
-            window.addActor(backButton);
+            window.addActor(muteButton);
 
-            window.setSize(noButton.getWidth() / 4 + 20 + backButton.getWidth() / 4 + noButton.getWidth() + backButton.getWidth(), backButton.getHeight() * 2.5f);
-            window.setPosition(Game.VIRTUAL_WIDTH / 2 - window.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2);
-
-            /**Add to screen stage*/
             screen.stage.addActor(window);
 
             return;

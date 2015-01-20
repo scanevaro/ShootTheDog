@@ -28,6 +28,8 @@ public class Game implements ApplicationListener {
     public void create() {
         dialogs = new Dialogs(this);
 
+        Gdx.input.setCatchBackKey(true);
+
         Settings.load();
         Assets.load();
         setScreen(new SplashScreen(this));

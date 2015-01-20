@@ -75,12 +75,20 @@ public class MainMenuScreen extends AbstractScreen {
 
         ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play1DuckStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonUp));
+        play1DuckStyle.imageUp.setMinWidth(192);
+        play1DuckStyle.imageUp.setMinHeight(64);
         play1DuckStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonDown));
+        play1DuckStyle.imageDown.setMinWidth(192);
+        play1DuckStyle.imageDown.setMinHeight(64);
         play1DuckButton = new ImageButton(play1DuckStyle);
 
         ImageButton.ImageButtonStyle play2DucksStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play2DucksStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonUp));
+        play2DucksStyle.imageUp.setMinWidth(192);
+        play2DucksStyle.imageUp.setMinHeight(64);
         play2DucksStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonDown));
+        play2DucksStyle.imageDown.setMinWidth(192);
+        play2DucksStyle.imageDown.setMinHeight(64);
         play2DucksButton = new ImageButton(play2DucksStyle);
 
 //        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
@@ -208,11 +216,9 @@ public class MainMenuScreen extends AbstractScreen {
 //        closeButton.setPosition(Game.VIRTUAL_WIDTH - closeButton.getWidth(), 0);
 //        stage.addActor(closeButton);
 
-        play1DuckButton.setSize(160, 18);
         play1DuckButton.setPosition(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4 - play1DuckButton.getWidth() / 2, 68);
         stage.addActor(play1DuckButton);
 
-        play2DucksButton.setSize(160, 18);
         play2DucksButton.setPosition(Game.VIRTUAL_WIDTH / 4 * 3 - play2DucksButton.getWidth() / 2, 68);
         stage.addActor(play2DucksButton);
 
