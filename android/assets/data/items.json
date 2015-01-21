@@ -5,13 +5,13 @@ com.badlogic.gdx.graphics.Color: {
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
-  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
   button: { down: button, up: button, font: default-font, fontColor: white }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	pauseDialog: { titleFont: default-font, background: pauseDialog, titleFontColor: white }
 },
-  com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
   default: { font: default-font, fontColor: white }
 }
 }

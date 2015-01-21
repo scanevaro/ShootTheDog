@@ -197,6 +197,7 @@ public class MainMenuScreen extends AbstractScreen {
         configButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (Settings.soundEnabled) Assets.pauseClicked.play();
                 stage.addActor(configDialog);
             }
         });
