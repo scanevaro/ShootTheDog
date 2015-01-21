@@ -35,7 +35,7 @@ public class Game implements ApplicationListener {
         Gdx.input.setCatchBackKey(true);
 
         Settings.load();
-        Assets.load();
+        new Assets().load();
         setScreen(new SplashScreen(this));
 //        fps = new FPSLogger();
     }

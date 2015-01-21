@@ -1,6 +1,7 @@
 package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
@@ -18,9 +19,13 @@ public class Assets {
     public static int UISCOREWIDTH = 53;
     public static int UISCOREHEIGHT = 21;
 
+    public static boolean loaded;
+
+    public static AssetManager assetManager;
+
     public static Skin skin;
 
-    public static TextureAtlas atlas, items;
+    public static TextureAtlas items;
 
     public static TextureRegion backgroundRegion;
     public static TextureRegion backgroundBackRegion;
@@ -92,7 +97,6 @@ public class Assets {
     public static Music gameOver1;
     public static Music gameOver2;
     public static Music background;
-    public static Music dogShotMusic;
 
     public static Sound shoot;
     public static Sound dogBark;
@@ -110,17 +114,66 @@ public class Assets {
     public static Sound duckShot;
     public static Sound dogShotSound;
 
+    public Assets() {
+        assetManager = new AssetManager();
+        loaded = false;
+    }
+
     public static void load() {
-        loadSkin();
+        assetManager.load("data/loading.pack", TextureAtlas.class);
+        assetManager.finishLoading();
 
         loadAtlas();
-
-        loadTextures();
-
         loadSounds();
     }
 
-    private static void loadSkin() {
+    private static void loadAtlas() {
+        assetManager.load("data/items.pack", TextureAtlas.class);
+    }
+
+    private static void loadSounds() {
+        assetManager.load("data/sounds/DuckHunt.mp3", Music.class);
+        assetManager.load("data/sounds/start_round.mp3", Music.class);
+        assetManager.load("data/sounds/end_round.mp3", Music.class);
+        assetManager.load("data/sounds/gameOver1.mp3", Music.class);
+        assetManager.load("data/sounds/gameOver2.mp3", Music.class);
+        assetManager.load("data/sounds/music/background1.wav", Music.class);
+
+        assetManager.load("data/sounds/blast.mp3", Sound.class);
+        assetManager.load("data/sounds/bark.mp3", Sound.class);
+        assetManager.load("data/sounds/miss.mp3", Sound.class);
+        assetManager.load("data/sounds/laugh.mp3", Sound.class);
+        assetManager.load("data/sounds/end_duck_round.mp3", Sound.class);
+        assetManager.load("data/sounds/drop.mp3", Sound.class);
+        assetManager.load("data/sounds/duck_falling.mp3", Sound.class);
+        assetManager.load("data/sounds/cuak.mp3", Sound.class);
+        assetManager.load("data/sounds/perfect.mp3", Sound.class);
+        assetManager.load("data/sounds/outOfBullets.mp3", Sound.class);
+        assetManager.load("data/sounds/pauseClick.mp3", Sound.class);
+        assetManager.load("data/sounds/pauseClose.mp3", Sound.class);
+        assetManager.load("data/sounds/duckShot.mp3", Sound.class);
+        assetManager.load("data/sounds/dogShot.mp3", Sound.class);
+
+        assetManager.load("data/sounds/countingDuck0.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck1.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck2.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck3.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck4.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck5.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck6.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck7.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck8.mp3", Sound.class);
+        assetManager.load("data/sounds/countingDuck9.mp3", Sound.class);
+    }
+
+    public static void set() {
+        setSkin();
+        setAtlas();
+        setTextures();
+        setSounds();
+    }
+
+    private static void setSkin() {
         skin = new Skin();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/comic.ttf"));
@@ -140,13 +193,11 @@ public class Assets {
         skin.load(fileHandle);
     }
 
-    private static void loadAtlas() {
-        atlas = new TextureAtlas(Gdx.files.internal("data/splash/pack"));
-        items = new TextureAtlas(Gdx.files.internal("data/items.pack"),
-                Gdx.files.internal("data"));
+    private static void setAtlas() {
+        items = assetManager.get("data/items.pack");
     }
 
-    private static void loadTextures() {
+    private static void setTextures() {
         backgroundRegion = items.findRegion("grass1280");
         backgroundBackRegion = items.findRegion("wallpaper1280");
         dogWalking = new Animation(0.15f,
@@ -250,54 +301,47 @@ public class Assets {
         configButtonDown = new TextureRegion(new Texture(Gdx.files.internal("data/images/config.png")));
     }
 
-    private static void loadSounds() {
-        menuIntro = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/DuckHunt.mp3"));
+    private static void setSounds() {
+        menuIntro = assetManager.get("data/sounds/DuckHunt.mp3");
         menuIntro.setVolume(0.5f);
-        startRound = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/start_round.mp3"));
+        startRound = assetManager.get("data/sounds/start_round.mp3");
         startRound.setVolume(0.5f);
-        endRound = Gdx.audio.newMusic((Gdx.files.internal("data/sounds/end_round.mp3")));
+        endRound = assetManager.get("data/sounds/end_round.mp3");
         endRound.setVolume(0.5f);
-        gameOver1 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver1.mp3"));
+        gameOver1 = assetManager.get("data/sounds/gameOver1.mp3");
         gameOver1.setVolume(0.5f);
-        gameOver2 = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/gameOver2.mp3"));
+        gameOver2 = assetManager.get("data/sounds/gameOver2.mp3");
         gameOver2.setVolume(0.5f);
-        background = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/music/background1.wav"));
+        background = assetManager.get("data/sounds/music/background1.wav");
         background.setVolume(0.5f);
-        dogShotMusic = Gdx.audio.newMusic(Gdx.files.internal("data/sounds/shotTheDog.mp3"));
-        dogShotMusic.setVolume(0.5f);
 
-        shoot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/blast.mp3"));
-        dogBark = Gdx.audio.newSound(Gdx.files.internal("data/sounds/bark.mp3"));
-        miss = Gdx.audio.newSound(Gdx.files.internal("data/sounds/miss.mp3"));
-        dogLaughingSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/laugh.mp3"));
-        duckFoundSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/end_duck_round.mp3"));
-        hitGround = Gdx.audio.newSound(Gdx.files.internal("data/sounds/drop.mp3"));
-        duckFallingSnd = Gdx.audio.newSound(Gdx.files.internal("data/sounds/duck_falling.mp3"));
-        cuak = Gdx.audio.newSound(Gdx.files.internal("data/sounds/cuak.mp3"));
-        perfect = Gdx.audio.newSound(Gdx.files.internal("data/sounds/perfect.mp3"));
-        outOfBullets = Gdx.audio.newSound(Gdx.files.internal("data/sounds/outOfBullets.mp3"));
-        pauseClicked = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pauseClick.mp3"));
-        pauseClosed = Gdx.audio.newSound(Gdx.files.internal("data/sounds/pauseClose.mp3"));
-        duckShot = Gdx.audio.newSound(Gdx.files.internal("data/sounds/duckShot.mp3"));
-        dogShotSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/dogShot.mp3"));
+        shoot = assetManager.get("data/sounds/blast.mp3");
+        dogBark = assetManager.get("data/sounds/bark.mp3");
+        miss = assetManager.get("data/sounds/miss.mp3");
+        dogLaughingSnd = assetManager.get("data/sounds/laugh.mp3");
+        duckFoundSnd = assetManager.get("data/sounds/end_duck_round.mp3");
+        hitGround = assetManager.get("data/sounds/drop.mp3");
+        duckFallingSnd = assetManager.get("data/sounds/duck_falling.mp3");
+        cuak = assetManager.get("data/sounds/cuak.mp3");
+        perfect = assetManager.get("data/sounds/perfect.mp3");
+        outOfBullets = assetManager.get("data/sounds/outOfBullets.mp3");
+        pauseClicked = assetManager.get("data/sounds/pauseClick.mp3");
+        pauseClosed = assetManager.get("data/sounds/pauseClose.mp3");
+        duckShot = assetManager.get("data/sounds/duckShot.mp3");
+        dogShotSound = assetManager.get("data/sounds/dogShot.mp3");
 
         movingDucksArray = new Sound[10];
-        movingDucksArray[0] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck0.mp3"));
-        movingDucksArray[1] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck1.mp3"));
-        movingDucksArray[2] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck2.mp3"));
-        movingDucksArray[3] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck3.mp3"));
-        movingDucksArray[4] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck4.mp3"));
-        movingDucksArray[5] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck5.mp3"));
-        movingDucksArray[6] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck6.mp3"));
-        movingDucksArray[7] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck7.mp3"));
-        movingDucksArray[8] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck8.mp3"));
-        movingDucksArray[9] = Gdx.audio.newSound(Gdx.files.internal("data/sounds/countingDuck9.mp3"));
+        movingDucksArray[0] = assetManager.get("data/sounds/countingDuck0.mp3");
+        movingDucksArray[1] = assetManager.get("data/sounds/countingDuck1.mp3");
+        movingDucksArray[2] = assetManager.get("data/sounds/countingDuck2.mp3");
+        movingDucksArray[3] = assetManager.get("data/sounds/countingDuck3.mp3");
+        movingDucksArray[4] = assetManager.get("data/sounds/countingDuck4.mp3");
+        movingDucksArray[5] = assetManager.get("data/sounds/countingDuck5.mp3");
+        movingDucksArray[6] = assetManager.get("data/sounds/countingDuck6.mp3");
+        movingDucksArray[7] = assetManager.get("data/sounds/countingDuck7.mp3");
+        movingDucksArray[8] = assetManager.get("data/sounds/countingDuck8.mp3");
+        movingDucksArray[9] = assetManager.get("data/sounds/countingDuck9.mp3");
 
-    }
-
-    public static void playSound(Sound sound) {
-        if (Settings.soundEnabled)
-            sound.play(1);
     }
 
     public static void dispose() {
@@ -322,5 +366,7 @@ public class Assets {
         perfect.dispose();
         outOfBullets.dispose();
         for (int i = 0; i < movingDucksArray.length; i++) movingDucksArray[i].dispose();
+
+        assetManager.dispose();
     }
 }
