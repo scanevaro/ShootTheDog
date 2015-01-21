@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -261,10 +260,13 @@ public class MainMenuScreen extends AbstractScreen {
         configDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - configDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - configDialog.getHeight() / 2);
 
         //TODO Change it to CLOSE ICON
-        final TextButton closeDialogButton = new TextButton("Resume", Assets.skin.get("button", TextButton.TextButtonStyle.class));
-        closeDialogButton.setSize(52, 15);
-        closeDialogButton.setPosition(configDialog.getWidth() / 2 - closeDialogButton.getWidth() / 2, 20);
-        closeDialogButton.addListener(new ClickListener() {
+        ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
+        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
+        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        final ImageButton closeButton = new ImageButton(closeStyle);
+        closeButton.setSize(48, 48);
+        closeButton.setPosition(configDialog.getWidth() / 4 - closeButton.getWidth() / 2, 20);
+        closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.dialogOpen = false;
@@ -272,7 +274,7 @@ public class MainMenuScreen extends AbstractScreen {
                 configDialog.remove();
             }
         });
-        configDialog.addActor(closeDialogButton);
+        configDialog.addActor(closeButton);
 
         ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
         muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));

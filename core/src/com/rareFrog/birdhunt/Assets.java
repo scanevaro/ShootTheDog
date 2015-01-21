@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -198,8 +197,8 @@ public class Assets {
     }
 
     private static void setTextures() {
-        backgroundRegion = items.findRegion("grass1280");
-        backgroundBackRegion = items.findRegion("wallpaper1280");
+        backgroundRegion = items.findRegion("grass1440");
+        backgroundBackRegion = items.findRegion("wallpaper1440");
         dogWalking = new Animation(0.15f,
                 (items.findRegion("dogWalking1")),
                 (items.findRegion("dogWalking2")),
@@ -251,8 +250,8 @@ public class Assets {
                 (items.findRegion("uiWhiteDuck")),
                 (items.findRegion("uiRedDuck")));
         dogShot = new Animation(0.2f,
-                new TextureRegion(new Texture(Gdx.files.internal("data/dogShot0.png"))),
-                new TextureRegion(new Texture(Gdx.files.internal("data/dogShot1.png"))));
+                items.findRegion("dogShot0"),
+                items.findRegion("dogShot1"));
 
         duckFallingBlue = items.findRegion("duckFallingBlue");
         duckFallingBlack = items.findRegion("duckFallingBlack");
@@ -297,8 +296,8 @@ public class Assets {
         achievementsButtonDown = items.findRegion("achievements1");
         loginButtonUp = items.findRegion("login0");
         loginButtonDown = items.findRegion("login0");
-        configButtonUp = new TextureRegion(new Texture(Gdx.files.internal("data/images/config.png")));
-        configButtonDown = new TextureRegion(new Texture(Gdx.files.internal("data/images/config.png")));
+        configButtonUp = items.findRegion("config");
+        configButtonDown = items.findRegion("config");
     }
 
     private static void setSounds() {
