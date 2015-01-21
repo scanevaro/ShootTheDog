@@ -106,17 +106,19 @@ public class GameScreen extends AbstractScreen {
         compass.setPosition(0, 128 + 5);
         stage.addActor(compass);
 
-        tweenManager = new TweenManager();
-        Tween.registerAccessor(Sprite.class, new SpriteAccessor());
-        multiplierActor = new Sprite(Assets.soundIconUp);
-        multiplierActor.setSize(64, 64);
-        multiplierActor.setPosition(0, Game.VIRTUAL_HEIGHT - multiplierActor.getHeight());
+        {/**Multiplier Tween*/
+            tweenManager = new TweenManager();
+            Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+            multiplierActor = new Sprite(Assets.soundIconUp);
+            multiplierActor.setSize(64, 64);
+            multiplierActor.setPosition(0, Game.VIRTUAL_HEIGHT - multiplierActor.getHeight());
 
-        Tween.to(multiplierActor, SpriteAccessor.SCALE_XY, 0.6f)
-                .ease(Back.IN)
-                .target(0.9f, 0.9f)
-                .repeatYoyo(-1, 0.0f)
-                .start(tweenManager);
+            Tween.to(multiplierActor, SpriteAccessor.SCALE_XY, 0.6f)
+                    .ease(Back.IN)
+                    .target(0.9f, 0.9f)
+                    .repeatYoyo(-1, 0.0f)
+                    .start(tweenManager);
+        }
     }
 
     private void addListeners() {
@@ -140,7 +142,7 @@ public class GameScreen extends AbstractScreen {
             // case COUNT_DUCKS
             // case NEXT_ROUND
             case GAME_RUNNING:
-                updateRunning(delta);
+                updateRunning();
                 break;
             case GAME_OVER_1:
                 updateGameOver1();
@@ -175,7 +177,7 @@ public class GameScreen extends AbstractScreen {
         }
     }
 
-    private void updateRunning(float deltaTime) {
+    private void updateRunning() {
         switch (world.state) {
             case World.WORLD_STATE_RUNNING:
                 if (!game.dialogOpen && Gdx.input.justTouched()) {
