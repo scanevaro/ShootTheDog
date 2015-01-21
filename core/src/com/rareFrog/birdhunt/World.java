@@ -15,14 +15,6 @@ import java.util.Random;
 @SuppressWarnings("all")
 public class World {
 
-    public interface WorldListener {
-        public void reload();
-
-        public void shoot();
-
-        public void ducks();
-    }
-
     public static final int WORLD_STATE_RUNNING = 0;
     public static final int WORLD_STATE_ROUND_START = 1;
     public static final int WORLD_STATE_ROUND_PAUSE = 2;
@@ -39,7 +31,6 @@ public class World {
     private GameScreen gameScreen;
 
     public final List<Duck> ducks;
-    public final WorldListener listener;
     private WorldRenderer worldRenderer;
     public final Dog dog;
     public final Random rand;
@@ -58,11 +49,10 @@ public class World {
 
     Vector2 touchPoint;
 
-    public World(WorldListener listener, Game game, GameScreen gameScreen, int gameMode) {
+    public World(Game game, GameScreen gameScreen, int gameMode) {
         this.game = game;
         this.gameScreen = gameScreen;
         this.ducks = new ArrayList<Duck>(10);
-        this.listener = listener;
         this.gameMode = gameMode;
         rand = new Random();
         this.touchPoint = new Vector2();

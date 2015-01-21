@@ -1,7 +1,6 @@
 package com.rareFrog.birdhunt;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -31,10 +30,7 @@ public class WorldRenderer extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        Color color = new Color(getColor().r, getColor().g,
-                getColor().b, getColor().a * parentAlpha);
-
-        batch.setColor(color);
+        batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
 
         clearScreen();
 

@@ -1,12 +1,15 @@
 package com.rareFrog.birdhunt.screens;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
+import aurelienribon.tweenengine.equations.Back;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -34,7 +37,6 @@ public class GameScreen extends AbstractScreen {
     private OrthographicCamera guiCam;
     private SpriteBatch batch;
     public World world;
-    private World.WorldListener worldListener;
     private WorldRenderer renderer;
     public static int round;
     public static int shots;
@@ -44,41 +46,26 @@ public class GameScreen extends AbstractScreen {
     private int gameMode;
     public int score, multiplier;
     private Controls controls;
+
+    private Sprite multiplierActor;
+    private TweenManager tweenManager;
     /**
      * Widgets
      */
     private ImageButton pauseButton;
-    private Label compass, multiplierLabel;
-
-    private ShapeRenderer shapeRenderer;
+    private Label compass;
 
     public GameScreen(Game game, int gameMode) {
         controls = new Controls();
         this.game = game;
         this.gameMode = gameMode;
 
-        shapeRenderer = new ShapeRenderer();
-
         round = 1;
         guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
-        worldListener = new World.WorldListener() {
-            @Override
-            public void reload() {
-            }
-
-            @Override
-            public void shoot() {
-                if (Settings.soundEnabled) Assets.shoot.play();
-            }
-
-            @Override
-            public void ducks() {
-            }
-        };
-        world = new World(worldListener, game, this, gameMode);
+        world = new World(game, this, gameMode);
         renderer = new WorldRenderer(batch, world);
         world.setWorldRenderer(renderer);
         world.setStage(stage);
@@ -119,12 +106,17 @@ public class GameScreen extends AbstractScreen {
         compass.setPosition(0, 128 + 5);
         stage.addActor(compass);
 
+        tweenManager = new TweenManager();
+        Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+        multiplierActor = new Sprite(Assets.soundIconUp);
+        multiplierActor.setSize(64, 64);
+        multiplierActor.setPosition(0, Game.VIRTUAL_HEIGHT - multiplierActor.getHeight());
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.fontBig, Color.CYAN);
-        multiplierLabel = new Label("", labelStyle);
-        multiplierLabel.setSize(32, 32);
-        multiplierLabel.setPosition(5, Gdx.graphics.getHeight() - multiplierLabel.getHeight());
-        stage.addActor(multiplierLabel);
+        Tween.to(multiplierActor, SpriteAccessor.SCALE_XY, 0.6f)
+                .ease(Back.IN)
+                .target(0.9f, 0.9f)
+                .repeatYoyo(-1, 0.0f)
+                .start(tweenManager);
     }
 
     private void addListeners() {
@@ -136,9 +128,9 @@ public class GameScreen extends AbstractScreen {
         });
     }
 
-    public void update(float deltaTime) {
-        if (deltaTime > 0.1f)
-            deltaTime = 0.1f;
+    public void update(float delta) {
+        if (delta > 0.1f)
+            delta = 0.1f;
 
         switch (state) {
             case GAME_READY:
@@ -148,7 +140,7 @@ public class GameScreen extends AbstractScreen {
             // case COUNT_DUCKS
             // case NEXT_ROUND
             case GAME_RUNNING:
-                updateRunning(deltaTime);
+                updateRunning(delta);
                 break;
             case GAME_OVER_1:
                 updateGameOver1();
@@ -159,7 +151,8 @@ public class GameScreen extends AbstractScreen {
         }
 
         if (!game.dialogOpen) {
-            world.update(deltaTime);
+            tweenManager.update(delta);
+            world.update(delta);
             stage.act();
         }
     }
@@ -275,6 +268,8 @@ public class GameScreen extends AbstractScreen {
                 break;
         }
 
+        multiplierActor.draw(batch);
+
         batch.end();
         //P for processed, R for raw and C for calibrated
         controls.update(this.game.inputInterface.getRotation()[0]);
@@ -284,7 +279,6 @@ public class GameScreen extends AbstractScreen {
         renderer.setHorizontalPosition(controls.getCalibratedValue() * 4);
         compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
         // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
-        multiplierLabel.setText(String.valueOf(multiplier) + "x");
     }
 
     private void drawUI() {
@@ -449,5 +443,6 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        stage.dispose();
     }
 }
