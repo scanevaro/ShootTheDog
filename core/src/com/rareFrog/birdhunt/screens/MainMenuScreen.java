@@ -265,7 +265,7 @@ public class MainMenuScreen extends AbstractScreen {
         closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
-        closeButton.setPosition(configDialog.getWidth() / 4 - closeButton.getWidth() / 2, 20);
+        closeButton.setPosition(configDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
