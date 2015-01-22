@@ -5,525 +5,616 @@ filter: Linear,Linear
 repeat: none
 clouds
   rotate: false
-  xy: 1, 1080
+  xy: 1, 1087
   size: 1440, 960
   orig: 1440, 960
   offset: 0, 0
   index: -1
 grass1440
   rotate: false
-  xy: 1, 118
+  xy: 1, 125
   size: 1440, 960
   orig: 1440, 960
   offset: 0, 0
   index: -1
 uiScore
   rotate: false
-  xy: 1443, 1795
+  xy: 1443, 1802
   size: 430, 245
   orig: 430, 245
   offset: 0, 0
   index: -1
+aboutIconUp
+  rotate: false
+  xy: 1443, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+backIconUp
+  rotate: false
+  xy: 1875, 1887
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+closeIconUp
+  rotate: false
+  xy: 1443, 1478
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+config
+  rotate: false
+  xy: 1608, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+confirmIconUp
+  rotate: false
+  xy: 1443, 1316
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+crosshairIconUp
+  rotate: false
+  xy: 1608, 1478
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier1
+  rotate: false
+  xy: 1443, 1154
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier10
+  rotate: false
+  xy: 1608, 1316
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier2
+  rotate: false
+  xy: 1443, 992
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier3
+  rotate: false
+  xy: 1608, 1154
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier4
+  rotate: false
+  xy: 1443, 830
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier5
+  rotate: false
+  xy: 1608, 992
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier6
+  rotate: false
+  xy: 1443, 668
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier7
+  rotate: false
+  xy: 1608, 830
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier8
+  rotate: false
+  xy: 1443, 506
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+multiplier9
+  rotate: false
+  xy: 1608, 668
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
 pauseButton
   rotate: false
-  xy: 1443, 1633
+  xy: 1443, 344
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+quitIconUp
+  rotate: false
+  xy: 1608, 506
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 sfxIconDown
   rotate: false
-  xy: 1875, 1880
+  xy: 1443, 182
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 sfxIconUp
   rotate: false
-  xy: 1443, 1471
+  xy: 1608, 344
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 soundIconDown
   rotate: false
-  xy: 1608, 1633
-  size: 163, 160
-  orig: 163, 160
-  offset: 0, 0
-  index: -1
-soundIconUp
-  rotate: false
-  xy: 1443, 1309
+  xy: 1608, 182
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 menuCursor
   rotate: false
-  xy: 1, 1
+  xy: 1, 8
   size: 206, 115
   orig: 206, 115
   offset: 0, 0
   index: -1
 ui0Shots1
   rotate: false
-  xy: 209, 5
+  xy: 209, 12
   size: 205, 111
   orig: 205, 111
   offset: 0, 0
   index: -1
 ui1Shots
   rotate: false
-  xy: 416, 5
+  xy: 416, 12
   size: 205, 111
   orig: 205, 111
   offset: 0, 0
   index: -1
 ui2Shots
   rotate: false
-  xy: 623, 5
+  xy: 623, 12
   size: 205, 111
   orig: 205, 111
   offset: 0, 0
   index: -1
 ui3Shots
   rotate: false
-  xy: 830, 5
+  xy: 830, 12
   size: 205, 111
   orig: 205, 111
   offset: 0, 0
   index: -1
 title
   rotate: false
-  xy: 1037, 20
+  xy: 1037, 27
   size: 192, 96
   orig: 192, 96
   offset: 0, 0
   index: -1
-config
+soundIconUp
   rotate: false
-  xy: 1608, 1503
-  size: 128, 128
-  orig: 128, 128
+  xy: 1773, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+touchIconUp
+  rotate: false
+  xy: 1773, 1478
+  size: 163, 160
+  orig: 163, 160
   offset: 0, 0
   index: -1
 uiYellowDuck
   rotate: false
-  xy: 1773, 1703
+  xy: 1231, 33
   size: 90, 90
   orig: 90, 90
   offset: 0, 0
   index: -1
 play1ButtonDown
   rotate: false
-  xy: 1875, 1860
+  xy: 1443, 162
   size: 160, 18
   orig: 160, 18
   offset: 0, 0
   index: -1
 play1ButtonUp
   rotate: false
-  xy: 1443, 1289
+  xy: 1875, 1867
   size: 160, 18
   orig: 160, 18
   offset: 0, 0
   index: -1
 play2ButtonDown
   rotate: false
-  xy: 1231, 98
+  xy: 1773, 1458
   size: 160, 18
   orig: 160, 18
   offset: 0, 0
   index: -1
 play2ButtonUp
   rotate: false
-  xy: 1875, 1840
+  xy: 1443, 142
   size: 160, 18
   orig: 160, 18
   offset: 0, 0
   index: -1
 uiRedDuck
   rotate: false
-  xy: 1608, 1427
+  xy: 1323, 49
   size: 74, 74
   orig: 74, 74
   offset: 0, 0
   index: -1
 uiWhiteDuck
   rotate: false
-  xy: 1443, 1213
+  xy: 1773, 1382
   size: 74, 74
   orig: 74, 74
   offset: 0, 0
   index: -1
-ui10Ducks
-  rotate: false
-  xy: 1231, 75
-  size: 117, 21
-  orig: 117, 21
-  offset: 0, 0
-  index: -1
-uiDucksRound
-  rotate: false
-  xy: 1875, 1817
-  size: 117, 21
-  orig: 117, 21
-  offset: 0, 0
-  index: -1
-gameMode2
-  rotate: false
-  xy: 1037, 11
-  size: 127, 7
-  orig: 127, 7
-  offset: 0, 0
-  index: -1
-gameMode1
-  rotate: false
-  xy: 1231, 66
-  size: 119, 7
-  orig: 119, 7
-  offset: 0, 0
-  index: -1
 dogFound
   rotate: false
-  xy: 1773, 1648
+  xy: 1875, 1812
   size: 58, 53
   orig: 58, 53
   offset: 0, 0
   index: -1
-dogWalking3
-  rotate: false
-  xy: 1994, 1793
-  size: 53, 45
-  orig: 53, 45
-  offset: 0, 0
-  index: -1
 dog2Ducks
   rotate: false
-  xy: 1608, 1381
+  xy: 1773, 1336
   size: 56, 44
   orig: 56, 44
   offset: 0, 0
   index: -1
 dogWalking2
   rotate: false
-  xy: 1443, 1169
+  xy: 1849, 1414
   size: 58, 42
   orig: 58, 42
   offset: 0, 0
   index: -1
+dogWalking3
+  rotate: false
+  xy: 1935, 1820
+  size: 53, 45
+  orig: 53, 45
+  offset: 0, 0
+  index: -1
 dogWalking1
   rotate: false
-  xy: 1519, 1245
+  xy: 1773, 1292
   size: 55, 42
   orig: 55, 42
   offset: 0, 0
   index: -1
 dogWalking5
   rotate: false
-  xy: 1684, 1457
+  xy: 1773, 1246
   size: 52, 44
   orig: 52, 44
   offset: 0, 0
   index: -1
-dogWalking4
-  rotate: false
-  xy: 1231, 23
-  size: 54, 41
-  orig: 54, 41
-  offset: 0, 0
-  index: -1
 dogJump1
   rotate: false
-  xy: 1608, 1326
+  xy: 1399, 70
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
   index: -1
+dogWalking4
+  rotate: false
+  xy: 1773, 1203
+  size: 54, 41
+  orig: 54, 41
+  offset: 0, 0
+  index: -1
 dogShot0
   rotate: false
-  xy: 1443, 1125
+  xy: 1773, 1159
   size: 47, 42
   orig: 47, 42
   offset: 0, 0
   index: -1
 dogShot1
   rotate: false
-  xy: 1443, 1081
+  xy: 1773, 1115
   size: 47, 42
   orig: 47, 42
   offset: 0, 0
   index: -1
 dog1Duck
   rotate: false
-  xy: 1443, 1037
+  xy: 1773, 1071
   size: 46, 42
   orig: 46, 42
   offset: 0, 0
   index: -1
 dogLaugh1
   rotate: false
-  xy: 1443, 993
+  xy: 1773, 1027
   size: 46, 42
   orig: 46, 42
   offset: 0, 0
   index: -1
 dogLaugh2
   rotate: false
-  xy: 1443, 949
+  xy: 1773, 983
   size: 46, 42
   orig: 46, 42
   offset: 0, 0
   index: -1
 dogJump2
   rotate: false
-  xy: 1287, 25
+  xy: 1990, 1826
   size: 36, 39
   orig: 36, 39
   offset: 0, 0
   index: -1
-duckHitRed
-  rotate: false
-  xy: 1443, 911
-  size: 36, 36
-  orig: 36, 36
-  offset: 0, 0
-  index: -1
-duckHitBlue
-  rotate: false
-  xy: 1443, 874
-  size: 35, 35
-  orig: 35, 35
-  offset: 0, 0
-  index: -1
-duckFlyUpBlack2
-  rotate: false
-  xy: 1443, 839
-  size: 34, 33
-  orig: 34, 33
-  offset: 0, 0
-  index: -1
-duckFlyUpBlue2
-  rotate: false
-  xy: 1443, 804
-  size: 34, 33
-  orig: 34, 33
-  offset: 0, 0
-  index: -1
-duckFlyUpRed2
-  rotate: false
-  xy: 1443, 769
-  size: 34, 33
-  orig: 34, 33
-  offset: 0, 0
-  index: -1
-duckFlyTopBlack2
-  rotate: false
-  xy: 1443, 736
-  size: 34, 31
-  orig: 34, 31
-  offset: 0, 0
-  index: -1
-duckFlyTopRed2
-  rotate: false
-  xy: 1443, 703
-  size: 34, 31
-  orig: 34, 31
-  offset: 0, 0
-  index: -1
 duckFlyRightBlack3
   rotate: false
-  xy: 1519, 1213
+  xy: 1231, 1
   size: 34, 30
   orig: 34, 30
   offset: 0, 0
   index: -1
 duckFlyRightBlue3
   rotate: false
-  xy: 1503, 1181
+  xy: 1267, 1
   size: 34, 30
   orig: 34, 30
   offset: 0, 0
   index: -1
 duckFlyRightRed3
   rotate: false
-  xy: 1443, 671
+  xy: 1303, 1
   size: 34, 30
   orig: 34, 30
   offset: 0, 0
   index: -1
+duckHitRed
+  rotate: false
+  xy: 1605, 144
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+duckHitBlue
+  rotate: false
+  xy: 1773, 946
+  size: 35, 35
+  orig: 35, 35
+  offset: 0, 0
+  index: -1
+duckFlyUpBlack2
+  rotate: false
+  xy: 1643, 147
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
+duckFlyUpBlue2
+  rotate: false
+  xy: 1773, 911
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
+duckFlyUpRed2
+  rotate: false
+  xy: 1679, 147
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
+duckFlyTopBlack2
+  rotate: false
+  xy: 1773, 878
+  size: 34, 31
+  orig: 34, 31
+  offset: 0, 0
+  index: -1
+duckFlyTopRed2
+  rotate: false
+  xy: 1715, 149
+  size: 34, 31
+  orig: 34, 31
+  offset: 0, 0
+  index: -1
 duckFlyUpBlack3
   rotate: false
-  xy: 1738, 1599
+  xy: 1773, 844
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 duckFlyUpBlue3
   rotate: false
-  xy: 1443, 637
+  xy: 1773, 810
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 duckFlyUpRed3
   rotate: false
-  xy: 1738, 1565
+  xy: 1773, 776
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 duckFlyTopBlue1
   rotate: false
-  xy: 1833, 1668
+  xy: 1773, 741
   size: 30, 33
   orig: 30, 33
   offset: 0, 0
   index: -1
 duckHitBlack
   rotate: false
-  xy: 1443, 604
+  xy: 1849, 1381
   size: 33, 31
   orig: 33, 31
   offset: 0, 0
   index: -1
-duckFlyRightBlack1
-  rotate: false
-  xy: 1684, 1429
-  size: 36, 26
-  orig: 36, 26
-  offset: 0, 0
-  index: -1
 duckFlyTopBlack3
   rotate: false
-  xy: 1738, 1530
+  xy: 1773, 706
   size: 29, 33
   orig: 29, 33
   offset: 0, 0
   index: -1
 duckFlyTopBlue3
   rotate: false
-  xy: 1443, 569
+  xy: 1773, 671
   size: 29, 33
   orig: 29, 33
   offset: 0, 0
   index: -1
 duckFlyTopRed3
   rotate: false
-  xy: 1738, 1495
+  xy: 1773, 636
   size: 29, 33
   orig: 29, 33
   offset: 0, 0
   index: -1
 duckFlyTopBlack1
   rotate: false
-  xy: 1576, 1254
+  xy: 1773, 601
   size: 27, 33
   orig: 27, 33
   offset: 0, 0
   index: -1
 duckFlyTopBlue2
   rotate: false
-  xy: 1443, 534
+  xy: 1773, 566
   size: 27, 33
   orig: 27, 33
   offset: 0, 0
   index: -1
 duckFlyTopRed1
   rotate: false
-  xy: 1738, 1460
+  xy: 1773, 531
   size: 27, 33
   orig: 27, 33
   offset: 0, 0
   index: -1
 duckFlyUpBlack1
   rotate: false
-  xy: 1443, 499
+  xy: 1773, 496
   size: 26, 33
   orig: 26, 33
   offset: 0, 0
   index: -1
 duckFlyUpBlue1
   rotate: false
-  xy: 1443, 464
+  xy: 1773, 461
   size: 26, 33
   orig: 26, 33
   offset: 0, 0
   index: -1
 duckFlyUpRed1
   rotate: false
-  xy: 1443, 429
+  xy: 1773, 426
   size: 26, 33
   orig: 26, 33
   offset: 0, 0
   index: -1
 duckFlyRightRed2
   rotate: false
-  xy: 1875, 1793
+  xy: 1399, 46
   size: 37, 22
   orig: 37, 22
   offset: 0, 0
   index: -1
-duckFlyRightBlack2
-  rotate: false
-  xy: 1914, 1793
-  size: 36, 22
-  orig: 36, 22
-  offset: 0, 0
-  index: -1
-presentFlyAway
-  rotate: false
-  xy: 1952, 1804
-  size: 40, 11
-  orig: 40, 11
-  offset: 0, 0
-  index: -1
 duckFallingBlue
   rotate: false
-  xy: 1325, 31
+  xy: 1909, 1423
   size: 22, 33
   orig: 22, 33
   offset: 0, 0
   index: -1
 duckFallingRed
   rotate: false
-  xy: 1443, 394
+  xy: 1773, 391
   size: 22, 33
   orig: 22, 33
   offset: 0, 0
   index: -1
-duckFlyRightBlue1
-  rotate: false
-  xy: 1393, 90
-  size: 36, 26
-  orig: 36, 26
-  offset: 0, 0
-  index: -1
 duckFallingBlack
   rotate: false
-  xy: 1443, 359
+  xy: 1773, 356
   size: 20, 33
   orig: 20, 33
   offset: 0, 0
   index: -1
-duckFlyRightRed1
+duckFlyRightBlack1
   rotate: false
-  xy: 1865, 1765
+  xy: 1443, 114
   size: 36, 26
   orig: 36, 26
   offset: 0, 0
   index: -1
-duckFlyRightBlue2
+duckFlyRightBlue1
   rotate: false
-  xy: 1865, 1741
+  xy: 1481, 114
+  size: 36, 26
+  orig: 36, 26
+  offset: 0, 0
+  index: -1
+duckFlyRightRed1
+  rotate: false
+  xy: 1519, 114
+  size: 36, 26
+  orig: 36, 26
+  offset: 0, 0
+  index: -1
+duckFlyRightBlack2
+  rotate: false
+  xy: 1557, 118
   size: 36, 22
   orig: 36, 22
   offset: 0, 0
   index: -1
+duckFlyRightBlue2
+  rotate: false
+  xy: 1442, 90
+  size: 36, 22
+  orig: 36, 22
+  offset: 0, 0
+  index: -1
+presentFlyAway
+  rotate: false
+  xy: 1037, 14
+  size: 40, 11
+  orig: 40, 11
+  offset: 0, 0
+  index: -1
 presentRound
   rotate: false
-  xy: 1350, 75
+  xy: 1480, 91
   size: 29, 21
   orig: 29, 21
   offset: 0, 0
