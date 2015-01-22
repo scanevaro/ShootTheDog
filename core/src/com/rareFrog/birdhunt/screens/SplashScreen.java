@@ -77,25 +77,33 @@ public class SplashScreen extends AbstractScreen {
 
             if (splashSprite.stateTime < 3f) {
                 /**Delay fade out*/
-                splashSprite.addAction(Actions.delay(3f - splashSprite.stateTime));
-                loadingFrame.addAction(Actions.delay(3f - splashSprite.stateTime));
-                loadingBar.addAction(Actions.delay(3f - splashSprite.stateTime));
-                loadingBarHidden.addAction(Actions.delay(3f - splashSprite.stateTime));
-                loadingBg.addAction(Actions.delay(3f - splashSprite.stateTime));
+                splashSprite.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+                loadingFrame.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+                loadingBar.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+                loadingBarHidden.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+                loadingBg.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+                Timer.schedule(timer = new Timer.Task() {
+                    @Override
+                    public void run() {
+                        game.setScreen(new MainMenuScreen(game));
+                    }
+                }, DURATION - splashSprite.stateTime);
+            } else {
+                /**Fade out actors*/
+//            splashSprite.addAction(Actions.fadeOut(0.5f));
+                loadingFrame.addAction(Actions.fadeOut(0.5f));
+                loadingBar.addAction(Actions.fadeOut(0.5f));
+                loadingBarHidden.addAction(Actions.fadeOut(0.5f));
+                loadingBg.addAction(Actions.fadeOut(0.5f));
+                Timer.schedule(timer = new Timer.Task() {
+                    @Override
+                    public void run() {
+                        game.setScreen(new MainMenuScreen(game));
+                    }
+                }, 0.5f);
             }
 
-            /**Fade out actors*/
-            splashSprite.addAction(Actions.fadeOut(0.5f));
-            loadingFrame.addAction(Actions.fadeOut(0.5f));
-            loadingBar.addAction(Actions.fadeOut(0.5f));
-            loadingBarHidden.addAction(Actions.fadeOut(0.5f));
-            loadingBg.addAction(Actions.fadeOut(0.5f));
-            Timer.schedule(timer = new Timer.Task() {
-                @Override
-                public void run() {
-                    game.setScreen(new MainMenuScreen(game));
-                }
-            }, DURATION - splashSprite.stateTime);
+
             Assets.loaded = true;
         }
 
