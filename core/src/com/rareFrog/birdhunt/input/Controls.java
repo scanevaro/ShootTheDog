@@ -1,4 +1,4 @@
-package com.rareFrog.birdhunt.classes;
+package com.rareFrog.birdhunt.input;
 
 import com.badlogic.gdx.Gdx;
 
