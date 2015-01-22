@@ -45,7 +45,7 @@ public class GameScreen extends AbstractScreen {
     private String scoreString;
     private int gameMode;
     public int score, multiplier;
-    private Controls controls;
+    public Controls controls;
 
     private Sprite multiplierActor;
     private TweenManager tweenManager;
@@ -278,7 +278,7 @@ public class GameScreen extends AbstractScreen {
         if (Gdx.input.isTouched()) {
             controls.calibrate();
         }
-        renderer.setHorizontalPosition(controls.getCalibratedValue() * 4);
+        renderer.setHorizontalPosition(controls.getCalibratedValue());
         compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
         // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
     }
