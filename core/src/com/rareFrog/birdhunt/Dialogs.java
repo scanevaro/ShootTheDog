@@ -67,23 +67,23 @@ public class Dialogs {
         menuDialog.setWidth(256);
         menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
 
-        ImageButton.ImageButtonStyle quitStyle = new ImageButton.ImageButtonStyle();
-        quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
-        final ImageButton quitButton = new ImageButton(quitStyle);
-        quitButton.setSize(64, 64);
-        quitButton.setPosition(menuDialog.getWidth() / 4 - quitButton.getWidth() / 2, 0);
-        quitButton.addListener(new ClickListener() {
+        ImageButton.ImageButtonStyle confirmStyle = new ImageButton.ImageButtonStyle();
+        confirmStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonUp));
+        confirmStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonDown));
+        final ImageButton confirmButton = new ImageButton(confirmStyle);
+        confirmButton.setSize(64, 64);
+        confirmButton.setPosition(menuDialog.getWidth() / 4 - confirmButton.getWidth() / 2, 0);
+        confirmButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
-        menuDialog.addActor(quitButton);
+        menuDialog.addActor(confirmButton);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
-        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(64, 64);
         closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 0);
@@ -112,8 +112,8 @@ public class Dialogs {
         gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
-        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
         closeButton.setPosition(gameDialog.getWidth() / 4 - closeButton.getWidth() / 2, 20);
@@ -154,8 +154,8 @@ public class Dialogs {
         gameDialog.addActor(muteButton);
 
         ImageButton.ImageButtonStyle compassStyle = new ImageButton.ImageButtonStyle();
-        compassStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        compassStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        compassStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.crosshairIconUp));
+        compassStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.crosshairIconDown));
         final ImageButton compassButton = new ImageButton(compassStyle);
         compassButton.setSize(64, 64);
         compassButton.setPosition(gameDialog.getWidth() / 4, gameDialog.getHeight() / 2 - compassButton.getHeight() / 2 + 10);
@@ -167,8 +167,8 @@ public class Dialogs {
         gameDialog.addActor(compassButton);
 
         ImageButton.ImageButtonStyle touchStyle = new ImageButton.ImageButtonStyle();
-        touchStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        touchStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        touchStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.touchButtonUp));
+        touchStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.touchButtonDown));
         final ImageButton touchButton = new ImageButton(touchStyle);
         touchButton.setSize(64, 64);
         touchButton.setPosition(gameDialog.getWidth() / 4 * 3 - touchButton.getWidth(), gameDialog.getHeight() / 2 - touchButton.getHeight() / 2 + 10);
@@ -180,8 +180,8 @@ public class Dialogs {
         gameDialog.addActor(touchButton);
 
         ImageButton.ImageButtonStyle backStyle = new ImageButton.ImageButtonStyle();
-        backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        backStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
+        backStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.backIconDown));
         final ImageButton backButton = new ImageButton(backStyle);
         backButton.setSize(64, 64);
         backButton.setPosition(gameDialog.getWidth() - backButton.getWidth(), gameDialog.getHeight() / 2 - backButton.getHeight() / 2 + 10);

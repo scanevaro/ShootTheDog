@@ -18,9 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rareFrog.birdhunt.*;
-import com.rareFrog.birdhunt.input.Controls;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
+import com.rareFrog.birdhunt.input.Controls;
 import com.rareFrog.birdhunt.input.GameInputProcessor;
 
 public class GameScreen extends AbstractScreen {
@@ -47,7 +47,7 @@ public class GameScreen extends AbstractScreen {
     public int score, multiplier;
     public Controls controls;
 
-    private Sprite multiplierActor;
+    private Sprite multiplierSprite;
     private TweenManager tweenManager;
     /**
      * Widgets
@@ -109,11 +109,11 @@ public class GameScreen extends AbstractScreen {
         {/**Multiplier Tween*/
             tweenManager = new TweenManager();
             Tween.registerAccessor(Sprite.class, new SpriteAccessor());
-            multiplierActor = new Sprite(Assets.soundIconUp);
-            multiplierActor.setSize(64, 64);
-            multiplierActor.setPosition(0, Game.VIRTUAL_HEIGHT - multiplierActor.getHeight());
+            multiplierSprite = new Sprite(Assets.multiplier1);
+            multiplierSprite.setSize(64, 64);
+            multiplierSprite.setPosition(0, Game.VIRTUAL_HEIGHT - multiplierSprite.getHeight());
 
-            Tween.to(multiplierActor, SpriteAccessor.SCALE_XY, 0.6f)
+            Tween.to(multiplierSprite, SpriteAccessor.SCALE_XY, 0.6f)
                     .ease(Back.IN)
                     .target(0.9f, 0.9f)
                     .repeatYoyo(-1, 0.0f)
@@ -270,7 +270,42 @@ public class GameScreen extends AbstractScreen {
                 break;
         }
 
-        multiplierActor.draw(batch);
+        {/**Multiplier*/
+            multiplierSprite.draw(batch);
+            switch (multiplier) {
+                case 1:
+                    multiplierSprite.setRegion(Assets.multiplier1);
+                    break;
+                case 2:
+                    multiplierSprite.setRegion(Assets.multiplier2);
+                    break;
+                case 3:
+                    multiplierSprite.setRegion(Assets.multiplier3);
+                    break;
+                case 4:
+                    multiplierSprite.setRegion(Assets.multiplier4);
+                    break;
+                case 5:
+                    multiplierSprite.setRegion(Assets.multiplier5);
+                    break;
+                case 6:
+                    multiplierSprite.setRegion(Assets.multiplier6);
+                    break;
+                case 7:
+                    multiplierSprite.setRegion(Assets.multiplier7);
+                    break;
+                case 8:
+                    multiplierSprite.setRegion(Assets.multiplier8);
+                    break;
+                case 9:
+                    multiplierSprite.setRegion(Assets.multiplier9);
+                    break;
+                case 10:
+                    multiplierSprite.setRegion(Assets.multiplier10);
+                    break;
+            }
+        }
+
 
         batch.end();
         //P for processed, R for raw and C for calibrated

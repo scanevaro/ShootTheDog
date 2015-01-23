@@ -24,9 +24,23 @@ uiScore
   orig: 430, 245
   offset: 0, 0
   index: -1
+aboutIconDown
+  rotate: false
+  xy: 1443, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
 aboutIconUp
   rotate: false
   xy: 1443, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+backIconDown
+  rotate: false
+  xy: 1875, 1887
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
@@ -38,6 +52,13 @@ backIconUp
   orig: 163, 160
   offset: 0, 0
   index: -1
+closeIconDown
+  rotate: false
+  xy: 1443, 1478
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
 closeIconUp
   rotate: false
   xy: 1443, 1478
@@ -45,9 +66,23 @@ closeIconUp
   orig: 163, 160
   offset: 0, 0
   index: -1
-config
+configIconDown
   rotate: false
   xy: 1608, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+configIconUp
+  rotate: false
+  xy: 1608, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+confirmIconDown
+  rotate: false
+  xy: 1443, 1316
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
@@ -55,6 +90,13 @@ config
 confirmIconUp
   rotate: false
   xy: 1443, 1316
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+crosshairIconDown
+  rotate: false
+  xy: 1608, 1478
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
@@ -143,6 +185,13 @@ pauseButton
   orig: 163, 160
   offset: 0, 0
   index: -1
+quitIconDown
+  rotate: false
+  xy: 1608, 506
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
 quitIconUp
   rotate: false
   xy: 1608, 506
@@ -216,6 +265,13 @@ title
 soundIconUp
   rotate: false
   xy: 1773, 1640
+  size: 163, 160
+  orig: 163, 160
+  offset: 0, 0
+  index: -1
+touchIconDown
+  rotate: false
+  xy: 1773, 1478
   size: 163, 160
   orig: 163, 160
   offset: 0, 0

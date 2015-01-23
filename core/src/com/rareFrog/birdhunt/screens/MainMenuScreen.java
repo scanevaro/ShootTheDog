@@ -71,8 +71,8 @@ public class MainMenuScreen extends AbstractScreen {
 //        muteButton = new ImageButton(muteButtonStyle);
 
 //        ImageButton.ImageButtonStyle closeButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        closeButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeButtonUp));
-//        closeButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeButtonDown));
+//        closeButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+//        closeButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
 //        closeButton = new ImageButton(closeButtonStyle);
 
         ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
@@ -94,8 +94,8 @@ public class MainMenuScreen extends AbstractScreen {
         play2DucksButton = new ImageButton(play2DucksStyle);
 
 //        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonUp));
-//        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutButtonDown));
+//        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconUp));
+//        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
 //        aboutButton = new ImageButton(aboutStyle);
 
 //        ImageButton.ImageButtonStyle libgdxStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
@@ -261,8 +261,8 @@ public class MainMenuScreen extends AbstractScreen {
 
         //TODO Change it to CLOSE ICON
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
-        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
         closeButton.setPosition(configDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
@@ -297,8 +297,8 @@ public class MainMenuScreen extends AbstractScreen {
         configDialog.addActor(muteButton);
 
         ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle();
-        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconUp));
+        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
         final ImageButton aboutButton = new ImageButton(aboutStyle);
         aboutButton.setSize(64, 64);
         aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 - aboutButton.getHeight() / 2);
@@ -310,8 +310,8 @@ public class MainMenuScreen extends AbstractScreen {
         configDialog.addActor(aboutButton);
 
         ImageButton.ImageButtonStyle quitStyle = new ImageButton.ImageButtonStyle();
-        quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonUp));
+        quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonDown));
         final ImageButton quitButton = new ImageButton(quitStyle);
         quitButton.setSize(64, 64);
         quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 - quitButton.getHeight() / 2);

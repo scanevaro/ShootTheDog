@@ -55,23 +55,19 @@ public class Assets {
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
     public static TextureRegion pauseButton;
-    public static TextureRegion soundIconUp;
-    public static TextureRegion soundIconDown;
-    public static TextureRegion play1ButtonUp;
-    public static TextureRegion play1ButtonDown;
-    public static TextureRegion play2ButtonUp;
-    public static TextureRegion play2ButtonDown;
-    public static TextureRegion aboutButtonUp;
-    public static TextureRegion aboutButtonDown;
-    public static TextureRegion closeButtonDown;
-    public static TextureRegion closeButtonUp;
-    public static TextureRegion leaderboardsButtonUp;
-    public static TextureRegion leaderboardsButtonDown;
-    public static TextureRegion achievementsButtonUp;
-    public static TextureRegion achievementsButtonDown;
-    public static TextureRegion loginButtonUp;
-    public static TextureRegion loginButtonDown;
+    public static TextureRegion soundIconUp, soundIconDown;
+    public static TextureRegion play1ButtonUp, play1ButtonDown;
+    public static TextureRegion play2ButtonUp, play2ButtonDown;
+    public static TextureRegion aboutIconUp, aboutIconDown;
+    public static TextureRegion closeIconUp, closeIconDown;
+    public static TextureRegion loginButtonUp, loginButtonDown;
     public static TextureRegion configButtonUp, configButtonDown;
+    public static TextureRegion quitButtonUp, quitButtonDown;
+    public static TextureRegion touchButtonUp, touchButtonDown;
+    public static TextureRegion confirmButtonUp, confirmButtonDown;
+    public static TextureRegion backIconUp, backIconDown;
+    public static TextureRegion crosshairIconUp, crosshairIconDown;
+    public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
 
     public static Animation duckFlyRightBlue;
     public static Animation duckFlyRightBlack;
@@ -286,18 +282,34 @@ public class Assets {
         play1ButtonDown = items.findRegion("play1ButtonDown");
         play2ButtonUp = items.findRegion("play2ButtonUp");
         play2ButtonDown = items.findRegion("play2ButtonDown");
-        aboutButtonUp = items.findRegion("aboutButtonUp");
-        aboutButtonDown = items.findRegion("aboutButtonDown");
-        closeButtonUp = items.findRegion("closeButtonUp");
-        closeButtonDown = items.findRegion("closeButtonDown");
-        leaderboardsButtonUp = items.findRegion("leaderboards0");
-        leaderboardsButtonDown = items.findRegion("leaderboards0");
-        achievementsButtonUp = items.findRegion("achievements0");
-        achievementsButtonDown = items.findRegion("achievements1");
+        aboutIconUp = items.findRegion("aboutIconUp");
+        aboutIconDown = items.findRegion("aboutIconDown");
+        closeIconUp = items.findRegion("closeIconUp");
+        closeIconDown = items.findRegion("closeIconDown");
         loginButtonUp = items.findRegion("login0");
         loginButtonDown = items.findRegion("login0");
-        configButtonUp = items.findRegion("config");
-        configButtonDown = items.findRegion("config");
+        configButtonUp = items.findRegion("configIconUp");
+        configButtonDown = items.findRegion("configIconDown");
+        backIconUp = items.findRegion("backIconUp");
+        backIconDown = items.findRegion("backIconDown");
+        quitButtonUp = items.findRegion("quitIconUp");
+        quitButtonDown = items.findRegion("quitIconDown");
+        touchButtonUp = items.findRegion("touchIconUp");
+        touchButtonDown = items.findRegion("touchIconDown");
+        crosshairIconUp = items.findRegion("crosshairIconUp");
+        crosshairIconDown = items.findRegion("crosshairIconDown");
+        confirmButtonUp = items.findRegion("confirmIconUp");
+        confirmButtonDown = items.findRegion("confirmIconDown");
+        multiplier1 = items.findRegion("multiplier1");
+        multiplier2 = items.findRegion("multiplier2");
+        multiplier3 = items.findRegion("multiplier3");
+        multiplier4 = items.findRegion("multiplier4");
+        multiplier5 = items.findRegion("multiplier5");
+        multiplier6 = items.findRegion("multiplier6");
+        multiplier7 = items.findRegion("multiplier7");
+        multiplier8 = items.findRegion("multiplier8");
+        multiplier9 = items.findRegion("multiplier9");
+        multiplier10 = items.findRegion("multiplier10");
     }
 
     private static void setSounds() {
@@ -340,7 +352,6 @@ public class Assets {
         movingDucksArray[7] = assetManager.get("data/sounds/countingDuck7.mp3");
         movingDucksArray[8] = assetManager.get("data/sounds/countingDuck8.mp3");
         movingDucksArray[9] = assetManager.get("data/sounds/countingDuck9.mp3");
-
     }
 
     public static void dispose() {
