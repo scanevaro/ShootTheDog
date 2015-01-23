@@ -108,7 +108,7 @@ public class Dialogs {
         }
 
         gameDialog = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
-        gameDialog.setWidth(256);
+        gameDialog.setWidth(276);
         gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
@@ -116,7 +116,7 @@ public class Dialogs {
         closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
-        closeButton.setPosition(gameDialog.getWidth() / 4 - closeButton.getWidth() / 2, 20);
+        closeButton.setPosition(gameDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
