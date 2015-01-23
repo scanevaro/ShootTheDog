@@ -74,13 +74,7 @@ public class GameScreen extends AbstractScreen {
         setWidgets();
         addListeners();
 
-
-//        if (Settings.soundEnabled) Assets.startRound.play();
-        if (Settings.soundEnabled) {
-            Assets.startRound.play();
-//            Assets.background.play();
-//            Assets.background.setLooping(true);
-        }
+        if (Settings.soundEnabled) Assets.startRound.play();
 
         state = GAME_READY;
         stateTime = 0;

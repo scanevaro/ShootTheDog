@@ -148,7 +148,7 @@ public class World {
                 dog.position.x = Game.VIRTUAL_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
         }
 
-        if (stateTime <= 1.6f && Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
+        if (stateTime <= 1.6f && Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled) Assets.outOfBullets.play();
 
         if (stateTime > 1.6f) {
             updateDog(deltaTime, ducksHit);
@@ -350,7 +350,7 @@ public class World {
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
                 gameScreen.multiplier = 1;
-            } else if (Gdx.input.justTouched() && GameScreen.shots == 0) Assets.outOfBullets.play();
+            } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled) Assets.outOfBullets.play();
         } else {
             Duck duck = ducks.get(duckCount);
             int shot = 0;
