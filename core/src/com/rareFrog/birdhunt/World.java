@@ -245,10 +245,10 @@ public class World {
                 state = WORLD_STATE_PERFECT_ROUND;
                 if (Settings.soundEnabled) Assets.endRound.play();
 
-                //ducksgiving
+                /**ducksgiving*/
                 if (ducksDead == 10 && dogShot != 10)
                     game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAQ");
-                    //every last one
+                /**every last one*/
                 else if (ducksDead == 10 && dogShot == 10)
                     game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQBA");
 
@@ -366,9 +366,7 @@ public class World {
         } else {
             Duck duck = ducks.get(duckCount);
             int shot = 0;
-            if (Gdx.input.justTouched()
-                    && duck.bounds.contains(touchPoint.x, touchPoint.y)
-                    && duck.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
 
                 //two ducks one stone
@@ -396,8 +394,7 @@ public class World {
                 Assets.outOfBullets.play();
 
             Duck duck2 = ducks.get(duckCount + 1);
-            if (Gdx.input.justTouched() &&
-                    duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() && duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.hit();
 
                 //two ducks one stone
