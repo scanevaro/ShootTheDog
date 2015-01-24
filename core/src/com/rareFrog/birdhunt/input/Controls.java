@@ -28,7 +28,7 @@ public class Controls {
 
     public void update(float value) {
         rawAzimuth = value;//Gdx.input.getAzimuth();
-        azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+        azimuthValue = value;//(float) fir.getOutputSample(rawAzimuth);
     }
 
     public float getCalibratedValue() {
@@ -76,7 +76,7 @@ public class Controls {
     }
 
     public float getRawValue() {
-        return rawAzimuth * 4;
+        return rawAzimuth;
     }
 
     class FIR {

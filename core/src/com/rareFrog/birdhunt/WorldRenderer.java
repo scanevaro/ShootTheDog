@@ -25,7 +25,7 @@ public class WorldRenderer extends Actor {
     }
 
     public void setHorizontalPosition(float x) {
-        this.horizontalPosition = x;
+        this.horizontalPosition = -x;
     }
 
     @Override

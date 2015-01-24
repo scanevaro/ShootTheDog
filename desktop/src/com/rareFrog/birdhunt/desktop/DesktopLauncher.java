@@ -30,6 +30,7 @@ public class DesktopLauncher implements InputInterface {
         if (rotation > 90) {
             increment = false;
         }
-        return new float[]{rotation, rotation, rotation};
+
+        return new float[]{(float) Math.toRadians(rotation), (float) Math.toRadians(rotation), (float) Math.toRadians(rotation)};
     }
 }
