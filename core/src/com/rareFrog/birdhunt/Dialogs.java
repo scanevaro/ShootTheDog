@@ -191,6 +191,7 @@ public class Dialogs {
                 if (Assets.startRound.isPlaying()) Assets.startRound.stop();
                 if (Assets.background.isPlaying()) Assets.background.stop();
                 game.setScreen(new MainMenuScreen(game));
+                game.requestHandler.showInterstitial(true);
             }
         });
         gameDialog.addActor(backButton);
