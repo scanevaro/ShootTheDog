@@ -15,9 +15,9 @@ public class Controls {
     int updateCounter = 0;
 
     public Controls() {
-        double coefficients[] = new double[100];
-        for (int i = 0; i < 100; i++) {
-            coefficients[i] = 0.01f;
+        double coefficients[] = new double[20];
+        for (int i = 0; i < 20; i++) {
+            coefficients[i] = 1f/20f;
         }
         azimuthPrevious = new float[100];
 
@@ -27,7 +27,11 @@ public class Controls {
     public void update(float value) {
         value *= 4;
         rawAzimuth = value;//Gdx.input.getAzimuth();
-        azimuthValue = value;//(float) fir.getOutputSample(rawAzimuth);
+        azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+        if(!calibrated){
+            azimuthCalibration = value;
+            calibrated = true;
+        }
     }
 
     public float getCalibratedValue() {
@@ -48,23 +52,23 @@ public class Controls {
 
     public void calibrate() {
         calibrated = false;
-        azimuthPrevious[azimuthCounter] = azimuthValue;
-        if (azimuthCounter == 99) {
-            azimuthCounter = 0;
-            float tempAverage = 0;
-            for (int i = 0; i < 100; i++) {
-                tempAverage += azimuthPrevious[i];
-            }
-            tempAverage /= 100;
-            System.out.println("temp:" + tempAverage);
-            if (Math.abs(azimuthPreviousAverage - tempAverage) < 20) {
-                azimuthCalibration = (azimuthPreviousAverage + tempAverage) / 2;
-                calibrated = true;
-            }
-            azimuthPreviousAverage = tempAverage;
-            System.out.println("Average: " + tempAverage + " calibration: " + azimuthCalibration);
-        }
-        azimuthCounter++;
+        //azimuthPrevious[azimuthCounter] = azimuthValue;
+        //if (azimuthCounter == 99) {
+        //    azimuthCounter = 0;
+        //    float tempAverage = 0;
+        //    for (int i = 0; i < 100; i++) {
+        //        tempAverage += azimuthPrevious[i];
+        //    }
+        //    tempAverage /= 100;
+        //    System.out.println("temp:" + tempAverage);
+        //    if (Math.abs(azimuthPreviousAverage - tempAverage) < 20) {
+        //        azimuthCalibration = (azimuthPreviousAverage + tempAverage) / 2;
+        //        calibrated = true;
+        //    }
+        //    azimuthPreviousAverage = tempAverage;
+        //    System.out.println("Average: " + tempAverage + " calibration: " + azimuthCalibration);
+        //}
+        //azimuthCounter++;
     }
 
     public void blockingCalibrate() {
