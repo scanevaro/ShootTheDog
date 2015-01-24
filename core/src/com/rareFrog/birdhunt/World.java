@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
+import com.rareFrog.birdhunt.levels.GreenMeadows;
+import com.rareFrog.birdhunt.levels.Level;
 import com.rareFrog.birdhunt.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class World {
 
     Vector2 touchPoint;
 
+    private Level level;
+
     public World(Game game, GameScreen gameScreen, int gameMode) {
         this.game = game;
         this.gameScreen = gameScreen;
@@ -60,7 +64,7 @@ public class World {
         gameScreen.score = 0;
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
-
+        level = new GreenMeadows(null);
         generateRound();
     }
 
@@ -69,7 +73,7 @@ public class World {
 
         for (int i = 0; i < 10; i++) {
             float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
-            Duck duck = new Duck(random, 75f);
+            Duck duck = new Duck(level, random, 75f);
             ducks.add(duck);
         }
 
@@ -471,6 +475,8 @@ public class World {
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
+        worldRenderer.setLevel(this.level);
+        level.setOrthographicCamera(worldRenderer.gameCam);
     }
 
     public void setStage(Stage stage) {

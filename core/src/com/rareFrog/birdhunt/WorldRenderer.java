@@ -107,4 +107,8 @@ public class WorldRenderer extends Actor {
                     batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH - horizontalPosition, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
         }
     }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 }

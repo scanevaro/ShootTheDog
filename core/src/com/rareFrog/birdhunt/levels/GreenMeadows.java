@@ -18,20 +18,19 @@ public class GreenMeadows extends Level {
     private Sprite clouds[] = new Sprite[20];
 
     public GreenMeadows(OrthographicCamera gameCam) {
-        super(gameCam, 0, 0, GREEN_MEADOWS_TILES);
+        super(gameCam, (int) (GREEN_MEADOWS_TILES * Game.VIRTUAL_WIDTH), (int) Game.VIRTUAL_HEIGHT, GREEN_MEADOWS_TILES);
         for (int i = 0; i < GREEN_MEADOWS_TILES; i++) {
             backGround[i] = Assets.backgroundBackRegion;
             foreGround[i] = Assets.backgroundRegion;
         }
         scaleX = Game.VIRTUAL_WIDTH / backGround[0].getRegionWidth();
         scaleY = Game.VIRTUAL_HEIGHT / backGround[0].getRegionHeight();
-        float xPosition = gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horPosition;
         Random random = new Random();
         float scaleMultiplier = 0;
         for (int i = 0; i < clouds.length; i++) {
             clouds[i] = new Sprite(Assets.cloud[i % 3]);
             scaleMultiplier = 0.8f * random.nextFloat() + 0.2f;
-            clouds[i].setPosition(-Game.VIRTUAL_WIDTH + random.nextFloat() * Game.VIRTUAL_WIDTH * 2, random.nextFloat() * Game.VIRTUAL_HEIGHT/2 + Game.VIRTUAL_HEIGHT/2);
+            clouds[i].setPosition(-Game.VIRTUAL_WIDTH + random.nextFloat() * Game.VIRTUAL_WIDTH * 2, random.nextFloat() * Game.VIRTUAL_HEIGHT / 2 + Game.VIRTUAL_HEIGHT / 2);
             clouds[i].setScale(scaleX * scaleMultiplier, scaleY * scaleMultiplier);
 
         }

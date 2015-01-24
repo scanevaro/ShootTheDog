@@ -55,4 +55,8 @@ public abstract class Level {
     public void drawAndUpdateSpecifics(float deltaT, SpriteBatch spriteBatch) {
 
     }
+
+    public void setOrthographicCamera(OrthographicCamera orthographicCamera) {
+        this.gameCam = orthographicCamera;
+    }
 }

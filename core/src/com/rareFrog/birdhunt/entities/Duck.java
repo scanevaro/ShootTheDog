@@ -1,16 +1,13 @@
 package com.rareFrog.birdhunt.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.rareFrog.birdhunt.Game;
-import com.rareFrog.birdhunt.Assets;
-import com.rareFrog.birdhunt.DucksTextures;
-import com.rareFrog.birdhunt.DynamicGameObject;
-import com.rareFrog.birdhunt.Settings;
+import com.rareFrog.birdhunt.*;
+import com.rareFrog.birdhunt.levels.Level;
 
 import java.util.Random;
 
 public class Duck extends DynamicGameObject {
-
+    private Level level;
     public static final int BLUE_DUCK = 0;
     public static final int BLACK_DUCK = 1;
     public static final int RED_DUCK = 2;
@@ -46,8 +43,9 @@ public class Duck extends DynamicGameObject {
     private long soundID;
     private float fallingVolume;
 
-    public Duck(float x, float y) {
+    public Duck(Level level, float x, float y) {
         super(x, y, DUCK_WIDTH, DUCK_HEIGHT);
+        this.level = level;
         state = DUCK_STATE_FLYING;
         velocity.set(duck_velocity_x, duck_velocity_y);
         stateTime = 0;
@@ -137,13 +135,13 @@ public class Duck extends DynamicGameObject {
             else
                 velocity.y = -duck_velocity_y / 2;
 
-        if (position.x < DUCK_WIDTH / 2) {
+        if (position.x < -(level.width / 2)) { //DUCK_WIDTH / 2) {
             position.x = DUCK_WIDTH / 2;
             velocity.x = duck_velocity_y;
             velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
-        if (position.x > Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
+        if (position.x > (level.width / 2)) {//Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
             position.x = Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2;
             velocity.x = -duck_velocity_y;
             velocity.y = duck_velocity_y * rand.nextFloat();
