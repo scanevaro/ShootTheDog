@@ -26,6 +26,7 @@ public class Assets {
 
     public static TextureAtlas items;
 
+    public static TextureRegion cloud[];
     public static TextureRegion backgroundRegion;
     public static TextureRegion backgroundBackRegion;
     public static TextureRegion duckHit;
@@ -249,6 +250,10 @@ public class Assets {
                 items.findRegion("dogShot0"),
                 items.findRegion("dogShot1"));
 
+        cloud = new TextureRegion[3];
+        for (int i = 0; i < 3; i++) {
+            cloud[i] = items.findRegion("cloud" + (i + 1));
+        }
         duckFallingBlue = items.findRegion("duckFallingBlue");
         duckFallingBlack = items.findRegion("duckFallingBlack");
         duckFallingRed = items.findRegion("duckFallingRed");

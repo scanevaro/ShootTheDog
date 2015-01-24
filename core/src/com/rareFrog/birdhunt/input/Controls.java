@@ -1,7 +1,5 @@
 package com.rareFrog.birdhunt.input;
 
-import com.badlogic.gdx.Gdx;
-
 /**
  * Created by Elmar on 1/20/2015.
  */
@@ -27,6 +25,7 @@ public class Controls {
     }
 
     public void update(float value) {
+        value *= 4;
         rawAzimuth = value;//Gdx.input.getAzimuth();
         azimuthValue = value;//(float) fir.getOutputSample(rawAzimuth);
     }

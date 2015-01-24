@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
+import com.rareFrog.birdhunt.levels.GreenMeadows;
+import com.rareFrog.birdhunt.levels.Level;
 
 public class WorldRenderer extends Actor {
 
@@ -16,16 +18,19 @@ public class WorldRenderer extends Actor {
     public OrthographicCamera gameCam;
     private SpriteBatch batch;
     private float horizontalPosition = 0;
+    private Level level;
 
     public WorldRenderer(SpriteBatch batch, World world) {
         this.world = world;
         this.gameCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         this.gameCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
         this.batch = batch;
+        level = new GreenMeadows(gameCam);
     }
 
     public void setHorizontalPosition(float x) {
-        this.horizontalPosition = -x;
+        level.update(-x);
+        horizontalPosition = -x;
     }
 
     @Override
@@ -38,9 +43,8 @@ public class WorldRenderer extends Actor {
 
         batch.setProjectionMatrix(gameCam.combined);
         batch.enableBlending();
-
+        level.drawAndUpdateSpecifics(Gdx.graphics.getDeltaTime(), (SpriteBatch) batch);
         renderBackgroundBack();
-
         if (world.dog.state == Dog.DOG_STATE_WALKING
                 || world.dog.state == Dog.DOG_STATE_FOUND
                 || world.dog.state == Dog.DOG_STATE_JUMPING
@@ -72,27 +76,11 @@ public class WorldRenderer extends Actor {
     }
 
     private void renderBackgroundBack() {
-        batch.draw(Assets.backgroundBackRegion, Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
-        batch.draw(Assets.backgroundBackRegion, gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
-        batch.draw(Assets.backgroundBackRegion, -Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
+        level.drawBackgrounds(batch);
     }
 
     private void renderBackground() {
-        batch.draw(Assets.backgroundRegion, Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
-        batch.draw(Assets.backgroundRegion, gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
-        batch.draw(Assets.backgroundRegion, Game.VIRTUAL_WIDTH - gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horizontalPosition,
-                gameCam.position.y - Game.VIRTUAL_HEIGHT / 2, Game.VIRTUAL_WIDTH,
-                Game.VIRTUAL_HEIGHT);
+        level.drawForeGround(batch);
     }
 
     private void renderObjects() {
