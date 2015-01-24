@@ -134,6 +134,7 @@ public class World {
         updateDog(deltaTime, ducksHit);
         updateDucks(deltaTime);
         checkCollisions();
+        checkStates();
     }
 
     private void stateRoundPause(float deltaTime) {
@@ -325,6 +326,9 @@ public class World {
 
     private void checkCollisions() {
         checkDuckCollision();
+    }
+
+    private void checkStates() {
         checkDuckStates();
     }
 
@@ -421,15 +425,18 @@ public class World {
 
     private void checkDuckStates() {
         if (gameMode == GAME_MODE_1) {
-            if (ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD
-                    || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE)
+            if (ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE) {
                 state = WORLD_STATE_ROUND_PAUSE;
-        } else {
-            if ((ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks
-                    .get(duckCount).state == Duck.DUCK_STATE_GONE)
-                    && (ducks.get(duckCount + 1).state == Duck.DUCK_STATE_DEAD || ducks
-                    .get(duckCount + 1).state == Duck.DUCK_STATE_GONE))
-                state = WORLD_STATE_ROUND_PAUSE;
+
+                if (ducks.get(duckCount).state == Duck.DUCK_STATE_GONE)
+                    gameScreen.multiplier = 1;
+            }
+        } else if ((ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE) &&
+                (ducks.get(duckCount + 1).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount + 1).state == Duck.DUCK_STATE_GONE)) {
+            state = WORLD_STATE_ROUND_PAUSE;
+
+            if (ducks.get(duckCount).state == Duck.DUCK_STATE_GONE || ducks.get(duckCount + 1).state == Duck.DUCK_STATE_GONE)
+                gameScreen.multiplier = 1;
         }
     }
 
