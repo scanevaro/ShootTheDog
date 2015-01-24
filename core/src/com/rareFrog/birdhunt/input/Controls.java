@@ -76,7 +76,7 @@ public class Controls {
     }
 
     public float getRawValue() {
-        return rawAzimuth;
+        return rawAzimuth * 4;
     }
 
     class FIR {

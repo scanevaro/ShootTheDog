@@ -26,24 +26,20 @@ import com.rareFrog.birdhunt.interfaces.ActionResolver;
 import com.rareFrog.birdhunt.interfaces.IActivityRequestHandler;
 import com.rareFrog.birdhunt.interfaces.InputInterface;
 
-public class AndroidLauncher extends AndroidApplication implements SensorEventListener, InputInterface, GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
+public class AndroidLauncher extends AndroidApplication implements GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
     GameHelper gameHelper;
     protected AdView adView;
     private InterstitialAd interstitial;
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
 
     private final int SHOW_ADS = 1;
     private final int HIDE_ADS = 0;
-    private float rotationValue[];
+
+    private SensorFusion sensorFusion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rotationValue = new float[3];
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_FASTEST);
+        sensorFusion = new SensorFusion(this);
 
         RelativeLayout layout = new RelativeLayout(this);
 
@@ -53,7 +49,7 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        View gameView = initializeForView(new Game(this, this, this), config);
+        View gameView = initializeForView(new Game(this, this, sensorFusion.inputInterface), config);
 
         if (gameHelper == null) {
             gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
@@ -205,24 +201,4 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
         intHandler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }
 
-    @Override
-    public float[] getRotation() {
-        return rotationValue;
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE) {
-            return;
-        }
-        rotationValue = event.values;
-        for(int i = 0; i<rotationValue.length; i++){
-            rotationValue[i] = (float) Math.toDegrees(rotationValue[i]);
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
 }
