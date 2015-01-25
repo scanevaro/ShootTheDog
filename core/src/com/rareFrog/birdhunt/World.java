@@ -72,7 +72,8 @@ public class World {
         ducks.clear();
 
         for (int i = 0; i < 10; i++) {
-            float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
+            //float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
+            float random = -(level.width/2) + (rand.nextFloat()*level.width);
             Duck duck = new Duck(level, random, 75f);
             ducks.add(duck);
         }
