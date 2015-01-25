@@ -33,7 +33,7 @@ public class MainMenuScreen extends AbstractScreen {
     //    private ImageButton muteButton;
 //    private ImageButton closeButton;
     private ImageButton play1DuckButton, play2DucksButton, configButton;
-    private Window configDialog;
+    public Window configDialog;
 //    private ImageButton aboutButton;
 //    private ImageButton libgdxButton;
 //    private ImageButton achievementsButton;
@@ -196,6 +196,7 @@ public class MainMenuScreen extends AbstractScreen {
         configButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (game.dialogs.menuDialog != null) game.dialogs.menuDialog.remove();
                 if (Settings.soundEnabled) Assets.pauseClicked.play();
                 stage.addActor(configDialog);
             }
@@ -281,7 +282,7 @@ public class MainMenuScreen extends AbstractScreen {
         muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
-        muteButton.setPosition(20, configDialog.getHeight() / 2 - muteButton.getHeight() / 2);
+        muteButton.setPosition(20, configDialog.getHeight() / 2 - muteButton.getHeight() / 3);
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -301,7 +302,7 @@ public class MainMenuScreen extends AbstractScreen {
         aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
         final ImageButton aboutButton = new ImageButton(aboutStyle);
         aboutButton.setSize(64, 64);
-        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 - aboutButton.getHeight() / 2);
+        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 - aboutButton.getHeight() / 3);
         aboutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -314,10 +315,12 @@ public class MainMenuScreen extends AbstractScreen {
         quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonDown));
         final ImageButton quitButton = new ImageButton(quitStyle);
         quitButton.setSize(64, 64);
-        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 - quitButton.getHeight() / 2);
+        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 - quitButton.getHeight() / 3);
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                configDialog.remove();
+                game.dialogs.buildMenuDialog(game.screen);
             }
         });
         configDialog.addActor(quitButton);
