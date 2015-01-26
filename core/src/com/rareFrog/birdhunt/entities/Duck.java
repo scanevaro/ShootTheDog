@@ -164,7 +164,7 @@ public class Duck extends DynamicGameObject {
 
         if (stateTime > 0.125f) {
             if ((stateTime - lastTimeSaved) >= 0.125f) {
-                if (Settings.soundEnabled) Assets.miss.play();
+                if (Settings.soundEnabled) Assets.miss.play(0.5f);
                 lastTimeSaved = stateTime;
             }
         }
@@ -250,7 +250,7 @@ public class Duck extends DynamicGameObject {
 
         if (stateTime > 0.125f)
             if ((stateTime - lastTimeSaved) >= 0.125f) {
-                if (Settings.soundEnabled) Assets.miss.play();
+                if (Settings.soundEnabled) Assets.miss.play(0.5f);
                 lastTimeSaved = stateTime;
             }
 
