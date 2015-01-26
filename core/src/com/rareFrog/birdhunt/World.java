@@ -10,6 +10,7 @@ import com.rareFrog.birdhunt.levels.GreenMeadows;
 import com.rareFrog.birdhunt.levels.Level;
 import com.rareFrog.birdhunt.screens.GameScreen;
 import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
+import com.rareFrog.birdhunt.spriteobjects.Viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
-    //    public Viewmodel viewmodel;
+        public Viewmodel viewmodel;
     public ArrayList<BulletCasing> bulletCasings;
 
     public int state;
@@ -68,7 +69,7 @@ public class World {
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
         bulletCasings = new ArrayList<BulletCasing>();
-//        viewmodel = new Viewmodel();
+        viewmodel = new Viewmodel();
 
         level = new GreenMeadows(null);
         generateRound();

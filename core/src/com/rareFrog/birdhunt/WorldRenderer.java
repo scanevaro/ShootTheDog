@@ -60,8 +60,8 @@ public class WorldRenderer extends Actor {
     }
 
     private void renderSpriteObjects(SpriteBatch batch) {
-//        world.viewmodel.render(batch);
-        for(BulletCasing b : world.bulletCasings){
+        world.viewmodel.render(batch);
+        for (BulletCasing b : world.bulletCasings) {
             b.render(batch);
         }
     }
