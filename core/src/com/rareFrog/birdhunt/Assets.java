@@ -79,6 +79,7 @@ public class Assets {
     public static Animation duckFlyUpBlue;
     public static Animation duckFlyUpBlack;
     public static Animation duckFlyUpRed;
+    public static Animation birdFlyRightYellow;
     public static Animation dogWalking;
     public static Animation dogJumping;
     public static Animation dogLaughing;
@@ -203,8 +204,6 @@ public class Assets {
                 (items.findRegion("cart3")),
                 (items.findRegion("cart4")),
                 (items.findRegion("cart5")));
-//        bulletCasing.setPlayMode(Animation.PlayMode.LOOP);
-//        System.out.println(bulletCasing);
         dogWalking = new Animation(0.15f,
                 (items.findRegion("dogWalking1")),
                 (items.findRegion("dogWalking2")),
@@ -258,6 +257,10 @@ public class Assets {
         dogShot = new Animation(0.2f,
                 items.findRegion("dogShot0"),
                 items.findRegion("dogShot1"));
+        birdFlyRightYellow = new Animation(0.2f,
+                items.findRegion("bird11"),
+                items.findRegion("bird12"),
+                items.findRegion("bird13"));
 
         cloud = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
