@@ -56,6 +56,14 @@ public class WorldRenderer extends Actor {
             renderObjects();
             renderBackground();
         }
+        renderSpriteObjects((SpriteBatch) batch);
+    }
+
+    private void renderSpriteObjects(SpriteBatch batch) {
+        world.viewmodel.render(batch);
+        for(BulletCasing b : world.bulletCasings){
+            b.render(batch);
+        }
     }
 
     // also draws the background color
@@ -87,9 +95,6 @@ public class WorldRenderer extends Actor {
     private void renderObjects() {
         renderDog();
         renderDucks();
-        for(BulletCasing b : world.bulletCasings){
-            b.render(batch);
-        }
     }
 
     private void renderDog() {

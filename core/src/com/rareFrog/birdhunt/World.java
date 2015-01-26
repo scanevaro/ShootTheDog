@@ -10,6 +10,7 @@ import com.rareFrog.birdhunt.levels.GreenMeadows;
 import com.rareFrog.birdhunt.levels.Level;
 import com.rareFrog.birdhunt.screens.GameScreen;
 import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
+import com.rareFrog.birdhunt.spriteobjects.Viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
+    public Viewmodel viewmodel;
     public ArrayList<BulletCasing> bulletCasings;
 
     public int state;
@@ -67,6 +69,7 @@ public class World {
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
         bulletCasings = new ArrayList<BulletCasing>();
+        viewmodel = new Viewmodel();
 
         level = new GreenMeadows(null);
         generateRound();
@@ -316,12 +319,14 @@ public class World {
 
                 dogShot++;
                 GameScreen.shots--;
+                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0) {
                 if (Settings.soundEnabled) Assets.outOfBullets.play();
             } else if (Gdx.input.justTouched() && GameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
                 GameScreen.shots--;
                 if (Settings.soundEnabled) Assets.shoot.play();
+                bulletCasings.add(new BulletCasing());
             }
         }
     }
@@ -364,11 +369,9 @@ public class World {
                             gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                             break;
                     }
-                    bulletCasings.add(new BulletCasing());
                 } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                     duck.state = Duck.DUCK_STATE_FLY_AWAY;
                     gameScreen.multiplier = 1;
-                    bulletCasings.add(new BulletCasing());
                 } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled)
                     Assets.outOfBullets.play();
             }
@@ -395,12 +398,10 @@ public class World {
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                         break;
                 }
-                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
                 gameScreen.multiplier = 1;
-                bulletCasings.add(new BulletCasing());
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0)
                 Assets.outOfBullets.play();
 
@@ -427,12 +428,10 @@ public class World {
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                         break;
                 }
-                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.state = Duck.DUCK_STATE_FLY_AWAY;
                 gameScreen.multiplier = 1;
-                bulletCasings.add(new BulletCasing());
             }
         }
     }

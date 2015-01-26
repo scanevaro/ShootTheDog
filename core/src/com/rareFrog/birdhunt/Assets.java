@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -25,6 +26,8 @@ public class Assets {
     public static Skin skin;
 
     public static TextureAtlas items;
+
+    public static Texture viewmodel;
 
     public static TextureRegion cloud[];
     public static TextureRegion backgroundRegion;
@@ -198,6 +201,7 @@ public class Assets {
     private static void setTextures() {
         backgroundRegion = items.findRegion("grass1440");
         backgroundBackRegion = items.findRegion("wallpaper1440");
+        viewmodel = new Texture(Gdx.files.internal("data/images/viewmodel.png"));
         bulletCasing = new Animation(0.5f,
                 (items.findRegion("cart1")),
                 (items.findRegion("cart2")),

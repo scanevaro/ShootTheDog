@@ -22,6 +22,7 @@ import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.input.Controls;
 import com.rareFrog.birdhunt.input.GameInputProcessor;
+import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
 
 public class GameScreen extends AbstractScreen {
 
@@ -178,6 +179,7 @@ public class GameScreen extends AbstractScreen {
                     if (shots > 0) {
                         if (Settings.soundEnabled) Assets.shoot.play();
                         shots--;
+                        world.bulletCasings.add(new BulletCasing());
                     }
                 }
                 break;

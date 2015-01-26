@@ -25,8 +25,6 @@ public class BulletCasing {
     public boolean removed;
 
     public BulletCasing() {
-        x = 300;
-        y = 100;
         r = new Random();
         animation = Assets.bulletCasing;
         removed = false;
@@ -56,8 +54,8 @@ public class BulletCasing {
 
     public void reset() {
         x = 200;
-        y = 200;
-        vForce = 2F + r.nextFloat() * 1.5F;
-        hForce = 1F + r.nextFloat() * 2F;
+        y = 50;
+        vForce = 1F + r.nextFloat() * 2.5F;
+        hForce = 1F + r.nextFloat() * 5F;
     }
 }
