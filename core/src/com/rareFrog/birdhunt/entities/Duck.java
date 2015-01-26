@@ -11,6 +11,7 @@ public class Duck extends DynamicGameObject {
     public static final int BLUE_DUCK = 0;
     public static final int BLACK_DUCK = 1;
     public static final int RED_DUCK = 2;
+    public static final int YELLOW_BIRD = 3;
 
     public static final int DUCK_STATE_FLYING = 0;
     public static final int DUCK_STATE_HIT = 1;
@@ -56,12 +57,13 @@ public class Duck extends DynamicGameObject {
         rand = new Random();
         uiTexture = Assets.uiWhiteDuck;
 
-        if (rand.nextFloat() > 0.5f)
-            type = BLUE_DUCK;
-        else if (rand.nextFloat() > 0.5f)
-            type = BLACK_DUCK;
-        else
-            type = RED_DUCK;
+        type = YELLOW_BIRD;
+//        if (rand.nextFloat() > 0.5f)
+//            type = BLUE_DUCK;
+//        else if (rand.nextFloat() > 0.5f)
+//            type = BLACK_DUCK;
+//        else
+//            type = RED_DUCK;
     }
 
     public void update(float deltaTime) {
