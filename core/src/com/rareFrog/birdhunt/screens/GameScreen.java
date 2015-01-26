@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -54,7 +53,7 @@ public class GameScreen extends AbstractScreen {
      * Widgets
      */
     private ImageButton pauseButton;
-    private Label compass;
+//    private Label compass;
 
     public GameScreen(Game game, int gameMode) {
         controls = new Controls();
@@ -97,9 +96,9 @@ public class GameScreen extends AbstractScreen {
         pauseButton.setPosition(Game.VIRTUAL_WIDTH - pauseButton.getWidth() - 5, Game.VIRTUAL_HEIGHT - pauseButton.getHeight() - 5);
         stage.addActor(pauseButton);
 
-        compass = new Label("", Assets.skin);
-        compass.setPosition(0, 128 + 5);
-        stage.addActor(compass);
+//        compass = new Label("", Assets.skin);
+//        compass.setPosition(0, 128 + 5);
+//        stage.addActor(compass);
 
         {/**Multiplier Tween*/
             tweenManager = new TweenManager();
@@ -307,7 +306,7 @@ public class GameScreen extends AbstractScreen {
         //P for processed, R for raw and C for calibrated
         controls.update((float) Math.toDegrees(this.game.inputInterface.getRotation()[0]));
         renderer.setHorizontalPosition(controls.getCalibratedValue());
-        compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
+//        compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
         // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
     }
 

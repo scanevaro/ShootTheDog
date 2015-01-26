@@ -67,10 +67,8 @@ public class Assets {
     public static TextureRegion loginButtonUp, loginButtonDown;
     public static TextureRegion configButtonUp, configButtonDown;
     public static TextureRegion quitButtonUp, quitButtonDown;
-    public static TextureRegion touchButtonUp, touchButtonDown;
     public static TextureRegion confirmButtonUp, confirmButtonDown;
     public static TextureRegion backIconUp, backIconDown;
-    public static TextureRegion crosshairIconUp, crosshairIconDown;
     public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
 
     public static Animation duckFlyRightBlue;
@@ -315,10 +313,6 @@ public class Assets {
         backIconDown = items.findRegion("backIconDown");
         quitButtonUp = items.findRegion("quitIconUp");
         quitButtonDown = items.findRegion("quitIconDown");
-        touchButtonUp = items.findRegion("touchIconUp");
-        touchButtonDown = items.findRegion("touchIconDown");
-        crosshairIconUp = items.findRegion("crosshairIconUp");
-        crosshairIconDown = items.findRegion("crosshairIconDown");
         confirmButtonUp = items.findRegion("confirmIconUp");
         confirmButtonDown = items.findRegion("confirmIconDown");
         multiplier1 = items.findRegion("multiplier1");

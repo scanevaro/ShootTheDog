@@ -115,7 +115,7 @@ public class Dialogs {
         }
 
         gameDialog = new Window("Pause", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
-        gameDialog.setWidth(276);
+        gameDialog.setWidth(160);
         gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
@@ -139,7 +139,7 @@ public class Dialogs {
         muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
-        muteButton.setPosition(5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 10);
+        muteButton.setPosition(gameDialog.getWidth() / 2 - muteButton.getWidth() - 5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 10);
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -160,39 +160,13 @@ public class Dialogs {
         });
         gameDialog.addActor(muteButton);
 
-        ImageButton.ImageButtonStyle compassStyle = new ImageButton.ImageButtonStyle();
-        compassStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.crosshairIconUp));
-        compassStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.crosshairIconDown));
-        final ImageButton compassButton = new ImageButton(compassStyle);
-        compassButton.setSize(64, 64);
-        compassButton.setPosition(gameDialog.getWidth() / 4, gameDialog.getHeight() / 2 - compassButton.getHeight() / 2 + 10);
-        compassButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-            }
-        });
-        gameDialog.addActor(compassButton);
-
-        ImageButton.ImageButtonStyle touchStyle = new ImageButton.ImageButtonStyle();
-        touchStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.touchButtonUp));
-        touchStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.touchButtonDown));
-        final ImageButton touchButton = new ImageButton(touchStyle);
-        touchButton.setSize(64, 64);
-        touchButton.setPosition(gameDialog.getWidth() / 4 * 3 - touchButton.getWidth(), gameDialog.getHeight() / 2 - touchButton.getHeight() / 2 + 10);
-        touchButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-            }
-        });
-        gameDialog.addActor(touchButton);
-
-        ImageButton.ImageButtonStyle backStyle = new ImageButton.ImageButtonStyle();
-        backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
-        backStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.backIconDown));
-        final ImageButton backButton = new ImageButton(backStyle);
-        backButton.setSize(64, 64);
-        backButton.setPosition(gameDialog.getWidth() - backButton.getWidth(), gameDialog.getHeight() / 2 - backButton.getHeight() / 2 + 10);
-        backButton.addListener(new ClickListener() {
+        ImageButton.ImageButtonStyle homeStyle = new ImageButton.ImageButtonStyle();
+        homeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
+        homeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.backIconDown));
+        final ImageButton homeButton = new ImageButton(homeStyle);
+        homeButton.setSize(64, 64);
+        homeButton.setPosition(gameDialog.getWidth() / 2 + 5, gameDialog.getHeight() / 2 - homeButton.getHeight() / 2 + 10);
+        homeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (Assets.startRound.isPlaying()) Assets.startRound.stop();
@@ -201,7 +175,7 @@ public class Dialogs {
                 game.requestHandler.showInterstitial(true);
             }
         });
-        gameDialog.addActor(backButton);
+        gameDialog.addActor(homeButton);
 
         screen.stage.addActor(gameDialog);
     }
