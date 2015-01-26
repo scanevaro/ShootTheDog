@@ -292,6 +292,8 @@ public class MainMenuScreen extends AbstractScreen {
                     Settings.soundEnabled = true;
                     muteButton.setChecked(false);
                 }
+
+                if (!Settings.soundEnabled && Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
         });
         configDialog.addActor(muteButton);
