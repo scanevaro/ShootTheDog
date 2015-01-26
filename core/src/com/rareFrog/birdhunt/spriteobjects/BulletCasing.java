@@ -31,11 +31,12 @@ public class BulletCasing {
     }
 
     public void render(SpriteBatch batch){
-        texture = animation.getKeyFrame(stateTime);
+        if(texture == null) texture = animation.getKeyFrame(0);
         batch.draw(texture, x, y, WIDTH, HEIGHT);
     }
 
     public void update(float delta){
+        texture = animation.getKeyFrame(stateTime);
         stateTime += delta;
         x += hForce;
         y += vForce;

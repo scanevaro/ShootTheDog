@@ -199,11 +199,11 @@ public class Assets {
         backgroundRegion = items.findRegion("grass1440");
         backgroundBackRegion = items.findRegion("wallpaper1440");
         bulletCasing = new Animation(0.5f,
-                (items.findRegion("cart1")),
-                (items.findRegion("cart2")),
-                (items.findRegion("cart3")),
-                (items.findRegion("cart4")),
-                (items.findRegion("cart5")));
+                (items.findRegion("cart_1")),
+                (items.findRegion("cart_2")),
+                (items.findRegion("cart_3")),
+                (items.findRegion("cart_4")),
+                (items.findRegion("cart_5")));
         bulletCasing.setPlayMode(Animation.PlayMode.LOOP);
         System.out.println(bulletCasing);
         dogWalking = new Animation(0.15f,
