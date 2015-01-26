@@ -385,19 +385,17 @@ public class World {
                     case 2:
                         gameScreen.multiplier++;
                         gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                     case 1:
                         gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                     case 0:
                         if (gameScreen.multiplier != 1)
                             gameScreen.multiplier--;
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                 }
+                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
@@ -419,19 +417,17 @@ public class World {
                     case 2:
                         gameScreen.multiplier++;
                         gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                     case 1:
                         gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                     case 0:
                         if (gameScreen.multiplier != 1)
                             gameScreen.multiplier--;
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
-                        bulletCasings.add(new BulletCasing());
                         break;
                 }
+                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.state = Duck.DUCK_STATE_FLY_AWAY;

@@ -14,7 +14,7 @@ public class BulletCasing {
 
     private float vForce, hForce;
     private float stateTime = 0;
-    private final float gForce = 0.00982F;
+    private final float gForce = 0.07F;
     private TextureRegion texture;
     private Animation animation;
     private Random r;
@@ -57,7 +57,7 @@ public class BulletCasing {
     public void reset() {
         x = 200;
         y = 200;
-        vForce = 0.5F + r.nextFloat() * 0.4F;
-        hForce = 1F + r.nextFloat() * 0.5F;
+        vForce = 2F + r.nextFloat() * 1.5F;
+        hForce = 1F + r.nextFloat() * 2F;
     }
 }
