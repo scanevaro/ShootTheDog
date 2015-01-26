@@ -38,12 +38,17 @@ public class GreenMeadows extends Level {
 
     @Override
     public void drawAndUpdateSpecifics(float deltaT, SpriteBatch spriteBatch) {
+
         for (int i = 0; i < clouds.length; i++) {
+            clouds[i].setX(clouds[i].getX() - horPosition);
+            clouds[i].setX(clouds[i].getX() + clouds[i].getScaleX());
             clouds[i].draw(spriteBatch);
-            clouds[i].setX(clouds[i].getX() + clouds[i].getScaleX() * 2);
+            clouds[i].setX(clouds[i].getX() + horPosition);
+
             if (clouds[i].getX() > Game.VIRTUAL_WIDTH) {
-                clouds[i].setX(-Game.VIRTUAL_WIDTH - (clouds[i].getWidth() * clouds[i].getScaleX()));
+                clouds[i].setX(horPosition - Game.VIRTUAL_WIDTH - (clouds[i].getWidth() * clouds[i].getScaleX()));
             }
         }
+
     }
 }
