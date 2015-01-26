@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.screens.GameScreen;
+import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
+    public BulletCasing bulletCase;
 
     public int state;
     public int gameMode;
@@ -60,6 +62,7 @@ public class World {
         gameScreen.score = 0;
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
+        bulletCase = new BulletCasing();
 
         generateRound();
     }
@@ -114,7 +117,7 @@ public class World {
                 stateGameOver2(deltaTime);
                 break;
         }
-
+        bulletCase.update(deltaTime);
         stateTime += deltaTime;
     }
 

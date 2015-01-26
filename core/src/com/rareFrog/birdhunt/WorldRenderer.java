@@ -98,6 +98,7 @@ public class WorldRenderer extends Actor {
     private void renderObjects() {
         renderDog();
         renderDucks();
+        world.bulletCase.render(batch);
     }
 
     private void renderDog() {
