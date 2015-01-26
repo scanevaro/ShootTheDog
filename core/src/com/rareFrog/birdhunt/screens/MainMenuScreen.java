@@ -31,14 +31,13 @@ public class MainMenuScreen extends AbstractScreen {
     private Image menuBackground;
     private Image titleImage;
     //    private ImageButton muteButton;
-//    private ImageButton closeButton;
-    private ImageButton play1DuckButton, play2DucksButton, configButton;
+    //    private ImageButton closeButton;
+    private ImageButton play1DuckButton, play2DucksButton, configButton, loginButton;
     public Window configDialog;
-//    private ImageButton aboutButton;
-//    private ImageButton libgdxButton;
-//    private ImageButton achievementsButton;
-//    private ImageButton leaderboardsButton;
-//    private ImageButton loginButton;
+    //    private ImageButton aboutButton;
+    //    private ImageButton libgdxButton;
+    //    private ImageButton achievementsButton;
+    //    private ImageButton leaderboardsButton;
 
     public MainMenuScreen(Game game) {
         this.game = game;
@@ -112,10 +111,10 @@ public class MainMenuScreen extends AbstractScreen {
 //        achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonDown));
 //        achievementsButton = new ImageButton(achievementsStyle);
 
-//        ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
-//        loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
-//        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
-//        loginButton = new ImageButton(loginStyle);
+        ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
+        loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
+        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
+        loginButton = new ImageButton(loginStyle);
 
         ImageButton.ImageButtonStyle configStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         configStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.configButtonUp));
@@ -187,12 +186,12 @@ public class MainMenuScreen extends AbstractScreen {
 //                game.actionResolver.getAchievementsGPGS();
 //            }
 //        });
-//        loginButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                game.actionResolver.loginGPGS();
-//            }
-//        });
+        loginButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.actionResolver.loginGPGS();
+            }
+        });
         configButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -242,17 +241,17 @@ public class MainMenuScreen extends AbstractScreen {
 //        leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), closeButton.getWidth() + 5);
 //        stage.addActor(leaderboardsButton);
 //
-//        loginButton.setSize(64, 64);
-//        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5 + loginButton.getHeight());
-//        stage.addActor(loginButton);
+        configButton.setSize(32, 32);
+        configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth(), 2);
+        stage.addActor(configButton);
+
+        loginButton.setSize(32, 32);
+        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth() - configButton.getWidth() - 2, 2);
+        stage.addActor(loginButton);
 //
 //        achievementsButton.setSize(64, 64);
 //        achievementsButton.setPosition(Game.VIRTUAL_WIDTH - achievementsButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5/* + loginButton.getWidth() + 5*/);
 //        stage.addActor(achievementsButton);
-
-        configButton.setSize(32, 32);
-        configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth(), 2);
-        stage.addActor(configButton);
     }
 
     private void prepareConfigDialog() {

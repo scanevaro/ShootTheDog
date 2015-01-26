@@ -291,8 +291,8 @@ public class Assets {
         aboutIconDown = items.findRegion("aboutIconDown");
         closeIconUp = items.findRegion("closeIconUp");
         closeIconDown = items.findRegion("closeIconDown");
-        loginButtonUp = items.findRegion("login0");
-        loginButtonDown = items.findRegion("login0");
+        loginButtonUp = items.findRegion("loginButtonUp");
+        loginButtonDown = items.findRegion("loginButtonDown");
         configButtonUp = items.findRegion("configIconUp");
         configButtonDown = items.findRegion("configIconDown");
         backIconUp = items.findRegion("backIconUp");
