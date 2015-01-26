@@ -136,7 +136,7 @@ public class SplashScreen extends AbstractScreen {
         TextureAtlas atlas = Assets.assetManager.get("data/loading.pack");
 
         loadingFrame = new Image(atlas.findRegion("loading-frame"));
-        loadingFrame.setSize(512, 55);
+        loadingFrame.setSize(Game.VIRTUAL_WIDTH, 55);
         loadingFrame.setPosition(0, 0);
         loadingBarHidden = new Image(atlas.findRegion("loading-bar-hidden"));
         loadingBarHidden.setPosition(0, 1.1f);

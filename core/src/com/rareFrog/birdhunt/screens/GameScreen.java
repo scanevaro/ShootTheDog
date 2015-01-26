@@ -59,7 +59,7 @@ public class GameScreen extends AbstractScreen {
         controls = new Controls();
         this.game = game;
         this.gameMode = gameMode;
-
+        controls.calibrate();
         round = 1;
         guiCam = new OrthographicCamera(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
         guiCam.position.set(Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT / 2, 0);
@@ -304,10 +304,7 @@ public class GameScreen extends AbstractScreen {
         batch.end();
         //P for processed, R for raw and C for calibrated
         controls.update((float) Math.toDegrees(this.game.inputInterface.getRotation()[0]));
-        if (Gdx.input.isTouched()) {
-            controls.calibrate();
-        }
-        renderer.setHorizontalPosition(controls.getRawValue());
+        renderer.setHorizontalPosition(controls.getCalibratedValue());
         compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
         // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
     }

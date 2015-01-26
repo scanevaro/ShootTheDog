@@ -24,10 +24,10 @@ public class DesktopLauncher implements InputInterface {
             rotation += 0.25f;
         else
             rotation -= 0.25f;
-        if (rotation < -90) {
+        if (rotation < -30) {
             increment = true;
         }
-        if (rotation > 90) {
+        if (rotation > 30) {
             increment = false;
         }
 

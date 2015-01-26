@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -56,7 +57,9 @@ public class Dialogs {
                 gameDialog.remove();
     }
 
-    private void buildMenuDialog(final AbstractScreen screen) {
+    public void buildMenuDialog(final AbstractScreen screen) {
+        if (((MainMenuScreen) screen).configDialog != null) ((MainMenuScreen) screen).configDialog.remove();
+
         if (menuDialog != null) {
             menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
             screen.stage.addActor(menuDialog);
@@ -66,6 +69,10 @@ public class Dialogs {
         menuDialog = new Window("Quit", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
         menuDialog.setWidth(256);
         menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
+
+        Label label = new Label("Are you sure you want to Quit?", Assets.skin);
+        label.setPosition(25, menuDialog.getHeight() / 2 + 10);
+        menuDialog.addActor(label);
 
         ImageButton.ImageButtonStyle confirmStyle = new ImageButton.ImageButtonStyle();
         confirmStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonUp));
@@ -188,7 +195,10 @@ public class Dialogs {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (Assets.startRound.isPlaying()) Assets.startRound.stop();
+                if (Assets.background.isPlaying()) Assets.background.stop();
                 game.setScreen(new MainMenuScreen(game));
+                game.requestHandler.showInterstitial(true);
             }
         });
         gameDialog.addActor(backButton);

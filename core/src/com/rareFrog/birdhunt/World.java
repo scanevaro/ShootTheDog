@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
+import com.rareFrog.birdhunt.levels.GreenMeadows;
+import com.rareFrog.birdhunt.levels.Level;
 import com.rareFrog.birdhunt.screens.GameScreen;
 import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
 
@@ -51,6 +53,8 @@ public class World {
 
     Vector2 touchPoint;
 
+    private Level level;
+
     public World(Game game, GameScreen gameScreen, int gameMode) {
         this.game = game;
         this.gameScreen = gameScreen;
@@ -64,6 +68,7 @@ public class World {
         dog = new Dog(0, 60, this);
         bulletCase = new BulletCasing();
 
+        level = new GreenMeadows(null);
         generateRound();
     }
 
@@ -71,8 +76,9 @@ public class World {
         ducks.clear();
 
         for (int i = 0; i < 10; i++) {
-            float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
-            Duck duck = new Duck(random, 75f);
+            //float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
+            float random = -(level.width / 2) + (rand.nextFloat() * (level.width));
+            Duck duck = new Duck(level, random, 75f);
             ducks.add(duck);
         }
 
@@ -87,7 +93,7 @@ public class World {
     }
 
     public void update(float deltaTime) {
-        float touchX = ((Gdx.input.getX() - ((Gdx.graphics.getWidth() - stage.getViewport().getScreenWidth()) / 2)) * (stage.getViewport().getWorldWidth() / stage.getViewport().getScreenWidth())) - gameScreen.controls.getRawValue();
+        float touchX = ((Gdx.input.getX() - ((Gdx.graphics.getWidth() - stage.getViewport().getScreenWidth()) / 2)) * (stage.getViewport().getWorldWidth() / stage.getViewport().getScreenWidth())) - gameScreen.controls.getCalibratedValue();
         float touchY = (((Gdx.graphics.getHeight() - Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
         touchPoint.x = touchX;
         touchPoint.y = touchY;
@@ -137,6 +143,7 @@ public class World {
         updateDog(deltaTime, ducksHit);
         updateDucks(deltaTime);
         checkCollisions();
+        checkStates();
     }
 
     private void stateRoundPause(float deltaTime) {
@@ -243,10 +250,10 @@ public class World {
                 state = WORLD_STATE_PERFECT_ROUND;
                 if (Settings.soundEnabled) Assets.endRound.play();
 
-                //ducksgiving
+                /**ducksgiving*/
                 if (ducksDead == 10 && dogShot != 10)
                     game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAQ");
-                    //every last one
+                /**every last one*/
                 else if (ducksDead == 10 && dogShot == 10)
                     game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQBA");
 
@@ -328,6 +335,9 @@ public class World {
 
     private void checkCollisions() {
         checkDuckCollision();
+    }
+
+    private void checkStates() {
         checkDuckStates();
     }
 
@@ -361,9 +371,7 @@ public class World {
         } else {
             Duck duck = ducks.get(duckCount);
             int shot = 0;
-            if (Gdx.input.justTouched()
-                    && duck.bounds.contains(touchPoint.x, touchPoint.y)
-                    && duck.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.hit();
 
                 //two ducks one stone
@@ -391,8 +399,7 @@ public class World {
                 Assets.outOfBullets.play();
 
             Duck duck2 = ducks.get(duckCount + 1);
-            if (Gdx.input.justTouched() &&
-                    duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
+            if (Gdx.input.justTouched() && duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.hit();
 
                 //two ducks one stone
@@ -424,15 +431,18 @@ public class World {
 
     private void checkDuckStates() {
         if (gameMode == GAME_MODE_1) {
-            if (ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD
-                    || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE)
+            if (ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE) {
                 state = WORLD_STATE_ROUND_PAUSE;
-        } else {
-            if ((ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks
-                    .get(duckCount).state == Duck.DUCK_STATE_GONE)
-                    && (ducks.get(duckCount + 1).state == Duck.DUCK_STATE_DEAD || ducks
-                    .get(duckCount + 1).state == Duck.DUCK_STATE_GONE))
-                state = WORLD_STATE_ROUND_PAUSE;
+
+                if (ducks.get(duckCount).state == Duck.DUCK_STATE_GONE)
+                    gameScreen.multiplier = 1;
+            }
+        } else if ((ducks.get(duckCount).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount).state == Duck.DUCK_STATE_GONE) &&
+                (ducks.get(duckCount + 1).state == Duck.DUCK_STATE_DEAD || ducks.get(duckCount + 1).state == Duck.DUCK_STATE_GONE)) {
+            state = WORLD_STATE_ROUND_PAUSE;
+
+            if (ducks.get(duckCount).state == Duck.DUCK_STATE_GONE || ducks.get(duckCount + 1).state == Duck.DUCK_STATE_GONE)
+                gameScreen.multiplier = 1;
         }
     }
 
@@ -467,6 +477,8 @@ public class World {
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
+        worldRenderer.setLevel(this.level);
+        level.setOrthographicCamera(worldRenderer.gameCam);
     }
 
     public void setStage(Stage stage) {
