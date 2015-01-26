@@ -38,7 +38,7 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
-    public BulletCasing bulletCase;
+    public ArrayList<BulletCasing> bulletCasings;
 
     public int state;
     public int gameMode;
@@ -66,7 +66,7 @@ public class World {
         gameScreen.score = 0;
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
-        bulletCase = new BulletCasing();
+        bulletCasings = new ArrayList<BulletCasing>();
 
         level = new GreenMeadows(null);
         generateRound();
@@ -123,7 +123,9 @@ public class World {
                 stateGameOver2(deltaTime);
                 break;
         }
-        bulletCase.update(deltaTime);
+        for(BulletCasing b : bulletCasings){
+            b.update(deltaTime);
+        }
         stateTime += deltaTime;
     }
 
@@ -362,9 +364,11 @@ public class World {
                             gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                             break;
                     }
+                    bulletCasings.add(new BulletCasing());
                 } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                     duck.state = Duck.DUCK_STATE_FLY_AWAY;
                     gameScreen.multiplier = 1;
+                    bulletCasings.add(new BulletCasing());
                 } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled)
                     Assets.outOfBullets.play();
             }
@@ -381,20 +385,24 @@ public class World {
                     case 2:
                         gameScreen.multiplier++;
                         gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                     case 1:
                         gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                     case 0:
                         if (gameScreen.multiplier != 1)
                             gameScreen.multiplier--;
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                 }
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                 duck.state = Duck.DUCK_STATE_FLY_AWAY;
                 gameScreen.multiplier = 1;
+                bulletCasings.add(new BulletCasing());
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0)
                 Assets.outOfBullets.play();
 
@@ -411,20 +419,24 @@ public class World {
                     case 2:
                         gameScreen.multiplier++;
                         gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                     case 1:
                         gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                     case 0:
                         if (gameScreen.multiplier != 1)
                             gameScreen.multiplier--;
                         gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
+                        bulletCasings.add(new BulletCasing());
                         break;
                 }
 
             } else if (Gdx.input.justTouched() && GameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.state = Duck.DUCK_STATE_FLY_AWAY;
                 gameScreen.multiplier = 1;
+                bulletCasings.add(new BulletCasing());
             }
         }
     }

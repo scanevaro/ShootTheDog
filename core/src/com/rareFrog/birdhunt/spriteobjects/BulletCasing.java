@@ -14,35 +14,50 @@ public class BulletCasing {
 
     private float vForce, hForce;
     private float stateTime = 0;
-    private final float gForce = 0.0982F;
+    private final float gForce = 0.00982F;
     private TextureRegion texture;
     private Animation animation;
+    private Random r;
     private float x, y;
     private final float HEIGHT = 151F / 2.359F; // Both 64x64
     private final float WIDTH = 141F / 2.20F;
 
+    public boolean removed;
+
     public BulletCasing() {
-        x = 200;
-        y = 200;
-        Random r = new Random();
-        vForce = 2 - r.nextFloat() * 2;
-        hForce = 1 - r.nextFloat() * 4;
+        x = 300;
+        y = 100;
+        r = new Random();
         animation = Assets.bulletCasing;
+        removed = false;
+        reset();
+    }
+
+    public void remove(){
+        removed = true;
     }
 
     public void render(SpriteBatch batch){
-        if(texture == null) texture = animation.getKeyFrame(stateTime, true);
+        if(removed) return;
+        texture = animation.getKeyFrame(stateTime, true);
         batch.draw(texture, x, y, WIDTH, HEIGHT);
     }
 
     public void update(float delta){
-        texture = animation.getKeyFrame(stateTime);
+        if(removed) return;
         stateTime += delta;
         x += hForce;
         y += vForce;
         vForce -= gForce;
         hForce *= 0.95;
         if(stateTime >= Float.MAX_VALUE - 1) stateTime = 0;
+        System.out.println("X: " + x + ", Y: " + y);
     }
 
+    public void reset() {
+        x = 200;
+        y = 200;
+        vForce = 0.5F + r.nextFloat() * 0.4F;
+        hForce = 1F + r.nextFloat() * 0.5F;
+    }
 }

@@ -11,6 +11,7 @@ import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.levels.GreenMeadows;
 import com.rareFrog.birdhunt.levels.Level;
+import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
 
 public class WorldRenderer extends Actor {
 
@@ -86,7 +87,9 @@ public class WorldRenderer extends Actor {
     private void renderObjects() {
         renderDog();
         renderDucks();
-        world.bulletCase.render(batch);
+        for(BulletCasing b : world.bulletCasings){
+            b.render(batch);
+        }
     }
 
     private void renderDog() {
