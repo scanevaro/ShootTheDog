@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -199,13 +198,13 @@ public class Assets {
         backgroundRegion = items.findRegion("grass1440");
         backgroundBackRegion = items.findRegion("wallpaper1440");
         bulletCasing = new Animation(0.5f,
-                (items.findRegion("cart_1")),
-                (items.findRegion("cart_2")),
-                (items.findRegion("cart_3")),
-                (items.findRegion("cart_4")),
-                (items.findRegion("cart_5")));
-        bulletCasing.setPlayMode(Animation.PlayMode.LOOP);
-        System.out.println(bulletCasing);
+                (items.findRegion("cart1")),
+                (items.findRegion("cart2")),
+                (items.findRegion("cart3")),
+                (items.findRegion("cart4")),
+                (items.findRegion("cart5")));
+//        bulletCasing.setPlayMode(Animation.PlayMode.LOOP);
+//        System.out.println(bulletCasing);
         dogWalking = new Animation(0.15f,
                 (items.findRegion("dogWalking1")),
                 (items.findRegion("dogWalking2")),

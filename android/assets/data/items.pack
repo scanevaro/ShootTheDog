@@ -262,27 +262,27 @@ pauseButton
   orig: 163, 160
   offset: 0, 0
   index: -1
-bird1
+bird11
   rotate: false
   xy: 1231, 12
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
-  index: 1
-bird1
+  index: -1
+bird12
   rotate: false
   xy: 1341, 12
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
-  index: 2
-bird1
+  index: -1
+bird13
   rotate: false
   xy: 1451, 25
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
-  index: 3
+  index: -1
 quitIconDown
   rotate: false
   xy: 1866, 912
@@ -743,38 +743,38 @@ pauseDialog
   orig: 621, 631
   offset: 0, 0
   index: -1
-cart
+cart1
   rotate: false
   xy: 1, 154
   size: 141, 151
   orig: 141, 151
   offset: 0, 0
-  index: 1
-cart
+  index: -1
+cart2
   rotate: false
   xy: 624, 787
   size: 141, 151
   orig: 141, 151
   offset: 0, 0
-  index: 2
-cart
+  index: -1
+cart3
   rotate: false
   xy: 1, 1
   size: 141, 151
   orig: 141, 151
   offset: 0, 0
-  index: 3
-cart
+  index: -1
+cart4
   rotate: false
   xy: 144, 154
   size: 141, 151
   orig: 141, 151
   offset: 0, 0
-  index: 4
-cart
+  index: -1
+cart5
   rotate: false
   xy: 624, 634
   size: 141, 151
   orig: 141, 151
   offset: 0, 0
-  index: 5
+  index: -1
