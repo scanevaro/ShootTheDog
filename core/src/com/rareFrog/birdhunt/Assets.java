@@ -58,6 +58,7 @@ public class Assets {
     public static TextureRegion duckHitBlue;
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
+    public static TextureRegion birdHitYellow;
     public static TextureRegion pauseButton;
     public static TextureRegion soundIconUp, soundIconDown;
     public static TextureRegion play1ButtonUp, play1ButtonDown;
@@ -81,6 +82,8 @@ public class Assets {
     public static Animation duckFlyUpBlack;
     public static Animation duckFlyUpRed;
     public static Animation birdFlyRightYellow;
+    public static Animation birdFlyUpYellow;
+    public static Animation birdFlyFallingYellow;
     public static Animation dogWalking;
     public static Animation dogJumping;
     public static Animation dogLaughing;
@@ -262,7 +265,18 @@ public class Assets {
         birdFlyRightYellow = new Animation(0.2f,
                 items.findRegion("bird11"),
                 items.findRegion("bird12"),
-                items.findRegion("bird13"));
+                items.findRegion("bird13"),
+                items.findRegion("bird12"),
+                items.findRegion("bird14"),
+                items.findRegion("bird15"),
+                items.findRegion("bird16"));
+        birdFlyUpYellow = new Animation(0.2f,
+                items.findRegion("bird17"),
+                items.findRegion("bird18"),
+                items.findRegion("bird19"));
+        birdFlyFallingYellow = new Animation(0.2f,
+                items.findRegion("bird111"),
+                items.findRegion("bird112"));
 
         cloud = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
@@ -274,6 +288,7 @@ public class Assets {
         duckHitBlue = items.findRegion("duckHitBlue");
         duckHitBlack = items.findRegion("duckHitBlack");
         duckHitRed = items.findRegion("duckHitRed");
+        birdHitYellow = items.findRegion("bird110");
         pauseButton = items.findRegion("pauseButton");
 
         ui0Shots = items.findRegion("ui0Shots1");

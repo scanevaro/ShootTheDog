@@ -32,7 +32,7 @@ public class DucksTextures {
         TextureRegion texture = null;
 
         if (velocity.x == 0)
-            texture = Assets.birdFlyRightYellow.getKeyFrame(stateTime, true);
+            texture = Assets.birdFlyUpYellow.getKeyFrame(stateTime, true);
         else if (velocity.x > velocity.y)
             texture = Assets.birdFlyRightYellow.getKeyFrame(stateTime, true);
         else if (velocity.x < velocity.y)
@@ -90,7 +90,7 @@ public class DucksTextures {
         return texture;
     }
 
-    public static TextureRegion getFallingTexture(int type, boolean flip) {
+    public static TextureRegion getFallingTexture(float stateTime, int type, boolean flip) {
         TextureRegion texture = null;
 
         switch (type) {
@@ -105,6 +105,10 @@ public class DucksTextures {
             case Duck.RED_DUCK:
                 Assets.duckFallingRed.flip(flip, false);
                 texture = Assets.duckFallingRed;
+                break;
+            case Duck.YELLOW_BIRD:
+                texture = Assets.birdFlyFallingYellow.getKeyFrame(stateTime);
+                texture.flip(flip, false);
                 break;
         }
 
@@ -124,6 +128,9 @@ public class DucksTextures {
             case Duck.RED_DUCK:
                 texture = Assets.duckHitRed;
                 break;
+            case Duck.YELLOW_BIRD:
+                texture = Assets.birdHitYellow;
+                break;
         }
 
         return texture;
@@ -141,6 +148,9 @@ public class DucksTextures {
                 break;
             case Duck.RED_DUCK:
                 texture = Assets.duckFlyUpRed.getKeyFrame(stateTime, true);
+                break;
+            case Duck.YELLOW_BIRD:
+                texture = Assets.birdFlyUpYellow.getKeyFrame(stateTime, true);
                 break;
         }
 

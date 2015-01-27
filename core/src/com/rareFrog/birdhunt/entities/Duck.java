@@ -209,10 +209,10 @@ public class Duck extends DynamicGameObject {
 
         frames++;
         if (frames > 4) {
-            texture = DucksTextures.getFallingTexture(type, true);
+            texture = DucksTextures.getFallingTexture(stateTime, type, true);
             frames = 0;
         } else
-            texture = DucksTextures.getFallingTexture(type, false);
+            texture = DucksTextures.getFallingTexture(stateTime, type, false);
 
         velocity.add(0, DUCK_GRAVITY);
         position.add(velocity.x * deltaTime, velocity.y * deltaTime);
