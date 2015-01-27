@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -34,6 +35,7 @@ public class MainMenuScreen extends AbstractScreen {
     //    private ImageButton closeButton;
     private ImageButton play1DuckButton, play2DucksButton, configButton, loginButton;
     public Window configDialog;
+    private Label deeepLabel;
     //    private ImageButton aboutButton;
     //    private ImageButton libgdxButton;
     //    private ImageButton achievementsButton;
@@ -41,6 +43,9 @@ public class MainMenuScreen extends AbstractScreen {
 
     public MainMenuScreen(Game game) {
         this.game = game;
+
+        Assets.font.setColor(1, 1, 1, 1);
+        Assets.font.setScale(0.4f);
 
         batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
@@ -120,6 +125,8 @@ public class MainMenuScreen extends AbstractScreen {
         configStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.configButtonUp));
         configStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.configButtonDown));
         configButton = new ImageButton(configStyle);
+
+        deeepLabel = new Label("Deeep Games 2014 - Version: Prototype", Assets.skin);
     }
 
     private void configureWidgets() {
@@ -252,6 +259,9 @@ public class MainMenuScreen extends AbstractScreen {
 //        achievementsButton.setSize(64, 64);
 //        achievementsButton.setPosition(Game.VIRTUAL_WIDTH - achievementsButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5/* + loginButton.getWidth() + 5*/);
 //        stage.addActor(achievementsButton);
+
+        deeepLabel.setPosition(Game.VIRTUAL_WIDTH / 2 - deeepLabel.getWidth() / 2, 5);
+        stage.addActor(deeepLabel);
     }
 
     private void prepareConfigDialog() {
@@ -322,6 +332,7 @@ public class MainMenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 configDialog.remove();
                 game.dialogs.buildMenuDialog(game.screen);
+                if (Settings.soundEnabled) Assets.pauseClicked.play();
             }
         });
         configDialog.addActor(quitButton);
@@ -341,11 +352,6 @@ public class MainMenuScreen extends AbstractScreen {
 
         stage.act();
         stage.draw();
-
-        Assets.font.setScale(0.5f, 0.5f);
-        batch.begin();
-        Assets.font.draw(batch, "Version 0.1", Game.VIRTUAL_WIDTH / 2 - 50, 20);
-        batch.end();
     }
 
     @Override

@@ -5,7 +5,6 @@ import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Back;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -357,48 +356,47 @@ public class GameScreen extends AbstractScreen {
         }
 
         batch.draw(
-                Assets.uiScore,
-                480 - 100,
+                Assets.dialog,
+                Game.VIRTUAL_WIDTH - 100,
                 20,
                 Assets.UISCOREWIDTH + Assets.UISCOREWIDTH / 2,
                 Assets.UISCOREHEIGHT + Assets.UISCOREHEIGHT / 2);
 
-        Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.59f, 0.59f);
-        Assets.font.draw(batch, scoreString, 480 - 95, 48);
+        Assets.font.draw(batch, scoreString, Game.VIRTUAL_WIDTH - 92, 48);
 
-        batch.draw(Assets.presentFlyAway, 41, 54, 41, 15);
+        batch.draw(Assets.dialog, 45, 54, 32, 15);
 
-        Assets.font.setColor(0.4f, 0.8f, 0.2f, 1);
-        Assets.font.draw(batch, "R " + String.valueOf(round), 48, 66);
+//        Assets.font.setColor(0.4f, 0.8f, 0.2f, 1);
+        Assets.font.setScale(0.5f, 0.5f);
+        Assets.font.draw(batch, "R " + String.valueOf(round), 52, 69);
     }
 
     private void presentReady() {
         if (!game.dialogOpen) {
             batch.draw(
-                    Assets.presentRound,
-                    Game.VIRTUAL_WIDTH / 2 - Assets.presentRound.getRegionWidth(),
-                    Game.VIRTUAL_HEIGHT / 2 + 30,
-                    Assets.presentRound.getRegionWidth() + Assets.presentRound.getRegionWidth(),
-                    Assets.presentRound.getRegionHeight() + Assets.presentRound.getRegionHeight());
+                    Assets.dialog,
+                    Game.VIRTUAL_WIDTH / 2 - 32,
+                    Game.VIRTUAL_HEIGHT / 2 + 28,
+                    54,
+                    38);
 
-            Assets.font.setColor(Color.WHITE);
             Assets.font.setScale(0.5f, 0.5f);
-            Assets.font.draw(batch, "Round", Game.VIRTUAL_WIDTH / 2 - Assets.presentRound.getRegionWidth() / 2 - 10, Game.VIRTUAL_HEIGHT / 2 + 64);
-            Assets.font.draw(batch, String.valueOf(round), Game.VIRTUAL_WIDTH / 2 - Assets.font.getSpaceWidth() + 4, Game.VIRTUAL_HEIGHT / 2 + 45);
+            Assets.font.draw(batch, "Round", Game.VIRTUAL_WIDTH / 2 - 16 - 10, Game.VIRTUAL_HEIGHT / 2 + 64);
+            Assets.font.draw(batch, String.valueOf(round), Game.VIRTUAL_WIDTH / 2 - Assets.font.getSpaceWidth(), Game.VIRTUAL_HEIGHT / 2 + 45);
         }
     }
 
     private void presentRunning() {
         if (world.ducks.get(world.duckCount).state == Duck.DUCK_STATE_FLY_AWAY) {
-            batch.draw(Assets.presentFlyAway,
-                    480 / 2 - Assets.presentFlyAway.getRegionWidth(),
-                    320 / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
-                    Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
+            batch.draw(Assets.dialog,
+                    Game.VIRTUAL_WIDTH / 2 - 32,
+                    Game.VIRTUAL_HEIGHT / 2 + 30,
+                    96,
+                    32);
 
-            Assets.font.setColor(Color.WHITE);
             Assets.font.setScale(0.45f, 0.5f);
-            Assets.font.draw(batch, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
+            Assets.font.draw(batch, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - 32, Game.VIRTUAL_HEIGHT / 2 + 45);
         }
 
         if (world.state == World.WORLD_STATE_PERFECT_ROUND) {
@@ -407,14 +405,14 @@ public class GameScreen extends AbstractScreen {
 
             if (stateTime > 5) {
                 batch.draw(
-                        Assets.presentFlyAway,
-                        Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth(),
-                        Game.VIRTUAL_HEIGHT / 2 + 30, Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth(),
-                        Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
+                        Assets.dialog,
+                        Game.VIRTUAL_WIDTH / 2 - 32,
+                        Game.VIRTUAL_HEIGHT / 2 + 30,
+                        32,
+                        32);
 
-                Assets.font.setColor(Color.WHITE);
                 Assets.font.setScale(0.45f, 0.5f);
-                Assets.font.draw(batch, "Perfect", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 15, Game.VIRTUAL_HEIGHT / 2 + 45);
+                Assets.font.draw(batch, "Perfect", Game.VIRTUAL_WIDTH / 2 - 32, Game.VIRTUAL_HEIGHT / 2 + 45);
             }
         }
 
@@ -432,13 +430,12 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void presentGameOver() {
-        batch.draw(Assets.presentFlyAway, 480 / 2 - Assets.presentFlyAway.getRegionWidth() - 5, 320 / 2 + 30,
-                Assets.presentFlyAway.getRegionWidth() + Assets.presentFlyAway.getRegionWidth() + 12,
-                Assets.presentFlyAway.getRegionHeight() + Assets.presentFlyAway.getRegionHeight());
+        batch.draw(Assets.dialog, 480 / 2 - Assets.dialog.getRegionWidth() - 5, 320 / 2 + 30,
+                Assets.dialog.getRegionWidth() + Assets.dialog.getRegionWidth() + 12,
+                Assets.dialog.getRegionHeight() + Assets.dialog.getRegionHeight());
 
-        Assets.font.setColor(Color.WHITE);
         Assets.font.setScale(0.45f, 0.5f);
-        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.presentFlyAway.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
+        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.dialog.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
     }
 
     @Override

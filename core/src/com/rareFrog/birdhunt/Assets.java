@@ -40,8 +40,6 @@ public class Assets {
     public static TextureRegion dogFound;
     public static TextureRegion uiShot;
     public static TextureRegion uiDucksRound;
-    public static TextureRegion uiScore;
-    public static TextureRegion presentRound;
     public static TextureRegion ui3Shots;
     public static TextureRegion ui2Shots;
     public static TextureRegion ui1Shots;
@@ -50,7 +48,7 @@ public class Assets {
     public static TextureRegion uiYellowDuck;
     public static TextureRegion dogDuckFound;
     public static TextureRegion dogDucksFound;
-    public static TextureRegion presentFlyAway;
+    public static TextureRegion dialog;
     public static TextureRegion ui0Shots;
     public static TextureRegion duckFallingBlue;
     public static TextureRegion duckFallingBlack;
@@ -299,9 +297,7 @@ public class Assets {
         menuCursor = items.findRegion("menuCursor");
         uiShot = items.findRegion("uiShot");
         uiDucksRound = items.findRegion("uiDucksRound");
-        uiScore = items.findRegion("uiScore");
-        presentRound = items.findRegion("presentRound");
-        presentFlyAway = items.findRegion("presentFlyAway");
+        dialog = items.findRegion("pauseDialog");
         ui3Shots = items.findRegion("ui3Shots");
         ui2Shots = items.findRegion("ui2Shots");
         ui1Shots = items.findRegion("ui1Shots");
@@ -340,8 +336,6 @@ public class Assets {
         multiplier8 = items.findRegion("multiplier8");
         multiplier9 = items.findRegion("multiplier9");
         multiplier10 = items.findRegion("multiplier10");
-
-
     }
 
     private static void setSounds() {
