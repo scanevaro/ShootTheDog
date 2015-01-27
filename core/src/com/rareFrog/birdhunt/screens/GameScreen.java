@@ -392,11 +392,11 @@ public class GameScreen extends AbstractScreen {
             batch.draw(Assets.dialog,
                     Game.VIRTUAL_WIDTH / 2 - 32,
                     Game.VIRTUAL_HEIGHT / 2 + 30,
-                    96,
+                    64,
                     32);
 
             Assets.font.setScale(0.45f, 0.5f);
-            Assets.font.draw(batch, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - 32, Game.VIRTUAL_HEIGHT / 2 + 45);
+            Assets.font.draw(batch, "FLY AWAY", Game.VIRTUAL_WIDTH / 2 - 28, Game.VIRTUAL_HEIGHT / 2 + 54);
         }
 
         if (world.state == World.WORLD_STATE_PERFECT_ROUND) {
