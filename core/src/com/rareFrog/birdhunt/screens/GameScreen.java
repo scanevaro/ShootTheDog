@@ -406,13 +406,13 @@ public class GameScreen extends AbstractScreen {
             if (stateTime > 5) {
                 batch.draw(
                         Assets.dialog,
-                        Game.VIRTUAL_WIDTH / 2 - 32,
+                        Game.VIRTUAL_WIDTH / 2 - 50,
                         Game.VIRTUAL_HEIGHT / 2 + 30,
-                        32,
-                        32);
+                        100,
+                        42);
 
-                Assets.font.setScale(0.45f, 0.5f);
-                Assets.font.draw(batch, "Perfect", Game.VIRTUAL_WIDTH / 2 - 32, Game.VIRTUAL_HEIGHT / 2 + 45);
+                Assets.font.setScale(0.8f);
+                Assets.font.draw(batch, "Perfect!", Game.VIRTUAL_WIDTH / 2 - (Assets.font.getSpaceWidth() * 16) / 2, Game.VIRTUAL_HEIGHT / 2 + 64);
             }
         }
 
