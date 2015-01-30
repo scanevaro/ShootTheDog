@@ -39,7 +39,7 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
-        public Viewmodel viewmodel;
+    public Viewmodel viewmodel;
     public ArrayList<BulletCasing> bulletCasings;
 
     public int state;
@@ -143,7 +143,7 @@ public class World {
     }
 
     private void stateRunning(float deltaTime) {
-        if (Assets.background.getVolume() <= 0.5f) Assets.background.setVolume(Assets.background.getVolume() + 0.005f);
+        if (Assets.background.getVolume() <= 0.5f) Assets.background.setVolume(Assets.background.getVolume() + 0.015f);
 
         updateDog(deltaTime, ducksHit);
         updateDucks(deltaTime);
@@ -152,8 +152,6 @@ public class World {
     }
 
     private void stateRoundPause(float deltaTime) {
-//        if (Assets.background.getVolume() > 0.15f) Assets.background.setVolume(Assets.background.getVolume() - 0.005f);
-
         if (checkDucksRoundPause) {
             checkDucksRoundPause();
 
@@ -163,13 +161,23 @@ public class World {
                 dog.position.x = Game.VIRTUAL_WIDTH / 2 - (Dog.DOG_WIDTH / 2);
         }
 
-        if (stateTime <= 1.6f && Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled)
-            Assets.outOfBullets.play();
+        {/**Out of Bullets*/
+            if (stateTime <= 1.6f && Gdx.input.justTouched() && GameScreen.shots == 0 && Settings.soundEnabled)
+                Assets.outOfBullets.play();
+        }
+
+        if (dog.state != Dog.DOG_STATE_SHOT && stateTime > 1.5f && ducksHit > 0 && Assets.background.getVolume() > 0.0f)
+            Assets.background.setVolume(Assets.background.getVolume() - 0.015f);
 
         if (stateTime > 1.6f) {
             updateDog(deltaTime, ducksHit);
             checkDogState();
             checkDogCollision();
+
+//            {/**BGM lower*/
+//                if (ducksHit > 0 && Assets.background.getVolume() > 0.0f)
+//                    Assets.background.setVolume(Assets.background.getVolume() - 0.005f);
+//            }
         }
 
         if (duckCount > 9) {
@@ -180,6 +188,8 @@ public class World {
     }
 
     private void stateRoundEnd() {
+        if (Assets.background.getVolume() <= 0.5f) Assets.background.setVolume(Assets.background.getVolume() + 0.015f);
+
         if (stateTime > 5) {
             newRound();
             state = WORLD_STATE_ROUND_START;
@@ -189,6 +199,8 @@ public class World {
     }
 
     private void statePerfectRound() {
+        if (Assets.background.getVolume() <= 0.5f) Assets.background.setVolume(Assets.background.getVolume() + 0.015f);
+
         if (stateTime > 9) {
             newRound();
             state = WORLD_STATE_ROUND_START;
@@ -204,7 +216,7 @@ public class World {
     }
 
     private void stateCountingDucks(float deltaTime) {
-        if (Assets.background.getVolume() > 0.15f) Assets.background.setVolume(Assets.background.getVolume() - 0.005f);
+        if (Assets.background.getVolume() > 0.15f) Assets.background.setVolume(Assets.background.getVolume() - 0.015f);
 
         updateDucksCounting(deltaTime);
 
@@ -269,7 +281,7 @@ public class World {
                 if (Assets.background.isPlaying()) Assets.background.stop();
                 state = WORLD_STATE_GAME_OVER_1;
 
-                //inner rage
+                /**inner rage*/
                 if (ducksDead == 0 && dogShot == 10) game.actionResolver.unlockAchievementGPGS("CgkImYvC7YcLEAIQAg");
             }
 
@@ -300,6 +312,10 @@ public class World {
     }
 
     private void checkDogState() {
+        if (dog.state == Dog.DOG_STATE_SHOT)
+            if (Assets.background.getVolume() <= 0.5f)
+                Assets.background.setVolume(Assets.background.getVolume() + 0.015f);
+
         if (dog.state == Dog.DOG_STATE_HIDDEN) {
             state = WORLD_STATE_RUNNING;
             checkDucksRoundPause = true;
