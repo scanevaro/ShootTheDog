@@ -203,8 +203,16 @@ public class MainMenuScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (game.dialogs.menuDialog != null) game.dialogs.menuDialog.remove();
-                if (Settings.soundEnabled) Assets.pauseClicked.play();
-                stage.addActor(configDialog);
+
+                if (!configDialog.isVisible()) {
+                    if (Settings.soundEnabled) Assets.pauseClicked.play();
+                    stage.addActor(configDialog);
+                    configDialog.setVisible(true);
+                } else {
+                    if (Settings.soundEnabled) Assets.pauseClosed.play();
+                    configDialog.remove();
+                    configDialog.setVisible(false);
+                }
             }
         });
     }
@@ -268,6 +276,7 @@ public class MainMenuScreen extends AbstractScreen {
         configDialog = new Window("Config", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
         configDialog.setWidth(256);
         configDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - configDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - configDialog.getHeight() / 2);
+        configDialog.setVisible(false);
 
         //TODO Change it to CLOSE ICON
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
