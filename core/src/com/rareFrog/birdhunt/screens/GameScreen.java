@@ -37,8 +37,8 @@ public class GameScreen extends AbstractScreen {
     private SpriteBatch batch;
     public World world;
     private WorldRenderer renderer;
-    public static int round;
-    public static int shots;
+    public int round;
+    public int shots;
     private int x;
     private int lastScore;
     private String scoreString;

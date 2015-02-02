@@ -50,10 +50,8 @@ public class Assets {
     public static TextureRegion dogDucksFound;
     public static TextureRegion dialog;
     public static TextureRegion ui0Shots;
-    public static TextureRegion duckFallingBlue;
     public static TextureRegion duckFallingBlack;
     public static TextureRegion duckFallingRed;
-    public static TextureRegion duckHitBlue;
     public static TextureRegion duckHitBlack;
     public static TextureRegion duckHitRed;
     public static TextureRegion birdHitYellow;
@@ -69,14 +67,12 @@ public class Assets {
     public static TextureRegion confirmButtonUp, confirmButtonDown;
     public static TextureRegion backIconUp, backIconDown;
     public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
+    public static TextureRegion squirrel, monkey, cow, pig, bear;
 
-    public static Animation duckFlyRightBlue;
     public static Animation duckFlyRightBlack;
     public static Animation duckFlyRightRed;
-    public static Animation duckFlyTopBlue;
     public static Animation duckFlyTopBlack;
     public static Animation duckFlyTopRed;
-    public static Animation duckFlyUpBlue;
     public static Animation duckFlyUpBlack;
     public static Animation duckFlyUpRed;
     public static Animation birdFlyRightYellow;
@@ -100,7 +96,9 @@ public class Assets {
 
     public static Sound shoot;
     public static Sound dogBark;
-    public static Sound miss;
+    public static Sound flapLong;
+    public static Sound flapNormal;
+    public static Sound flapShort;
     public static Sound dogLaughingSnd;
     public static Sound duckFoundSnd;
     public static Sound hitGround;
@@ -137,11 +135,13 @@ public class Assets {
         assetManager.load("data/sounds/end_round.mp3", Music.class);
         assetManager.load("data/sounds/gameOver1.mp3", Music.class);
         assetManager.load("data/sounds/gameOver2.mp3", Music.class);
-        assetManager.load("data/sounds/music/background1.wav", Music.class);
+        assetManager.load("data/sounds/music/background1.mp3", Music.class);
 
         assetManager.load("data/sounds/blast.mp3", Sound.class);
         assetManager.load("data/sounds/bark.mp3", Sound.class);
-        assetManager.load("data/sounds/miss.mp3", Sound.class);
+        assetManager.load("data/sounds/flapLong.mp3", Sound.class);
+        assetManager.load("data/sounds/flapNormal.mp3", Sound.class);
+        assetManager.load("data/sounds/flapShort.mp3", Sound.class);
         assetManager.load("data/sounds/laugh.mp3", Sound.class);
         assetManager.load("data/sounds/end_duck_round.mp3", Sound.class);
         assetManager.load("data/sounds/drop.mp3", Sound.class);
@@ -218,10 +218,6 @@ public class Assets {
         dogLaughing = new Animation(0.1f,
                 (items.findRegion("dogLaugh1")),
                 (items.findRegion("dogLaugh2")));
-        duckFlyRightBlue = new Animation(0.2f,
-                (items.findRegion("duckFlyRightBlue1")),
-                (items.findRegion("duckFlyRightBlue2")),
-                (items.findRegion("duckFlyRightBlue3")));
         duckFlyRightBlack = new Animation(0.2f,
                 (items.findRegion("duckFlyRightBlack1")),
                 (items.findRegion("duckFlyRightBlack2")),
@@ -230,10 +226,6 @@ public class Assets {
                 (items.findRegion("duckFlyRightRed1")),
                 (items.findRegion("duckFlyRightRed2")),
                 (items.findRegion("duckFlyRightRed3")));
-        duckFlyTopBlue = new Animation(0.2f,
-                (items.findRegion("duckFlyTopBlue1")),
-                (items.findRegion("duckFlyTopBlue2")),
-                (items.findRegion("duckFlyTopBlue3")));
         duckFlyTopBlack = new Animation(0.2f,
                 (items.findRegion("duckFlyTopBlack1")),
                 (items.findRegion("duckFlyTopBlack2")),
@@ -242,10 +234,6 @@ public class Assets {
                 (items.findRegion("duckFlyTopRed1")),
                 (items.findRegion("duckFlyTopRed2")),
                 (items.findRegion("duckFlyTopRed3")));
-        duckFlyUpBlue = new Animation(0.2f,
-                (items.findRegion("duckFlyUpBlue1")),
-                (items.findRegion("duckFlyUpBlue2")),
-                (items.findRegion("duckFlyUpBlue3")));
         duckFlyUpBlack = new Animation(0.2f,
                 (items.findRegion("duckFlyUpBlack1")),
                 (items.findRegion("duckFlyUpBlack2")),
@@ -280,10 +268,8 @@ public class Assets {
         for (int i = 0; i < 3; i++) {
             cloud[i] = items.findRegion("cloud" + (i + 1));
         }
-        duckFallingBlue = items.findRegion("duckFallingBlue");
         duckFallingBlack = items.findRegion("duckFallingBlack");
         duckFallingRed = items.findRegion("duckFallingRed");
-        duckHitBlue = items.findRegion("duckHitBlue");
         duckHitBlack = items.findRegion("duckHitBlack");
         duckHitRed = items.findRegion("duckHitRed");
         birdHitYellow = items.findRegion("bird110");
@@ -336,6 +322,11 @@ public class Assets {
         multiplier8 = items.findRegion("multiplier8");
         multiplier9 = items.findRegion("multiplier9");
         multiplier10 = items.findRegion("multiplier10");
+        squirrel = items.findRegion("squirrel");
+        monkey = items.findRegion("monkey");
+        cow = items.findRegion("cow");
+        pig = items.findRegion("pig");
+        bear = items.findRegion("bear");
     }
 
     private static void setSounds() {
@@ -349,12 +340,14 @@ public class Assets {
         gameOver1.setVolume(0.5f);
         gameOver2 = assetManager.get("data/sounds/gameOver2.mp3");
         gameOver2.setVolume(0.5f);
-        background = assetManager.get("data/sounds/music/background1.wav");
+        background = assetManager.get("data/sounds/music/background1.mp3");
         background.setVolume(0.5f);
 
         shoot = assetManager.get("data/sounds/blast.mp3");
         dogBark = assetManager.get("data/sounds/bark.mp3");
-        miss = assetManager.get("data/sounds/miss.mp3");
+        flapLong = assetManager.get("data/sounds/flapLong.mp3");
+        flapNormal = assetManager.get("data/sounds/flapNormal.mp3");
+        flapShort = assetManager.get("data/sounds/flapShort.mp3");
         dogLaughingSnd = assetManager.get("data/sounds/laugh.mp3");
         duckFoundSnd = assetManager.get("data/sounds/end_duck_round.mp3");
         hitGround = assetManager.get("data/sounds/drop.mp3");
@@ -393,7 +386,9 @@ public class Assets {
         //sound
         shoot.dispose();
         dogBark.dispose();
-        miss.dispose();
+        flapLong.dispose();
+        flapNormal.dispose();
+        flapShort.dispose();
         dogLaughingSnd.dispose();
         duckFoundSnd.dispose();
         hitGround.dispose();

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Duck extends DynamicGameObject {
     private Level level;
-    public static final int BLUE_DUCK = 0;
+
     public static final int BLACK_DUCK = 1;
     public static final int RED_DUCK = 2;
     public static final int YELLOW_BIRD = 3;
@@ -47,7 +47,7 @@ public class Duck extends DynamicGameObject {
     public Duck(Level level, float x, float y) {
         super(x, y, DUCK_WIDTH, DUCK_HEIGHT);
         this.level = level;
-        state = DUCK_STATE_FLYING;
+        state = DUCK_STATE_STANDBY;
         velocity.set(duck_velocity_x, duck_velocity_y);
         stateTime = 0;
         uiStateTime = 0;
@@ -57,13 +57,12 @@ public class Duck extends DynamicGameObject {
         rand = new Random();
         uiTexture = Assets.uiWhiteDuck;
 
-        type = YELLOW_BIRD;
-//        if (rand.nextFloat() > 0.5f)
-//            type = BLUE_DUCK;
-//        else if (rand.nextFloat() > 0.5f)
-//            type = BLACK_DUCK;
-//        else
-//            type = RED_DUCK;
+        if (rand.nextFloat() > 0.5f)
+            type = YELLOW_BIRD;
+        else if (rand.nextFloat() > 0.5f)
+            type = BLACK_DUCK;
+        else
+            type = RED_DUCK;
     }
 
     public void update(float deltaTime) {
@@ -162,12 +161,12 @@ public class Duck extends DynamicGameObject {
             velocity.y = duck_velocity_y * rand.nextFloat() * topBot;
         }
 
-        if (stateTime > 0.125f) {
-            if ((stateTime - lastTimeSaved) >= 0.125f) {
-                if (Settings.soundEnabled) Assets.miss.play(0.5f);
-                lastTimeSaved = stateTime;
-            }
-        }
+//        if (stateTime > 0.125f) {
+//            if ((stateTime - lastTimeSaved) >= 0.125f) {
+//                if (Settings.soundEnabled) Assets.flapLong.play();
+//                lastTimeSaved = stateTime;
+//            }
+//        }
 
         if (stateTime > 1.3f) {
             if ((stateTime - lastTimeSaved2) >= 2f) {
@@ -190,10 +189,15 @@ public class Duck extends DynamicGameObject {
 
     private void checkStateTime() {
         if (stateTime > 8f) {
-            state = DUCK_STATE_FLY_AWAY;
-            stateTime = 0;
-            return;
+            flyAway();
         }
+    }
+
+    public void flyAway() {
+        state = DUCK_STATE_FLY_AWAY;
+        stateTime = 0;
+        stopFlap();
+        return;
     }
 
     public void hit() {
@@ -202,6 +206,7 @@ public class Duck extends DynamicGameObject {
         stateTime = 0;
 
         if (Settings.soundEnabled) Assets.duckShot.play();
+        stopFlap();
     }
 
     private void stateFalling(float deltaTime) {
@@ -248,11 +253,11 @@ public class Duck extends DynamicGameObject {
         bounds.x = position.x;
         bounds.y = position.y;
 
-        if (stateTime > 0.125f)
-            if ((stateTime - lastTimeSaved) >= 0.125f) {
-                if (Settings.soundEnabled) Assets.miss.play(0.5f);
-                lastTimeSaved = stateTime;
-            }
+//        if (stateTime > 0.125f)
+//            if ((stateTime - lastTimeSaved) >= 0.125f) {
+//                if (Settings.soundEnabled) Assets.flapLong.play();
+//                lastTimeSaved = stateTime;
+//            }
 
         if (position.y > Game.VIRTUAL_HEIGHT + DUCK_HEIGHT)
             state = DUCK_STATE_GONE;
@@ -266,5 +271,38 @@ public class Duck extends DynamicGameObject {
 
     public String toString() {
         return "[" + bounds.x + ", " + bounds.y + "]";
+    }
+
+    private void playFlap() {
+        switch (type) {
+            case YELLOW_BIRD:
+                Assets.flapLong.loop();
+                break;
+            case BLACK_DUCK:
+                Assets.flapNormal.loop();
+                break;
+            case RED_DUCK:
+                Assets.flapShort.loop();
+                break;
+        }
+    }
+
+    private void stopFlap() {
+        switch (type) {
+            case YELLOW_BIRD:
+                Assets.flapLong.stop();
+                break;
+            case BLACK_DUCK:
+                Assets.flapNormal.stop();
+                break;
+            case RED_DUCK:
+                Assets.flapShort.stop();
+                break;
+        }
+    }
+
+    public void fly() {
+        state = Duck.DUCK_STATE_FLYING;
+        playFlap();
     }
 }

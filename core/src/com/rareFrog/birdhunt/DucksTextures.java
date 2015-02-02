@@ -11,9 +11,6 @@ public class DucksTextures {
         TextureRegion texture = null;
 
         switch (type) {
-            case Duck.BLUE_DUCK:
-                texture = getBlueDuckTexture(stateTime, velocity);
-                break;
             case Duck.BLACK_DUCK:
                 texture = getBlackDuckTexture(stateTime, velocity);
                 break;
@@ -74,30 +71,10 @@ public class DucksTextures {
         return texture;
     }
 
-    private static TextureRegion getBlueDuckTexture(float stateTime,
-                                                    Vector2 velocity) {
-        TextureRegion texture = null;
-
-        if (velocity.x == 0)
-            texture = Assets.duckFlyUpBlue.getKeyFrame(stateTime, true);
-        else if (velocity.x > velocity.y)
-            texture = Assets.duckFlyRightBlue.getKeyFrame(stateTime, true);
-        else if (velocity.x < velocity.y)
-            texture = Assets.duckFlyTopBlue.getKeyFrame(stateTime, true);
-        else
-            texture = Assets.duckFlyTopBlue.getKeyFrame(stateTime, true);
-
-        return texture;
-    }
-
     public static TextureRegion getFallingTexture(float stateTime, int type, boolean flip) {
         TextureRegion texture = null;
 
         switch (type) {
-            case Duck.BLUE_DUCK:
-                Assets.duckFallingBlue.flip(flip, false);
-                texture = Assets.duckFallingBlue;
-                break;
             case Duck.BLACK_DUCK:
                 Assets.duckFallingBlack.flip(flip, false);
                 texture = Assets.duckFallingBlack;
@@ -119,9 +96,6 @@ public class DucksTextures {
         TextureRegion texture = null;
 
         switch (type) {
-            case Duck.BLUE_DUCK:
-                texture = Assets.duckHitBlue;
-                break;
             case Duck.BLACK_DUCK:
                 texture = Assets.duckHitBlack;
                 break;
@@ -140,9 +114,6 @@ public class DucksTextures {
         TextureRegion texture = null;
 
         switch (type) {
-            case Duck.BLUE_DUCK:
-                texture = Assets.duckFlyUpBlue.getKeyFrame(stateTime, true);
-                break;
             case Duck.BLACK_DUCK:
                 texture = Assets.duckFlyUpBlack.getKeyFrame(stateTime, true);
                 break;
