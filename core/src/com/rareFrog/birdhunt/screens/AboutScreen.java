@@ -88,10 +88,11 @@ public class AboutScreen extends AbstractScreen {
         Assets.font.draw(stage.getBatch(), "Deeep Games - 2015", 138, Game.VIRTUAL_HEIGHT - 45);
         Assets.font.setScale(0.7f);
         Assets.font.draw(stage.getBatch(), "www.deeepgames.com", 138, Game.VIRTUAL_HEIGHT - 85);
-        Assets.font.draw(stage.getBatch(), "Art by Alessandro Galluci - holystar4@gmail.com", 5, Game.VIRTUAL_HEIGHT / 2 - 15);
+        Assets.font.draw(stage.getBatch(), "Art by Alessandro Galluci - alegallucci.rei@gmail.com", 5, Game.VIRTUAL_HEIGHT / 2 + 5);
+        Assets.font.draw(stage.getBatch(), "PR by Michael Phelps - kamata@pixel-virtuosa.com", 5, Game.VIRTUAL_HEIGHT / 2 - 25);
         Assets.font.draw(stage.getBatch(), "Music and Sound Effects", 64 + 35, Game.VIRTUAL_HEIGHT / 2 - 60);
         Assets.font.draw(stage.getBatch(), "by Christopher Porter", 64 + 48, Game.VIRTUAL_HEIGHT / 2 - 90);
-        Assets.font.draw(stage.getBatch(), "chrisportermusic@gmail.com", 64 + 24, Game.VIRTUAL_HEIGHT / 2 - 125);
+        Assets.font.draw(stage.getBatch(), "chrisportermusic1@gmail.com", 64 + 24, Game.VIRTUAL_HEIGHT / 2 - 125);
         stage.getBatch().end();
     }
 
