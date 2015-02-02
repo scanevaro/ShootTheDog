@@ -1,11 +1,6 @@
 package com.rareFrog.birdhunt.android;
 
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +19,6 @@ import com.google.example.games.basegameutils.GameHelper;
 import com.rareFrog.birdhunt.Game;
 import com.rareFrog.birdhunt.interfaces.ActionResolver;
 import com.rareFrog.birdhunt.interfaces.IActivityRequestHandler;
-import com.rareFrog.birdhunt.interfaces.InputInterface;
 
 public class AndroidLauncher extends AndroidApplication implements GameHelper.GameHelperListener, ActionResolver, IActivityRequestHandler {
     GameHelper gameHelper;
@@ -56,7 +50,7 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
             gameHelper.enableDebugLog(true);
         }
         gameHelper.setup(this);
-        gameHelper.setMaxAutoSignInAttempts(0);
+        gameHelper.setMaxAutoSignInAttempts(1);
 
         // Create and setup the AdMob view
         adView = new AdView(this);

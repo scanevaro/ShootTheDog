@@ -274,17 +274,18 @@ public class Duck extends DynamicGameObject {
     }
 
     private void playFlap() {
-        switch (type) {
-            case YELLOW_BIRD:
-                Assets.flapLong.loop();
-                break;
-            case BLACK_DUCK:
-                Assets.flapNormal.loop();
-                break;
-            case RED_DUCK:
-                Assets.flapShort.loop();
-                break;
-        }
+        if (Settings.soundEnabled)
+            switch (type) {
+                case YELLOW_BIRD:
+                    Assets.flapLong.loop();
+                    break;
+                case BLACK_DUCK:
+                    Assets.flapNormal.loop();
+                    break;
+                case RED_DUCK:
+                    Assets.flapShort.loop();
+                    break;
+            }
     }
 
     private void stopFlap() {

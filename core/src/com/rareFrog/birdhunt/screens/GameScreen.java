@@ -430,12 +430,15 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void presentGameOver() {
-        batch.draw(Assets.dialog, 480 / 2 - Assets.dialog.getRegionWidth() - 5, 320 / 2 + 30,
-                Assets.dialog.getRegionWidth() + Assets.dialog.getRegionWidth() + 12,
-                Assets.dialog.getRegionHeight() + Assets.dialog.getRegionHeight());
+        batch.draw(
+                Assets.dialog,
+                Game.VIRTUAL_WIDTH / 2 - 50,
+                Game.VIRTUAL_HEIGHT / 2 + 30,
+                100,
+                42);
 
-        Assets.font.setScale(0.45f, 0.5f);
-        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - Assets.dialog.getRegionWidth() / 2 - 20, Game.VIRTUAL_HEIGHT / 2 + 45);
+        Assets.font.setScale(0.6f);
+        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - (Assets.font.getSpaceWidth() * 20.5f) / 2, Game.VIRTUAL_HEIGHT / 2 + 62);
     }
 
     @Override
