@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.rareFrog.birdhunt.screens.AboutScreen;
 import com.rareFrog.birdhunt.screens.AbstractScreen;
 import com.rareFrog.birdhunt.screens.GameScreen;
 import com.rareFrog.birdhunt.screens.MainMenuScreen;
@@ -24,6 +25,9 @@ public class Dialogs {
     }
 
     public void update(AbstractScreen screen) {
+        if (screen instanceof AboutScreen)
+            game.setScreen(new MainMenuScreen(game));
+
         if (!game.dialogOpen) {
             game.dialogOpen = true;
             build(screen);

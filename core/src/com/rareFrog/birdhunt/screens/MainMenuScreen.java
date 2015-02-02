@@ -22,24 +22,23 @@ import com.rareFrog.birdhunt.input.GameInputProcessor;
 
 
 public class MainMenuScreen extends AbstractScreen {
-    //main
+    /**
+     * main
+     */
     Game game;
-    //screen
+    /**
+     * screen
+     */
     private SpriteBatch batch;
-    private GameInputProcessor gameInputProcessor;
-    //widgets
+    /**
+     * widgets
+     */
     private Image menuBackgroundBack;
     private Image menuBackground;
     private Image titleImage;
-    //    private ImageButton muteButton;
-    //    private ImageButton closeButton;
     private ImageButton play1DuckButton, play2DucksButton, configButton, loginButton;
     public Window configDialog;
     private Label deeepLabel;
-    //    private ImageButton aboutButton;
-    //    private ImageButton libgdxButton;
-    //    private ImageButton achievementsButton;
-    //    private ImageButton leaderboardsButton;
 
     public MainMenuScreen(Game game) {
         this.game = game;
@@ -68,17 +67,6 @@ public class MainMenuScreen extends AbstractScreen {
         menuBackground = new Image(Assets.backgroundRegion);
         titleImage = new Image(Assets.title);
 
-//        ImageButton.ImageButtonStyle muteButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        muteButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-//        muteButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
-//        muteButtonStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
-//        muteButton = new ImageButton(muteButtonStyle);
-
-//        ImageButton.ImageButtonStyle closeButtonStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        closeButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
-//        closeButtonStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
-//        closeButton = new ImageButton(closeButtonStyle);
-
         ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play1DuckStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonUp));
         play1DuckStyle.imageUp.setMinWidth(192);
@@ -97,25 +85,6 @@ public class MainMenuScreen extends AbstractScreen {
         play2DucksStyle.imageDown.setMinHeight(64);
         play2DucksButton = new ImageButton(play2DucksStyle);
 
-//        ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconUp));
-//        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
-//        aboutButton = new ImageButton(aboutStyle);
-
-//        ImageButton.ImageButtonStyle libgdxStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
-//        libgdxStyle.imageUp = new TextureRegionDrawable(Assets.atlas.findRegion("gdx"));
-//        libgdxButton = new ImageButton(libgdxStyle);
-
-//        ImageButton.ImageButtonStyle leaderboardsStyle = new ImageButton.ImageButtonStyle();
-//        leaderboardsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsButtonUp));
-//        leaderboardsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsButtonDown));
-//        leaderboardsButton = new ImageButton(leaderboardsStyle);
-
-//        ImageButton.ImageButtonStyle achievementsStyle = new ImageButton.ImageButtonStyle();
-//        achievementsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonUp));
-//        achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsButtonDown));
-//        achievementsButton = new ImageButton(achievementsStyle);
-
         ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
         loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
         loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
@@ -130,22 +99,9 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     private void configureWidgets() {
-//        if (!Settings.soundEnabled) muteButton.setChecked(true);
     }
 
     private void addListeners() {
-//        muteButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                if (muteButton.isChecked()) {
-//                    Settings.soundEnabled = false;
-//                    muteButton.setChecked(true);
-//                } else {
-//                    Settings.soundEnabled = true;
-//                    muteButton.setChecked(false);
-//                }
-//            }
-//        });
         play1DuckButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -162,37 +118,6 @@ public class MainMenuScreen extends AbstractScreen {
                 if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
         });
-//        aboutButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-////                game.setScreen(new AboutScreen(game));
-//            }
-//        });
-//        libgdxButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                Gdx.net.openURI("libgdx.badlogicgames.com");
-//            }
-//        });
-//        closeButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                Settings.save();
-//                Gdx.app.exit();
-//            }
-//        });
-//        leaderboardsButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                game.actionResolver.getLeaderboardGPGS();
-//            }
-//        });
-//        achievementsButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                game.actionResolver.getAchievementsGPGS();
-//            }
-//        });
         loginButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -226,36 +151,16 @@ public class MainMenuScreen extends AbstractScreen {
         menuBackground.setPosition(0, 0);
         stage.addActor(menuBackground);
 
-//        muteButton.setSize(64, 64);
-//        muteButton.setPosition(0, 0);
-//        stage.addActor(muteButton);
-//
-//        closeButton.setSize(64, 64);
-//        closeButton.setPosition(Game.VIRTUAL_WIDTH - closeButton.getWidth(), 0);
-//        stage.addActor(closeButton);
-
         play1DuckButton.setPosition(Game.VIRTUAL_WIDTH / 2 - Game.VIRTUAL_WIDTH / 4 - play1DuckButton.getWidth() / 2, 68);
         stage.addActor(play1DuckButton);
 
         play2DucksButton.setPosition(Game.VIRTUAL_WIDTH / 4 * 3 - play2DucksButton.getWidth() / 2, 68);
         stage.addActor(play2DucksButton);
 
-//        aboutButton.setSize(128, 20);
-//        aboutButton.setPosition(Game.VIRTUAL_WIDTH / 2 - aboutButton.getWidth() / 2, 32);
-//        stage.addActor(aboutButton);
-//
-//        libgdxButton.setSize(64, 64);
-//        libgdxButton.setPosition(Game.VIRTUAL_WIDTH - libgdxButton.getWidth(), Game.VIRTUAL_HEIGHT - libgdxButton.getHeight());
-//        stage.addActor(libgdxButton);
-//
         titleImage.setSize(256, 128);
         titleImage.setPosition(Game.VIRTUAL_WIDTH / 2 - titleImage.getWidth() / 2, 150);
         stage.addActor(titleImage);
-//
-//        leaderboardsButton.setSize(64, 64);
-//        leaderboardsButton.setPosition(Game.VIRTUAL_WIDTH - leaderboardsButton.getWidth(), closeButton.getWidth() + 5);
-//        stage.addActor(leaderboardsButton);
-//
+
         configButton.setSize(32, 32);
         configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth(), 2);
         stage.addActor(configButton);
@@ -263,10 +168,6 @@ public class MainMenuScreen extends AbstractScreen {
         loginButton.setSize(32, 32);
         loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth() - configButton.getWidth() - 2, 2);
         stage.addActor(loginButton);
-//
-//        achievementsButton.setSize(64, 64);
-//        achievementsButton.setPosition(Game.VIRTUAL_WIDTH - achievementsButton.getWidth(), closeButton.getWidth() + 5 + leaderboardsButton.getWidth() + 5/* + loginButton.getWidth() + 5*/);
-//        stage.addActor(achievementsButton);
 
         deeepLabel.setPosition(Game.VIRTUAL_WIDTH / 2 - deeepLabel.getWidth() / 2, 5);
         stage.addActor(deeepLabel);
@@ -327,6 +228,7 @@ public class MainMenuScreen extends AbstractScreen {
         aboutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new AboutScreen(game));
             }
         });
         configDialog.addActor(aboutButton);
@@ -379,7 +281,7 @@ public class MainMenuScreen extends AbstractScreen {
     private void setInputProcessor() {
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(gameInputProcessor = new GameInputProcessor(game));
+        inputMultiplexer.addProcessor(new GameInputProcessor(game));
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -398,23 +300,7 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     @Override
-    public void show() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-//        if (!Settings.soundEnabled) muteButton.setChecked(true);
-    }
-
-    @Override
     public void dispose() {
+        stage.dispose();
     }
 }
