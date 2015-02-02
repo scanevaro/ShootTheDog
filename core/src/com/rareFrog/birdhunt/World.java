@@ -8,8 +8,6 @@ import com.rareFrog.birdhunt.entities.*;
 import com.rareFrog.birdhunt.levels.GreenMeadows;
 import com.rareFrog.birdhunt.levels.Level;
 import com.rareFrog.birdhunt.screens.GameScreen;
-import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
-import com.rareFrog.birdhunt.spriteobjects.Viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +36,8 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
-    public Viewmodel viewmodel;
-    public ArrayList<BulletCasing> bulletCasings;
+    //    public Viewmodel viewmodel;
+//    public ArrayList<BulletCasing> bulletCasings;
     public Squirrel squirrel;
     public Monkey monkey;
     public Cow cow;
@@ -72,8 +70,8 @@ public class World {
         gameScreen.score = 0;
         gameScreen.multiplier = 1;
         dog = new Dog(0, 60, this);
-        bulletCasings = new ArrayList<BulletCasing>();
-        viewmodel = new Viewmodel();
+//        bulletCasings = new ArrayList<BulletCasing>();
+//        viewmodel = new Viewmodel();
 
         level = new GreenMeadows(null);
         instantiateAnimals();
@@ -139,9 +137,9 @@ public class World {
                 stateGameOver2(deltaTime);
                 break;
         }
-        for (BulletCasing b : bulletCasings) {
-            b.update(deltaTime);
-        }
+//        for (BulletCasing b : bulletCasings) {
+//            b.update(deltaTime);
+//        }
         stateTime += deltaTime;
     }
 
@@ -326,14 +324,14 @@ public class World {
 
                 dogShot++;
                 gameScreen.shots--;
-                bulletCasings.add(new BulletCasing());
+//                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && gameScreen.shots == 0) {
                 if (Settings.soundEnabled) Assets.outOfBullets.play();
             } else if (Gdx.input.justTouched() && gameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
                 gameScreen.shots--;
                 if (Settings.soundEnabled) Assets.shoot.play();
-                bulletCasings.add(new BulletCasing());
+//                bulletCasings.add(new BulletCasing());
             }
         }
     }

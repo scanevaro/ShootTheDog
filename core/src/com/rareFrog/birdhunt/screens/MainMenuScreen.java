@@ -275,6 +275,7 @@ public class MainMenuScreen extends AbstractScreen {
     private void prepareConfigDialog() {
         configDialog = new Window("Config", Assets.skin.get("pauseDialog", Window.WindowStyle.class));
         configDialog.setWidth(256);
+        configDialog.setHeight(196);
         configDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - configDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - configDialog.getHeight() / 2);
         configDialog.setVisible(false);
 
@@ -300,7 +301,7 @@ public class MainMenuScreen extends AbstractScreen {
         muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
-        muteButton.setPosition(20, configDialog.getHeight() / 2 - muteButton.getHeight() / 3);
+        muteButton.setPosition(20, configDialog.getHeight() / 2 + 5);
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -322,7 +323,7 @@ public class MainMenuScreen extends AbstractScreen {
         aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
         final ImageButton aboutButton = new ImageButton(aboutStyle);
         aboutButton.setSize(64, 64);
-        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 - aboutButton.getHeight() / 3);
+        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
         aboutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -335,7 +336,7 @@ public class MainMenuScreen extends AbstractScreen {
         quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonDown));
         final ImageButton quitButton = new ImageButton(quitStyle);
         quitButton.setSize(64, 64);
-        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 - quitButton.getHeight() / 3);
+        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -345,6 +346,34 @@ public class MainMenuScreen extends AbstractScreen {
             }
         });
         configDialog.addActor(quitButton);
+
+        ImageButton.ImageButtonStyle leaderboardsStyle = new ImageButton.ImageButtonStyle();
+        leaderboardsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsUp));
+        leaderboardsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsDown));
+        final ImageButton leaderboardsButton = new ImageButton(leaderboardsStyle);
+        leaderboardsButton.setSize(64, 64);
+        leaderboardsButton.setPosition(configDialog.getWidth() / 2 - 5 - 64, 32 + 10);
+        leaderboardsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.actionResolver.getLeaderboardGPGS();
+            }
+        });
+        configDialog.addActor(leaderboardsButton);
+
+        ImageButton.ImageButtonStyle achievementsStyle = new ImageButton.ImageButtonStyle();
+        achievementsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.achievementsUp));
+        achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsDown));
+        final ImageButton achievementsButton = new ImageButton(achievementsStyle);
+        achievementsButton.setSize(64, 64);
+        achievementsButton.setPosition(configDialog.getWidth() / 2 + 5, 32 + 10);
+        achievementsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.actionResolver.getAchievementsGPGS();
+            }
+        });
+        configDialog.addActor(achievementsButton);
     }
 
     private void setInputProcessor() {

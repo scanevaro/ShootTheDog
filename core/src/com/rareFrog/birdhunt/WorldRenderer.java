@@ -13,7 +13,6 @@ import com.rareFrog.birdhunt.entities.Dog;
 import com.rareFrog.birdhunt.entities.Duck;
 import com.rareFrog.birdhunt.levels.GreenMeadows;
 import com.rareFrog.birdhunt.levels.Level;
-import com.rareFrog.birdhunt.spriteobjects.BulletCasing;
 
 public class WorldRenderer extends Actor {
 
@@ -63,10 +62,10 @@ public class WorldRenderer extends Actor {
     }
 
     private void renderSpriteObjects(SpriteBatch batch) {
-        world.viewmodel.render(batch);
-        for (BulletCasing b : world.bulletCasings) {
-            b.render(batch);
-        }
+//        world.viewmodel.render(batch);
+//        for (BulletCasing b : world.bulletCasings) {
+//            b.render(batch);
+//        }
     }
 
     // also draws the background color

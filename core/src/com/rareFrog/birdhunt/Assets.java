@@ -68,6 +68,7 @@ public class Assets {
     public static TextureRegion backIconUp, backIconDown;
     public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
     public static TextureRegion squirrel, monkey, cow, pig, bear;
+    public static TextureRegion leaderboardsUp, leaderboardsDown, achievementsUp, achievementsDown;
 
     public static Animation duckFlyRightBlack;
     public static Animation duckFlyRightRed;
@@ -327,6 +328,10 @@ public class Assets {
         cow = items.findRegion("cow");
         pig = items.findRegion("pig");
         bear = items.findRegion("bear");
+        achievementsDown = items.findRegion("achievementsDown");
+        achievementsUp = items.findRegion("achievementsUp");
+        leaderboardsDown = items.findRegion("leaderboardsDown");
+        leaderboardsUp = items.findRegion("leaderboardsUp");
     }
 
     private static void setSounds() {
