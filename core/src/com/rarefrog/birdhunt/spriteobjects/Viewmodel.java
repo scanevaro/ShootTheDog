@@ -2,7 +2,6 @@ package com.rarefrog.birdhunt.spriteobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.rarefrog.birdhunt.Assets;
 
 /**
  * Created by Andreas on 1/26/2015.
@@ -15,7 +14,7 @@ public class Viewmodel {
     private final float HEIGHT = 124F;
 
     public Viewmodel(){
-        texture = Assets.viewmodel;
+//        texture = Assets.viewmodel;
         x = 100F;
     }
 
