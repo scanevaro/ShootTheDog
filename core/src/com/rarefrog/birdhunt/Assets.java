@@ -136,7 +136,7 @@ public class Assets {
         assetManager.load("data/sounds/end_round.mp3", Music.class);
         assetManager.load("data/sounds/gameOver1.mp3", Music.class);
         assetManager.load("data/sounds/gameOver2.mp3", Music.class);
-        assetManager.load("data/sounds/music/background1.mp3", Music.class);
+        assetManager.load("data/sounds/music/background1.wav", Music.class);
 
         assetManager.load("data/sounds/blast.mp3", Sound.class);
         assetManager.load("data/sounds/bark.mp3", Sound.class);
@@ -347,7 +347,7 @@ public class Assets {
         gameOver1.setVolume(0.5f);
         gameOver2 = assetManager.get("data/sounds/gameOver2.mp3");
         gameOver2.setVolume(0.5f);
-        background = assetManager.get("data/sounds/music/background1.mp3");
+        background = assetManager.get("data/sounds/music/background1.wav");
         background.setVolume(0.5f);
 
         shoot = assetManager.get("data/sounds/blast.mp3");
