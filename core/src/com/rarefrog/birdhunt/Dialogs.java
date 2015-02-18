@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.rarefrog.birdhunt.screens.AboutScreen;
@@ -80,7 +81,6 @@ public class Dialogs {
 
         ImageButton.ImageButtonStyle confirmStyle = new ImageButton.ImageButtonStyle();
         confirmStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonUp));
-        confirmStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonDown));
         final ImageButton confirmButton = new ImageButton(confirmStyle);
         confirmButton.setSize(64, 64);
         confirmButton.setPosition(menuDialog.getWidth() / 4 - confirmButton.getWidth() / 2, 0);
@@ -94,7 +94,6 @@ public class Dialogs {
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
         closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(64, 64);
         closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 0);
@@ -124,7 +123,6 @@ public class Dialogs {
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
         closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
         closeButton.setPosition(gameDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
@@ -134,6 +132,18 @@ public class Dialogs {
                 game.dialogOpen = false;
                 if (Settings.soundEnabled) Assets.pauseClosed.play();
                 gameDialog.remove();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                closeButton.getImage().setOrigin(Align.center);
+                closeButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                closeButton.getImage().setScale(1.0f);
             }
         });
         gameDialog.addActor(closeButton);
@@ -166,7 +176,6 @@ public class Dialogs {
 
         ImageButton.ImageButtonStyle homeStyle = new ImageButton.ImageButtonStyle();
         homeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
-        homeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.backIconDown));
         final ImageButton homeButton = new ImageButton(homeStyle);
         homeButton.setSize(64, 64);
         homeButton.setPosition(gameDialog.getWidth() / 2 + 5, gameDialog.getHeight() / 2 - homeButton.getHeight() / 2 + 10);

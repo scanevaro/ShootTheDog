@@ -56,18 +56,18 @@ public class Assets {
     public static TextureRegion birdHitYellow;
     public static TextureRegion pauseButton;
     public static TextureRegion soundIconUp, soundIconDown;
-    public static TextureRegion play1ButtonUp, play1ButtonDown;
-    public static TextureRegion play2ButtonUp, play2ButtonDown;
-    public static TextureRegion aboutIconUp, aboutIconDown;
-    public static TextureRegion closeIconUp, closeIconDown;
-    public static TextureRegion loginButtonUp, loginButtonDown;
-    public static TextureRegion configButtonUp, configButtonDown;
-    public static TextureRegion quitButtonUp, quitButtonDown;
-    public static TextureRegion confirmButtonUp, confirmButtonDown;
-    public static TextureRegion backIconUp, backIconDown;
+    public static TextureRegion play1ButtonUp;
+    public static TextureRegion play2ButtonUp;
+    public static TextureRegion aboutIconUp;
+    public static TextureRegion closeIconUp;
+    public static TextureRegion loginButtonUp;
+    public static TextureRegion configButtonUp;
+    public static TextureRegion quitButtonUp;
+    public static TextureRegion confirmButtonUp;
+    public static TextureRegion backIconUp;
     public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
     public static TextureRegion squirrel, monkey, cow, pig, bear;
-    public static TextureRegion leaderboardsUp, leaderboardsDown, achievementsUp, achievementsDown;
+    public static TextureRegion leaderboardsUp, achievementsUp;
     public static TextureRegion logo, chrislogo;
 
     public static Animation duckFlyRightBlack;
@@ -127,7 +127,7 @@ public class Assets {
     }
 
     private static void loadAtlas() {
-        assetManager.load("data/items.pack", TextureAtlas.class);
+        assetManager.load("data/items.atlas", TextureAtlas.class);
     }
 
     private static void loadSounds() {
@@ -187,7 +187,7 @@ public class Assets {
         generator.dispose();
 
         FileHandle fileHandle = Gdx.files.internal("data/items.json");
-        FileHandle atlasFile = fileHandle.sibling("items.pack");
+        FileHandle atlasFile = fileHandle.sibling("items.atlas");
         if (atlasFile.exists()) {
             skin.addRegions(new TextureAtlas(atlasFile));
         }
@@ -195,7 +195,7 @@ public class Assets {
     }
 
     private static void setAtlas() {
-        items = assetManager.get("data/items.pack");
+        items = assetManager.get("data/items.atlas");
     }
 
     private static void setTextures() {
@@ -296,23 +296,14 @@ public class Assets {
         soundIconUp = items.findRegion("soundIconUp");
         soundIconDown = items.findRegion("soundIconDown");
         play1ButtonUp = items.findRegion("play1ButtonUp");
-        play1ButtonDown = items.findRegion("play1ButtonDown");
         play2ButtonUp = items.findRegion("play2ButtonUp");
-        play2ButtonDown = items.findRegion("play2ButtonDown");
         aboutIconUp = items.findRegion("aboutIconUp");
-        aboutIconDown = items.findRegion("aboutIconDown");
         closeIconUp = items.findRegion("closeIconUp");
-        closeIconDown = items.findRegion("closeIconDown");
         loginButtonUp = items.findRegion("loginButtonUp");
-        loginButtonDown = items.findRegion("loginButtonDown");
         configButtonUp = items.findRegion("configIconUp");
-        configButtonDown = items.findRegion("configIconDown");
         backIconUp = items.findRegion("backIconUp");
-        backIconDown = items.findRegion("backIconDown");
         quitButtonUp = items.findRegion("quitIconUp");
-        quitButtonDown = items.findRegion("quitIconDown");
         confirmButtonUp = items.findRegion("confirmIconUp");
-        confirmButtonDown = items.findRegion("confirmIconDown");
         multiplier1 = items.findRegion("multiplier1");
         multiplier2 = items.findRegion("multiplier2");
         multiplier3 = items.findRegion("multiplier3");
@@ -328,9 +319,7 @@ public class Assets {
         cow = items.findRegion("cow");
         pig = items.findRegion("pig");
         bear = items.findRegion("bear");
-        achievementsDown = items.findRegion("achievementsDown");
         achievementsUp = items.findRegion("achievementsUp");
-        leaderboardsDown = items.findRegion("leaderboardsDown");
         leaderboardsUp = items.findRegion("leaderboardsUp");
         logo = items.findRegion("logo");
         chrislogo = items.findRegion("chrisportermusic");

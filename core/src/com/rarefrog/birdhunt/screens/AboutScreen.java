@@ -61,9 +61,6 @@ public class AboutScreen extends AbstractScreen {
         backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
         backStyle.imageUp.setMinWidth(64);
         backStyle.imageUp.setMinHeight(64);
-        backStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.backIconDown));
-        backStyle.imageDown.setMinWidth(64);
-        backStyle.imageDown.setMinHeight(64);
         ImageButton backButton = new ImageButton(backStyle);
         backButton.setPosition(5, 5);
         backButton.addListener(new ClickListener() {

@@ -71,28 +71,20 @@ public class MainMenuScreen extends AbstractScreen {
         play1DuckStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonUp));
         play1DuckStyle.imageUp.setMinWidth(192);
         play1DuckStyle.imageUp.setMinHeight(64);
-        play1DuckStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play1ButtonDown));
-        play1DuckStyle.imageDown.setMinWidth(192);
-        play1DuckStyle.imageDown.setMinHeight(64);
         play1DuckButton = new ImageButton(play1DuckStyle);
 
         ImageButton.ImageButtonStyle play2DucksStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play2DucksStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonUp));
         play2DucksStyle.imageUp.setMinWidth(192);
         play2DucksStyle.imageUp.setMinHeight(64);
-        play2DucksStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.play2ButtonDown));
-        play2DucksStyle.imageDown.setMinWidth(192);
-        play2DucksStyle.imageDown.setMinHeight(64);
         play2DucksButton = new ImageButton(play2DucksStyle);
 
         ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
         loginStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonUp));
-        loginStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.loginButtonDown));
         loginButton = new ImageButton(loginStyle);
 
         ImageButton.ImageButtonStyle configStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         configStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.configButtonUp));
-        configStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.configButtonDown));
         configButton = new ImageButton(configStyle);
 
         deeepLabel = new Label("Deeep Games 2014 - Version: Prototype", Assets.skin);
@@ -183,7 +175,6 @@ public class MainMenuScreen extends AbstractScreen {
         //TODO Change it to CLOSE ICON
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
         closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
-        closeStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.closeIconDown));
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
         closeButton.setPosition(configDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
@@ -221,7 +212,6 @@ public class MainMenuScreen extends AbstractScreen {
 
         ImageButton.ImageButtonStyle aboutStyle = new ImageButton.ImageButtonStyle();
         aboutStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconUp));
-        aboutStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.aboutIconDown));
         final ImageButton aboutButton = new ImageButton(aboutStyle);
         aboutButton.setSize(64, 64);
         aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
@@ -235,7 +225,6 @@ public class MainMenuScreen extends AbstractScreen {
 
         ImageButton.ImageButtonStyle quitStyle = new ImageButton.ImageButtonStyle();
         quitStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonUp));
-        quitStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.quitButtonDown));
         final ImageButton quitButton = new ImageButton(quitStyle);
         quitButton.setSize(64, 64);
         quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
@@ -251,7 +240,6 @@ public class MainMenuScreen extends AbstractScreen {
 
         ImageButton.ImageButtonStyle leaderboardsStyle = new ImageButton.ImageButtonStyle();
         leaderboardsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsUp));
-        leaderboardsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.leaderboardsDown));
         final ImageButton leaderboardsButton = new ImageButton(leaderboardsStyle);
         leaderboardsButton.setSize(64, 64);
         leaderboardsButton.setPosition(configDialog.getWidth() / 2 - 5 - 64, 32 + 10);
@@ -265,7 +253,6 @@ public class MainMenuScreen extends AbstractScreen {
 
         ImageButton.ImageButtonStyle achievementsStyle = new ImageButton.ImageButtonStyle();
         achievementsStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.achievementsUp));
-        achievementsStyle.imageDown = new TextureRegionDrawable(new TextureRegion(Assets.achievementsDown));
         final ImageButton achievementsButton = new ImageButton(achievementsStyle);
         achievementsButton.setSize(64, 64);
         achievementsButton.setPosition(configDialog.getWidth() / 2 + 5, 32 + 10);
