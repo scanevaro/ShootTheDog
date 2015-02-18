@@ -1,7 +1,6 @@
 package com.rarefrog.birdhunt;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -80,7 +79,7 @@ public class Dialogs {
         menuDialog.addActor(label);
 
         ImageButton.ImageButtonStyle confirmStyle = new ImageButton.ImageButtonStyle();
-        confirmStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.confirmButtonUp));
+        confirmStyle.imageUp = new TextureRegionDrawable(Assets.confirmButtonUp);
         final ImageButton confirmButton = new ImageButton(confirmStyle);
         confirmButton.setSize(64, 64);
         confirmButton.setPosition(menuDialog.getWidth() / 4 - confirmButton.getWidth() / 2, 0);
@@ -89,11 +88,25 @@ public class Dialogs {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                confirmButton.getImage().setOrigin(Align.center);
+                confirmButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                confirmButton.getImage().setScale(1.0f);
+            }
         });
         menuDialog.addActor(confirmButton);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
-        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+        closeStyle.imageUp = new TextureRegionDrawable(Assets.closeIconUp);
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(64, 64);
         closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 0);
@@ -103,6 +116,20 @@ public class Dialogs {
                 game.dialogOpen = false;
                 menuDialog.remove();
                 if (Settings.soundEnabled) Assets.pauseClosed.play();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                closeButton.getImage().setOrigin(Align.center);
+                closeButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                closeButton.getImage().setScale(1.0f);
             }
         });
         menuDialog.addActor(closeButton);
@@ -122,7 +149,7 @@ public class Dialogs {
         gameDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - gameDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - gameDialog.getHeight() / 2);
 
         ImageButton.ImageButtonStyle closeStyle = new ImageButton.ImageButtonStyle();
-        closeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.closeIconUp));
+        closeStyle.imageUp = new TextureRegionDrawable(Assets.closeIconUp);
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
         closeButton.setPosition(gameDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
@@ -136,6 +163,7 @@ public class Dialogs {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
                 closeButton.getImage().setOrigin(Align.center);
                 closeButton.getImage().setScale(1.5f);
                 return true;
@@ -143,14 +171,15 @@ public class Dialogs {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
                 closeButton.getImage().setScale(1.0f);
             }
         });
         gameDialog.addActor(closeButton);
 
         ImageButton.ImageButtonStyle muteStyle = new ImageButton.ImageButtonStyle();
-        muteStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.soundIconUp));
-        muteStyle.imageChecked = new TextureRegionDrawable(new TextureRegion(Assets.soundIconDown));
+        muteStyle.imageUp = new TextureRegionDrawable(Assets.soundIconUp);
+        muteStyle.imageChecked = new TextureRegionDrawable(Assets.soundIconDown);
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
         muteButton.setPosition(gameDialog.getWidth() / 2 - muteButton.getWidth() - 5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 10);
@@ -171,11 +200,25 @@ public class Dialogs {
 
                 if (!Settings.soundEnabled && Assets.startRound.isPlaying()) Assets.startRound.stop();
             }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                muteButton.getImage().setOrigin(Align.center);
+                muteButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                muteButton.getImage().setScale(1.0f);
+            }
         });
         gameDialog.addActor(muteButton);
 
         ImageButton.ImageButtonStyle homeStyle = new ImageButton.ImageButtonStyle();
-        homeStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
+        homeStyle.imageUp = new TextureRegionDrawable(Assets.backIconUp);
         final ImageButton homeButton = new ImageButton(homeStyle);
         homeButton.setSize(64, 64);
         homeButton.setPosition(gameDialog.getWidth() / 2 + 5, gameDialog.getHeight() / 2 - homeButton.getHeight() / 2 + 10);
@@ -186,6 +229,20 @@ public class Dialogs {
                 if (Assets.background.isPlaying()) Assets.background.stop();
                 game.setScreen(new MainMenuScreen(game));
                 game.requestHandler.showInterstitial(true);
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                homeButton.getImage().setOrigin(Align.center);
+                homeButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                homeButton.getImage().setScale(1.0f);
             }
         });
         gameDialog.addActor(homeButton);

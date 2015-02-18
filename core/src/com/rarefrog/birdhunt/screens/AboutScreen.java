@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -58,15 +58,29 @@ public class AboutScreen extends AbstractScreen {
         stage.addActor(chrislogo);
 
         ImageButton.ImageButtonStyle backStyle = new ImageButton.ImageButtonStyle();
-        backStyle.imageUp = new TextureRegionDrawable(new TextureRegion(Assets.backIconUp));
+        backStyle.imageUp = new TextureRegionDrawable(Assets.backIconUp);
         backStyle.imageUp.setMinWidth(64);
         backStyle.imageUp.setMinHeight(64);
-        ImageButton backButton = new ImageButton(backStyle);
+        final ImageButton backButton = new ImageButton(backStyle);
         backButton.setPosition(5, 5);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new MainMenuScreen(game));
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                backButton.getImage().setOrigin(Align.center);
+                backButton.getImage().setScale(1.5f);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                backButton.getImage().setScale(1.0f);
             }
         });
         stage.addActor(backButton);
