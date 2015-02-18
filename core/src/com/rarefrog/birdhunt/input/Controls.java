@@ -1,7 +1,9 @@
 package com.rarefrog.birdhunt.input;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.rarefrog.birdhunt.Game;
 
 /**
  * Created by Elmar on 1/20/2015.
@@ -11,40 +13,61 @@ public class Controls {
     private float rawAzimuth = 0;
     private float azimuthValue = 0;
     private boolean calibrated = false;
-    private float azimuthPrevious[];
     private float azimuthCalibration;
+    private boolean addup;
+    private boolean removeup;
+    private float previousVal;
 
     public Controls() {
         double coefficients[] = new double[10];
         for (int i = 0; i < 10; i++) {
-            coefficients[i] = 1f/10f;
+            coefficients[i] = 1f / 10f;
         }
-        azimuthPrevious = new float[100];
 
         fir = new FIR(coefficients);
     }
 
     public void update(float value) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            rawAzimuth+=5f;
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                if (rawAzimuth < Game.VIRTUAL_WIDTH - 5)
+                    rawAzimuth += 5f;
+                else
+                    rawAzimuth = Game.VIRTUAL_WIDTH;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                if (rawAzimuth > -Game.VIRTUAL_WIDTH + 5)
+                    rawAzimuth -= 5f;
+                else
+                    rawAzimuth = -Game.VIRTUAL_WIDTH;
+            }
+            System.out.println(rawAzimuth);
+        } else {
+            value *= 4;
+            rawAzimuth = value;//Gdx.input.getAzimuth();
+            System.out.println(rawAzimuth);
+            //clamp at -480 and 480, recalibrate?
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            rawAzimuth-=5f;
-        }
-        //System.out.println(rawAzimuth);
-        //clamp at -480 and 480, recalibrate?
 
-        value *= 4;
-        //rawAzimuth = value;//Gdx.input.getAzimuth();
         azimuthValue = (float) fir.getOutputSample(rawAzimuth);
-        if(!calibrated){
-            azimuthCalibration = value;
+        if (!calibrated) {
+            previousVal = azimuthCalibration = value;
             calibrated = true;
+            addup = false;
+            removeup = false;
         }
     }
 
     public float getCalibratedValue() {
-        return azimuthValue - azimuthCalibration;
+        //==========================================================//
+        float returnValue = azimuthValue - azimuthCalibration;      //
+        if (addup) {                                                //
+            // returnValue += 360 degrees                           //
+        } else if (removeup) {                                      //
+            // returnValue -= 360 degrees                           //
+        }                                                           //
+        //==========================================================//
+        return returnValue;
     }
 
     public float getAzimuthValue() {
