@@ -75,14 +75,14 @@ public class Dialogs {
         menuDialog.setPosition(Game.VIRTUAL_WIDTH / 2 - menuDialog.getWidth() / 2, Game.VIRTUAL_HEIGHT / 2 - menuDialog.getHeight() / 2);
 
         Label label = new Label("Are you sure you want to Quit?", Assets.skin);
-        label.setPosition(25, menuDialog.getHeight() / 2 + 10);
+        label.setPosition(45, menuDialog.getHeight() / 2 + 25);
         menuDialog.addActor(label);
 
         ImageButton.ImageButtonStyle confirmStyle = new ImageButton.ImageButtonStyle();
         confirmStyle.imageUp = new TextureRegionDrawable(Assets.confirmButtonUp);
         final ImageButton confirmButton = new ImageButton(confirmStyle);
         confirmButton.setSize(64, 64);
-        confirmButton.setPosition(menuDialog.getWidth() / 4 - confirmButton.getWidth() / 2, 0);
+        confirmButton.setPosition(menuDialog.getWidth() / 4 - confirmButton.getWidth() / 2, 20);
         confirmButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -109,7 +109,7 @@ public class Dialogs {
         closeStyle.imageUp = new TextureRegionDrawable(Assets.closeIconUp);
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(64, 64);
-        closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 0);
+        closeButton.setPosition(menuDialog.getWidth() / 4 * 3 - closeButton.getWidth() / 2, 20);
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

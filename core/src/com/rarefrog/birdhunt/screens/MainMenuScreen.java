@@ -230,7 +230,7 @@ public class MainMenuScreen extends AbstractScreen {
         closeStyle.imageUp = new TextureRegionDrawable(Assets.closeIconUp);
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
-        closeButton.setPosition(configDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
+        closeButton.setPosition(configDialog.getWidth() / 2 - closeButton.getWidth() / 2, 10);
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -259,7 +259,7 @@ public class MainMenuScreen extends AbstractScreen {
         muteStyle.imageChecked = new TextureRegionDrawable(Assets.soundIconDown);
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
-        muteButton.setPosition(20, configDialog.getHeight() / 2 + 5);
+        muteButton.setPosition(20, configDialog.getHeight() / 2 + 15);
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -293,7 +293,7 @@ public class MainMenuScreen extends AbstractScreen {
         aboutStyle.imageUp = new TextureRegionDrawable(Assets.aboutIconUp);
         final ImageButton aboutButton = new ImageButton(aboutStyle);
         aboutButton.setSize(64, 64);
-        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
+        aboutButton.setPosition(20 + muteButton.getWidth() + 5, configDialog.getHeight() / 2 + 15);
         aboutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -319,7 +319,7 @@ public class MainMenuScreen extends AbstractScreen {
         quitStyle.imageUp = new TextureRegionDrawable(Assets.quitButtonUp);
         final ImageButton quitButton = new ImageButton(quitStyle);
         quitButton.setSize(64, 64);
-        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 + 5);
+        quitButton.setPosition(20 + muteButton.getWidth() + 5 + aboutButton.getWidth() + 5, configDialog.getHeight() / 2 + 15);
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -347,7 +347,7 @@ public class MainMenuScreen extends AbstractScreen {
         leaderboardsStyle.imageUp = new TextureRegionDrawable(Assets.leaderboardsUp);
         final ImageButton leaderboardsButton = new ImageButton(leaderboardsStyle);
         leaderboardsButton.setSize(64, 64);
-        leaderboardsButton.setPosition(configDialog.getWidth() / 2 - 5 - 64, 32 + 10);
+        leaderboardsButton.setPosition(configDialog.getWidth() / 2 - 15 - 64, 32 + 10);
         leaderboardsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -373,7 +373,7 @@ public class MainMenuScreen extends AbstractScreen {
         achievementsStyle.imageUp = new TextureRegionDrawable(Assets.achievementsUp);
         final ImageButton achievementsButton = new ImageButton(achievementsStyle);
         achievementsButton.setSize(64, 64);
-        achievementsButton.setPosition(configDialog.getWidth() / 2 + 5, 32 + 10);
+        achievementsButton.setPosition(configDialog.getWidth() / 2 + 15, 32 + 10);
         achievementsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
