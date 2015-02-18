@@ -19,12 +19,10 @@ public class GreenMeadows extends Level {
 
     public GreenMeadows(OrthographicCamera gameCam) {
         super(gameCam, (int) (GREEN_MEADOWS_TILES * Game.VIRTUAL_WIDTH), (int) Game.VIRTUAL_HEIGHT, GREEN_MEADOWS_TILES);
-        for (int i = 0; i < GREEN_MEADOWS_TILES; i++) {
-            backGround[i] = Assets.backgroundBackRegion;
-            foreGround[i] = Assets.backgroundRegion;
-        }
-        scaleX = Game.VIRTUAL_WIDTH / backGround[0].getRegionWidth();
-        scaleY = Game.VIRTUAL_HEIGHT / backGround[0].getRegionHeight();
+        backGround = Assets.backgroundBackRegion_rear;
+        foreGround = Assets.backgroundBackRegion_front;
+        scaleX = Game.VIRTUAL_WIDTH / backGround.getRegionWidth();
+        scaleY = Game.VIRTUAL_HEIGHT / backGround.getRegionHeight();
         Random random = new Random();
         float scaleMultiplier = 0;
         for (int i = 0; i < clouds.length; i++) {

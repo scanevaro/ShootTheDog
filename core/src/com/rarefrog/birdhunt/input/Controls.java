@@ -1,5 +1,8 @@
 package com.rarefrog.birdhunt.input;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+
 /**
  * Created by Elmar on 1/20/2015.
  */
@@ -22,8 +25,17 @@ public class Controls {
     }
 
     public void update(float value) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            rawAzimuth+=5f;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            rawAzimuth-=5f;
+        }
+        //System.out.println(rawAzimuth);
+        //clamp at -480 and 480, recalibrate?
+
         value *= 4;
-        rawAzimuth = value;//Gdx.input.getAzimuth();
+        //rawAzimuth = value;//Gdx.input.getAzimuth();
         azimuthValue = (float) fir.getOutputSample(rawAzimuth);
         if(!calibrated){
             azimuthCalibration = value;

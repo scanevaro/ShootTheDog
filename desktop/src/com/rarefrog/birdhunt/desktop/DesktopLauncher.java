@@ -20,17 +20,6 @@ public class DesktopLauncher implements InputInterface {
 
     @Override
     public float[] getRotation() {
-        if (increment)
-            rotation += 0.25f;
-        else
-            rotation -= 0.25f;
-        if (rotation < -30) {
-            increment = true;
-        }
-        if (rotation > 30) {
-            increment = false;
-        }
-
         return new float[]{(float) Math.toRadians(rotation), (float) Math.toRadians(rotation), (float) Math.toRadians(rotation)};
     }
 }

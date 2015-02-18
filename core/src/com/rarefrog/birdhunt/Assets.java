@@ -31,6 +31,8 @@ public class Assets {
     public static TextureRegion cloud[];
     public static TextureRegion backgroundRegion;
     public static TextureRegion backgroundBackRegion;
+    public static TextureRegion backgroundBackRegion_rear;
+    public static TextureRegion backgroundBackRegion_front;
     public static TextureRegion duckHit;
     public static TextureRegion title;
     public static TextureRegion gameMode1;
@@ -201,6 +203,8 @@ public class Assets {
     private static void setTextures() {
         backgroundRegion = items.findRegion("grass1440");
         backgroundBackRegion = items.findRegion("wallpaper1440");
+        backgroundBackRegion_rear = items.findRegion("DH_wallpaper_rear");
+        backgroundBackRegion_front = items.findRegion("DH_wallpaper_front");
 //        viewmodel = new Texture(Gdx.files.internal("data/images/viewmodel.png"));
         bulletCasing = new Animation(0.5f,
                 (items.findRegion("cart1")),

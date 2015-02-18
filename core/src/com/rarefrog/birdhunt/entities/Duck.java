@@ -135,22 +135,22 @@ public class Duck extends DynamicGameObject {
                 velocity.y = duck_velocity_y / 2;
             else
                 velocity.y = -duck_velocity_y / 2;
-
+        System.out.println(level.width);
         if (position.x < -(level.width / 2)) { //DUCK_WIDTH / 2) {
             position.x = DUCK_WIDTH / 2;
-            velocity.x = duck_velocity_y;
+            velocity.x = duck_velocity_x;
             velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
         if (position.x > (level.width / 2)) {//Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
             position.x = Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2;
-            velocity.x = -duck_velocity_y;
+            velocity.x = -duck_velocity_x;
             velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
         if (position.y < DUCK_WIDTH / 2) {
             position.y = DUCK_HEIGHT / 2;
-            velocity.x = duck_velocity_y;
+            velocity.x = duck_velocity_x;
             velocity.y = duck_velocity_y * rand.nextFloat();
         }
 
@@ -189,7 +189,7 @@ public class Duck extends DynamicGameObject {
 
     private void checkStateTime() {
         if (stateTime > 8f) {
-            flyAway();
+            //flyAway();
         }
     }
 

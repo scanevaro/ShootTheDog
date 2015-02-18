@@ -13,8 +13,10 @@ public abstract class Level {
     public int width;
     public int height;
     public float horPosition;
-    protected TextureRegion foreGround[];
-    protected TextureRegion backGround[];
+    //protected TextureRegion foreGround[];
+    protected TextureRegion foreGround;
+    //protected TextureRegion backGround[];
+    protected TextureRegion backGround;
     protected OrthographicCamera gameCam;
 
     public Level(OrthographicCamera gameCam, int width, int height, int tiles) {
@@ -22,8 +24,6 @@ public abstract class Level {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
-        foreGround = new TextureRegion[tiles];
-        backGround = new TextureRegion[tiles];
     }
 
     public void update(float horPosition) {
@@ -31,25 +31,18 @@ public abstract class Level {
     }
 
     public void drawForeGround(SpriteBatch spriteBatch) {
-        for (int i = 0; i < tiles; i++) {
-            float xPosition = Game.VIRTUAL_WIDTH * i - Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horPosition;
-            spriteBatch.draw(foreGround[i],
-                    xPosition,
-                    gameCam.position.y - Game.VIRTUAL_HEIGHT / 2,
-                    Game.VIRTUAL_WIDTH,
-                    Game.VIRTUAL_HEIGHT);
-        }
+        spriteBatch.draw(foreGround,
+                -Game.VIRTUAL_WIDTH - horPosition, gameCam.position.y - Game.VIRTUAL_HEIGHT / 2,
+                Game.VIRTUAL_WIDTH * 3,
+                Game.VIRTUAL_HEIGHT);
     }
 
     public void drawBackgrounds(SpriteBatch spriteBatch) {
-        for (int i = 0; i < tiles; i++) {
-            float xPosition = Game.VIRTUAL_WIDTH * i - Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horPosition;
-            spriteBatch.draw(backGround[i],
-                    xPosition,
-                    gameCam.position.y - Game.VIRTUAL_HEIGHT / 2,
-                    Game.VIRTUAL_WIDTH,
-                    Game.VIRTUAL_HEIGHT);
-        }
+        //float xPosition = Game.VIRTUAL_WIDTH * i - Game.VIRTUAL_WIDTH + gameCam.position.x - (Game.VIRTUAL_WIDTH / 2) - horPosition
+        spriteBatch.draw(backGround,
+                -Game.VIRTUAL_WIDTH - horPosition, gameCam.position.y - Game.VIRTUAL_HEIGHT / 2,
+                Game.VIRTUAL_WIDTH * 3,
+                Game.VIRTUAL_HEIGHT);
     }
 
     public void drawAndUpdateSpecifics(float deltaT, SpriteBatch spriteBatch) {
