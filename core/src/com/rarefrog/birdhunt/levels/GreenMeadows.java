@@ -15,7 +15,7 @@ public class GreenMeadows extends Level {
     public static final int GREEN_MEADOWS_TILES = 3;
     private float scaleX = 1;
     private float scaleY = 1;
-    private Sprite clouds[] = new Sprite[20];
+    private Sprite clouds[] = new Sprite[10];
 
     public GreenMeadows(OrthographicCamera gameCam) {
         super(gameCam, (int) (GREEN_MEADOWS_TILES * Game.VIRTUAL_WIDTH), (int) Game.VIRTUAL_HEIGHT, GREEN_MEADOWS_TILES);
