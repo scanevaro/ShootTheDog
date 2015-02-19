@@ -70,13 +70,13 @@ public class MainMenuScreen extends AbstractScreen {
         ImageButton.ImageButtonStyle play1DuckStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play1DuckStyle.imageUp = new TextureRegionDrawable(Assets.play1ButtonUp);
         play1DuckStyle.imageUp.setMinWidth(192);
-        play1DuckStyle.imageUp.setMinHeight(64);
+        play1DuckStyle.imageUp.setMinHeight(46);
         play1DuckButton = new ImageButton(play1DuckStyle);
 
         ImageButton.ImageButtonStyle play2DucksStyle = new ImageButton.ImageButtonStyle(/*Assets.getSkin().get(Button.ButtonStyle.class)*/);
         play2DucksStyle.imageUp = new TextureRegionDrawable(Assets.play2ButtonUp);
         play2DucksStyle.imageUp.setMinWidth(192);
-        play2DucksStyle.imageUp.setMinHeight(64);
+        play2DucksStyle.imageUp.setMinHeight(46);
         play2DucksButton = new ImageButton(play2DucksStyle);
 
         ImageButton.ImageButtonStyle loginStyle = new ImageButton.ImageButtonStyle();
@@ -106,7 +106,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 play1DuckButton.getImage().setOrigin(Align.center);
-                play1DuckButton.getImage().setScale(1.5f);
+                play1DuckButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -123,11 +123,12 @@ public class MainMenuScreen extends AbstractScreen {
                 game.setScreen(new GameScreen(game, World.GAME_MODE_2));
                 if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 play2DucksButton.getImage().setOrigin(Align.center);
-                play2DucksButton.getImage().setScale(1.5f);
+                play2DucksButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -142,6 +143,7 @@ public class MainMenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.actionResolver.loginGPGS();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -171,6 +173,7 @@ public class MainMenuScreen extends AbstractScreen {
                     configDialog.setVisible(false);
                 }
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -207,11 +210,11 @@ public class MainMenuScreen extends AbstractScreen {
         stage.addActor(titleImage);
 
         configButton.setSize(32, 32);
-        configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth(), 2);
+        configButton.setPosition(Game.VIRTUAL_WIDTH - configButton.getWidth() - 8, 8);
         stage.addActor(configButton);
 
         loginButton.setSize(32, 32);
-        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth() - configButton.getWidth() - 2, 2);
+        loginButton.setPosition(Game.VIRTUAL_WIDTH - loginButton.getWidth() - configButton.getWidth() - 16, 8);
         stage.addActor(loginButton);
 
         deeepLabel.setPosition(Game.VIRTUAL_WIDTH / 2 - deeepLabel.getWidth() / 2, 5);
@@ -238,6 +241,7 @@ public class MainMenuScreen extends AbstractScreen {
                 if (Settings.soundEnabled) Assets.pauseClosed.play();
                 configDialog.remove();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -273,6 +277,7 @@ public class MainMenuScreen extends AbstractScreen {
 
                 if (!Settings.soundEnabled && Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -299,6 +304,7 @@ public class MainMenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new AboutScreen(game));
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -327,6 +333,7 @@ public class MainMenuScreen extends AbstractScreen {
                 game.dialogs.buildMenuDialog(game.screen);
                 if (Settings.soundEnabled) Assets.pauseClicked.play();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -353,6 +360,7 @@ public class MainMenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.actionResolver.getLeaderboardGPGS();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -379,6 +387,7 @@ public class MainMenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.actionResolver.getAchievementsGPGS();
             }
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);

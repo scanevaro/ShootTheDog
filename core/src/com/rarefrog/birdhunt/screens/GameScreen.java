@@ -52,7 +52,6 @@ public class GameScreen extends AbstractScreen {
      * Widgets
      */
     private ImageButton pauseButton;
-//    private Label compass;
 
     public GameScreen(Game game, int gameMode) {
         controls = new Controls();
@@ -91,8 +90,8 @@ public class GameScreen extends AbstractScreen {
         ImageButton.ImageButtonStyle pauseStyle = new ImageButton.ImageButtonStyle();
         pauseStyle.imageUp = new TextureRegionDrawable(Assets.pauseButton);
         pauseButton = new ImageButton(pauseStyle);
-        pauseButton.setSize(21, 21);
-        pauseButton.setPosition(Game.VIRTUAL_WIDTH - pauseButton.getWidth() - 5, Game.VIRTUAL_HEIGHT - pauseButton.getHeight() - 5);
+        pauseButton.setSize(32, 32);
+        pauseButton.setPosition(Game.VIRTUAL_WIDTH - pauseButton.getWidth() - 7, Game.VIRTUAL_HEIGHT - pauseButton.getHeight() - 7);
         stage.addActor(pauseButton);
 
 //        compass = new Label("", Assets.skin);

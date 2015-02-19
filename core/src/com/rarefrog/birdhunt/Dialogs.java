@@ -152,7 +152,7 @@ public class Dialogs {
         closeStyle.imageUp = new TextureRegionDrawable(Assets.closeIconUp);
         final ImageButton closeButton = new ImageButton(closeStyle);
         closeButton.setSize(48, 48);
-        closeButton.setPosition(gameDialog.getWidth() / 2 - closeButton.getWidth() / 2, 0);
+        closeButton.setPosition(gameDialog.getWidth() / 2 - closeButton.getWidth() / 2, 8);
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -165,7 +165,7 @@ public class Dialogs {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 closeButton.getImage().setOrigin(Align.center);
-                closeButton.getImage().setScale(1.5f);
+                closeButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -182,7 +182,7 @@ public class Dialogs {
         muteStyle.imageChecked = new TextureRegionDrawable(Assets.soundIconDown);
         final ImageButton muteButton = new ImageButton(muteStyle);
         muteButton.setSize(64, 64);
-        muteButton.setPosition(gameDialog.getWidth() / 2 - muteButton.getWidth() - 5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 10);
+        muteButton.setPosition(gameDialog.getWidth() / 2 - muteButton.getWidth() - 5, gameDialog.getHeight() / 2 - muteButton.getHeight() / 2 + 20);
         muteButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -205,7 +205,7 @@ public class Dialogs {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 muteButton.getImage().setOrigin(Align.center);
-                muteButton.getImage().setScale(1.5f);
+                muteButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -221,7 +221,7 @@ public class Dialogs {
         homeStyle.imageUp = new TextureRegionDrawable(Assets.backIconUp);
         final ImageButton homeButton = new ImageButton(homeStyle);
         homeButton.setSize(64, 64);
-        homeButton.setPosition(gameDialog.getWidth() / 2 + 5, gameDialog.getHeight() / 2 - homeButton.getHeight() / 2 + 10);
+        homeButton.setPosition(gameDialog.getWidth() / 2 + 5, gameDialog.getHeight() / 2 - homeButton.getHeight() / 2 + 20);
         homeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -235,7 +235,7 @@ public class Dialogs {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 homeButton.getImage().setOrigin(Align.center);
-                homeButton.getImage().setScale(1.5f);
+                homeButton.getImage().setScale(1.25f);
                 return true;
             }
 
