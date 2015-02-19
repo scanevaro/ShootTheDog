@@ -2,10 +2,12 @@ package com.rarefrog.birdhunt.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -60,6 +62,11 @@ public class MainMenuScreen extends AbstractScreen {
         setInputProcessor();
 
         game.requestHandler.showAds(true);
+
+        stage.getRoot().setColor(new Color(1, 1, 1, 0));
+        stage.getRoot().addAction(Actions.fadeIn(0.8f));
+
+//        stage.addAction(Actions.fadeOut(0.5f));
     }
 
     private void setWidgets() {

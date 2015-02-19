@@ -85,7 +85,7 @@ public class SplashScreen extends AbstractScreen {
                 Timer.schedule(timer = new Timer.Task() {
                     @Override
                     public void run() {
-                        game.setScreen(new MainMenuScreen(game));
+                        game.setScreen(new ChrisSplashScreen(game));
                     }
                 }, DURATION - splashSprite.stateTime);
             } else {
@@ -98,7 +98,7 @@ public class SplashScreen extends AbstractScreen {
                 Timer.schedule(timer = new Timer.Task() {
                     @Override
                     public void run() {
-                        game.setScreen(new MainMenuScreen(game));
+                        game.setScreen(new ChrisSplashScreen(game));
                     }
                 }, 0.5f);
             }
