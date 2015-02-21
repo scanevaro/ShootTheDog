@@ -79,6 +79,8 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
 
         // Begin loading your interstitial.
         interstitial.loadAd(adRequest);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
