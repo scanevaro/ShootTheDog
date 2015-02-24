@@ -225,6 +225,11 @@ public class Dialogs {
         homeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
+                Assets.flapLong.stop();
+                Assets.flapNormal.stop();
+                Assets.flapShort.stop();
+
                 if (Assets.startRound.isPlaying()) Assets.startRound.stop();
                 if (Assets.background.isPlaying()) Assets.background.stop();
                 game.setScreen(new MainMenuScreen(game));

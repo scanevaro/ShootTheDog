@@ -2,12 +2,10 @@ package com.rarefrog.birdhunt.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rarefrog.birdhunt.*;
-import com.rarefrog.birdhunt.levels.Level;
 
 import java.util.Random;
 
 public class Duck extends DynamicGameObject {
-    private Level level;
 
     public static final int BLACK_DUCK = 1;
     public static final int RED_DUCK = 2;
@@ -37,21 +35,18 @@ public class Duck extends DynamicGameObject {
     public Integer state;
     public float uiStateTime;
     public float stateTime;
-    private float lastTimeSaved;
     private float lastTimeSaved2;
     private Random rand;
     private int frames;
     private long soundID;
     private float fallingVolume;
 
-    public Duck(Level level, float x, float y) {
+    public Duck(float x, float y) {
         super(x, y, DUCK_WIDTH, DUCK_HEIGHT);
-        this.level = level;
         state = DUCK_STATE_STANDBY;
         velocity.set(duck_velocity_x, duck_velocity_y);
         stateTime = 0;
         uiStateTime = 0;
-        lastTimeSaved = 0;
         lastTimeSaved2 = 0;
         soundID = -1;
         rand = new Random();
@@ -258,12 +253,6 @@ public class Duck extends DynamicGameObject {
         position.add(0, deltaTime * 135);
         bounds.x = position.x;
         bounds.y = position.y;
-
-//        if (stateTime > 0.125f)
-//            if ((stateTime - lastTimeSaved) >= 0.125f) {
-//                if (Settings.soundEnabled) Assets.flapLong.play();
-//                lastTimeSaved = stateTime;
-//            }
 
         if (position.y > Game.VIRTUAL_HEIGHT + DUCK_HEIGHT)
             state = DUCK_STATE_GONE;

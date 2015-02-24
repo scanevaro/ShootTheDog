@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.rarefrog.birdhunt.entities.*;
+import com.rarefrog.birdhunt.entities.Dog;
+import com.rarefrog.birdhunt.entities.Duck;
 import com.rarefrog.birdhunt.levels.GreenMeadows;
 import com.rarefrog.birdhunt.levels.Level;
 import com.rarefrog.birdhunt.screens.GameScreen;
@@ -67,7 +68,7 @@ public class World {
 //        viewmodel = new Viewmodel();
 
         level = new GreenMeadows(null);
-                generateRound();
+        generateRound();
     }
 
     private void generateRound() {
@@ -75,7 +76,7 @@ public class World {
 
         for (int i = 0; i < 10; i++) {
             float random = -(Game.VIRTUAL_WIDTH) + (rand.nextFloat() * (Game.VIRTUAL_WIDTH * 3));
-            Duck duck = new Duck(level, random, 75f);
+            Duck duck = new Duck(random, 75f);
             ducks.add(duck);
         }
 
@@ -141,7 +142,7 @@ public class World {
 
         updateDog(delta, ducksHit);
         updateDucks(delta);
-                checkCollisions();
+        checkCollisions();
         checkStates();
     }
 
@@ -165,7 +166,7 @@ public class World {
 
         if (stateTime > 1.6f) {
             updateDog(delta, ducksHit);
-                    checkDogState();
+            checkDogState();
             checkDogCollision();
         }
 
@@ -328,7 +329,7 @@ public class World {
             if (ducks.get(duckCount).state == Duck.DUCK_STATE_STANDBY)
                 ducks.get(duckCount).fly();
             if (ducks.get(duckCount + 1).state == Duck.DUCK_STATE_STANDBY)
-                ducks.get(duckCount).fly();
+                ducks.get(duckCount + 1).fly();
 
             ducks.get(duckCount).update(deltaTime);
             ducks.get(duckCount + 1).update(deltaTime);
