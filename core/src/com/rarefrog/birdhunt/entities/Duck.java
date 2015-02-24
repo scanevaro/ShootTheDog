@@ -1,9 +1,7 @@
 package com.rarefrog.birdhunt.entities;
 
-import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rarefrog.birdhunt.*;
-import com.rarefrog.birdhunt.Game;
 import com.rarefrog.birdhunt.levels.Level;
 
 import java.util.Random;
@@ -140,18 +138,18 @@ public class Duck extends DynamicGameObject {
 
         if (position.x < -Game.VIRTUAL_WIDTH) { //DUCK_WIDTH / 2) {
             velocity.x = duck_velocity_x;
-            if(position.y > Game.VIRTUAL_HEIGHT/2){
+            if (position.y > Game.VIRTUAL_HEIGHT / 2) {
                 velocity.y = -rand.nextFloat() * duck_velocity_y;
-            }else{
+            } else {
                 velocity.y = rand.nextFloat() * duck_velocity_y;
             }
         }
 
-        if (position.x+bounds.width > (Game.VIRTUAL_WIDTH*2)) {//Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
+        if (position.x + bounds.width > (Game.VIRTUAL_WIDTH * 2)) {//Game.VIRTUAL_WIDTH - DUCK_WIDTH / 2) {
             velocity.x = -duck_velocity_x;
-            if(position.y > Game.VIRTUAL_HEIGHT/2){
+            if (position.y > Game.VIRTUAL_HEIGHT / 2) {
                 velocity.y = -rand.nextFloat() * duck_velocity_y;
-            }else{
+            } else {
                 velocity.y = rand.nextFloat() * duck_velocity_y;
             }
         }
@@ -197,7 +195,7 @@ public class Duck extends DynamicGameObject {
 
     private void checkStateTime() {
         if (stateTime > 8f) {
-            //flyAway();
+            flyAway();
         }
     }
 
