@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rarefrog.birdhunt.entities.Dog;
 import com.rarefrog.birdhunt.entities.Duck;
@@ -56,16 +54,7 @@ public class WorldRenderer extends Actor {
         } else {
             renderObjects();
             renderBackground();
-            renderAnimals();
         }
-        renderSpriteObjects((SpriteBatch) batch);
-    }
-
-    private void renderSpriteObjects(SpriteBatch batch) {
-//        world.viewmodel.render(batch);
-//        for (BulletCasing b : world.bulletCasings) {
-//            b.render(batch);
-//        }
     }
 
     // also draws the background color
@@ -116,48 +105,6 @@ public class WorldRenderer extends Actor {
                     batch.draw(texture, duck.bounds.x - horizontalPosition, duck.bounds.y, Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
                 else
                     batch.draw(texture, duck.bounds.x + Duck.DUCK_WIDTH - horizontalPosition, duck.bounds.y, -Duck.DUCK_WIDTH, Duck.DUCK_HEIGHT);
-        }
-    }
-
-    private void renderAnimals() {
-        if (world.squirrel.texture != null) {
-            TextureRegion texture = world.squirrel.texture;
-            Vector2 position = world.squirrel.position;
-            Rectangle bounds = world.squirrel.bounds;
-
-            batch.draw(texture, position.x - horizontalPosition, position.y, bounds.width, bounds.height);
-        }
-
-        if (world.monkey.texture != null) {
-            TextureRegion texture = world.monkey.texture;
-            Vector2 position = world.monkey.position;
-            Rectangle bounds = world.monkey.bounds;
-
-            batch.draw(texture, position.x - horizontalPosition, position.y, bounds.width, bounds.height);
-        }
-
-        if (world.cow.texture != null) {
-            TextureRegion texture = world.cow.texture;
-            Vector2 position = world.cow.position;
-            Rectangle bounds = world.cow.bounds;
-
-            batch.draw(texture, position.x - horizontalPosition, position.y, bounds.width, bounds.height);
-        }
-
-        if (world.pig.texture != null) {
-            TextureRegion texture = world.pig.texture;
-            Vector2 position = world.pig.position;
-            Rectangle bounds = world.pig.bounds;
-
-            batch.draw(texture, position.x - horizontalPosition, position.y, bounds.width, bounds.height);
-        }
-
-        if (world.bear.texture != null) {
-            TextureRegion texture = world.bear.texture;
-            Vector2 position = world.bear.position;
-            Rectangle bounds = world.bear.bounds;
-
-            batch.draw(texture, position.x - horizontalPosition, position.y, bounds.width, bounds.height);
         }
     }
 

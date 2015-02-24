@@ -36,13 +36,6 @@ public class World {
     public final Dog dog;
     public final Random rand;
     public Stage stage;
-    //    public Viewmodel viewmodel;
-//    public ArrayList<BulletCasing> bulletCasings;
-    public Squirrel squirrel;
-    public Monkey monkey;
-    public Cow cow;
-    public Pig pig;
-    public Bear bear;
 
     public int state;
     public int gameMode;
@@ -74,23 +67,13 @@ public class World {
 //        viewmodel = new Viewmodel();
 
         level = new GreenMeadows(null);
-        instantiateAnimals();
-        generateRound();
-    }
-
-    private void instantiateAnimals() {
-        squirrel = new Squirrel();
-        monkey = new Monkey();
-        cow = new Cow();
-        pig = new Pig();
-        bear = new Bear();
+                generateRound();
     }
 
     private void generateRound() {
         ducks.clear();
 
         for (int i = 0; i < 10; i++) {
-            //float random = rand.nextFloat() > 0.5f ? Game.VIRTUAL_WIDTH / 2 - 30 : Game.VIRTUAL_WIDTH / 2 + 30;
             float random = -(Game.VIRTUAL_WIDTH) + (rand.nextFloat() * (Game.VIRTUAL_WIDTH * 3));
             Duck duck = new Duck(level, random, 75f);
             ducks.add(duck);
@@ -158,8 +141,7 @@ public class World {
 
         updateDog(delta, ducksHit);
         updateDucks(delta);
-        updateAnimals(delta);
-        checkCollisions();
+                checkCollisions();
         checkStates();
     }
 
@@ -183,8 +165,7 @@ public class World {
 
         if (stateTime > 1.6f) {
             updateDog(delta, ducksHit);
-            updateAnimals(delta);
-            checkDogState();
+                    checkDogState();
             checkDogCollision();
         }
 
@@ -354,17 +335,8 @@ public class World {
         }
     }
 
-    private void updateAnimals(float delta) {
-        squirrel.update(delta);
-        monkey.update(delta);
-        cow.update(delta);
-        pig.update(delta);
-        bear.update(delta);
-    }
-
     private void checkCollisions() {
         checkDuckCollision();
-        checkAnimalsCollision();
     }
 
     private void checkStates() {
@@ -392,27 +364,6 @@ public class World {
                             gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                             break;
                     }
-
-                    {/**Animals State*/
-                        if (gameScreen.shots == 2 && gameScreen.multiplier == 3 && !squirrel.isActive()) {
-                            squirrel.setState(Animal.INSTANTIATE);
-                            return;
-                        } else if (gameScreen.shots == 2 && gameScreen.multiplier == 5 && !monkey.isActive()) {
-                            monkey.setState(Animal.INSTANTIATE);
-                            return;
-                        } else if (gameScreen.shots == 2 && gameScreen.multiplier == 7 && !cow.isActive()) {
-                            cow.setState(Animal.INSTANTIATE);
-                            return;
-                        } else if (gameScreen.shots == 2 && gameScreen.multiplier == 9 && !pig.isActive()) {
-                            pig.setState(Animal.INSTANTIATE);
-                            return;
-                        } else if (gameScreen.shots == 2 && gameScreen.multiplier == 10 && !bear.isActive()) {
-                            bear.setState(Animal.INSTANTIATE);
-                            return;
-                        }
-                    }/***/
-
-
                 } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                     duck.flyAway();
                     gameScreen.multiplier = 1;
@@ -476,27 +427,6 @@ public class World {
             } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
                 duck2.flyAway();
                 gameScreen.multiplier = 1;
-            }
-        }
-    }
-
-    private void checkAnimalsCollision() {
-        if (Gdx.input.justTouched()) {
-            if (squirrel.bounds.contains(touchPoint.x, touchPoint.y)) {
-                squirrel.hit();
-                return;
-            } else if (monkey.bounds.contains(touchPoint.x, touchPoint.y)) {
-                monkey.hit();
-                return;
-            } else if (cow.bounds.contains(touchPoint.x, touchPoint.y)) {
-                cow.hit();
-                return;
-            } else if (pig.bounds.contains(touchPoint.x, touchPoint.y)) {
-                pig.hit();
-                return;
-            } else if (bear.bounds.contains(touchPoint.x, touchPoint.y)) {
-                bear.hit();
-                return;
             }
         }
     }
