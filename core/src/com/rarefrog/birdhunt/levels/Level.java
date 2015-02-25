@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.rarefrog.birdhunt.Game;
+import com.rarefrog.birdhunt.input.Controls;
 
 /**
  * Created by Elmar on 1/22/2015.
@@ -26,8 +27,15 @@ public abstract class Level {
         this.tiles = tiles;
     }
 
-    public void update(float horPosition) {
-        this.horPosition = horPosition;
+    public void update(Controls horPosition) {
+        if(-horPosition.getCalibratedValue()>480){
+            horPosition.outOfRightBounds(480);
+        }
+        if(-horPosition.getCalibratedValue()<-480){
+            horPosition.outOfRightBounds(-480);
+        }
+        this.horPosition = -horPosition.getCalibratedValue();
+
     }
 
     public void drawForeGround(SpriteBatch spriteBatch) {

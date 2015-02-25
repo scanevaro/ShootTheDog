@@ -35,6 +35,7 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Game game;
         sensorFusion = new SensorFusion(this);
 
         RelativeLayout layout = new RelativeLayout(this);
@@ -45,8 +46,8 @@ public class AndroidLauncher extends AndroidApplication implements GameHelper.Ga
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        View gameView = initializeForView(new Game(this, this, sensorFusion.inputInterface), config);
-
+        View gameView = initializeForView(game = new Game(this, this, sensorFusion.inputInterface), config);
+        sensorFusion.setCalibrationListener(game);
         if (gameHelper == null) {
             gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
             gameHelper.enableDebugLog(true);

@@ -115,4 +115,6 @@ idea {
     }
 }
 dependencies {
+    compile files('libs/android-support-v4.jar')
+    compile files('libs/commons-math3-3.0.zjar')
 }

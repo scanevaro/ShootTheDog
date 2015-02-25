@@ -317,7 +317,7 @@ public class GameScreen extends AbstractScreen {
         batch.end();
         //P for processed, R for raw and C for calibrated
         controls.update((float) Math.toDegrees(this.game.inputInterface.getRotation()[0]));
-        renderer.setHorizontalPosition(controls.getCalibratedValue());
+        renderer.setHorizontalPosition(controls);
     }
 
     private void drawUI() {

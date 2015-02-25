@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.rarefrog.birdhunt.entities.Dog;
 import com.rarefrog.birdhunt.entities.Duck;
+import com.rarefrog.birdhunt.input.Controls;
 import com.rarefrog.birdhunt.levels.GreenMeadows;
 import com.rarefrog.birdhunt.levels.Level;
 
@@ -28,9 +29,9 @@ public class WorldRenderer extends Actor {
         level = new GreenMeadows(gameCam);
     }
 
-    public void setHorizontalPosition(float x) {
-        level.update(-x);
-        horizontalPosition = -x;
+    public void setHorizontalPosition(Controls x) {
+        level.update(x);
+        horizontalPosition = -x.getCalibratedValue();
     }
 
     @Override

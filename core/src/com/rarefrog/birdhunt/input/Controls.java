@@ -4,18 +4,18 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.rarefrog.birdhunt.Game;
+import com.rarefrog.birdhunt.interfaces.CalibrationData;
 
 /**
  * Created by Elmar on 1/20/2015.
  */
-public class Controls {
+public class Controls implements CalibrationData {
     private FIR fir;
     private float rawAzimuth = 0;
     private float azimuthValue = 0;
     private boolean calibrated = false;
     private float azimuthCalibration;
-    private boolean addup;
-    private boolean removeup;
+    private float notZero = 0;
     private float previousVal;
 
     public Controls() {
@@ -41,11 +41,11 @@ public class Controls {
                 else
                     rawAzimuth = -Game.VIRTUAL_WIDTH;
             }
-            System.out.println(rawAzimuth);
+            //System.out.println(rawAzimuth);
         } else {
-            value *= 4;
+            value *= 16;
             rawAzimuth = value;//Gdx.input.getAzimuth();
-            System.out.println(rawAzimuth);
+            //System.out.println(rawAzimuth + " raw raw " + value / 4);
             //clamp at -480 and 480, recalibrate?
         }
 
@@ -53,19 +53,22 @@ public class Controls {
         if (!calibrated) {
             previousVal = azimuthCalibration = value;
             calibrated = true;
-            addup = false;
-            removeup = false;
+            notZero = 0;
         }
+    }
+
+    public void outOfRightBounds(float value) {
+        azimuthCalibration = azimuthCalibration - (-getCalibratedValue() - value);
+    }
+
+    public void outOfLeftBounds(float value) {
+        azimuthCalibration = azimuthCalibration + (-getCalibratedValue() - value);
     }
 
     public float getCalibratedValue() {
         //==========================================================//
         float returnValue = azimuthValue - azimuthCalibration;      //
-        if (addup) {                                                //
-            // returnValue += 360 degrees                           //
-        } else if (removeup) {                                      //
-            // returnValue -= 360 degrees                           //
-        }                                                           //
+        //
         //==========================================================//
         return returnValue;
     }
@@ -94,6 +97,11 @@ public class Controls {
 
     public float getRawValue() {
         return rawAzimuth;
+    }
+
+    @Override
+    public float getCalibration() {
+        return azimuthCalibration;
     }
 
     class FIR {

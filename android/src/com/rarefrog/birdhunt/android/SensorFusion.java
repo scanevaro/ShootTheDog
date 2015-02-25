@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import com.rarefrog.birdhunt.Game;
 import com.rarefrog.birdhunt.interfaces.InputInterface;
 
 import java.util.Timer;
@@ -69,6 +70,10 @@ public class SensorFusion implements SensorEventListener {
         initListeners();
     }
 
+    public void setCalibrationListener(Game game) {
+
+    }
+
     public void initListeners() {
         mSensorManager.registerListener(this,
                 mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -85,6 +90,7 @@ public class SensorFusion implements SensorEventListener {
         inputInterface = new InputInterface() {
             @Override
             public float[] getRotation() {
+                //System.out.println((int) Math.toDegrees(fusedOrientation[0]) + " )( " + (int) Math.toDegrees(gyroOrientation[0]) + " )( " + (int) Math.toDegrees(accMagOrientation[0]));
                 return fusedOrientation;
             }
         };
@@ -281,7 +287,7 @@ public class SensorFusion implements SensorEventListener {
             // to comensate gyro drift
             gyroMatrix = getRotationMatrixFromOrientation(fusedOrientation);
             System.arraycopy(fusedOrientation, 0, gyroOrientation, 0, 3);
-            for(int i = 0; i<3; i++){
+            for (int i = 0; i < 3; i++) {
                 fusedOrientation[i] *= -1;
             }
         }
