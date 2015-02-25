@@ -6,21 +6,21 @@ filter: Linear,Linear
 repeat: none
 aboutIconUp
   rotate: false
-  xy: 1836, 1877
+  xy: 1836, 1253
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 achievementsUp
   rotate: false
-  xy: 1836, 1715
+  xy: 1836, 1091
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 backIconUp
   rotate: false
-  xy: 1444, 1281
+  xy: 1788, 671
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
@@ -28,27 +28,6 @@ backIconUp
 bird11
   rotate: false
   xy: 1024, 5
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-bird110
-  rotate: false
-  xy: 1574, 127
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-bird111
-  rotate: false
-  xy: 1664, 291
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-bird112
-  rotate: false
-  xy: 1574, 17
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
@@ -76,205 +55,114 @@ bird14
   index: -1
 bird15
   rotate: false
-  xy: 1704, 511
+  xy: 1919, 1635
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird16
   rotate: false
-  xy: 1574, 457
+  xy: 1919, 1525
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird17
   rotate: false
-  xy: 1444, 425
+  xy: 1919, 1415
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird18
   rotate: false
-  xy: 1814, 475
+  xy: 1464, 5
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird19
   rotate: false
-  xy: 1684, 401
+  xy: 1574, 5
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird24
   rotate: false
-  xy: 1554, 347
+  xy: 1684, 11
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird25
   rotate: false
-  xy: 1444, 315
+  xy: 1794, 11
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird26
   rotate: false
-  xy: 1924, 475
+  xy: 1803, 139
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 bird34
   rotate: false
-  xy: 1444, 205
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-bird35
-  rotate: false
-  xy: 1464, 19
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-bird36
-  rotate: false
-  xy: 1554, 237
+  xy: 1913, 139
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 closeIconUp
   rotate: false
-  xy: 1609, 1281
-  size: 163, 160
-  orig: 163, 160
+  xy: 1609, 121
+  size: 95, 94
+  orig: 95, 94
   offset: 0, 0
   index: -1
 cloud1
   rotate: false
-  xy: 1444, 1443
+  xy: 1444, 853
   size: 341, 193
   orig: 341, 193
   offset: 0, 0
   index: -1
 cloud2
   rotate: false
-  xy: 1444, 1836
+  xy: 1444, 1246
   size: 390, 201
   orig: 390, 201
   offset: 0, 0
   index: -1
 cloud3
   rotate: false
-  xy: 1444, 1638
+  xy: 1444, 1048
   size: 342, 196
   orig: 342, 196
   offset: 0, 0
   index: -1
 configIconUp
   rotate: false
-  xy: 1444, 1119
+  xy: 1696, 509
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 confirmIconUp
   rotate: false
-  xy: 1939, 1109
+  xy: 1706, 121
   size: 95, 94
   orig: 95, 94
   offset: 0, 0
   index: -1
-decline
+gameover
   rotate: false
-  xy: 1939, 1013
-  size: 95, 94
-  orig: 95, 94
-  offset: 0, 0
-  index: -1
-dog1Duck
-  rotate: false
-  xy: 1684, 181
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dog2Ducks
-  rotate: false
-  xy: 1774, 291
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogFound
-  rotate: false
-  xy: 1684, 71
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogJump1
-  rotate: false
-  xy: 1794, 181
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogJump2
-  rotate: false
-  xy: 1884, 365
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogLaugh1
-  rotate: false
-  xy: 1794, 71
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogLaugh2
-  rotate: false
-  xy: 1904, 255
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogShot0
-  rotate: false
-  xy: 1999, 671
-  size: 47, 42
-  orig: 47, 42
-  offset: 0, 0
-  index: -1
-dogShot1
-  rotate: false
-  xy: 1999, 627
-  size: 47, 42
-  orig: 47, 42
-  offset: 0, 0
-  index: -1
-dogWalking1
-  rotate: false
-  xy: 1904, 145
-  size: 108, 108
-  orig: 108, 108
-  offset: 0, 0
-  index: -1
-dogWalking2
-  rotate: false
-  xy: 1904, 35
-  size: 108, 108
-  orig: 108, 108
+  xy: 1444, 1449
+  size: 473, 294
+  orig: 473, 294
   offset: 0, 0
   index: -1
 grass1440
@@ -286,119 +174,100 @@ grass1440
   index: -1
 leaderboardsUp
   rotate: false
-  xy: 1609, 1119
+  xy: 1444, 439
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 loginButtonUp
   rotate: false
-  xy: 1788, 1457
+  xy: 1788, 833
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 logo
   rotate: false
-  xy: 1787, 1205
+  xy: 1444, 601
   size: 250, 250
   orig: 250, 250
   offset: 0, 0
   index: -1
 multiplier1
   rotate: false
-  xy: 1774, 1043
-  size: 163, 160
-  orig: 163, 160
+  xy: 1774, 379
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 multiplier10
   rotate: false
-  xy: 1739, 751
+  xy: 1609, 217
   size: 170, 128
   orig: 170, 128
   offset: 0, 0
   index: -1
 multiplier2
   rotate: false
-  xy: 1609, 827
+  xy: 1781, 249
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 multiplier3
   rotate: false
-  xy: 1609, 697
+  xy: 1904, 379
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 multiplier4
   rotate: false
-  xy: 1444, 665
+  xy: 1911, 249
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 multiplier5
   rotate: false
-  xy: 1911, 715
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-multiplier6
-  rotate: false
-  xy: 1739, 621
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-multiplier7
-  rotate: false
-  xy: 1574, 567
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-multiplier8
-  rotate: false
-  xy: 1444, 535
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-multiplier9
-  rotate: false
-  xy: 1869, 585
+  xy: 1904, 9
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 pauseButton
   rotate: false
-  xy: 1444, 957
+  xy: 1861, 509
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
+pauseDialog
+  rotate: false
+  xy: 1444, 1745
+  size: 520, 292
+  split: 0, 0, 0, 0
+  pad: -1, -1, 0, 0
+  orig: 520, 292
+  offset: 0, 0
+  index: -1
 quitIconUp
   rotate: false
-  xy: 1609, 957
+  xy: 1444, 277
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 soundIconDown
   rotate: false
-  xy: 1774, 881
+  xy: 1444, 115
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
   index: -1
 soundIconUp
   rotate: false
-  xy: 1444, 795
+  xy: 1609, 347
   size: 163, 160
   orig: 163, 160
   offset: 0, 0
@@ -440,21 +309,21 @@ ui3Shots
   index: -1
 uiRedDuck
   rotate: false
-  xy: 1939, 845
+  xy: 1966, 1963
   size: 74, 74
   orig: 74, 74
   offset: 0, 0
   index: -1
 uiWhiteDuck
   rotate: false
-  xy: 1444, 129
+  xy: 1966, 1887
   size: 74, 74
   orig: 74, 74
   offset: 0, 0
   index: -1
 uiYellowDuck
   rotate: false
-  xy: 1939, 921
+  xy: 1696, 761
   size: 90, 90
   orig: 90, 90
   offset: 0, 0
@@ -474,210 +343,343 @@ filter: Linear,Linear
 repeat: none
 DH_mountains
   rotate: false
-  xy: 2, 1340
-  size: 2000, 667
-  orig: 2000, 667
+  xy: 2, 1546
+  size: 1800, 480
+  orig: 1800, 480
   offset: 0, 0
   index: -1
 DH_sky
   rotate: false
-  xy: 2, 671
-  size: 2000, 667
-  orig: 2000, 667
+  xy: 2, 1026
+  size: 1800, 480
+  orig: 1800, 480
   offset: 0, 0
   index: -1
 DH_wallpaper_front
   rotate: false
-  xy: 2, 2
-  size: 2000, 667
-  orig: 2000, 667
+  xy: 2, 544
+  size: 1440, 480
+  orig: 1440, 480
   offset: 0, 0
   index: -1
-
-items3.png
-size: 2048,2048
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-DH_wallpaper_rear
+bird110
   rotate: false
-  xy: 2, 1287
-  size: 2000, 667
-  orig: 2000, 667
+  xy: 1804, 1178
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+bird111
+  rotate: false
+  xy: 1804, 1068
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+bird112
+  rotate: false
+  xy: 1804, 958
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+bird35
+  rotate: false
+  xy: 1804, 1398
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+bird36
+  rotate: false
+  xy: 1804, 1288
+  size: 108, 108
+  orig: 108, 108
   offset: 0, 0
   index: -1
 chrisportermusic
   rotate: false
-  xy: 2, 745
+  xy: 2, 2
   size: 960, 540
   orig: 960, 540
   offset: 0, 0
   index: -1
+dog1Duck
+  rotate: false
+  xy: 1914, 1398
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dog2Ducks
+  rotate: false
+  xy: 1934, 1918
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogFound
+  rotate: false
+  xy: 1934, 1808
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogJump1
+  rotate: false
+  xy: 1934, 1698
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogJump2
+  rotate: false
+  xy: 1934, 1588
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogLaugh1
+  rotate: false
+  xy: 1914, 1288
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogLaugh2
+  rotate: false
+  xy: 1914, 1178
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogShot0
+  rotate: false
+  xy: 1914, 1068
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogShot1
+  rotate: false
+  xy: 1914, 958
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogWalking1
+  rotate: false
+  xy: 1444, 916
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
+dogWalking2
+  rotate: false
+  xy: 1554, 916
+  size: 108, 108
+  orig: 108, 108
+  offset: 0, 0
+  index: -1
 dogWalking3
   rotate: false
-  xy: 2, 2
+  xy: 1444, 806
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 dogWalking4
   rotate: false
-  xy: 625, 635
+  xy: 1554, 806
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 dogWalking5
   rotate: false
-  xy: 1629, 1177
+  xy: 1444, 696
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFallingBlack
   rotate: false
-  xy: 964, 853
+  xy: 1554, 696
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFallingBlack2
   rotate: false
-  xy: 112, 2
+  xy: 1444, 586
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFallingRed
   rotate: false
-  xy: 625, 525
+  xy: 1554, 586
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFallingRed2
   rotate: false
-  xy: 735, 635
+  xy: 1629, 476
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightBlack1
   rotate: false
-  xy: 1629, 1067
+  xy: 1664, 848
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightBlack2
   rotate: false
-  xy: 1739, 1177
+  xy: 1664, 738
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightBlack3
   rotate: false
-  xy: 1074, 853
+  xy: 1664, 628
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightRed1
   rotate: false
-  xy: 222, 2
+  xy: 1629, 366
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightRed2
   rotate: false
-  xy: 625, 415
+  xy: 1629, 256
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyRightRed3
   rotate: false
-  xy: 735, 525
+  xy: 1629, 146
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopBlack1
   rotate: false
-  xy: 845, 635
+  xy: 1739, 518
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopBlack2
   rotate: false
-  xy: 1739, 1067
+  xy: 1774, 848
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopBlack3
   rotate: false
-  xy: 1849, 1177
+  xy: 1774, 738
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopRed1
   rotate: false
-  xy: 1184, 853
+  xy: 1774, 628
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopRed2
   rotate: false
-  xy: 332, 2
+  xy: 1739, 408
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckFlyTopRed3
   rotate: false
-  xy: 625, 305
+  xy: 1739, 298
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckHitBlack
   rotate: false
-  xy: 735, 415
+  xy: 1739, 188
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
 duckHitRed
   rotate: false
-  xy: 845, 525
+  xy: 1739, 78
   size: 108, 108
   orig: 108, 108
   offset: 0, 0
   index: -1
-pauseDialog
+multiplier6
   rotate: false
-  xy: 2, 112
-  size: 621, 631
-  orig: 621, 631
+  xy: 1804, 1898
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+multiplier7
+  rotate: false
+  xy: 1804, 1768
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+multiplier8
+  rotate: false
+  xy: 1804, 1638
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+multiplier9
+  rotate: false
+  xy: 1804, 1508
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 play1ButtonUp
   rotate: false
-  xy: 964, 1125
+  xy: 964, 382
   size: 663, 160
   orig: 663, 160
   offset: 0, 0
   index: -1
 play2ButtonUp
   rotate: false
-  xy: 964, 963
+  xy: 964, 220
   size: 663, 160
   orig: 663, 160
+  offset: 0, 0
+  index: -1
+
+items3.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+DH_wallpaper_rear
+  rotate: false
+  xy: 2, 2
+  size: 1440, 480
+  orig: 1440, 480
   offset: 0, 0
   index: -1

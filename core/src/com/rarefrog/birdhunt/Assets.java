@@ -70,7 +70,7 @@ public class Assets {
     public static TextureRegion multiplier1, multiplier2, multiplier3, multiplier4, multiplier5, multiplier6, multiplier7, multiplier8, multiplier9, multiplier10;
     public static TextureRegion squirrel, monkey, cow, pig, bear;
     public static TextureRegion leaderboardsUp, achievementsUp;
-    public static TextureRegion logo, chrislogo;
+    public static TextureRegion logo, chrislogo, gameOver;
 
     public static Animation duckFlyRightBlack;
     public static Animation duckFlyRightRed;
@@ -327,6 +327,7 @@ public class Assets {
         leaderboardsUp = items.findRegion("leaderboardsUp");
         logo = items.findRegion("logo");
         chrislogo = items.findRegion("chrisportermusic");
+        gameOver = items.findRegion("gameover");
     }
 
     private static void setSounds() {

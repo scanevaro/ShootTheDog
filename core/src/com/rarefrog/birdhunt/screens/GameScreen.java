@@ -318,8 +318,6 @@ public class GameScreen extends AbstractScreen {
         //P for processed, R for raw and C for calibrated
         controls.update((float) Math.toDegrees(this.game.inputInterface.getRotation()[0]));
         renderer.setHorizontalPosition(controls.getCalibratedValue());
-//        compass.setText("P: " + (int) controls.getAzimuthValue() + " R: " + (int) controls.getRawValue() + " C: " + (int) controls.getCalibratedValue());
-        // renderer.gameCam.position.x = controls.getCalibratedValue() * 10 + 240;
     }
 
     private void drawUI() {
@@ -345,13 +343,6 @@ public class GameScreen extends AbstractScreen {
                 20,
                 Assets.UISHOTSWIDTH + Assets.UISHOTSWIDTH / 2,
                 Assets.UISHOTSHEIGHT + Assets.UISHOTSHEIGHT / 2);
-
-//        batch.draw(
-//                Assets.uiDucksRound,
-//                480 / 2 - Assets.uiDucksRound.getRegionWidth() / 2 - 30,
-//                20,
-//                Assets.uiDucksRound.getRegionWidth() * 2 - Assets.uiDucksRound.getRegionWidth() / 2,
-//                Assets.uiDucksRound.getRegionHeight() + Assets.uiDucksRound.getRegionHeight() / 2);
 
         x = -88;
         for (int i = 0; i < world.ducks.size(); i++) {
@@ -443,15 +434,7 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void presentGameOver() {
-        batch.draw(
-                Assets.dialog,
-                Game.VIRTUAL_WIDTH / 2 - 50,
-                Game.VIRTUAL_HEIGHT / 2 + 30,
-                100,
-                42);
-
-        Assets.font.setScale(0.6f);
-        Assets.font.draw(batch, "GAME OVER", Game.VIRTUAL_WIDTH / 2 - (Assets.font.getSpaceWidth() * 20.5f) / 2, Game.VIRTUAL_HEIGHT / 2 + 62);
+        batch.draw(Assets.gameOver, Game.VIRTUAL_WIDTH / 2 - 48, Game.VIRTUAL_HEIGHT / 2, 96, 64);
     }
 
     @Override
@@ -465,22 +448,6 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-    }
-
-    @Override
-    public void show() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
     }
 
     @Override

@@ -253,7 +253,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 closeButton.getImage().setOrigin(Align.center);
-                closeButton.getImage().setScale(1.5f);
+                closeButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -289,7 +289,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 muteButton.getImage().setOrigin(Align.center);
-                muteButton.getImage().setScale(1.5f);
+                muteButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -316,7 +316,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 aboutButton.getImage().setOrigin(Align.center);
-                aboutButton.getImage().setScale(1.5f);
+                aboutButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -345,7 +345,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 quitButton.getImage().setOrigin(Align.center);
-                quitButton.getImage().setScale(1.5f);
+                quitButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -372,7 +372,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 leaderboardsButton.getImage().setOrigin(Align.center);
-                leaderboardsButton.getImage().setScale(1.5f);
+                leaderboardsButton.getImage().setScale(1.25f);
                 return true;
             }
 
@@ -399,7 +399,7 @@ public class MainMenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 achievementsButton.getImage().setOrigin(Align.center);
-                achievementsButton.getImage().setScale(1.5f);
+                achievementsButton.getImage().setScale(1.25f);
                 return true;
             }
 
