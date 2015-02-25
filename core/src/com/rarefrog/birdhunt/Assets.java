@@ -240,13 +240,13 @@ public class Assets {
                 (items.findRegion("duckFlyTopRed2")),
                 (items.findRegion("duckFlyTopRed3")));
         duckFlyUpBlack = new Animation(0.2f,
-                (items.findRegion("duckFlyUpBlack1")),
-                (items.findRegion("duckFlyUpBlack2")),
-                (items.findRegion("duckFlyUpBlack3")));
+                (items.findRegion("duckFlyTopBlack1")),
+                (items.findRegion("duckFlyTopBlack2")),
+                (items.findRegion("duckFlyTopBlack3")));
         duckFlyUpRed = new Animation(0.2f,
-                (items.findRegion("duckFlyUpRed1")),
-                (items.findRegion("duckFlyUpRed2")),
-                (items.findRegion("duckFlyUpRed3")));
+                (items.findRegion("duckFlyTopRed1")),
+                (items.findRegion("duckFlyTopRed2")),
+                (items.findRegion("duckFlyTopRed3")));
         uiDucks = new Animation(0.2f,
                 (items.findRegion("uiWhiteDuck")),
                 (items.findRegion("uiRedDuck")));

@@ -22,6 +22,9 @@ public class DucksTextures {
                 break;
         }
 
+        if (texture == null)
+            return texture;
+
         return texture;
     }
 
@@ -36,6 +39,9 @@ public class DucksTextures {
             texture = Assets.birdFlyRightYellow.getKeyFrame(stateTime, true);
         else
             texture = Assets.birdFlyRightYellow.getKeyFrame(stateTime, true);
+
+        if (texture == null)
+            return texture;
 
         return texture;
     }
@@ -52,6 +58,9 @@ public class DucksTextures {
         else
             texture = Assets.duckFlyTopRed.getKeyFrame(stateTime, true);
 
+        if (texture == null)
+            return texture;
+
         return texture;
     }
 
@@ -67,6 +76,9 @@ public class DucksTextures {
             texture = Assets.duckFlyTopBlack.getKeyFrame(stateTime, true);
         else
             texture = Assets.duckFlyTopBlack.getKeyFrame(stateTime, true);
+
+        if (texture == null)
+            return texture;
 
         return texture;
     }
@@ -89,6 +101,9 @@ public class DucksTextures {
                 break;
         }
 
+        if (texture == null)
+            return texture;
+
         return texture;
     }
 
@@ -107,6 +122,9 @@ public class DucksTextures {
                 break;
         }
 
+        if (texture == null)
+            return texture;
+
         return texture;
     }
 
@@ -124,6 +142,9 @@ public class DucksTextures {
                 texture = Assets.birdFlyUpYellow.getKeyFrame(stateTime, true);
                 break;
         }
+
+        if (texture == null)
+            return texture;
 
         return texture;
     }
