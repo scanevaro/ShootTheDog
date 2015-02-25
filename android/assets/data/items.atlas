@@ -247,7 +247,7 @@ pauseDialog
   xy: 1444, 1745
   size: 520, 292
   split: 0, 0, 0, 0
-  pad: -1, -1, 0, 0
+  pad: -1, -1, 27, 0
   orig: 520, 292
   offset: 0, 0
   index: -1
