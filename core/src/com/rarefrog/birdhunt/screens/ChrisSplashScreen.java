@@ -16,7 +16,7 @@ import com.rarefrog.birdhunt.entities.ChrisSplashActor;
  * Created by scanevaro on 09/12/2014.
  */
 public class ChrisSplashScreen extends AbstractScreen {
-    private static final float DURATION = 3.5f; //Duration of the SplashScreen
+    private static final float DURATION = 3.0f; //Duration of the SplashScreen
     private Game game;
     private Stage stage;
     private SpriteBatch batch;
@@ -34,7 +34,7 @@ public class ChrisSplashScreen extends AbstractScreen {
     private void configureActors() {
         splashSprite.setColor(1, 1, 1, 0);
 
-        splashSprite.addAction(Actions.delay(3f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
+        splashSprite.addAction(Actions.delay(2.5f - splashSprite.stateTime, Actions.fadeOut(0.5f)));
     }
 
     private void setListeners() {
