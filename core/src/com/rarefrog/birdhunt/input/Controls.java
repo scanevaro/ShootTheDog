@@ -17,6 +17,9 @@ public class Controls implements CalibrationData {
     private float azimuthCalibration;
     private float notZero = 0;
     private float previousVal;
+    public boolean touchMovement = true;
+    private float previousTouch = 0;
+    private float touchX = 0;
 
     public Controls() {
         double coefficients[] = new double[10];
@@ -28,32 +31,49 @@ public class Controls implements CalibrationData {
     }
 
     public void update(float value) {
-        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                if (rawAzimuth < Game.VIRTUAL_WIDTH - 5)
-                    rawAzimuth += 5f;
-                else
-                    rawAzimuth = Game.VIRTUAL_WIDTH;
+        if (touchMovement) {
+            if (Gdx.input.isTouched()) {
+                if (previousTouch != -1) {
+                    touchX += Gdx.input.getX() - previousTouch;
+                    if (touchX >= Game.VIRTUAL_WIDTH) {
+                        touchX = Game.VIRTUAL_WIDTH;
+                    }
+                    if (touchX <= -Game.VIRTUAL_WIDTH) {
+                        touchX = -Game.VIRTUAL_WIDTH;
+                    }
+                }
+                previousTouch = Gdx.input.getX();
+            } else {
+                previousTouch = -1;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                if (rawAzimuth > -Game.VIRTUAL_WIDTH + 5)
-                    rawAzimuth -= 5f;
-                else
-                    rawAzimuth = -Game.VIRTUAL_WIDTH;
-            }
-            //System.out.println(rawAzimuth);
         } else {
-            value *= 16;
-            rawAzimuth = value;//Gdx.input.getAzimuth();
-            //System.out.println(rawAzimuth + " raw raw " + value / 4);
-            //clamp at -480 and 480, recalibrate?
-        }
+            if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                    if (rawAzimuth < Game.VIRTUAL_WIDTH - 5)
+                        rawAzimuth += 5f;
+                    else
+                        rawAzimuth = Game.VIRTUAL_WIDTH;
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                    if (rawAzimuth > -Game.VIRTUAL_WIDTH + 5)
+                        rawAzimuth -= 5f;
+                    else
+                        rawAzimuth = -Game.VIRTUAL_WIDTH;
+                }
+                //System.out.println(rawAzimuth);
+            } else {
+                value *= 16;
+                rawAzimuth = value;//Gdx.input.getAzimuth();
+                //System.out.println(rawAzimuth + " raw raw " + value / 4);
+                //clamp at -480 and 480, recalibrate?
+            }
 
-        azimuthValue = (float) fir.getOutputSample(rawAzimuth);
-        if (!calibrated) {
-            previousVal = azimuthCalibration = value;
-            calibrated = true;
-            notZero = 0;
+            azimuthValue = (float) fir.getOutputSample(rawAzimuth);
+            if (!calibrated) {
+                previousVal = azimuthCalibration = value;
+                calibrated = true;
+                notZero = 0;
+            }
         }
     }
 
@@ -66,6 +86,8 @@ public class Controls implements CalibrationData {
     }
 
     public float getCalibratedValue() {
+        if (touchMovement)
+            return touchX;
         //==========================================================//
         float returnValue = azimuthValue - azimuthCalibration;      //
         //
