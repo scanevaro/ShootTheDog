@@ -5,12 +5,14 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.rarefrog.birdhunt.screens.ControlSelect;
 
 public class Assets {
     public static int UISHOTSWIDTH = 29;
@@ -71,6 +73,7 @@ public class Assets {
     public static TextureRegion squirrel, monkey, cow, pig, bear;
     public static TextureRegion leaderboardsUp, achievementsUp;
     public static TextureRegion logo, chrislogo, gameOver;
+    public static TextureRegion controls;
 
     public static Animation duckFlyRightBlack;
     public static Animation duckFlyRightRed;
@@ -121,6 +124,7 @@ public class Assets {
     }
 
     public static void load() {
+        controls = new TextureRegion(new Texture(Gdx.files.internal("data/BH.png")));
         assetManager.load("data/loading.pack", TextureAtlas.class);
         assetManager.finishLoading();
 

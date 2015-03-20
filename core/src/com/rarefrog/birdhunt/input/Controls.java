@@ -17,7 +17,7 @@ public class Controls implements CalibrationData {
     private float azimuthCalibration;
     private float notZero = 0;
     private float previousVal;
-    public boolean touchMovement = true;
+    public static boolean touchMovement = false;
     private float previousTouch = 0;
     private float touchX = 0;
 

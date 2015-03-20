@@ -105,7 +105,8 @@ public class MainMenuScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.requestHandler.showAds(false);
-                game.setScreen(new GameScreen(game, World.GAME_MODE_1));
+                //game.setScreen(new GameScreen(game, World.GAME_MODE_1));
+                game.setScreen(new ControlSelect(game, World.GAME_MODE_1));
                 if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
 
@@ -127,8 +128,9 @@ public class MainMenuScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.requestHandler.showAds(false);
-                game.setScreen(new GameScreen(game, World.GAME_MODE_2));
-                if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
+                //game.setScreen(new GameScreen(game, World.GAME_MODE_2));
+                game.setScreen(new ControlSelect(game, World.GAME_MODE_2));
+                //if (Assets.menuIntro.isPlaying()) Assets.menuIntro.stop();
             }
 
             @Override
