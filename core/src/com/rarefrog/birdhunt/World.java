@@ -49,7 +49,7 @@ public class World {
     public boolean checkDucksRoundPause;
     public boolean perfect;
 
-    Vector2 touchPoint;
+    public Vector2 touchPoint;
 
     private Level level;
 

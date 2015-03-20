@@ -38,7 +38,7 @@ public class ControlSelect extends AbstractScreen {
     public void show() {
         if (batch == null) batch = new SpriteBatch();
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
-        controlActor = new ControlActor();
+        controlActor = new ControlActor(game,gamemode);
         stage.addActor(controlActor);
         setInputProcessor();
     }
@@ -61,7 +61,7 @@ public class ControlSelect extends AbstractScreen {
         super.render(delta);
         stage.act();
 
-        Gdx.gl.glClearColor(1, 1f, 1, 1);
+        Gdx.gl.glClearColor(0, 0f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();

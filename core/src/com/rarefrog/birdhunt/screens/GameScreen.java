@@ -187,10 +187,12 @@ public class GameScreen extends AbstractScreen {
         switch (world.state) {
             case World.WORLD_STATE_RUNNING:
                 if (!game.dialogOpen && Gdx.input.justTouched()) {
-                    if (shots > 0) {
-                        if (Settings.soundEnabled) Assets.shoot.play();
-                        shots--;
+                    if (world.touchPoint.y > 96) { //for swiping purposes
+                        if (shots > 0) {
+                            if (Settings.soundEnabled) Assets.shoot.play();
+                            shots--;
 //                        world.bulletCasings.add(new BulletCasing());
+                        }
                     }
                 }
                 break;
