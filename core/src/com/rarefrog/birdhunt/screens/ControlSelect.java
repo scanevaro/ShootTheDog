@@ -1,6 +1,7 @@
 package com.rarefrog.birdhunt.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,23 +12,21 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rarefrog.birdhunt.Assets;
 import com.rarefrog.birdhunt.Game;
 import com.rarefrog.birdhunt.World;
+import com.rarefrog.birdhunt.input.GameInputProcessor;
 
 /**
  * Created by Elmar on 3/18/2015.
  */
 public class ControlSelect extends AbstractScreen {
     private Game game;
-    private Stage stage;
     private SpriteBatch batch;
     private int gamemode;
-    private int leftSelected = -1;
-    private int rightSelected = -1;
     private ControlActor controlActor;
-    private ShapeRenderer shapeRenderer;
 
     public ControlSelect(Game game, int gamemode) {
         this.game = game;
         this.gamemode = gamemode;
+
     }
 
     public void launchGame() {
@@ -41,12 +40,19 @@ public class ControlSelect extends AbstractScreen {
         stage = new Stage(new FitViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT), batch);
         controlActor = new ControlActor();
         stage.addActor(controlActor);
-        shapeRenderer = new ShapeRenderer();
+        setInputProcessor();
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height);
+    }
+
+    private void setInputProcessor() {
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(new GameInputProcessor(game));;
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
 

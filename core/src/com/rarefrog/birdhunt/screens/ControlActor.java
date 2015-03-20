@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.rarefrog.birdhunt.Assets;
 import com.rarefrog.birdhunt.Game;
 
@@ -15,9 +17,9 @@ import com.rarefrog.birdhunt.Game;
  * Created by Elmar on 3/20/2015.
  */
 public class ControlActor extends Actor {
+    public ClickListener clickListener;
     private TextureRegion texture;
     private ShapeRenderer shapeRenderer;
-    public float stateTime;
     private int leftSelected = -1;
     private int rightSelected = -1;
 
@@ -27,53 +29,55 @@ public class ControlActor extends Actor {
         shapeRenderer = new ShapeRenderer();
 
         setActions();
-
-        stateTime = 0;
+        setWidth(Game.VIRTUAL_WIDTH);
+        setHeight(Game.VIRTUAL_HEIGHT);
     }
 
     private void setActions() {
-        SequenceAction secAction = new SequenceAction();
-        secAction.addAction(Actions.fadeIn(0.5f));
-        addAction(secAction);
-    }
 
+        clickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println(x + "  " + y);
+                if (Gdx.input.getX() < Gdx.graphics.getWidth() / 2) {
+                    leftSelected = 1;
+                    rightSelected = 0;
+                } else {
+                    leftSelected = 0;
+                    rightSelected = 1;
+                }
+                System.out.println("l:" + leftSelected + "r:" + rightSelected);
+            }
+        };
+        addListener(clickListener);
+    }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.end();
-        if (Gdx.input.isTouched()) {
-            if (Gdx.input.getX() < Gdx.graphics.getWidth() / 2) {
-                leftSelected = 1;
-                rightSelected = 0;
-            } else {
-                leftSelected = 0;
-                rightSelected = 1;
-            }
-            System.out.println("l:" + leftSelected + "r:" + rightSelected);
-        }
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        Color backGr = new Color(1, 1, 1, 1);
+        Color backGr1 = new Color(1, 1, 1, 1);
+        Color backGr2 = new Color(1, 1, 1, 1);
         shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 
         if (leftSelected == -1) {
-            backGr.set(1, 1, 1, 1);
+            backGr1.set(1, 1, 1, 1);
         } else if (leftSelected == 1) {
-            backGr.set(1, 0, 0, 1);
+            backGr1.set(1, 0, 0, 1);
         } else {
-            backGr.set(0, 1, 0, 1);
+            backGr1.set(0, 1, 0, 1);
         }
-        shapeRenderer.setColor(backGr);
+        shapeRenderer.setColor(backGr1);
         shapeRenderer.rect(0, 0, Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT);
         if (rightSelected == -1) {
-            backGr.set(1, 1, 1, 1);
+            backGr2.set(1, 1, 1, 1);
         } else if (rightSelected == 0) {
-            backGr.set(1, 0, 0, 1);
+            backGr2.set(1, 0, 0, 1);
         } else {
-            backGr.set(0, 1, 0, 1);
+            backGr2.set(0, 1, 0, 1);
         }
-        shapeRenderer.setColor(backGr);
+        shapeRenderer.setColor(backGr2);
         shapeRenderer.rect(Game.VIRTUAL_WIDTH / 2, 0, Game.VIRTUAL_WIDTH / 2, Game.VIRTUAL_HEIGHT);
         shapeRenderer.end();
         batch.begin();
@@ -85,4 +89,7 @@ public class ControlActor extends Actor {
 
 
     }
+
+
+
 }
