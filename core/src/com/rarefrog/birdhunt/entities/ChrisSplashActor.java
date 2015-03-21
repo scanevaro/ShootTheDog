@@ -18,7 +18,7 @@ public class ChrisSplashActor extends Actor {
 
     public ChrisSplashActor() {
         texture = Assets.chrislogo;
-
+        setSize(600,600);
         setActions();
 
         stateTime = 0;
