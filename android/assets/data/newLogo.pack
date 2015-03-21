@@ -3,108 +3,143 @@ newLogo.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-newLogoAnim0000
+animation_Animation 1
   rotate: false
-  xy: 1, 689
-  size: 170, 170
-  orig: 170, 170
+  xy: 1, 777
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0001
+  index: 0
+animation_Animation 1
   rotate: false
-  xy: 1, 517
-  size: 170, 170
-  orig: 170, 170
+  xy: 1, 583
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0002
+  index: 1
+animation_Animation 1
   rotate: false
-  xy: 173, 689
-  size: 170, 170
-  orig: 170, 170
+  xy: 195, 777
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0003
+  index: 2
+animation_Animation 1
   rotate: false
-  xy: 1, 345
-  size: 170, 170
-  orig: 170, 170
+  xy: 1, 389
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0004
+  index: 3
+animation_Animation 1
   rotate: false
-  xy: 173, 517
-  size: 170, 170
-  orig: 170, 170
+  xy: 195, 583
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0005
+  index: 4
+animation_Animation 1
   rotate: false
-  xy: 345, 689
-  size: 170, 170
-  orig: 170, 170
+  xy: 389, 777
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0006
+  index: 5
+animation_Animation 1
   rotate: false
-  xy: 1, 173
-  size: 170, 170
-  orig: 170, 170
+  xy: 1, 195
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0007
+  index: 6
+animation_Animation 1
   rotate: false
-  xy: 173, 345
-  size: 170, 170
-  orig: 170, 170
+  xy: 195, 389
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0008
+  index: 7
+animation_Animation 1
   rotate: false
-  xy: 345, 517
-  size: 170, 170
-  orig: 170, 170
+  xy: 389, 583
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0009
+  index: 8
+animation_Animation 1
   rotate: false
-  xy: 517, 689
-  size: 170, 170
-  orig: 170, 170
+  xy: 583, 777
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0010
+  index: 9
+animation_Animation 1
   rotate: false
   xy: 1, 1
-  size: 170, 170
-  orig: 170, 170
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0011
+  index: 10
+animation_Animation 1
   rotate: false
-  xy: 173, 173
-  size: 170, 170
-  orig: 170, 170
+  xy: 195, 195
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0012
+  index: 11
+animation_Animation 1
   rotate: false
-  xy: 345, 345
-  size: 170, 170
-  orig: 170, 170
+  xy: 389, 389
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0013
+  index: 12
+animation_Animation 1
   rotate: false
-  xy: 517, 517
-  size: 170, 170
-  orig: 170, 170
+  xy: 583, 583
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
-newLogoAnim0014
+  index: 13
+animation_Animation 1
   rotate: false
-  xy: 689, 689
-  size: 170, 170
-  orig: 170, 170
+  xy: 777, 777
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
-  index: -1
+  index: 14
+animation_Animation 1
+  rotate: false
+  xy: 195, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 15
+animation_Animation 1
+  rotate: false
+  xy: 389, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 16
+animation_Animation 1
+  rotate: false
+  xy: 583, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 17
+animation_Animation 1
+  rotate: false
+  xy: 777, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 18
+animation_Animation 1
+  rotate: false
+  xy: 389, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 19

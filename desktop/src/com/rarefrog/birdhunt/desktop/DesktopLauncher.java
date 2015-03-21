@@ -13,8 +13,8 @@ public class DesktopLauncher implements InputInterface {
 
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = (int) Game.VIRTUAL_WIDTH*3;
-        config.height = (int) Game.VIRTUAL_HEIGHT*2;
+        config.width = (int) Game.VIRTUAL_WIDTH;
+        config.height = (int) Game.VIRTUAL_HEIGHT;
         new LwjglApplication(new Game(new ActionResolverDesktop(), new IDesktopRequestHandler(), new DesktopLauncher()), config);
     }
 

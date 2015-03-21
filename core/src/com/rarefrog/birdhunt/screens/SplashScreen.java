@@ -87,7 +87,7 @@ public class SplashScreen extends AbstractScreen {
                     public void run() {
                         game.setScreen(new ChrisSplashScreen(game));
                     }
-                }, DURATION - splashSprite.stateTime);
+                }, 0.5f - splashSprite.stateTime);
             } else {
                 /**Fade out actors*/
 //            splashSprite.addAction(Actions.fadeOut(0.5f));
@@ -103,17 +103,16 @@ public class SplashScreen extends AbstractScreen {
                 }, 0.5f);
             }
 
-
             Assets.loaded = true;
         }
 
         percent = Interpolation.linear.apply(percent, Assets.assetManager.getProgress(), 0.1f);
 
         loadingBarHidden.setX(startX + endX * percent);
-        loadingBg.setSize(512, 50);
+        loadingBg.setSize(Game.VIRTUAL_WIDTH, 50);
         loadingBg.setX(loadingBarHidden.getX() + 30);
         loadingBg.setY(loadingBarHidden.getY() + 4);
-        loadingBg.setWidth(512 - 512 * percent);
+        loadingBg.setWidth(Game.VIRTUAL_WIDTH - Game.VIRTUAL_WIDTH * percent);
     }
 
     @Override
@@ -142,18 +141,18 @@ public class SplashScreen extends AbstractScreen {
         loadingBarHidden.setPosition(0, 1.1f);
         loadingBg = new Image(atlas.findRegion("loading-frame-bg"));
 
-        Animation anim = new Animation(0.05f, atlas.findRegions("loading-bar-anim"));
+        Animation anim = new Animation(0.00005f, atlas.findRegions("loading-bar-anim"));
         anim.setPlayMode(Animation.PlayMode.LOOP_REVERSED);
         loadingBar = new LoadingBar(anim);
         loadingBar.setPosition(0, 5);
-
-        stage.addActor(loadingBar);
-        stage.addActor(loadingBg);
-        stage.addActor(loadingBarHidden);
-        stage.addActor(loadingFrame);
+        loadingBar.setWidth(Game.VIRTUAL_WIDTH);
+        //stage.addActor(loadingBar);
+        //stage.addActor(loadingBg);
+        //stage.addActor(loadingBarHidden);
+        //stage.addActor(loadingFrame);
 
         startX = 0;
-        endX = 512;
+        endX = Game.VIRTUAL_WIDTH;
     }
 
     @Override
