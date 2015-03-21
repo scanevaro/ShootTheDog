@@ -187,10 +187,12 @@ public class GameScreen extends AbstractScreen {
         switch (world.state) {
             case World.WORLD_STATE_RUNNING:
                 if (!game.dialogOpen && Gdx.input.justTouched()) {
-                    if (world.touchPoint.y > 96) { //for swiping purposes
+                    float touchY = (((Gdx.graphics.getHeight() - Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
+                    if (touchY > 96) { //for swiping purposes
                         if (shots > 0) {
                             if (Settings.soundEnabled) Assets.shoot.play();
                             shots--;
+                            System.out.println("decreasing gamescreen " + world.touchPoint.y);
 //                        world.bulletCasings.add(new BulletCasing());
                         }
                     }

@@ -91,10 +91,12 @@ public class World {
     }
 
     public void update(float deltaTime) {
+
         float touchX = ((Gdx.input.getX() - ((Gdx.graphics.getWidth() - stage.getViewport().getScreenWidth()) / 2)) * (stage.getViewport().getWorldWidth() / stage.getViewport().getScreenWidth())) - gameScreen.controls.getCalibratedValue();
         float touchY = (((Gdx.graphics.getHeight() - Gdx.input.getY()) - ((Gdx.graphics.getHeight() - stage.getViewport().getScreenHeight()) / 2)) * (stage.getViewport().getWorldHeight() / stage.getViewport().getScreenHeight()));
         touchPoint.x = touchX;
         touchPoint.y = touchY;
+        System.out.println("update: " + touchY);
         switch (state) {
             case WORLD_STATE_ROUND_START:
                 stateRoundStart(deltaTime);
@@ -296,7 +298,7 @@ public class World {
     }
 
     private void checkDogCollision() {
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched() && touchPoint.y > 96) { //for swiping purposes) {
             if (gameScreen.shots > 0 && dog.bounds.contains(touchPoint.x, touchPoint.y) && dog.stateTime < 3) {
                 dog.state = Dog.DOG_STATE_SHOT;
                 dog.stateTime = 0;
@@ -307,12 +309,14 @@ public class World {
 
                 dogShot++;
                 gameScreen.shots--;
+                System.out.println("decreasing world 1");
 //                bulletCasings.add(new BulletCasing());
 
             } else if (Gdx.input.justTouched() && gameScreen.shots == 0) {
                 if (Settings.soundEnabled) Assets.outOfBullets.play();
             } else if (Gdx.input.justTouched() && gameScreen.shots > 0 && !dog.bounds.contains(touchPoint.x, touchPoint.y)) {
                 gameScreen.shots--;
+                System.out.println("decreasing world 2");
                 if (Settings.soundEnabled) Assets.shoot.play();
 //                bulletCasings.add(new BulletCasing());
             }
@@ -345,9 +349,9 @@ public class World {
     }
 
     private void checkDuckCollision() {
-        if (gameMode == GAME_MODE_1) {
-            Duck duck = ducks.get(duckCount);
-            if (Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched()) {
+            if (gameMode == GAME_MODE_1) {
+                Duck duck = ducks.get(duckCount);
                 if (duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
                     duck.hit();
 
@@ -365,69 +369,70 @@ public class World {
                             gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
                             break;
                     }
-                } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
+                } else if (gameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
                     duck.flyAway();
                     gameScreen.multiplier = 1;
-                } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && Settings.soundEnabled)
+                } else if (gameScreen.shots == 0 && Settings.soundEnabled) {
                     if (Settings.soundEnabled) Assets.outOfBullets.play();
-            }
-        } else {
-            Duck duck = ducks.get(duckCount);
-            int shot = 0;
-            if (Gdx.input.justTouched() && duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
-                duck.hit();
-
-                //two ducks one stone
-                shot++;
-
-                switch (gameScreen.shots) {
-                    case 2:
-                        gameScreen.multiplier++;
-                        gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
-                        break;
-                    case 1:
-                        gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
-                        break;
-                    case 0:
-                        if (gameScreen.multiplier != 1)
-                            gameScreen.multiplier--;
-                        gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
-                        break;
                 }
+            } else {
+                Duck duck = ducks.get(duckCount);
+                int shot = 0;
+                if (duck.bounds.contains(touchPoint.x, touchPoint.y) && duck.state == Duck.DUCK_STATE_FLYING) {
+                    duck.hit();
 
-            } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
-                duck.flyAway();
-                gameScreen.multiplier = 1;
-            } else if (Gdx.input.justTouched() && gameScreen.shots == 0)
-                if (Settings.soundEnabled) Assets.outOfBullets.play();
+                    //two ducks one stone
+                    shot++;
 
-            Duck duck2 = ducks.get(duckCount + 1);
-            if (Gdx.input.justTouched() && duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
-                duck2.hit();
+                    switch (gameScreen.shots) {
+                        case 2:
+                            gameScreen.multiplier++;
+                            gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
+                            break;
+                        case 1:
+                            gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
+                            break;
+                        case 0:
+                            if (gameScreen.multiplier != 1)
+                                gameScreen.multiplier--;
+                            gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
+                            break;
+                    }
 
-                shot++;
+                } else if (gameScreen.shots == 0 && duck.state == Duck.DUCK_STATE_FLYING) {
+                    duck.flyAway();
+                    gameScreen.multiplier = 1;
+                } else if (gameScreen.shots == 0)
+                    if (Settings.soundEnabled) Assets.outOfBullets.play();
 
-                /**two ducks one stone*/
-                if (shot == 2) game.actionResolver.unlockAchievementGPGS("CgkIm6zBrtUEEAIQAw");
+                Duck duck2 = ducks.get(duckCount + 1);
+                if (duck2.bounds.contains(touchPoint.x, touchPoint.y) && duck2.state == Duck.DUCK_STATE_FLYING) {
+                    duck2.hit();
 
-                switch (gameScreen.shots) {
-                    case 2:
-                        gameScreen.multiplier++;
-                        gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
-                        break;
-                    case 1:
-                        gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
-                        break;
-                    case 0:
-                        if (gameScreen.multiplier != 1)
-                            gameScreen.multiplier--;
-                        gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
-                        break;
+                    shot++;
+
+                    /**two ducks one stone*/
+                    if (shot == 2) game.actionResolver.unlockAchievementGPGS("CgkIm6zBrtUEEAIQAw");
+
+                    switch (gameScreen.shots) {
+                        case 2:
+                            gameScreen.multiplier++;
+                            gameScreen.score += Duck.SCORE2 * gameScreen.multiplier;
+                            break;
+                        case 1:
+                            gameScreen.score += Duck.SCORE1 * gameScreen.multiplier;
+                            break;
+                        case 0:
+                            if (gameScreen.multiplier != 1)
+                                gameScreen.multiplier--;
+                            gameScreen.score += Duck.SCORE0 * gameScreen.multiplier;
+                            break;
+                    }
+
+                } else if (gameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
+                    duck2.flyAway();
+                    gameScreen.multiplier = 1;
                 }
-
-            } else if (Gdx.input.justTouched() && gameScreen.shots == 0 && duck2.state == Duck.DUCK_STATE_FLYING) {
-                duck2.flyAway();
-                gameScreen.multiplier = 1;
             }
         }
     }
