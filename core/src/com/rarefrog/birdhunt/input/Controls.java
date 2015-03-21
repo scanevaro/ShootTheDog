@@ -20,6 +20,7 @@ public class Controls implements CalibrationData {
     public static boolean touchMovement = false;
     private float previousTouch = 0;
     private float touchX = 0;
+    private boolean allowSwipe = true;
 
     public Controls() {
         double coefficients[] = new double[10];
@@ -30,8 +31,12 @@ public class Controls implements CalibrationData {
         fir = new FIR(coefficients);
     }
 
+    public void updateAllowance(boolean allowSwipe) {
+        this.allowSwipe = allowSwipe;
+    }
+
     public void update(float value) {
-        if (touchMovement) {
+        if (touchMovement && allowSwipe) {
             if (Gdx.input.isTouched()) {
                 if (previousTouch != -1) {
                     touchX += Gdx.input.getX() - previousTouch;
