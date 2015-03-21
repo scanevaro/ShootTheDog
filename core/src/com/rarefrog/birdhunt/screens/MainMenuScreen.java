@@ -94,7 +94,7 @@ public class MainMenuScreen extends AbstractScreen {
         configStyle.imageUp = new TextureRegionDrawable(Assets.configButtonUp);
         configButton = new ImageButton(configStyle);
 
-        deeepLabel = new Label("Deeep Games 2014/2015 - Version: 1.0.0", Assets.skin);
+        deeepLabel = new Label("Deeep Games 2014/2015 - Version: 1.1.2", Assets.skin);
     }
 
     private void configureWidgets() {
